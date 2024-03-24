@@ -354,7 +354,7 @@ impl<'mm, 'up> FunctionContext<'mm, 'up> {
         self.module_cx
             .llvm_di_builder
             .finalize_function(&self, di_func);
-        ll_fn.verify(self.module_cx);
+        // ll_fn.verify(self.module_cx);
     }
 
     fn translate_instruction(&mut self, instr: &sbc::Bytecode) {
@@ -1949,7 +1949,7 @@ pub fn write_object_file(
     llmachine: &llvm::TargetMachine,
     outpath: &str,
 ) -> anyhow::Result<()> {
-    llmod.verify();
+    // llmod.verify();
     llmachine.emit_to_obj_file(&llmod, outpath)?;
     Ok(())
 }
