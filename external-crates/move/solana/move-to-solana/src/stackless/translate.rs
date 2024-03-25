@@ -38,7 +38,10 @@ use crate::{
     },
 };
 use codespan::Location;
-use llvm_sys::core::LLVMGetModuleContext;
+use llvm_sys::core::{
+    LLVMBuildBr, LLVMGetBasicBlockTerminator, LLVMGetEntryBasicBlock, LLVMGetModuleContext,
+    LLVMGetNextBasicBlock, LLVMPositionBuilderAtEnd,
+};
 use log::debug;
 use move_core_types::{account_address, u256::U256, vm_status::StatusCode::ARITHMETIC_ERROR};
 use move_model::{
@@ -215,6 +218,30 @@ impl<'mm, 'up> FunctionContext<'mm, 'up> {
         self.env.module_env.env
     }
 
+    pub fn fix_bb_terminator(&self) {
+        let function = self
+            .module_cx
+            .lookup_move_fn_decl(self.env.get_qualified_inst_id(self.type_params.to_vec()))
+            .0;
+
+        let mut current_block = unsafe { LLVMGetEntryBasicBlock(function) };
+        loop {
+            let next_block = unsafe { LLVMGetNextBasicBlock(current_block) };
+            if next_block.is_null() {
+                break;
+            }
+            let no_terminator = unsafe { LLVMGetBasicBlockTerminator(current_block).is_null() };
+            if no_terminator {
+                unsafe {
+                    LLVMPositionBuilderAtEnd(self.module_cx.llvm_builder.0, current_block);
+                    LLVMBuildBr(self.module_cx.llvm_builder.0, next_block);
+                }
+            }
+
+            current_block = next_block;
+        }
+    }
+
     pub fn translate(mut self) {
         let fn_data = StacklessBytecodeGenerator::new(&self.env).generate_function();
         let func_target =
@@ -351,10 +378,12 @@ impl<'mm, 'up> FunctionContext<'mm, 'up> {
             self.translate_instruction(instr);
         }
 
+        self.fix_bb_terminator();
+
         self.module_cx
             .llvm_di_builder
             .finalize_function(&self, di_func);
-        // ll_fn.verify(self.module_cx);
+        ll_fn.verify(self.module_cx);
     }
 
     fn translate_instruction(&mut self, instr: &sbc::Bytecode) {
@@ -1949,7 +1978,7 @@ pub fn write_object_file(
     llmachine: &llvm::TargetMachine,
     outpath: &str,
 ) -> anyhow::Result<()> {
-    // llmod.verify();
+    llmod.verify();
     llmachine.emit_to_obj_file(&llmod, outpath)?;
     Ok(())
 }
