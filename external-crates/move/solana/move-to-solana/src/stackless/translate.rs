@@ -40,7 +40,7 @@ use crate::{
 use codespan::Location;
 use llvm_sys::core::{
     LLVMBuildBr, LLVMGetBasicBlockTerminator, LLVMGetEntryBasicBlock, LLVMGetModuleContext,
-    LLVMGetNextBasicBlock, LLVMPositionBuilderAtEnd,
+    LLVMGetNextBasicBlock, LLVMGetPreviousBasicBlock, LLVMPositionBuilderAtEnd,
 };
 use log::debug;
 use move_core_types::{account_address, u256::U256, vm_status::StatusCode::ARITHMETIC_ERROR};
@@ -218,6 +218,13 @@ impl<'mm, 'up> FunctionContext<'mm, 'up> {
         self.env.module_env.env
     }
 
+    // This is a general approach to fix all basic blocks which do not have a terminator.
+    // The only requirement for this function is that 'next' and 'prev' iterators for the basic blocks
+    // should return the next and prev bb in the code layout (and not in the control flow).
+    // This is the right assumption, since we build basic blocks by sequencial processing of the labels
+    // and instructions.
+    // Another approach is to fix terminator when we translate instructions:
+    // see processing of 'sbc::Bytecode::Label' below.
     pub fn fix_bb_terminator(&self) {
         let function = self
             .module_cx
@@ -378,7 +385,8 @@ impl<'mm, 'up> FunctionContext<'mm, 'up> {
             self.translate_instruction(instr);
         }
 
-        self.fix_bb_terminator();
+        // Note that at this point we could globally fix all terminators ('fix_bb_terminator')
+        // but we rather do local fixes per translating an instruction.
 
         self.module_cx
             .llvm_di_builder
@@ -573,6 +581,21 @@ impl<'mm, 'up> FunctionContext<'mm, 'up> {
             }
             sbc::Bytecode::Label(_, label) => {
                 let llbb = self.label_blocks[label];
+
+                // Stackless code may have basic block terminators already removed by Move compiler optimizer,
+                // LLVM requires all basic block terminators even for the fall-thru. Insert terminators here.
+                let bb = *llbb.get_basic_block_ref();
+                unsafe {
+                    let prev_bb = LLVMGetPreviousBasicBlock(bb);
+                    if !prev_bb.is_null() {
+                        let terminator = LLVMGetBasicBlockTerminator(prev_bb);
+                        if terminator.is_null() {
+                            LLVMPositionBuilderAtEnd(self.module_cx.llvm_builder.0, prev_bb);
+                            LLVMBuildBr(self.module_cx.llvm_builder.0, bb);
+                        }
+                    }
+                }
+
                 builder.position_at_end(llbb);
             }
             sbc::Bytecode::Abort(_, local) => {
