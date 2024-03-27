@@ -34,7 +34,7 @@ use crate::{
     options::Options,
     stackless::{
         dwarf::DIContext, entrypoint::EntrypointGenerator, extensions::*, llvm,
-        module_context::ModuleContext, rttydesc::RttyContext,
+        module_context::ModuleContext, rttydesc::RttyContext, BasicBlock,
     },
 };
 use codespan::Location;
@@ -218,14 +218,16 @@ impl<'mm, 'up> FunctionContext<'mm, 'up> {
         self.env.module_env.env
     }
 
+    // Note for two following routines.
+    // Stackless code may have basic block terminators being removed by Move compiler optimizer,
+    // LLVM requires all basic block terminators even for the fall-thru.
+
     // This is a general approach to fix all basic blocks which do not have a terminator.
     // The only requirement for this function is that 'next' and 'prev' iterators for the basic blocks
     // should return the next and prev bb in the code layout (and not in the control flow).
     // This is the right assumption, since we build basic blocks by sequencial processing of the labels
     // and instructions.
-    // Another approach is to fix terminator when we translate instructions:
-    // see processing of 'sbc::Bytecode::Label' below.
-    pub fn fix_bb_terminator(&self) {
+    pub fn fix_bb_terminators(&self) {
         let function = self
             .module_cx
             .lookup_move_fn_decl(self.env.get_qualified_inst_id(self.type_params.to_vec()))
@@ -246,6 +248,22 @@ impl<'mm, 'up> FunctionContext<'mm, 'up> {
             }
 
             current_block = next_block;
+        }
+    }
+
+    // Check and add terminator in the previous basic block.
+    // This is handy to use when basic blocks are already built and while translating the Label bytecode.
+    fn fix_terminator_in_prev_bb(&self, llbb: BasicBlock) {
+        let bb = *llbb.get_basic_block_ref();
+        unsafe {
+            let prev_bb = LLVMGetPreviousBasicBlock(bb);
+            if !prev_bb.is_null() {
+                let terminator = LLVMGetBasicBlockTerminator(prev_bb);
+                if terminator.is_null() {
+                    LLVMPositionBuilderAtEnd(self.module_cx.llvm_builder.0, prev_bb);
+                    LLVMBuildBr(self.module_cx.llvm_builder.0, bb);
+                }
+            }
         }
     }
 
@@ -582,19 +600,8 @@ impl<'mm, 'up> FunctionContext<'mm, 'up> {
             sbc::Bytecode::Label(_, label) => {
                 let llbb = self.label_blocks[label];
 
-                // Stackless code may have basic block terminators already removed by Move compiler optimizer,
-                // LLVM requires all basic block terminators even for the fall-thru. Insert terminators here.
-                let bb = *llbb.get_basic_block_ref();
-                unsafe {
-                    let prev_bb = LLVMGetPreviousBasicBlock(bb);
-                    if !prev_bb.is_null() {
-                        let terminator = LLVMGetBasicBlockTerminator(prev_bb);
-                        if terminator.is_null() {
-                            LLVMPositionBuilderAtEnd(self.module_cx.llvm_builder.0, prev_bb);
-                            LLVMBuildBr(self.module_cx.llvm_builder.0, bb);
-                        }
-                    }
-                }
+                // Check and insert the terminator in previous basic block.
+                self.fix_terminator_in_prev_bb(llbb);
 
                 builder.position_at_end(llbb);
             }
