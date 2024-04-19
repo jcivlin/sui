@@ -565,11 +565,8 @@ module std::vector_tests {
         };
     }
 
-    // todo solana
     #[test]
-    //#[expected_failure(vector_error, minor_status = 4, location = Self)]
     #[expected_failure]
-    // #[expected_failure(major_status=18446744073709551615, minor_status=17, location=std::vector)]
     fun size_limit_fail() {
         let v = V::empty();
         let i = 0;
