@@ -492,7 +492,9 @@ impl SharedTestingConfig {
         stats
     }
 
+    //
     #[cfg(feature = "solana-backend")]
+    //
     fn exec_module_tests_solana(
         &self,
         test_plan: &ModuleTestPlan,
@@ -659,6 +661,29 @@ impl SharedTestingConfig {
                 | (Some(ExpectedFailure::Expected), move_to_solana::runner::ExitReason::Abort) => {
                     output.pass(function_name);
                     stats.test_success(test_run_info(), test_plan);
+                }
+                // Support expected failures with known error codes
+                (Some(ExpectedFailure::ExpectedWithError(error)), move_to_solana::runner::ExitReason::Failure) => {
+                    // Processing
+                    // #[expected_failure(major_status = MEMORY_LIMIT_EXCEEDED, minor_status = UNKNOWN_STATUS, location=Self)]
+                    if error.0 == StatusCode::MEMORY_LIMIT_EXCEEDED {
+                        if let (Some(minor_status), return_value) = (error.1, result.return_value) {
+                            if minor_status == return_value {
+                                output.pass(function_name);
+                                stats.test_success(test_run_info(), test_plan);
+                            }
+                        }
+                    } else {
+                        output.fail(function_name);
+                        stats.test_failure(
+                            TestFailure::new(
+                                FailureReason::solana_vm_error(result.log),
+                                test_run_info(),
+                                None,
+                            ),
+                            test_plan,
+                        )
+                    }
                 }
                 // Support tests with naked expected_failure, for example size_limit_fail in vector_tests.move
                 (Some(
