@@ -492,9 +492,7 @@ impl SharedTestingConfig {
         stats
     }
 
-    //
     #[cfg(feature = "solana-backend")]
-    //
     fn exec_module_tests_solana(
         &self,
         test_plan: &ModuleTestPlan,
