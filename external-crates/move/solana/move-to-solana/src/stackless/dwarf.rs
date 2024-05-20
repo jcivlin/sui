@@ -477,6 +477,7 @@ impl<'up> DIBuilder<'up> {
         module: &Module,
         source: &str,
         debug: bool,
+        _binary: bool, // if set debug_info section automatically added to *.o. '_binary' reserved for future processing.
     ) -> DIBuilder<'up> {
         if debug {
             let llmod = module.0;

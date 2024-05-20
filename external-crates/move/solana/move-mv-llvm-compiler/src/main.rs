@@ -272,7 +272,7 @@ fn main() -> anyhow::Result<()> {
                 &llmod,
                 &entrypoint_generator,
                 &options,
-                mod_src,
+                mod_src.to_string(),
             );
             mod_cx.translate();
 

@@ -145,16 +145,17 @@ impl<'up> GlobalContext<'up> {
         llmod: &'this llvm::Module,
         entrypoint_generator: &'this EntrypointGenerator<'this, 'up>,
         options: &'this Options,
-        source: &'this str,
+        source: String,
     ) -> ModuleContext<'up, 'this> {
         let Self { env, llvm_cx, .. } = self;
 
         let m_env = env.get_module(id);
         let modname = m_env.llvm_module_name();
-        debug!(target: "dwarf", "Create DWARF for module {:#?} with source {:#?}", modname, source);
         // DIBuilder does not depend on Builder and can be created first
         // Note: if options.bytecode_file_path.is_some() we compile from binary and debug information is already lost, then do not try to retrieve it.
-        let llvm_di_builder = llvm_cx.create_di_builder(self, llmod, source, options.debug && options.bytecode_file_path.is_none());
+        let source = if options.bytecode_file_path.is_some() {options.bytecode_file_path.clone().unwrap()} else {source.to_string()};
+        debug!(target: "dwarf", "Create DWARF for module {:#?} with source {:#?}", modname, source);
+        let llvm_di_builder = llvm_cx.create_di_builder(self, llmod, &source, options.debug, options.bytecode_file_path.is_some());
         let llvm_builder = llvm_cx.create_builder();
         let rtty_cx = RttyContext::new(self.env, &self.llvm_cx, llmod);
         ModuleContext {
