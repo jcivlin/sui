@@ -280,29 +280,27 @@ fn main() -> anyhow::Result<()> {
                 println!("Module {} Solana llvm ir", modname);
                 llmod.dump();
             }
-            if !args.obj {
-                let mut output_file = output_file_path.to_owned();
+
+            let mut obj_output_file_path = output_file_path.clone();
+            if compilation {
                 // If '-c' option is set, then -o is the directory to output the compiled modules,
                 // each module 'mod' will get file name 'mod.ll'
-                if compilation {
                     if output_file_path.ends_with('/') {
                         output_file_path.pop();
                     }
                     let mut out_path = Path::new(&output_file_path).to_path_buf().join(modname);
                     out_path.set_extension(&args.output_file_extension);
-                    output_file = out_path.to_str().unwrap().to_string();
+                    let output_file = out_path.to_str().unwrap().to_string();
                     match fs::create_dir_all(out_path.parent().expect("Should be a path")) {
                         Ok(_) => {}
                         Err(err) => eprintln!("Error creating directory: {}", err),
                     }
-                }
                 if let Some(_module_di) = mod_cx.llvm_di_builder.module_di() {
                     let module_di = mod_cx.llvm_module.0;
                     let output_file = format!("{}.debug_info", output_file);
                     llvm_write_to_file(module_di, true, &output_file)?;
                 }
                 llvm_write_to_file(llmod.as_mut(), args.llvm_ir, &output_file)?;
-                drop(llmod);
                 if entrypoint_generator.has_entries() {
                     let path = Path::new(&output_file);
                     let path = path.to_path_buf();
@@ -310,11 +308,17 @@ fn main() -> anyhow::Result<()> {
                     let path = path.join("solana_entrypoint.ll");
                     llvm_write_to_file(entrypoint_generator.llvm_module.0, true, &path.to_string_lossy().to_string())?;
                 }
-            } else {
-                write_object_file(llmod, &llmachine, &output_file_path, &options)?;
+                if args.obj {
+                    obj_output_file_path = replace_file_extension(&output_file, "o");
+                }
+            }
+            if args.obj {
+                write_object_file(llmod, &llmachine, &obj_output_file_path, &options)?;
                 if entrypoint_generator.has_entries() {
-                    let path = Path::new(&output_file_path);
-                    entrypoint_generator.write_object_file(path.to_path_buf().parent().unwrap())?;
+                    let path = Path::new(&obj_output_file_path);
+                    if !path.exists() {
+                        entrypoint_generator.write_object_file(path.to_path_buf().parent().unwrap())?;
+                    }
                 }
             }
         }
@@ -401,4 +405,17 @@ fn llvm_write_to_file(
     }
 
     Ok(())
+}
+
+fn replace_file_extension(output_file_path: &str, new_extension: &str) -> String {
+    // Find position of the last dot in output_file_path
+    if let Some(last_dot_pos) = output_file_path.rfind('.') {
+        // Check if there's an extension after the last dot and replace extension
+        if let Some(file_name) = output_file_path.get(0..last_dot_pos) {
+            return format!("{}.{}", file_name, new_extension);
+        }
+    }
+    // Otherwise, if no dot is found or there's no extension after the last dot,
+    // simply append the new extension to the original file path
+    format!("{}.{}", output_file_path, new_extension)
 }

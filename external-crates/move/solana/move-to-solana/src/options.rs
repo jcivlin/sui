@@ -4,7 +4,7 @@
 
 use clap::Parser;
 
-#[derive(Debug, Parser)]
+#[derive(Debug, Parser, Clone)]
 #[clap(author, version, about)]
 pub struct Options {
     /// Directories where to lookup dependencies.
