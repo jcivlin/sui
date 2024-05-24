@@ -48,7 +48,7 @@ jobs:
           cargo build --manifest-path external-crates/move/Cargo.toml --profile ci -p move-cli --bin move --features solana-backend
           cargo build --manifest-path external-crates/move/Cargo.toml --profile ci -p move-compiler
           cargo build --manifest-path external-crates/move/Cargo.toml --profile ci -p move-ir-compiler
-          cargo test --manifest-path external-crates/move/Cargo.toml --profile ci -p move-mv-llvm-compiler
+          cargo test --manifest-path external-crates/move/Cargo.toml --profile ci -p move-mv-llvm-compiler -- --test-threads=1
         env:
           LLVM_SYS_170_PREFIX: ${{ env.MOVE_DEV_PATH }}
           PLATFORM_TOOLS_ROOT: ${{ env.PLATFORM_TOOLS_PATH }}
