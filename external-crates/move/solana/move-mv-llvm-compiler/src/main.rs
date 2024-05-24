@@ -12,7 +12,7 @@ use clap::Parser;
 use cli::{absolute_existing_file, absolute_new_file, Args};
 use codespan_reporting::{diagnostic::Severity, term::termcolor::Buffer};
 use llvm_sys::prelude::LLVMModuleRef;
-use log::Level;
+use log::{Level, debug};
 use move_binary_format::{
     binary_views::BinaryIndexedView,
     file_format::{CompiledModule, CompiledScript},
@@ -35,9 +35,7 @@ fn main() -> anyhow::Result<()> {
     initialize_logger();
     let args = Args::parse();
 
-    if args.llvm_ir && args.obj {
-        anyhow::bail!("can't output both LLVM IR (-S) and object file (-O)");
-    }
+    debug!(target: "launch_compiler", "args: {:#?}", args);
 
     let compilation = args.compile.is_some();
     let deserialization = args.bytecode_file_path.is_some();

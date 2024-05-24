@@ -187,7 +187,7 @@ fn compile_mvir_to_mvbc(
     let mut cmd = Command::new(harness_paths.dep.to_str().expect("PathBuf"));
     cmd.arg(test_plan.mvir_file.to_str().expect("PathBuf"));
 
-    debug!("cmd: {:#?}", cmd);
+    debug!(target: "launch_compiler", "cmd: {:#?}", cmd);
 
     let output = cmd.output()?;
     if !output.status.success() {
@@ -217,7 +217,7 @@ fn compile_mvbc_to_llvmir(
     cmd.arg(test_plan.llir_file.to_str().expect("PathBuf"));
     cmd.arg("-S");
 
-    debug!("cmd: {:#?}", cmd);
+    debug!(target: "launch_compiler", "cmd: {:#?}", cmd);
 
     let output = cmd.output().context("run move-mv-llvm-compiler failed")?;
     if !output.status.success() {

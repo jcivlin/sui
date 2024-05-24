@@ -76,6 +76,7 @@ fn run_test_inner(test_path: &Path) -> anyhow::Result<()> {
             &"--stdlib".to_string(),
             &"--test".to_string(),
             &"--dev".to_string(),
+            &"-O".to_string(),
         ],
     )?;
 
