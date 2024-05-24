@@ -282,19 +282,22 @@ fn main() -> anyhow::Result<()> {
             }
 
             let mut obj_output_file_path = output_file_path.clone();
-            if compilation {
+            if compilation || args.llvm_ir {
+                let mut output_file = output_file_path.to_owned();
                 // If '-c' option is set, then -o is the directory to output the compiled modules,
                 // each module 'mod' will get file name 'mod.ll'
+                if compilation {
                     if output_file_path.ends_with('/') {
                         output_file_path.pop();
                     }
                     let mut out_path = Path::new(&output_file_path).to_path_buf().join(modname);
                     out_path.set_extension(&args.output_file_extension);
-                    let output_file = out_path.to_str().unwrap().to_string();
+                    output_file = out_path.to_str().unwrap().to_string();
                     match fs::create_dir_all(out_path.parent().expect("Should be a path")) {
                         Ok(_) => {}
                         Err(err) => eprintln!("Error creating directory: {}", err),
                     }
+                }
                 if let Some(_module_di) = mod_cx.llvm_di_builder.module_di() {
                     let module_di = mod_cx.llvm_module.0;
                     let output_file = format!("{}.debug_info", output_file);
