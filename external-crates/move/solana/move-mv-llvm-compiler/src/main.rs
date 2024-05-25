@@ -29,7 +29,7 @@ use move_model::{
 };
 
 use package::build_dependency;
-use std::{fs, io::Write, path::Path};
+use std::{fs, io::Write, path::{Path, PathBuf}};
 
 fn main() -> anyhow::Result<()> {
     initialize_logger();
@@ -324,9 +324,12 @@ fn main() -> anyhow::Result<()> {
                 }
             }
         } // for
-        if compilation || args.llvm_ir {
+        if compilation {
             if entrypoint_generator.has_entries() {
-                let path = Path::new(&output_file_path);
+                let mut entrypoint_name = entrypoint_generator.llvm_module.get_module_id();
+                entrypoint_name = format!("{}.o", entrypoint_name);
+                let mut path = PathBuf::from(output_file_path); // output_file_path is building directory in case of '-c' compilation
+                path.push(entrypoint_name);
                 entrypoint_generator.write_object_file(path.to_path_buf().parent().unwrap())?;
             }
         }
