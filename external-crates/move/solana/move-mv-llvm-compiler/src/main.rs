@@ -317,7 +317,7 @@ fn main() -> anyhow::Result<()> {
                 write_object_file(llmod, &llmachine, &obj_output_file_path, &options)?;
                 if entrypoint_generator.has_entries() {
                     let path = Path::new(&obj_output_file_path);
-                    if !path.exists() {
+                    if !compilation || !path.exists() {
                         entrypoint_generator.write_object_file(path.to_path_buf().parent().unwrap())?;
                     }
                 }
