@@ -259,6 +259,7 @@ fn main() -> anyhow::Result<()> {
         for mod_id in modules {
             let module = global_env.get_module(mod_id);
             let modname = module.llvm_module_name();
+            debug!("Compiling {modname}");
             let mut llmod = global_cx.llvm_cx.create_module(&modname);
             if args.diagnostics {
                 let disasm = module.disassemble();
@@ -315,14 +316,21 @@ fn main() -> anyhow::Result<()> {
             }
             if args.obj {
                 write_object_file(llmod, &llmachine, &obj_output_file_path, &options)?;
-                if entrypoint_generator.has_entries() {
-                    let path = Path::new(&obj_output_file_path);
-                    if !compilation || !path.exists() {
+                if !compilation {
+                    if entrypoint_generator.has_entries() {
+                        let path = Path::new(&obj_output_file_path);
                         entrypoint_generator.write_object_file(path.to_path_buf().parent().unwrap())?;
                     }
                 }
             }
+        } // for
+        if compilation || args.llvm_ir {
+            if entrypoint_generator.has_entries() {
+                let path = Path::new(&output_file_path);
+                entrypoint_generator.write_object_file(path.to_path_buf().parent().unwrap())?;
+            }
         }
+
         // NB: context must outlive llvm module
         // fixme this should be handled with lifetimes
         drop(entry_llmod);
