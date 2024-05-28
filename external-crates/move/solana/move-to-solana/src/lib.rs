@@ -420,7 +420,7 @@ fn compile(global_env: &GlobalEnv, options: &Options) -> anyhow::Result<()> {
             &llmod,
             &entrypoint_generator,
             options,
-            module_source_path,
+            module_source_path.to_string(),
         );
         mod_cx.translate();
 

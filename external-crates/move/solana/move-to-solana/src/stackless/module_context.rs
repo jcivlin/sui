@@ -46,7 +46,7 @@ pub struct ModuleContext<'mm: 'up, 'up> {
     pub target_machine: &'up TargetMachine,
     pub options: &'up Options,
     pub rtty_cx: RttyContext<'mm, 'up>,
-    pub source: &'up str,
+    pub source: String,
 }
 
 impl<'mm: 'up, 'up> ModuleContext<'mm, 'up> {

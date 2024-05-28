@@ -12,7 +12,7 @@ use clap::Parser;
 use cli::{absolute_existing_file, absolute_new_file, Args};
 use codespan_reporting::{diagnostic::Severity, term::termcolor::Buffer};
 use llvm_sys::prelude::LLVMModuleRef;
-use log::Level;
+use log::{Level, debug};
 use move_binary_format::{
     binary_views::BinaryIndexedView,
     file_format::{CompiledModule, CompiledScript},
@@ -29,15 +29,13 @@ use move_model::{
 };
 
 use package::build_dependency;
-use std::{fs, io::Write, path::Path};
+use std::{fs, io::Write, path::{Path, PathBuf}};
 
 fn main() -> anyhow::Result<()> {
     initialize_logger();
     let args = Args::parse();
 
-    if args.llvm_ir && args.obj {
-        anyhow::bail!("can't output both LLVM IR (-S) and object file (-O)");
-    }
+    debug!(target: "launch_compiler", "args: {:#?}", args);
 
     let compilation = args.compile.is_some();
     let deserialization = args.bytecode_file_path.is_some();
@@ -261,6 +259,7 @@ fn main() -> anyhow::Result<()> {
         for mod_id in modules {
             let module = global_env.get_module(mod_id);
             let modname = module.llvm_module_name();
+            debug!("Compiling {modname}");
             let mut llmod = global_cx.llvm_cx.create_module(&modname);
             if args.diagnostics {
                 let disasm = module.disassemble();
@@ -272,7 +271,7 @@ fn main() -> anyhow::Result<()> {
                 &llmod,
                 &entrypoint_generator,
                 &options,
-                mod_src,
+                mod_src.to_string(),
             );
             mod_cx.translate();
 
@@ -280,7 +279,9 @@ fn main() -> anyhow::Result<()> {
                 println!("Module {} Solana llvm ir", modname);
                 llmod.dump();
             }
-            if !args.obj {
+
+            let mut obj_output_file_path = output_file_path.clone();
+            if compilation || args.llvm_ir {
                 let mut output_file = output_file_path.to_owned();
                 // If '-c' option is set, then -o is the directory to output the compiled modules,
                 // each module 'mod' will get file name 'mod.ll'
@@ -302,7 +303,6 @@ fn main() -> anyhow::Result<()> {
                     llvm_write_to_file(module_di, true, &output_file)?;
                 }
                 llvm_write_to_file(llmod.as_mut(), args.llvm_ir, &output_file)?;
-                drop(llmod);
                 if entrypoint_generator.has_entries() {
                     let path = Path::new(&output_file);
                     let path = path.to_path_buf();
@@ -310,14 +310,30 @@ fn main() -> anyhow::Result<()> {
                     let path = path.join("solana_entrypoint.ll");
                     llvm_write_to_file(entrypoint_generator.llvm_module.0, true, &path.to_string_lossy().to_string())?;
                 }
-            } else {
-                write_object_file(llmod, &llmachine, &output_file_path, &options)?;
-                if entrypoint_generator.has_entries() {
-                    let path = Path::new(&output_file_path);
-                    entrypoint_generator.write_object_file(path.to_path_buf().parent().unwrap())?;
+                if args.obj {
+                    obj_output_file_path = replace_file_extension(&output_file, "o");
                 }
             }
+            if args.obj {
+                write_object_file(llmod, &llmachine, &obj_output_file_path, &options)?;
+                if !compilation {
+                    if entrypoint_generator.has_entries() {
+                        let path = Path::new(&obj_output_file_path);
+                        entrypoint_generator.write_object_file(path.to_path_buf().parent().unwrap())?;
+                    }
+                }
+            }
+        } // for
+        if compilation {
+            if entrypoint_generator.has_entries() {
+                let mut entrypoint_name = entrypoint_generator.llvm_module.get_module_id();
+                entrypoint_name = format!("{}.o", entrypoint_name);
+                let mut path = PathBuf::from(output_file_path); // output_file_path is building directory in case of '-c' compilation
+                path.push(entrypoint_name);
+                entrypoint_generator.write_object_file(path.to_path_buf().parent().unwrap())?;
+            }
         }
+
         // NB: context must outlive llvm module
         // fixme this should be handled with lifetimes
         drop(entry_llmod);
@@ -401,4 +417,17 @@ fn llvm_write_to_file(
     }
 
     Ok(())
+}
+
+fn replace_file_extension(output_file_path: &str, new_extension: &str) -> String {
+    // Find position of the last dot in output_file_path
+    if let Some(last_dot_pos) = output_file_path.rfind('.') {
+        // Check if there's an extension after the last dot and replace extension
+        if let Some(file_name) = output_file_path.get(0..last_dot_pos) {
+            return format!("{}.{}", file_name, new_extension);
+        }
+    }
+    // Otherwise, if no dot is found or there's no extension after the last dot,
+    // simply append the new extension to the original file path
+    format!("{}.{}", output_file_path, new_extension)
 }

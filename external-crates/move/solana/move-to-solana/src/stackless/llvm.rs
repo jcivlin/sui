@@ -122,8 +122,9 @@ impl Context {
         module: &Module,
         source: &str,
         debug: bool,
+        binary: bool
     ) -> DIBuilder {
-        DIBuilder::new(g_ctx, module, source, debug)
+        DIBuilder::new(g_ctx, module, source, debug, binary)
     }
 
     pub fn get_anonymous_struct_type(&self, field_tys: &[Type]) -> Type {

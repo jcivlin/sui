@@ -477,6 +477,7 @@ impl<'up> DIBuilder<'up> {
         module: &Module,
         source: &str,
         debug: bool,
+        _binary: bool, // if set debug_info section automatically added to *.o. '_binary' reserved for future processing.
     ) -> DIBuilder<'up> {
         if debug {
             let llmod = module.0;
@@ -1119,7 +1120,7 @@ impl<'up> DIBuilder<'up> {
                 std::ptr::null(), /* *const i8 */
                 0,                /* usize */
                 LLVMDWARFEmissionKind::LLVMDWARFEmissionKindFull,
-                0,         /* u32 */
+                0,         /* Maybe set to DWARF version 4 */
                 0,         /* i32 */
                 0,         /* i32 */
                 slash_ptr, /* *const i8 */
