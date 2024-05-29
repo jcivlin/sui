@@ -1840,7 +1840,21 @@ impl<'mm, 'up> FunctionContext<'mm, 'up> {
                     Type::Vector(bt) if bt.is_number_u8() => {
                         // This is a Constant::ByteArray element type.
                         assert!(matches!(val_vec[0], Constant::ByteArray(_)));
-                        todo!("{:?}", mc);
+
+                        if let Some(vec) = move_stackless_bytecode::stackless_bytecode::transform_bytearray_to_vec(&val_vec) {
+                            debug!(target: "constant", "ByteArray contents: {:#?}", vec);
+                            let aval = llcx.const_int_array::<u8>(vec);
+
+                            let elt_mty = Type::Primitive(PrimitiveType::U8);
+                            let (res_val_type, res_ptr) =
+                            self.make_global_array_and_copy_to_new_vec(aval, &elt_mty);
+
+                            return builder
+                                .build_load(res_val_type, res_ptr, "reload")
+                                .as_constant();
+                        } else {
+                            todo!("{:?}", mc);
+                        }
                     }
                     _ => {
                         todo!("unexpected vec constant: {}: {:#?}", val_vec.len(), val_vec);
