@@ -10,8 +10,11 @@
 /// genesis time and include the previous signature in verify_drand_signature. See https://drand.love/developer/ or the
 /// previous version of this file: https://github.com/MystenLabs/sui/blob/92df778310679626f00bc4226d7f7a281322cfdd/sui_programmability/examples/games/sources/drand_lib.move
 
+
+// Copied from sui_programmability/examples/games/sources/drand_lib.move
+// Run it from current directory as move-mv-llvm-compiler -c ./drand_lib.move  -p ./Move.toml --test {-O|-S} -o <out_dir>
+
 module games::drand_lib {
-// module 0x0::drand_lib {
     use std::hash::sha2_256;
     use std::vector;
 
