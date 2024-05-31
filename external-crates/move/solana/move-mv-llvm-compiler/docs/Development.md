@@ -210,7 +210,7 @@ To debug in VS Code add this config:
   `RUST_LOG=launch_compiler cargo test --manifest-path external-crates/move/Cargo.toml -p move-mv-llvm-compiler --test stdlib-with-p-option-tests; echo EOT`
 
    will print out something like this:
-   ```
+   ```log
     Compiling move-mv-llvm-compiler v0.1.0 (/home/sol/work/git/sui-solana-032024/external-crates/move/solana/move-mv-llvm-compiler)
     Finished test [unoptimized + debuginfo] target(s) in 1.22s
      Running tests/stdlib-with-p-option-tests.rs (external-crates/move/target/debug/deps/stdlib_with_p_option_tests-ffb0765866d3fdd7)
@@ -300,8 +300,28 @@ Instead of calling `--help` on the move-mv-llvm-compiler use `cargo run -- --hel
 Use [RUST_LOG](https://docs.rs/env_logger/latest/env_logger/) environment variable to print compiler logs.
 For example
 
-> RUST_LOG=info move-mv-llvm-compiler -b tests/BasicCoin.mv
-> RUST_LOG=debug move-mv-llvm-compiler -b tests/BasicCoin.mv
+```sh
+RUST_LOG=info move-mv-llvm-compiler -b tests/BasicCoin.mv
+RUST_LOG=debug move-mv-llvm-compiler -b tests/BasicCoin.mv
+```
+
+----
+As cargo uses regex to match tests, one can pass test path to control which tests should be run e.g.,
+```sh
+# Run basic/sources/basic.move test
+cargo test  --manifest-path external-crates/move/Cargo.toml -p move-mv-llvm-compiler --test rbpf-tests -- basic/sources/basic.move
+```
+
+---
+The `instruction_data` field in input.json provides the name of entry point to be invoked. When the entry
+point is not found rbpf will [error with event log](https://github.com/anza-xyz/sui/blob/solana/external-crates/move/solana/move-mv-llvm-compiler/tests/rbpf-tests.rs#L578) like this.
+
+```log
+event 0: "0x44f, 0x44f, 0x44f, 0x44f, 0x44f"
+test run_test::hello/sources/hello.move ... FAILED
+```
+
+The fix is to supply correct entry point name.
 
 ----
 On MacOS, some builds and tests might spuriously fail because the tools downloaded may not be trusted by the OS. You may get error message like "clang-17 can't be opened because Apple cannot check it for malicious software". To get around that run the following command in each directory where binaries are there e.g., `move-dev/bin` and `rust/bin`
