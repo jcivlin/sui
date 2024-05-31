@@ -1340,7 +1340,7 @@ impl<'mm, 'up> FunctionContext<'mm, 'up> {
                     .get_file_and_location(&loc)
                     .unwrap_or(("unknown".to_string(), Location::new(0, 0)));
                 debug!(target: "dwarf", "Op {:#?} {}:{:#?} {:#?}", &op, filename, location.line.0, &struct_name);
-                di_builder.create_struct(self, mod_id, &struct_id, &struct_name, None);
+                di_builder.create_struct(self, mod_id, struct_id, &struct_name, None);
             }
             Operation::Unpack(mod_id, struct_id, types) => {
                 let types = mty::Type::instantiate_vec(types.to_vec(), self.type_params);
@@ -1856,21 +1856,6 @@ impl<'mm, 'up> FunctionContext<'mm, 'up> {
                         if !val_vec.is_empty() {
                             assert!(matches!(val_vec[0], Constant::ByteArray(_)));
                         }
-
-                        // if let Some(vec) = move_stackless_bytecode::stackless_bytecode::transform_bytearray_to_vec(&val_vec) {
-                        //     debug!(target: "constant", "ByteArray contents: {:#?}", vec);
-                        //     let aval = llcx.const_int_array::<u8>(vec);
-
-                        //     let elt_mty = Type::Primitive(PrimitiveType::U8);
-                        //     let (res_val_type, res_ptr) =
-                        //     self.make_global_array_and_copy_to_new_vec(aval, &elt_mty);
-
-                        //     return builder
-                        //         .build_load(res_val_type, res_ptr, "reload")
-                        //         .as_constant();
-                        // } else {
-                        //     todo!("{:?}", mc);
-                        // }
 
                         let vec = match move_stackless_bytecode::stackless_bytecode::transform_bytearray_to_vec(&val_vec) {
                             Some(v) => v.clone(),
