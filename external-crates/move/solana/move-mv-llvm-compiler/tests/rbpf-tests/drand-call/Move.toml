@@ -1,0 +1,10 @@
+[package]
+name = "drand-call"
+version = "1.0.0"
+
+[addresses]
+# drand = "0xba31"
+hello = "0xba31"
+
+[dependencies]
+Games = { local = "../../../../../../../sui_programmability/examples/games" }
