@@ -9,8 +9,7 @@ module 0x10::debug {
   native public fun print<T>(x: &T);
 }
 
-// module drand::drand {
-module hello::hello {
+module drand::hello {
     use 0x10::debug;
     use 0x1::string;
     use std::vector;
