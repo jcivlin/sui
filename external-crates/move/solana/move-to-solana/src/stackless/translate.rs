@@ -1872,8 +1872,6 @@ impl<'mm, 'up> FunctionContext<'mm, 'up> {
                         return builder
                             .build_load(res_val_type, res_ptr, "reload")
                             .as_constant();
-
-
                     }
                     _ => {
                         todo!("unexpected vec constant: {}: {:#?}", val_vec.len(), val_vec);
