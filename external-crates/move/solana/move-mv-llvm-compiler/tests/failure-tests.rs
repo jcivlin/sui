@@ -46,9 +46,9 @@
 //!
 //! - `// ignore` - don't run the test
 
-use anyhow::anyhow;
+use anyhow::{anyhow, bail};
 use log::debug;
-use std::{fs, io, path::{Path, PathBuf}};
+use std::{env, fs, io, path::{Path, PathBuf}};
 
 mod test_common;
 use test_common as tc;
@@ -72,6 +72,29 @@ fn run_test_inner(test_path: &Path) -> anyhow::Result<()> {
         return Ok(());
     }
 
+    let current_dir = env::current_dir()
+    .or_else(|err| bail!("Cannot get currecnt directory. Got error: {}", err))
+    .unwrap();
+
+    let test_name = &test_plan.name;
+
+    let toml_dir: String;
+    if let Some(pos) = test_name.rfind('.') {
+        toml_dir = test_name[..pos].to_string();
+    } else {
+        bail!("No extension found in the filename {}", test_name);
+    }
+
+    let p_absolute_path = current_dir.join(toml_dir).to_str().unwrap().to_owned();
+
+    let src = &test_plan.build_dir;
+    let dst = &src.join("stored_results");
+
+    tc::clean_results(src)?;
+    std::fs::remove_dir_all(dst).ok();
+
+
+
     debug!("harness_paths {:#?} &test_plan {:#?}", &harness_paths, &test_plan);
     tc::run_move_to_llvm_build(
         &harness_paths,
@@ -81,7 +104,7 @@ fn run_test_inner(test_path: &Path) -> anyhow::Result<()> {
             &"--test".to_string(),
             // &dep_option,
             // &"--dev".to_string(),
-            &"-O".to_string(),
+            // &"-O".to_string(),
         ],
     )?;
 
