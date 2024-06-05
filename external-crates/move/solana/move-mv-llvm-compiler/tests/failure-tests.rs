@@ -77,15 +77,34 @@ fn run_test_inner(test_path: &Path) -> anyhow::Result<()> {
     .unwrap();
 
     let test_name = &test_plan.name;
+    debug!(target: "debug", "test_name {:#?}", &test_name);
 
     let toml_dir: String;
-    if let Some(pos) = test_name.rfind('.') {
+    if let Some(pos) = test_name.rfind('/') {
         toml_dir = test_name[..pos].to_string();
     } else {
         bail!("No extension found in the filename {}", test_name);
     }
 
-    let p_absolute_path = current_dir.join(toml_dir).to_str().unwrap().to_owned();
+    let p_absolute_path = current_dir.join(&toml_dir).to_str().unwrap().to_owned();
+
+    debug!(target: "debug", "current_dir {:#?}", &current_dir);
+    debug!(target: "debug", "toml_dir {:#?}", &toml_dir);
+    debug!(target: "debug", "p_absolute_path {:#?}", &p_absolute_path);
+
+    let dependency = find_move_toml(&p_absolute_path);
+
+    let mut extra_param = if let Some(lib_dep) = dependency {
+        let p = "-p".to_string().to_owned();
+        let lib_dep_str = lib_dep.to_str().unwrap().to_string();
+        vec![p, lib_dep_str]
+    } else {
+        let stdlib = "--stdlib".to_string().to_owned();
+        vec![stdlib]
+    };
+    extra_param.push("--test".to_string());
+    extra_param.push("-O".to_string());
+    extra_param.push("--print-assembly".to_string());
 
     let src = &test_plan.build_dir;
     let dst = &src.join("stored_results");
@@ -99,13 +118,7 @@ fn run_test_inner(test_path: &Path) -> anyhow::Result<()> {
     tc::run_move_to_llvm_build(
         &harness_paths,
         &test_plan,
-        vec![
-            // &"--stdlib".to_string(),
-            &"--test".to_string(),
-            // &dep_option,
-            // &"--dev".to_string(),
-            // &"-O".to_string(),
-        ],
+        extra_param.iter().collect()
     )?;
 
     tc::compare_results(&test_plan)?;
@@ -154,4 +167,15 @@ fn check_files_with_extensions(dir: &PathBuf, ext1: &str, ext2: &str) -> Result<
         }
     }
     Ok(missing_files)
+}
+
+fn find_move_toml(dir: &str) -> Option<PathBuf> {
+    let path = Path::new(dir);
+    let move_toml = path.join("Move.toml");
+
+    if move_toml.exists() {
+        Some(move_toml)
+    } else {
+        None
+    }
 }
