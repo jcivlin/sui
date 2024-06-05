@@ -59,6 +59,7 @@ datatest_stable::harness!(run_test, TEST_DIR, r".*\.move$");
 
 fn run_test(test_path: &Path) -> Result<(), Box<dyn std::error::Error>> {
     tc::setup_logging_for_test();
+    dbg!(test_path);
     Ok(run_test_inner(test_path)?)
 }
 
@@ -76,9 +77,10 @@ fn run_test_inner(test_path: &Path) -> anyhow::Result<()> {
         &harness_paths,
         &test_plan,
         vec![
-            &"--stdlib".to_string(),
+            // &"--stdlib".to_string(),
             &"--test".to_string(),
-            &"--dev".to_string(),
+            // &dep_option,
+            // &"--dev".to_string(),
             &"-O".to_string(),
         ],
     )?;

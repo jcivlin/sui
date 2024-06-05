@@ -1851,8 +1851,9 @@ impl<'mm, 'up> FunctionContext<'mm, 'up> {
                     Type::Vector(bt) if bt.is_number_u8() => {
                         // This is a Constant::ByteArray element type.
 
+                        let func_name = self.env.get_full_name_str();
                         let val_vec_sz = val_vec.len();
-                        debug!(target: "debug", "val_vec size {val_vec_sz}");
+                        debug!(target: "debug", "val_vec size {val_vec_sz} in function {func_name}");
                         if !val_vec.is_empty() {
                             assert!(matches!(val_vec[0], Constant::ByteArray(_)));
                         }

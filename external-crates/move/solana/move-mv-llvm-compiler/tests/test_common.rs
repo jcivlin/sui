@@ -9,6 +9,7 @@ use rand::Rng;
 use serde::{Deserialize, Serialize};
 use serde_json::Result;
 use std::{
+    env,
     ffi::OsStr,
     fs::{self, File},
     io::{BufRead, BufReader, BufWriter, Write},
@@ -409,6 +410,15 @@ pub fn run_move_to_llvm_build(
     cmd.args(["-c", test]);
     cmd.args(["--extension", "ll.actual"]);
 
+    let dependency = find_toml_in_same_dir(&test);
+    if let Some(lib_dep) = dependency {
+        cmd.arg("-p");
+        cmd.arg(lib_dep.to_str().unwrap())
+    } else {
+        cmd.arg("--stdlib")
+        // cmd.arg("")
+    };
+
     for param in extra_params {
         cmd.arg(param);
     }
@@ -416,6 +426,11 @@ pub fn run_move_to_llvm_build(
 
     fs::create_dir_all(test_plan.build_dir.to_str().unwrap()).expect("Directory does not exist");
     cmd.args(["-o", test_plan.build_dir.to_str().expect("utf-8")]);
+
+    match env::current_dir() {
+        Ok(path) => println!("The current working directory is: {}", path.display()),
+        Err(e) => println!("Error retrieving current directory: {}", e),
+    }
 
     debug!(target: "launch_compiler", "{:#?}", &cmd);
 
@@ -887,4 +902,17 @@ fn generate_random_string() -> String {
         .collect();
 
     random_string
+}
+
+fn find_toml_in_same_dir(file_path: &str) -> Option<PathBuf> {
+    let path = Path::new(file_path);
+    if path.extension() == Some("move".as_ref()) {
+        if let Some(dir) = path.parent() {
+            let toml_path = dir.join("Move.toml");
+            if toml_path.exists() {
+                return Some(toml_path);
+            }
+        }
+    }
+    None
 }
