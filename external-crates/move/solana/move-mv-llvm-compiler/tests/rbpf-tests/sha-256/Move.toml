@@ -1,0 +1,10 @@
+[package]
+name = "sha-256"
+version = "1.0.0"
+
+[addresses]
+sha_256 = "0xba31"
+hello = "0x1"
+
+[dependencies]
+MoveStdlib = { local = "../../../../../crates/move-stdlib", addr_subst = { "std" = "0x1" } }

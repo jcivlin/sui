@@ -46,9 +46,9 @@
 //!
 //! - `// ignore` - don't run the test
 
-use anyhow::anyhow;
+use anyhow::{anyhow, bail};
 use log::debug;
-use std::{fs, io, path::{Path, PathBuf}};
+use std::{env, fs, io, path::{Path, PathBuf}};
 
 mod test_common;
 use test_common as tc;
@@ -59,6 +59,7 @@ datatest_stable::harness!(run_test, TEST_DIR, r".*\.move$");
 
 fn run_test(test_path: &Path) -> Result<(), Box<dyn std::error::Error>> {
     tc::setup_logging_for_test();
+    dbg!(test_path);
     Ok(run_test_inner(test_path)?)
 }
 
@@ -71,16 +72,53 @@ fn run_test_inner(test_path: &Path) -> anyhow::Result<()> {
         return Ok(());
     }
 
+    let current_dir = env::current_dir()
+    .or_else(|err| bail!("Cannot get currecnt directory. Got error: {}", err))
+    .unwrap();
+
+    let test_name = &test_plan.name;
+    debug!(target: "debug", "test_name {:#?}", &test_name);
+
+    let toml_dir: String;
+    if let Some(pos) = test_name.rfind('/') {
+        toml_dir = test_name[..pos].to_string();
+    } else {
+        bail!("No extension found in the filename {}", test_name);
+    }
+
+    let p_absolute_path = current_dir.join(&toml_dir).to_str().unwrap().to_owned();
+
+    debug!(target: "debug", "current_dir {:#?}", &current_dir);
+    debug!(target: "debug", "toml_dir {:#?}", &toml_dir);
+    debug!(target: "debug", "p_absolute_path {:#?}", &p_absolute_path);
+
+    let dependency = find_move_toml(&p_absolute_path);
+
+    let mut extra_param = if let Some(lib_dep) = dependency {
+        let p = "-p".to_string().to_owned();
+        let lib_dep_str = lib_dep.to_str().unwrap().to_string();
+        vec![p, lib_dep_str]
+    } else {
+        let stdlib = "--stdlib".to_string().to_owned();
+        vec![stdlib]
+    };
+    extra_param.push("--test".to_string());
+    extra_param.push("-O".to_string());
+    extra_param.push("--print-assembly".to_string());
+
+    let src = &test_plan.build_dir;
+    let dst = &src.join("stored_results");
+
+    tc::clean_results(src)?;
+    std::fs::remove_dir_all(dst).ok();
+
+
+
     debug!("harness_paths {:#?} &test_plan {:#?}", &harness_paths, &test_plan);
     tc::run_move_to_llvm_build(
         &harness_paths,
         &test_plan,
-        vec![
-            &"--stdlib".to_string(),
-            &"--test".to_string(),
-            &"--dev".to_string(),
-            &"-O".to_string(),
-        ],
+        extra_param.iter().collect()
     )?;
 
     tc::compare_results(&test_plan)?;
@@ -129,4 +167,15 @@ fn check_files_with_extensions(dir: &PathBuf, ext1: &str, ext2: &str) -> Result<
         }
     }
     Ok(missing_files)
+}
+
+fn find_move_toml(dir: &str) -> Option<PathBuf> {
+    let path = Path::new(dir);
+    let move_toml = path.join("Move.toml");
+
+    if move_toml.exists() {
+        Some(move_toml)
+    } else {
+        None
+    }
 }

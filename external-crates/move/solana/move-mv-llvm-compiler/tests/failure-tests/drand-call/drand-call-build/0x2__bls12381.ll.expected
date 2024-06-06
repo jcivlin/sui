@@ -1,0 +1,2768 @@
+; ModuleID = '0x2__bls12381'
+source_filename = "../../../../../../../crates/sui-framework/packages/sui-framework/sources/crypto/bls12381.move"
+target datalayout = "e-m:e-p:64:64-i64:64-n32:64-S128"
+target triple = "sbf-solana-solana"
+
+%__move_rt_type = type { { ptr, i64 }, i64, ptr }
+%struct.group_ops__Element_bls12381__GT_ = type { { ptr, i64, i64 } }
+%struct.group_ops__Element_bls12381__G1_ = type { { ptr, i64, i64 } }
+%struct.group_ops__Element_bls12381__G2_ = type { { ptr, i64, i64 } }
+%struct.group_ops__Element_bls12381__Scalar_ = type { { ptr, i64, i64 } }
+
+@__move_rttydesc_signer = private unnamed_addr constant %__move_rt_type { { ptr, i64 } { ptr @__move_rttydesc_signer_name, i64 6 }, i64 9, ptr @__move_rttydesc_NOTHING_info }
+@__move_rttydesc_signer_name = private unnamed_addr constant [6 x i8] c"signer"
+@__move_rttydesc_NOTHING_info = private unnamed_addr constant i8 -1
+@vec_literal = internal constant [48 x i8] c"\97\F1\D3\A71\97\D7\94&\95c\8CO\A9\AC\0F\C3h\8CO\97t\B9\05\A1N:?\17\1B\ACXlU\E8?\F9z\1A\EF\FB:\F0\0A\DB\22\C6\BB"
+@vdesc = internal constant { ptr, i64, i64 } { ptr @vec_literal, i64 48, i64 48 }
+@__move_rttydesc_u8 = private unnamed_addr constant %__move_rt_type { { ptr, i64 } { ptr @__move_rttydesc_u8_name, i64 2 }, i64 2, ptr @__move_rttydesc_NOTHING_info }
+@__move_rttydesc_u8_name = private unnamed_addr constant [2 x i8] c"u8"
+@vec_literal.1 = internal constant [48 x i8] c"\C0\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00"
+@vdesc.2 = internal constant { ptr, i64, i64 } { ptr @vec_literal.1, i64 48, i64 48 }
+@__move_rttydesc_group_ops__Element_bls12381__Scalar_ = private unnamed_addr constant %__move_rt_type { { ptr, i64 } { ptr @__move_rttydesc_group_ops__Element_bls12381__Scalar__name, i64 168 }, i64 11, ptr @__move_rttydesc_group_ops__Element_bls12381__Scalar__info }
+@__move_rttydesc_group_ops__Element_bls12381__Scalar__name = private unnamed_addr constant [168 x i8] c"0000000000000000000000000000000000000000000000000000000000000002::group_ops::Element<0000000000000000000000000000000000000000000000000000000000000002::bls12381::Scalar>"
+@__move_rttydesc_vector_u8__name = private unnamed_addr constant [10 x i8] c"vector<u8>"
+@__move_rttydesc_vector_u8__info = private unnamed_addr constant { ptr } { ptr @__move_rttydesc_u8 }
+@0 = private unnamed_addr constant [5 x i8] c"bytes"
+@s_fld_array = private unnamed_addr constant [1 x { %__move_rt_type, i64, { ptr, i64 } }] [{ %__move_rt_type, i64, { ptr, i64 } } { %__move_rt_type { { ptr, i64 } { ptr @__move_rttydesc_vector_u8__name, i64 10 }, i64 10, ptr @__move_rttydesc_vector_u8__info }, i64 0, { ptr, i64 } { ptr @0, i64 5 } }]
+@__move_rttydesc_group_ops__Element_bls12381__Scalar__info = private unnamed_addr constant { ptr, i64, i64, i64 } { ptr @s_fld_array, i64 1, i64 24, i64 8 }
+@__move_rttydesc_group_ops__Element_bls12381__G1_ = private unnamed_addr constant %__move_rt_type { { ptr, i64 } { ptr @__move_rttydesc_group_ops__Element_bls12381__G1__name, i64 164 }, i64 11, ptr @__move_rttydesc_group_ops__Element_bls12381__G1__info }
+@__move_rttydesc_group_ops__Element_bls12381__G1__name = private unnamed_addr constant [164 x i8] c"0000000000000000000000000000000000000000000000000000000000000002::group_ops::Element<0000000000000000000000000000000000000000000000000000000000000002::bls12381::G1>"
+@1 = private unnamed_addr constant [5 x i8] c"bytes"
+@s_fld_array.3 = private unnamed_addr constant [1 x { %__move_rt_type, i64, { ptr, i64 } }] [{ %__move_rt_type, i64, { ptr, i64 } } { %__move_rt_type { { ptr, i64 } { ptr @__move_rttydesc_vector_u8__name, i64 10 }, i64 10, ptr @__move_rttydesc_vector_u8__info }, i64 0, { ptr, i64 } { ptr @1, i64 5 } }]
+@__move_rttydesc_group_ops__Element_bls12381__G1__info = private unnamed_addr constant { ptr, i64, i64, i64 } { ptr @s_fld_array.3, i64 1, i64 24, i64 8 }
+@vec_literal.4 = internal constant [96 x i8] c"\93\E0+`Rq\9F`}\AC\D3\A0\88'OeYk\D0\D0\99 \B6\1A\B5\DAa\BB\DC\7FPI3L\F1\12\13\94]W\E5\AC}\05]\04+~\02J\A2\B2\F0\8F\0A\91&\08\05'-\C5\10Q\C6\E4z\D4\FA@;\02\B4Q\0Bdz\E3\D1w\0B\AC\03&\A8\05\BB\EF\D4\80V\C8\C1!\BD\B8"
+@vdesc.5 = internal constant { ptr, i64, i64 } { ptr @vec_literal.4, i64 96, i64 96 }
+@vec_literal.6 = internal constant [96 x i8] c"\C0\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00"
+@vdesc.7 = internal constant { ptr, i64, i64 } { ptr @vec_literal.6, i64 96, i64 96 }
+@__move_rttydesc_group_ops__Element_bls12381__G2_ = private unnamed_addr constant %__move_rt_type { { ptr, i64 } { ptr @__move_rttydesc_group_ops__Element_bls12381__G2__name, i64 164 }, i64 11, ptr @__move_rttydesc_group_ops__Element_bls12381__G2__info }
+@__move_rttydesc_group_ops__Element_bls12381__G2__name = private unnamed_addr constant [164 x i8] c"0000000000000000000000000000000000000000000000000000000000000002::group_ops::Element<0000000000000000000000000000000000000000000000000000000000000002::bls12381::G2>"
+@2 = private unnamed_addr constant [5 x i8] c"bytes"
+@s_fld_array.8 = private unnamed_addr constant [1 x { %__move_rt_type, i64, { ptr, i64 } }] [{ %__move_rt_type, i64, { ptr, i64 } } { %__move_rt_type { { ptr, i64 } { ptr @__move_rttydesc_vector_u8__name, i64 10 }, i64 10, ptr @__move_rttydesc_vector_u8__info }, i64 0, { ptr, i64 } { ptr @2, i64 5 } }]
+@__move_rttydesc_group_ops__Element_bls12381__G2__info = private unnamed_addr constant { ptr, i64, i64, i64 } { ptr @s_fld_array.8, i64 1, i64 24, i64 8 }
+@vec_literal.9 = internal constant [576 x i8] c"\12P\EB\D8q\FC\0A\92\A7\B2\D81h\D0\D7''-D\1B\EF\A1\\P=\D8\E9\0C\E9\8D\B3\E7\B6\D1\94\F6\089\C5\08\A8C\05\AA\CA\17\89\B6\08\9A\1C[F\E5\11\0B\86u\0E\C6\A524\88h\A8@EH<\92\B7\AFZ\F6\89E.\AF\AB\F1\A8\94>PC\9F\1DY\88*\98\EA\A0\17\0F\19\F2c7\D2\05\FBF\9C\D6\BD\15\C3\D5\A0M\C8\87\84\FB\B3\D0\B2\DB\DE\A5MC\B2\B7?,\BB\12\D5\83\86\A8p>\0F\94\82&\E4~\E8\9D\06\FB\A2>\B7\C5\AF\0D\9F\80\94\0C\A7q\B6\FF\D5\85{\AA\F2\22\EB\95\A7\D2\80\9Da\BF\E0.\1B\FD\1Bh\FF\02\F0\B8\10*\E1\C2\D5\D5\AB\1A\13h\BBD\\|- \97\03\F29h\9C\E3L\03x\A6\8Er\A6\B3\B2\16\DA\0E\22\A5\03\1BT\DD\FFW0\93\96\B3\8C\88\1CL\84\9E\C2>\87\195\02\B8n\DB\88W\C2s\FA\07ZPQ)7\E0yN\1Ee\A7a|\90\D8\BDf\06[\1F\FF\E5\1DzW\99s\B11P!\EC<\19\93O\11\B8\B4$\CDH\BF8\FC\EFh\08;\0B\0E\C5\C8\1A\93\B30\EE\1Ag}\0D\15\FF{\98N\89x\EFH\88\1E2\FA\C9\1B\93\B4s3\E2\BAW\035\0FU\A7\AE\FC\D3\C3\1BO\CBl\E5w\1C\C6\A0\E9xj\B5\973 \C8\06\AD6\08)\10{\A8\10\C5\A0\9F\FD\D9\BE\22\91\A0\C2Z\99\A2\01\B2\F5\22G=\17\13\91\12[\A8M\C4\00|\FB\F2\F8\DAu/|t\18R\03\FC\CAX\9A\C7\19\C3M\FF\BB\AA\D8C\1D\AD\1C\1F\B5\97\AA\A5\01\81\07\15O%\A7d\BD<y\93zE\B8EF\DAcK\8Fk\E1J\80a\E5\\\CE\BAG\8B#\F7\DA\CA\A3\\\8C\A7\8B\EA\E9b@E\B4\B6\04\C5\81#M\08j\99\02$\9Bdr\8F\FD!\A1\89\E8y5\A9T\05\1C|\DB\A7\B3\87&)\A4\FA\FC\05\06bE\CB\91\08\F0$-\0F\E3\EF\0FA\E5\86c\BF\08\CF\06\86r\CB\D0\1A~\C7;\AC\A4\D7,\A95D\DE\FFhk\FDm\F5C\D4\8E\AA$\AF\E4~\1E\FD\E4I8;gf1"
+@vdesc.10 = internal constant { ptr, i64, i64 } { ptr @vec_literal.9, i64 576, i64 576 }
+@vec_literal.11 = internal constant [576 x i8] c"\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\01\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00"
+@vdesc.12 = internal constant { ptr, i64, i64 } { ptr @vec_literal.11, i64 576, i64 576 }
+@vec_literal.13 = internal constant [32 x i8] zeroinitializer
+@vdesc.14 = internal constant { ptr, i64, i64 } { ptr @vec_literal.13, i64 32, i64 32 }
+@vec_literal.15 = internal constant [32 x i8] c"\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\01"
+@vdesc.16 = internal constant { ptr, i64, i64 } { ptr @vec_literal.15, i64 32, i64 32 }
+@vec_literal.17 = internal constant [32 x i8] zeroinitializer
+@vdesc.18 = internal constant { ptr, i64, i64 } { ptr @vec_literal.17, i64 32, i64 32 }
+
+declare i32 @memcmp(ptr, ptr, i64)
+
+define void @"0000000000000002_bls12381_unit_test_poiso_8NUmc3Uj4SYtWa"() {
+entry:
+  %local_0 = alloca i64, align 8
+  %local_1 = alloca { ptr, i64, i64 }, align 8
+  store i64 0, ptr %local_0, align 8
+  %loaded_alloca = load i64, ptr %local_0, align 8
+  %retval = call { ptr, i64, i64 } @move_native_unit_test_create_signers_for_testing(i64 %loaded_alloca)
+  store { ptr, i64, i64 } %retval, ptr %local_1, align 8
+  call void @move_rt_vec_destroy(ptr @__move_rttydesc_signer, ptr %local_1)
+  ret void
+}
+
+declare { ptr, i64, i64 } @move_native_unit_test_create_signers_for_testing(i64)
+
+define %struct.group_ops__Element_bls12381__GT_ @"0000000000000002_bls12381_pairing_4TrYMFtVLJPMkv"(ptr nonnull readonly %0, ptr nonnull readonly %1) {
+entry:
+  %local_0 = alloca ptr, align 8
+  %local_1 = alloca ptr, align 8
+  %local_2 = alloca i8, align 1
+  %local_3 = alloca ptr, align 8
+  %local_4 = alloca ptr, align 8
+  %local_5 = alloca %struct.group_ops__Element_bls12381__GT_, align 8
+  store ptr %0, ptr %local_0, align 8
+  store ptr %1, ptr %local_1, align 8
+  store i8 1, ptr %local_2, align 1
+  %load_store_tmp = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp, ptr %local_3, align 8
+  %load_store_tmp1 = load ptr, ptr %local_1, align 8
+  store ptr %load_store_tmp1, ptr %local_4, align 8
+  %call_arg_0 = load i8, ptr %local_2, align 1
+  %call_arg_1 = load ptr, ptr %local_3, align 8
+  %call_arg_2 = load ptr, ptr %local_4, align 8
+  %retval = call %struct.group_ops__Element_bls12381__GT_ @"0000000000000002_group_ops_pairing_4Uvhw9WszKUYn4"(i8 %call_arg_0, ptr %call_arg_1, ptr %call_arg_2)
+  store %struct.group_ops__Element_bls12381__GT_ %retval, ptr %local_5, align 8
+  %retval2 = load %struct.group_ops__Element_bls12381__GT_, ptr %local_5, align 8
+  ret %struct.group_ops__Element_bls12381__GT_ %retval2
+}
+
+define private %struct.group_ops__Element_bls12381__GT_ @"0000000000000002_group_ops_pairing_4Uvhw9WszKUYn4"(i8 %0, ptr nonnull readonly %1, ptr nonnull readonly %2) {
+entry:
+  %local_0 = alloca i8, align 1
+  %local_1 = alloca ptr, align 8
+  %local_2 = alloca ptr, align 8
+  %local_3 = alloca i8, align 1
+  %local_4 = alloca ptr, align 8
+  %local_5__bytes = alloca ptr, align 8
+  %local_6 = alloca ptr, align 8
+  %local_7__bytes = alloca ptr, align 8
+  %local_8__bytes = alloca { ptr, i64, i64 }, align 8
+  %local_9 = alloca %struct.group_ops__Element_bls12381__GT_, align 8
+  store i8 %0, ptr %local_0, align 1
+  store ptr %1, ptr %local_1, align 8
+  store ptr %2, ptr %local_2, align 8
+  %load_store_tmp = load i8, ptr %local_0, align 1
+  store i8 %load_store_tmp, ptr %local_3, align 1
+  %load_store_tmp1 = load ptr, ptr %local_1, align 8
+  store ptr %load_store_tmp1, ptr %local_4, align 8
+  %tmp = load ptr, ptr %local_4, align 8
+  %fld_ref = getelementptr inbounds %struct.group_ops__Element_bls12381__G1_, ptr %tmp, i32 0, i32 0
+  store ptr %fld_ref, ptr %local_5__bytes, align 8
+  %load_store_tmp2 = load ptr, ptr %local_2, align 8
+  store ptr %load_store_tmp2, ptr %local_6, align 8
+  %tmp3 = load ptr, ptr %local_6, align 8
+  %fld_ref4 = getelementptr inbounds %struct.group_ops__Element_bls12381__G2_, ptr %tmp3, i32 0, i32 0
+  store ptr %fld_ref4, ptr %local_7__bytes, align 8
+  %loaded_alloca = load i8, ptr %local_3, align 1
+  %loaded_alloca5 = load ptr, ptr %local_5__bytes, align 8
+  %loaded_alloca6 = load ptr, ptr %local_7__bytes, align 8
+  %retval = call { ptr, i64, i64 } @move_native_group_ops_internal_pairing(i8 %loaded_alloca, ptr %loaded_alloca5, ptr %loaded_alloca6)
+  store { ptr, i64, i64 } %retval, ptr %local_8__bytes, align 8
+  %fv.0 = load { ptr, i64, i64 }, ptr %local_8__bytes, align 8
+  %insert_0 = insertvalue %struct.group_ops__Element_bls12381__GT_ undef, { ptr, i64, i64 } %fv.0, 0
+  store %struct.group_ops__Element_bls12381__GT_ %insert_0, ptr %local_9, align 8
+  %retval7 = load %struct.group_ops__Element_bls12381__GT_, ptr %local_9, align 8
+  ret %struct.group_ops__Element_bls12381__GT_ %retval7
+}
+
+declare { ptr, i64, i64 } @move_native_group_ops_internal_pairing(i8, ptr, ptr)
+
+declare i1 @move_native_bls12381_bls12381_min_pk_verify(ptr, ptr, ptr)
+
+declare i1 @move_native_bls12381_bls12381_min_sig_verify(ptr, ptr, ptr)
+
+define %struct.group_ops__Element_bls12381__G1_ @"0000000000000002_bls12381_g1_add_CkR6SM7BuRnuMj"(ptr nonnull readonly %0, ptr nonnull readonly %1) {
+entry:
+  %local_0 = alloca ptr, align 8
+  %local_1 = alloca ptr, align 8
+  %local_2 = alloca i8, align 1
+  %local_3 = alloca ptr, align 8
+  %local_4 = alloca ptr, align 8
+  %local_5 = alloca %struct.group_ops__Element_bls12381__G1_, align 8
+  store ptr %0, ptr %local_0, align 8
+  store ptr %1, ptr %local_1, align 8
+  store i8 1, ptr %local_2, align 1
+  %load_store_tmp = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp, ptr %local_3, align 8
+  %load_store_tmp1 = load ptr, ptr %local_1, align 8
+  store ptr %load_store_tmp1, ptr %local_4, align 8
+  %call_arg_0 = load i8, ptr %local_2, align 1
+  %call_arg_1 = load ptr, ptr %local_3, align 8
+  %call_arg_2 = load ptr, ptr %local_4, align 8
+  %retval = call %struct.group_ops__Element_bls12381__G1_ @"0000000000000002_group_ops_add_5FDhgkSAfeNzNH"(i8 %call_arg_0, ptr %call_arg_1, ptr %call_arg_2)
+  store %struct.group_ops__Element_bls12381__G1_ %retval, ptr %local_5, align 8
+  %retval2 = load %struct.group_ops__Element_bls12381__G1_, ptr %local_5, align 8
+  ret %struct.group_ops__Element_bls12381__G1_ %retval2
+}
+
+define private %struct.group_ops__Element_bls12381__G1_ @"0000000000000002_group_ops_add_5FDhgkSAfeNzNH"(i8 %0, ptr nonnull readonly %1, ptr nonnull readonly %2) {
+entry:
+  %local_0 = alloca i8, align 1
+  %local_1 = alloca ptr, align 8
+  %local_2 = alloca ptr, align 8
+  %local_3 = alloca i8, align 1
+  %local_4 = alloca ptr, align 8
+  %local_5__bytes = alloca ptr, align 8
+  %local_6 = alloca ptr, align 8
+  %local_7__bytes = alloca ptr, align 8
+  %local_8__bytes = alloca { ptr, i64, i64 }, align 8
+  %local_9 = alloca %struct.group_ops__Element_bls12381__G1_, align 8
+  store i8 %0, ptr %local_0, align 1
+  store ptr %1, ptr %local_1, align 8
+  store ptr %2, ptr %local_2, align 8
+  %load_store_tmp = load i8, ptr %local_0, align 1
+  store i8 %load_store_tmp, ptr %local_3, align 1
+  %load_store_tmp1 = load ptr, ptr %local_1, align 8
+  store ptr %load_store_tmp1, ptr %local_4, align 8
+  %tmp = load ptr, ptr %local_4, align 8
+  %fld_ref = getelementptr inbounds %struct.group_ops__Element_bls12381__G1_, ptr %tmp, i32 0, i32 0
+  store ptr %fld_ref, ptr %local_5__bytes, align 8
+  %load_store_tmp2 = load ptr, ptr %local_2, align 8
+  store ptr %load_store_tmp2, ptr %local_6, align 8
+  %tmp3 = load ptr, ptr %local_6, align 8
+  %fld_ref4 = getelementptr inbounds %struct.group_ops__Element_bls12381__G1_, ptr %tmp3, i32 0, i32 0
+  store ptr %fld_ref4, ptr %local_7__bytes, align 8
+  %loaded_alloca = load i8, ptr %local_3, align 1
+  %loaded_alloca5 = load ptr, ptr %local_5__bytes, align 8
+  %loaded_alloca6 = load ptr, ptr %local_7__bytes, align 8
+  %retval = call { ptr, i64, i64 } @move_native_group_ops_internal_add(i8 %loaded_alloca, ptr %loaded_alloca5, ptr %loaded_alloca6)
+  store { ptr, i64, i64 } %retval, ptr %local_8__bytes, align 8
+  %fv.0 = load { ptr, i64, i64 }, ptr %local_8__bytes, align 8
+  %insert_0 = insertvalue %struct.group_ops__Element_bls12381__G1_ undef, { ptr, i64, i64 } %fv.0, 0
+  store %struct.group_ops__Element_bls12381__G1_ %insert_0, ptr %local_9, align 8
+  %retval7 = load %struct.group_ops__Element_bls12381__G1_, ptr %local_9, align 8
+  ret %struct.group_ops__Element_bls12381__G1_ %retval7
+}
+
+declare { ptr, i64, i64 } @move_native_group_ops_internal_add(i8, ptr, ptr)
+
+define %struct.group_ops__Element_bls12381__G1_ @"0000000000000002_bls12381_g1_div_3V4GcgPydbpFkQ"(ptr nonnull readonly %0, ptr nonnull readonly %1) {
+entry:
+  %local_0 = alloca ptr, align 8
+  %local_1 = alloca ptr, align 8
+  %local_2 = alloca i8, align 1
+  %local_3 = alloca ptr, align 8
+  %local_4 = alloca ptr, align 8
+  %local_5 = alloca %struct.group_ops__Element_bls12381__G1_, align 8
+  store ptr %0, ptr %local_0, align 8
+  store ptr %1, ptr %local_1, align 8
+  store i8 1, ptr %local_2, align 1
+  %load_store_tmp = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp, ptr %local_3, align 8
+  %load_store_tmp1 = load ptr, ptr %local_1, align 8
+  store ptr %load_store_tmp1, ptr %local_4, align 8
+  %call_arg_0 = load i8, ptr %local_2, align 1
+  %call_arg_1 = load ptr, ptr %local_3, align 8
+  %call_arg_2 = load ptr, ptr %local_4, align 8
+  %retval = call %struct.group_ops__Element_bls12381__G1_ @"0000000000000002_group_ops_div_7Y6ZZjGePtg1tB"(i8 %call_arg_0, ptr %call_arg_1, ptr %call_arg_2)
+  store %struct.group_ops__Element_bls12381__G1_ %retval, ptr %local_5, align 8
+  %retval2 = load %struct.group_ops__Element_bls12381__G1_, ptr %local_5, align 8
+  ret %struct.group_ops__Element_bls12381__G1_ %retval2
+}
+
+define private %struct.group_ops__Element_bls12381__G1_ @"0000000000000002_group_ops_div_7Y6ZZjGePtg1tB"(i8 %0, ptr nonnull readonly %1, ptr nonnull readonly %2) {
+entry:
+  %local_0 = alloca i8, align 1
+  %local_1 = alloca ptr, align 8
+  %local_2 = alloca ptr, align 8
+  %local_3 = alloca i8, align 1
+  %local_4 = alloca ptr, align 8
+  %local_5__bytes = alloca ptr, align 8
+  %local_6 = alloca ptr, align 8
+  %local_7__bytes = alloca ptr, align 8
+  %local_8__bytes = alloca { ptr, i64, i64 }, align 8
+  %local_9 = alloca %struct.group_ops__Element_bls12381__G1_, align 8
+  store i8 %0, ptr %local_0, align 1
+  store ptr %1, ptr %local_1, align 8
+  store ptr %2, ptr %local_2, align 8
+  %load_store_tmp = load i8, ptr %local_0, align 1
+  store i8 %load_store_tmp, ptr %local_3, align 1
+  %load_store_tmp1 = load ptr, ptr %local_1, align 8
+  store ptr %load_store_tmp1, ptr %local_4, align 8
+  %tmp = load ptr, ptr %local_4, align 8
+  %fld_ref = getelementptr inbounds %struct.group_ops__Element_bls12381__Scalar_, ptr %tmp, i32 0, i32 0
+  store ptr %fld_ref, ptr %local_5__bytes, align 8
+  %load_store_tmp2 = load ptr, ptr %local_2, align 8
+  store ptr %load_store_tmp2, ptr %local_6, align 8
+  %tmp3 = load ptr, ptr %local_6, align 8
+  %fld_ref4 = getelementptr inbounds %struct.group_ops__Element_bls12381__G1_, ptr %tmp3, i32 0, i32 0
+  store ptr %fld_ref4, ptr %local_7__bytes, align 8
+  %loaded_alloca = load i8, ptr %local_3, align 1
+  %loaded_alloca5 = load ptr, ptr %local_5__bytes, align 8
+  %loaded_alloca6 = load ptr, ptr %local_7__bytes, align 8
+  %retval = call { ptr, i64, i64 } @move_native_group_ops_internal_div(i8 %loaded_alloca, ptr %loaded_alloca5, ptr %loaded_alloca6)
+  store { ptr, i64, i64 } %retval, ptr %local_8__bytes, align 8
+  %fv.0 = load { ptr, i64, i64 }, ptr %local_8__bytes, align 8
+  %insert_0 = insertvalue %struct.group_ops__Element_bls12381__G1_ undef, { ptr, i64, i64 } %fv.0, 0
+  store %struct.group_ops__Element_bls12381__G1_ %insert_0, ptr %local_9, align 8
+  %retval7 = load %struct.group_ops__Element_bls12381__G1_, ptr %local_9, align 8
+  ret %struct.group_ops__Element_bls12381__G1_ %retval7
+}
+
+declare { ptr, i64, i64 } @move_native_group_ops_internal_div(i8, ptr, ptr)
+
+define %struct.group_ops__Element_bls12381__G1_ @"0000000000000002_bls12381_g1_from_bytes_cgzwVQqnmW1wY7"(ptr nonnull readonly %0) {
+entry:
+  %local_0 = alloca ptr, align 8
+  %local_1 = alloca i8, align 1
+  %local_2 = alloca ptr, align 8
+  %local_3 = alloca i1, align 1
+  %local_4 = alloca %struct.group_ops__Element_bls12381__G1_, align 8
+  store ptr %0, ptr %local_0, align 8
+  store i8 1, ptr %local_1, align 1
+  %load_store_tmp = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp, ptr %local_2, align 8
+  store i1 false, ptr %local_3, align 1
+  %call_arg_0 = load i8, ptr %local_1, align 1
+  %call_arg_1 = load ptr, ptr %local_2, align 8
+  %call_arg_2 = load i1, ptr %local_3, align 1
+  %retval = call %struct.group_ops__Element_bls12381__G1_ @"0000000000000002_group_ops_from_bytes_8nysSJmWy4dU8W"(i8 %call_arg_0, ptr %call_arg_1, i1 %call_arg_2)
+  store %struct.group_ops__Element_bls12381__G1_ %retval, ptr %local_4, align 8
+  %retval1 = load %struct.group_ops__Element_bls12381__G1_, ptr %local_4, align 8
+  ret %struct.group_ops__Element_bls12381__G1_ %retval1
+}
+
+define private %struct.group_ops__Element_bls12381__G1_ @"0000000000000002_group_ops_from_bytes_8nysSJmWy4dU8W"(i8 %0, ptr nonnull readonly %1, i1 %2) {
+entry:
+  %local_0 = alloca i8, align 1
+  %local_1 = alloca ptr, align 8
+  %local_2 = alloca i1, align 1
+  %local_3 = alloca i1, align 1
+  %local_4 = alloca i1, align 1
+  %local_5 = alloca i1, align 1
+  %local_6 = alloca i8, align 1
+  %local_7 = alloca ptr, align 8
+  %local_8 = alloca i1, align 1
+  %local_9 = alloca i1, align 1
+  %local_10 = alloca ptr, align 8
+  %local_11 = alloca i64, align 8
+  %local_12 = alloca ptr, align 8
+  %local_13__bytes = alloca { ptr, i64, i64 }, align 8
+  %local_14 = alloca %struct.group_ops__Element_bls12381__G1_, align 8
+  store i8 %0, ptr %local_0, align 1
+  store ptr %1, ptr %local_1, align 8
+  store i1 %2, ptr %local_2, align 1
+  %load_store_tmp = load i1, ptr %local_2, align 1
+  store i1 %load_store_tmp, ptr %local_4, align 1
+  %cnd = load i1, ptr %local_4, align 1
+  br i1 %cnd, label %bb_1, label %bb_0
+
+bb_1:                                             ; preds = %entry
+  store i1 true, ptr %local_5, align 1
+  %load_store_tmp1 = load i1, ptr %local_5, align 1
+  store i1 %load_store_tmp1, ptr %local_3, align 1
+  br label %bb_2
+
+bb_0:                                             ; preds = %entry
+  %load_store_tmp2 = load i8, ptr %local_0, align 1
+  store i8 %load_store_tmp2, ptr %local_6, align 1
+  %load_store_tmp3 = load ptr, ptr %local_1, align 8
+  store ptr %load_store_tmp3, ptr %local_7, align 8
+  %loaded_alloca = load i8, ptr %local_6, align 1
+  %loaded_alloca4 = load ptr, ptr %local_7, align 8
+  %retval = call i1 @move_native_group_ops_internal_validate(i8 %loaded_alloca, ptr %loaded_alloca4)
+  store i1 %retval, ptr %local_8, align 1
+  %load_store_tmp5 = load i1, ptr %local_8, align 1
+  store i1 %load_store_tmp5, ptr %local_3, align 1
+  br label %bb_2
+
+bb_2:                                             ; preds = %bb_0, %bb_1
+  %load_store_tmp6 = load i1, ptr %local_3, align 1
+  store i1 %load_store_tmp6, ptr %local_9, align 1
+  %cnd7 = load i1, ptr %local_9, align 1
+  br i1 %cnd7, label %bb_4, label %bb_3
+
+bb_4:                                             ; preds = %bb_2
+  br label %bb_5
+
+bb_3:                                             ; preds = %bb_2
+  %load_store_tmp8 = load ptr, ptr %local_1, align 8
+  store ptr %load_store_tmp8, ptr %local_10, align 8
+  store i64 1, ptr %local_11, align 8
+  %call_arg_0 = load i64, ptr %local_11, align 8
+  call void @move_rt_abort(i64 %call_arg_0)
+  unreachable
+
+bb_5:                                             ; preds = %bb_4
+  %load_store_tmp9 = load ptr, ptr %local_1, align 8
+  store ptr %load_store_tmp9, ptr %local_12, align 8
+  %load_deref_store_tmp1 = load ptr, ptr %local_12, align 8
+  %load_deref_store_tmp2 = load { ptr, i64, i64 }, ptr %load_deref_store_tmp1, align 8
+  store { ptr, i64, i64 } %load_deref_store_tmp2, ptr %local_13__bytes, align 8
+  %fv.0 = load { ptr, i64, i64 }, ptr %local_13__bytes, align 8
+  %insert_0 = insertvalue %struct.group_ops__Element_bls12381__G1_ undef, { ptr, i64, i64 } %fv.0, 0
+  store %struct.group_ops__Element_bls12381__G1_ %insert_0, ptr %local_14, align 8
+  %retval10 = load %struct.group_ops__Element_bls12381__G1_, ptr %local_14, align 8
+  ret %struct.group_ops__Element_bls12381__G1_ %retval10
+}
+
+declare i1 @move_native_group_ops_internal_validate(i8, ptr)
+
+define %struct.group_ops__Element_bls12381__G1_ @"0000000000000002_bls12381_g1_generator_DXcZUc6LuJg6gX"() {
+entry:
+  %newv = alloca { ptr, i64, i64 }, align 8
+  %local_0 = alloca { ptr, i64, i64 }, align 8
+  %local_1 = alloca { ptr, i64, i64 }, align 8
+  %local_2 = alloca i8, align 1
+  %local_3 = alloca ptr, align 8
+  %local_4 = alloca i1, align 1
+  %local_5 = alloca %struct.group_ops__Element_bls12381__G1_, align 8
+  %0 = call { ptr, i64, i64 } @move_rt_vec_empty(ptr @__move_rttydesc_u8)
+  store { ptr, i64, i64 } %0, ptr %newv, align 8
+  call void @move_rt_vec_copy(ptr @__move_rttydesc_u8, ptr %newv, ptr @vdesc)
+  %reload = load { ptr, i64, i64 }, ptr %newv, align 8
+  store { ptr, i64, i64 } %reload, ptr %local_1, align 8
+  %load_store_tmp = load { ptr, i64, i64 }, ptr %local_1, align 8
+  store { ptr, i64, i64 } %load_store_tmp, ptr %local_0, align 8
+  store i8 1, ptr %local_2, align 1
+  store ptr %local_0, ptr %local_3, align 8
+  store i1 true, ptr %local_4, align 1
+  %call_arg_0 = load i8, ptr %local_2, align 1
+  %call_arg_1 = load ptr, ptr %local_3, align 8
+  %call_arg_2 = load i1, ptr %local_4, align 1
+  %retval = call %struct.group_ops__Element_bls12381__G1_ @"0000000000000002_group_ops_from_bytes_8nysSJmWy4dU8W"(i8 %call_arg_0, ptr %call_arg_1, i1 %call_arg_2)
+  store %struct.group_ops__Element_bls12381__G1_ %retval, ptr %local_5, align 8
+  %retval1 = load %struct.group_ops__Element_bls12381__G1_, ptr %local_5, align 8
+  ret %struct.group_ops__Element_bls12381__G1_ %retval1
+}
+
+define %struct.group_ops__Element_bls12381__G1_ @"0000000000000002_bls12381_g1_identity_HC8zzhiRBbkvyU"() {
+entry:
+  %newv = alloca { ptr, i64, i64 }, align 8
+  %local_0 = alloca { ptr, i64, i64 }, align 8
+  %local_1 = alloca { ptr, i64, i64 }, align 8
+  %local_2 = alloca i8, align 1
+  %local_3 = alloca ptr, align 8
+  %local_4 = alloca i1, align 1
+  %local_5 = alloca %struct.group_ops__Element_bls12381__G1_, align 8
+  %0 = call { ptr, i64, i64 } @move_rt_vec_empty(ptr @__move_rttydesc_u8)
+  store { ptr, i64, i64 } %0, ptr %newv, align 8
+  call void @move_rt_vec_copy(ptr @__move_rttydesc_u8, ptr %newv, ptr @vdesc.2)
+  %reload = load { ptr, i64, i64 }, ptr %newv, align 8
+  store { ptr, i64, i64 } %reload, ptr %local_1, align 8
+  %load_store_tmp = load { ptr, i64, i64 }, ptr %local_1, align 8
+  store { ptr, i64, i64 } %load_store_tmp, ptr %local_0, align 8
+  store i8 1, ptr %local_2, align 1
+  store ptr %local_0, ptr %local_3, align 8
+  store i1 true, ptr %local_4, align 1
+  %call_arg_0 = load i8, ptr %local_2, align 1
+  %call_arg_1 = load ptr, ptr %local_3, align 8
+  %call_arg_2 = load i1, ptr %local_4, align 1
+  %retval = call %struct.group_ops__Element_bls12381__G1_ @"0000000000000002_group_ops_from_bytes_8nysSJmWy4dU8W"(i8 %call_arg_0, ptr %call_arg_1, i1 %call_arg_2)
+  store %struct.group_ops__Element_bls12381__G1_ %retval, ptr %local_5, align 8
+  %retval1 = load %struct.group_ops__Element_bls12381__G1_, ptr %local_5, align 8
+  ret %struct.group_ops__Element_bls12381__G1_ %retval1
+}
+
+define %struct.group_ops__Element_bls12381__G1_ @"0000000000000002_bls12381_g1_mul_6pRZHwJrsbzzhi"(ptr nonnull readonly %0, ptr nonnull readonly %1) {
+entry:
+  %local_0 = alloca ptr, align 8
+  %local_1 = alloca ptr, align 8
+  %local_2 = alloca i8, align 1
+  %local_3 = alloca ptr, align 8
+  %local_4 = alloca ptr, align 8
+  %local_5 = alloca %struct.group_ops__Element_bls12381__G1_, align 8
+  store ptr %0, ptr %local_0, align 8
+  store ptr %1, ptr %local_1, align 8
+  store i8 1, ptr %local_2, align 1
+  %load_store_tmp = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp, ptr %local_3, align 8
+  %load_store_tmp1 = load ptr, ptr %local_1, align 8
+  store ptr %load_store_tmp1, ptr %local_4, align 8
+  %call_arg_0 = load i8, ptr %local_2, align 1
+  %call_arg_1 = load ptr, ptr %local_3, align 8
+  %call_arg_2 = load ptr, ptr %local_4, align 8
+  %retval = call %struct.group_ops__Element_bls12381__G1_ @"0000000000000002_group_ops_mul_Ggozy62bH2MW91"(i8 %call_arg_0, ptr %call_arg_1, ptr %call_arg_2)
+  store %struct.group_ops__Element_bls12381__G1_ %retval, ptr %local_5, align 8
+  %retval2 = load %struct.group_ops__Element_bls12381__G1_, ptr %local_5, align 8
+  ret %struct.group_ops__Element_bls12381__G1_ %retval2
+}
+
+define private %struct.group_ops__Element_bls12381__G1_ @"0000000000000002_group_ops_mul_Ggozy62bH2MW91"(i8 %0, ptr nonnull readonly %1, ptr nonnull readonly %2) {
+entry:
+  %local_0 = alloca i8, align 1
+  %local_1 = alloca ptr, align 8
+  %local_2 = alloca ptr, align 8
+  %local_3 = alloca i8, align 1
+  %local_4 = alloca ptr, align 8
+  %local_5__bytes = alloca ptr, align 8
+  %local_6 = alloca ptr, align 8
+  %local_7__bytes = alloca ptr, align 8
+  %local_8__bytes = alloca { ptr, i64, i64 }, align 8
+  %local_9 = alloca %struct.group_ops__Element_bls12381__G1_, align 8
+  store i8 %0, ptr %local_0, align 1
+  store ptr %1, ptr %local_1, align 8
+  store ptr %2, ptr %local_2, align 8
+  %load_store_tmp = load i8, ptr %local_0, align 1
+  store i8 %load_store_tmp, ptr %local_3, align 1
+  %load_store_tmp1 = load ptr, ptr %local_1, align 8
+  store ptr %load_store_tmp1, ptr %local_4, align 8
+  %tmp = load ptr, ptr %local_4, align 8
+  %fld_ref = getelementptr inbounds %struct.group_ops__Element_bls12381__Scalar_, ptr %tmp, i32 0, i32 0
+  store ptr %fld_ref, ptr %local_5__bytes, align 8
+  %load_store_tmp2 = load ptr, ptr %local_2, align 8
+  store ptr %load_store_tmp2, ptr %local_6, align 8
+  %tmp3 = load ptr, ptr %local_6, align 8
+  %fld_ref4 = getelementptr inbounds %struct.group_ops__Element_bls12381__G1_, ptr %tmp3, i32 0, i32 0
+  store ptr %fld_ref4, ptr %local_7__bytes, align 8
+  %loaded_alloca = load i8, ptr %local_3, align 1
+  %loaded_alloca5 = load ptr, ptr %local_5__bytes, align 8
+  %loaded_alloca6 = load ptr, ptr %local_7__bytes, align 8
+  %retval = call { ptr, i64, i64 } @move_native_group_ops_internal_mul(i8 %loaded_alloca, ptr %loaded_alloca5, ptr %loaded_alloca6)
+  store { ptr, i64, i64 } %retval, ptr %local_8__bytes, align 8
+  %fv.0 = load { ptr, i64, i64 }, ptr %local_8__bytes, align 8
+  %insert_0 = insertvalue %struct.group_ops__Element_bls12381__G1_ undef, { ptr, i64, i64 } %fv.0, 0
+  store %struct.group_ops__Element_bls12381__G1_ %insert_0, ptr %local_9, align 8
+  %retval7 = load %struct.group_ops__Element_bls12381__G1_, ptr %local_9, align 8
+  ret %struct.group_ops__Element_bls12381__G1_ %retval7
+}
+
+declare { ptr, i64, i64 } @move_native_group_ops_internal_mul(i8, ptr, ptr)
+
+define %struct.group_ops__Element_bls12381__G1_ @"0000000000000002_bls12381_g1_multi_scalar_FYs2vj4sa1hQKe"(ptr nonnull readonly %0, ptr nonnull readonly %1) {
+entry:
+  %local_0 = alloca ptr, align 8
+  %local_1 = alloca ptr, align 8
+  %local_2 = alloca i8, align 1
+  %local_3 = alloca ptr, align 8
+  %local_4 = alloca ptr, align 8
+  %local_5 = alloca %struct.group_ops__Element_bls12381__G1_, align 8
+  store ptr %0, ptr %local_0, align 8
+  store ptr %1, ptr %local_1, align 8
+  store i8 1, ptr %local_2, align 1
+  %load_store_tmp = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp, ptr %local_3, align 8
+  %load_store_tmp1 = load ptr, ptr %local_1, align 8
+  store ptr %load_store_tmp1, ptr %local_4, align 8
+  %call_arg_0 = load i8, ptr %local_2, align 1
+  %call_arg_1 = load ptr, ptr %local_3, align 8
+  %call_arg_2 = load ptr, ptr %local_4, align 8
+  %retval = call %struct.group_ops__Element_bls12381__G1_ @"0000000000000002_group_ops_multi_scalar_mu_H3STcG9t8Ns3jZ"(i8 %call_arg_0, ptr %call_arg_1, ptr %call_arg_2)
+  store %struct.group_ops__Element_bls12381__G1_ %retval, ptr %local_5, align 8
+  %retval2 = load %struct.group_ops__Element_bls12381__G1_, ptr %local_5, align 8
+  ret %struct.group_ops__Element_bls12381__G1_ %retval2
+}
+
+define private %struct.group_ops__Element_bls12381__G1_ @"0000000000000002_group_ops_multi_scalar_mu_H3STcG9t8Ns3jZ"(i8 %0, ptr nonnull readonly %1, ptr nonnull readonly %2) {
+entry:
+  %local_0 = alloca i8, align 1
+  %local_1 = alloca ptr, align 8
+  %local_2 = alloca ptr, align 8
+  %local_3 = alloca %struct.group_ops__Element_bls12381__G1_, align 8
+  %local_4 = alloca { ptr, i64, i64 }, align 8
+  %local_5 = alloca i64, align 8
+  %local_6 = alloca %struct.group_ops__Element_bls12381__Scalar_, align 8
+  %local_7 = alloca { ptr, i64, i64 }, align 8
+  %local_8 = alloca ptr, align 8
+  %local_9 = alloca i64, align 8
+  %local_10 = alloca i64, align 8
+  %local_11 = alloca i1, align 1
+  %local_12 = alloca ptr, align 8
+  %local_13 = alloca ptr, align 8
+  %local_14 = alloca i64, align 8
+  %local_15 = alloca ptr, align 8
+  %local_16 = alloca i64, align 8
+  %local_17 = alloca ptr, align 8
+  %local_18 = alloca i64, align 8
+  %local_19 = alloca i1, align 1
+  %local_20 = alloca ptr, align 8
+  %local_21 = alloca ptr, align 8
+  %local_22 = alloca i64, align 8
+  %local_23 = alloca { ptr, i64, i64 }, align 8
+  %local_24 = alloca { ptr, i64, i64 }, align 8
+  %local_25 = alloca i64, align 8
+  %local_26 = alloca i64, align 8
+  %local_27 = alloca ptr, align 8
+  %local_28 = alloca i64, align 8
+  %local_29 = alloca i1, align 1
+  %local_30 = alloca ptr, align 8
+  %local_31 = alloca i64, align 8
+  %local_32 = alloca ptr, align 8
+  %local_33 = alloca %struct.group_ops__Element_bls12381__Scalar_, align 8
+  %local_34 = alloca ptr, align 8
+  %local_35 = alloca ptr, align 8
+  %local_36__bytes = alloca ptr, align 8
+  %local_37 = alloca { ptr, i64, i64 }, align 8
+  %local_38 = alloca ptr, align 8
+  %local_39 = alloca i64, align 8
+  %local_40 = alloca ptr, align 8
+  %local_41 = alloca %struct.group_ops__Element_bls12381__G1_, align 8
+  %local_42 = alloca ptr, align 8
+  %local_43 = alloca ptr, align 8
+  %local_44__bytes = alloca ptr, align 8
+  %local_45 = alloca { ptr, i64, i64 }, align 8
+  %local_46 = alloca i64, align 8
+  %local_47 = alloca i64, align 8
+  %local_48 = alloca i64, align 8
+  %local_49 = alloca ptr, align 8
+  %local_50 = alloca ptr, align 8
+  %local_51 = alloca i8, align 1
+  %local_52 = alloca ptr, align 8
+  %local_53 = alloca ptr, align 8
+  %local_54__bytes = alloca { ptr, i64, i64 }, align 8
+  %local_55 = alloca %struct.group_ops__Element_bls12381__G1_, align 8
+  store i8 %0, ptr %local_0, align 1
+  store ptr %1, ptr %local_1, align 8
+  store ptr %2, ptr %local_2, align 8
+  %load_store_tmp = load ptr, ptr %local_1, align 8
+  store ptr %load_store_tmp, ptr %local_8, align 8
+  %loaded_alloca = load ptr, ptr %local_8, align 8
+  %retval = call i64 @move_native_vector_length(ptr @__move_rttydesc_group_ops__Element_bls12381__Scalar_, ptr %loaded_alloca)
+  store i64 %retval, ptr %local_9, align 8
+  store i64 0, ptr %local_10, align 8
+  %gt_src_0 = load i64, ptr %local_9, align 8
+  %gt_src_1 = load i64, ptr %local_10, align 8
+  %gt_dst = icmp ugt i64 %gt_src_0, %gt_src_1
+  store i1 %gt_dst, ptr %local_11, align 1
+  %cnd = load i1, ptr %local_11, align 1
+  br i1 %cnd, label %bb_1, label %bb_0
+
+bb_1:                                             ; preds = %entry
+  br label %bb_2
+
+bb_0:                                             ; preds = %entry
+  %load_store_tmp1 = load ptr, ptr %local_1, align 8
+  store ptr %load_store_tmp1, ptr %local_12, align 8
+  %load_store_tmp2 = load ptr, ptr %local_2, align 8
+  store ptr %load_store_tmp2, ptr %local_13, align 8
+  store i64 1, ptr %local_14, align 8
+  %call_arg_0 = load i64, ptr %local_14, align 8
+  call void @move_rt_abort(i64 %call_arg_0)
+  unreachable
+
+bb_2:                                             ; preds = %bb_1
+  %load_store_tmp3 = load ptr, ptr %local_1, align 8
+  store ptr %load_store_tmp3, ptr %local_15, align 8
+  %loaded_alloca4 = load ptr, ptr %local_15, align 8
+  %retval5 = call i64 @move_native_vector_length(ptr @__move_rttydesc_group_ops__Element_bls12381__Scalar_, ptr %loaded_alloca4)
+  store i64 %retval5, ptr %local_16, align 8
+  %load_store_tmp6 = load ptr, ptr %local_2, align 8
+  store ptr %load_store_tmp6, ptr %local_17, align 8
+  %loaded_alloca7 = load ptr, ptr %local_17, align 8
+  %retval8 = call i64 @move_native_vector_length(ptr @__move_rttydesc_group_ops__Element_bls12381__G1_, ptr %loaded_alloca7)
+  store i64 %retval8, ptr %local_18, align 8
+  %eq_src_0 = load i64, ptr %local_16, align 8
+  %eq_src_1 = load i64, ptr %local_18, align 8
+  %eq_dst = icmp eq i64 %eq_src_0, %eq_src_1
+  store i1 %eq_dst, ptr %local_19, align 1
+  %cnd9 = load i1, ptr %local_19, align 1
+  br i1 %cnd9, label %bb_4, label %bb_3
+
+bb_4:                                             ; preds = %bb_2
+  br label %bb_5
+
+bb_3:                                             ; preds = %bb_2
+  %load_store_tmp10 = load ptr, ptr %local_1, align 8
+  store ptr %load_store_tmp10, ptr %local_20, align 8
+  %load_store_tmp11 = load ptr, ptr %local_2, align 8
+  store ptr %load_store_tmp11, ptr %local_21, align 8
+  store i64 1, ptr %local_22, align 8
+  %call_arg_012 = load i64, ptr %local_22, align 8
+  call void @move_rt_abort(i64 %call_arg_012)
+  unreachable
+
+bb_5:                                             ; preds = %bb_4
+  %retval13 = call { ptr, i64, i64 } @move_native_vector_empty(ptr @__move_rttydesc_u8)
+  store { ptr, i64, i64 } %retval13, ptr %local_23, align 8
+  %load_store_tmp14 = load { ptr, i64, i64 }, ptr %local_23, align 8
+  store { ptr, i64, i64 } %load_store_tmp14, ptr %local_7, align 8
+  %retval15 = call { ptr, i64, i64 } @move_native_vector_empty(ptr @__move_rttydesc_u8)
+  store { ptr, i64, i64 } %retval15, ptr %local_24, align 8
+  %load_store_tmp16 = load { ptr, i64, i64 }, ptr %local_24, align 8
+  store { ptr, i64, i64 } %load_store_tmp16, ptr %local_4, align 8
+  store i64 0, ptr %local_25, align 8
+  %load_store_tmp17 = load i64, ptr %local_25, align 8
+  store i64 %load_store_tmp17, ptr %local_5, align 8
+  br label %bb_9
+
+bb_9:                                             ; preds = %join_bb, %bb_5
+  %load_store_tmp18 = load i64, ptr %local_5, align 8
+  store i64 %load_store_tmp18, ptr %local_26, align 8
+  %load_store_tmp19 = load ptr, ptr %local_1, align 8
+  store ptr %load_store_tmp19, ptr %local_27, align 8
+  %loaded_alloca20 = load ptr, ptr %local_27, align 8
+  %retval21 = call i64 @move_native_vector_length(ptr @__move_rttydesc_group_ops__Element_bls12381__Scalar_, ptr %loaded_alloca20)
+  store i64 %retval21, ptr %local_28, align 8
+  %lt_src_0 = load i64, ptr %local_26, align 8
+  %lt_src_1 = load i64, ptr %local_28, align 8
+  %lt_dst = icmp ult i64 %lt_src_0, %lt_src_1
+  store i1 %lt_dst, ptr %local_29, align 1
+  %cnd22 = load i1, ptr %local_29, align 1
+  br i1 %cnd22, label %bb_7, label %bb_6
+
+bb_7:                                             ; preds = %bb_9
+  br label %bb_8
+
+bb_8:                                             ; preds = %bb_7
+  %load_store_tmp23 = load ptr, ptr %local_1, align 8
+  store ptr %load_store_tmp23, ptr %local_30, align 8
+  %load_store_tmp24 = load i64, ptr %local_5, align 8
+  store i64 %load_store_tmp24, ptr %local_31, align 8
+  %loaded_alloca25 = load ptr, ptr %local_30, align 8
+  %loaded_alloca26 = load i64, ptr %local_31, align 8
+  %retval27 = call ptr @move_native_vector_borrow(ptr @__move_rttydesc_group_ops__Element_bls12381__Scalar_, ptr %loaded_alloca25, i64 %loaded_alloca26)
+  store ptr %retval27, ptr %local_32, align 8
+  %load_deref_store_tmp1 = load ptr, ptr %local_32, align 8
+  %load_deref_store_tmp2 = load %struct.group_ops__Element_bls12381__Scalar_, ptr %load_deref_store_tmp1, align 8
+  store %struct.group_ops__Element_bls12381__Scalar_ %load_deref_store_tmp2, ptr %local_33, align 8
+  %load_store_tmp28 = load %struct.group_ops__Element_bls12381__Scalar_, ptr %local_33, align 8
+  store %struct.group_ops__Element_bls12381__Scalar_ %load_store_tmp28, ptr %local_6, align 8
+  store ptr %local_7, ptr %local_34, align 8
+  store ptr %local_6, ptr %local_35, align 8
+  %tmp = load ptr, ptr %local_35, align 8
+  %fld_ref = getelementptr inbounds %struct.group_ops__Element_bls12381__Scalar_, ptr %tmp, i32 0, i32 0
+  store ptr %fld_ref, ptr %local_36__bytes, align 8
+  %load_deref_store_tmp129 = load ptr, ptr %local_36__bytes, align 8
+  %load_deref_store_tmp230 = load { ptr, i64, i64 }, ptr %load_deref_store_tmp129, align 8
+  store { ptr, i64, i64 } %load_deref_store_tmp230, ptr %local_37, align 8
+  %call_arg_031 = load ptr, ptr %local_34, align 8
+  %call_arg_1 = load { ptr, i64, i64 }, ptr %local_37, align 8
+  call void @"0000000000000001_vector_append_9dqoPGavEhpvk5"(ptr %call_arg_031, { ptr, i64, i64 } %call_arg_1)
+  %load_store_tmp32 = load ptr, ptr %local_2, align 8
+  store ptr %load_store_tmp32, ptr %local_38, align 8
+  %load_store_tmp33 = load i64, ptr %local_5, align 8
+  store i64 %load_store_tmp33, ptr %local_39, align 8
+  %loaded_alloca34 = load ptr, ptr %local_38, align 8
+  %loaded_alloca35 = load i64, ptr %local_39, align 8
+  %retval36 = call ptr @move_native_vector_borrow(ptr @__move_rttydesc_group_ops__Element_bls12381__G1_, ptr %loaded_alloca34, i64 %loaded_alloca35)
+  store ptr %retval36, ptr %local_40, align 8
+  %load_deref_store_tmp137 = load ptr, ptr %local_40, align 8
+  %load_deref_store_tmp238 = load %struct.group_ops__Element_bls12381__G1_, ptr %load_deref_store_tmp137, align 8
+  store %struct.group_ops__Element_bls12381__G1_ %load_deref_store_tmp238, ptr %local_41, align 8
+  %load_store_tmp39 = load %struct.group_ops__Element_bls12381__G1_, ptr %local_41, align 8
+  store %struct.group_ops__Element_bls12381__G1_ %load_store_tmp39, ptr %local_3, align 8
+  store ptr %local_4, ptr %local_42, align 8
+  store ptr %local_3, ptr %local_43, align 8
+  %tmp40 = load ptr, ptr %local_43, align 8
+  %fld_ref41 = getelementptr inbounds %struct.group_ops__Element_bls12381__G1_, ptr %tmp40, i32 0, i32 0
+  store ptr %fld_ref41, ptr %local_44__bytes, align 8
+  %load_deref_store_tmp142 = load ptr, ptr %local_44__bytes, align 8
+  %load_deref_store_tmp243 = load { ptr, i64, i64 }, ptr %load_deref_store_tmp142, align 8
+  store { ptr, i64, i64 } %load_deref_store_tmp243, ptr %local_45, align 8
+  %call_arg_044 = load ptr, ptr %local_42, align 8
+  %call_arg_145 = load { ptr, i64, i64 }, ptr %local_45, align 8
+  call void @"0000000000000001_vector_append_9dqoPGavEhpvk5"(ptr %call_arg_044, { ptr, i64, i64 } %call_arg_145)
+  %load_store_tmp46 = load i64, ptr %local_5, align 8
+  store i64 %load_store_tmp46, ptr %local_46, align 8
+  store i64 1, ptr %local_47, align 8
+  %add_src_0 = load i64, ptr %local_46, align 8
+  %add_src_1 = load i64, ptr %local_47, align 8
+  %add_dst = add i64 %add_src_0, %add_src_1
+  %ovfcond = icmp ult i64 %add_dst, %add_src_0
+  br i1 %ovfcond, label %then_bb, label %join_bb
+
+then_bb:                                          ; preds = %bb_8
+  call void @move_rt_abort(i64 4017)
+  unreachable
+
+join_bb:                                          ; preds = %bb_8
+  store i64 %add_dst, ptr %local_48, align 8
+  %load_store_tmp47 = load i64, ptr %local_48, align 8
+  store i64 %load_store_tmp47, ptr %local_5, align 8
+  br label %bb_9
+
+bb_6:                                             ; preds = %bb_9
+  %load_store_tmp48 = load ptr, ptr %local_1, align 8
+  store ptr %load_store_tmp48, ptr %local_49, align 8
+  %load_store_tmp49 = load ptr, ptr %local_2, align 8
+  store ptr %load_store_tmp49, ptr %local_50, align 8
+  %load_store_tmp50 = load i8, ptr %local_0, align 1
+  store i8 %load_store_tmp50, ptr %local_51, align 1
+  store ptr %local_7, ptr %local_52, align 8
+  store ptr %local_4, ptr %local_53, align 8
+  %loaded_alloca51 = load i8, ptr %local_51, align 1
+  %loaded_alloca52 = load ptr, ptr %local_52, align 8
+  %loaded_alloca53 = load ptr, ptr %local_53, align 8
+  %retval54 = call { ptr, i64, i64 } @move_native_group_ops_internal_multi_scalar_mul(i8 %loaded_alloca51, ptr %loaded_alloca52, ptr %loaded_alloca53)
+  store { ptr, i64, i64 } %retval54, ptr %local_54__bytes, align 8
+  %fv.0 = load { ptr, i64, i64 }, ptr %local_54__bytes, align 8
+  %insert_0 = insertvalue %struct.group_ops__Element_bls12381__G1_ undef, { ptr, i64, i64 } %fv.0, 0
+  store %struct.group_ops__Element_bls12381__G1_ %insert_0, ptr %local_55, align 8
+  %retval55 = load %struct.group_ops__Element_bls12381__G1_, ptr %local_55, align 8
+  ret %struct.group_ops__Element_bls12381__G1_ %retval55
+}
+
+declare i64 @move_native_vector_length(ptr, ptr)
+
+declare { ptr, i64, i64 } @move_native_vector_empty(ptr)
+
+declare ptr @move_native_vector_borrow(ptr, ptr, i64)
+
+define private void @"0000000000000001_vector_append_9dqoPGavEhpvk5"(ptr noalias nonnull %0, { ptr, i64, i64 } %1) {
+entry:
+  %local_0 = alloca ptr, align 8
+  %local_1 = alloca { ptr, i64, i64 }, align 8
+  %local_2 = alloca ptr, align 8
+  %local_3 = alloca ptr, align 8
+  %local_4 = alloca i1, align 1
+  %local_5 = alloca i1, align 1
+  %local_6 = alloca ptr, align 8
+  %local_7 = alloca ptr, align 8
+  %local_8 = alloca i8, align 1
+  %local_9 = alloca ptr, align 8
+  %local_10 = alloca { ptr, i64, i64 }, align 8
+  store ptr %0, ptr %local_0, align 8
+  store { ptr, i64, i64 } %1, ptr %local_1, align 8
+  store ptr %local_1, ptr %local_2, align 8
+  %call_arg_0 = load ptr, ptr %local_2, align 8
+  call void @"0000000000000001_vector_reverse_DYV9motnmmM5cs"(ptr %call_arg_0)
+  br label %bb_3
+
+bb_3:                                             ; preds = %bb_2, %entry
+  store ptr %local_1, ptr %local_3, align 8
+  %call_arg_01 = load ptr, ptr %local_3, align 8
+  %retval = call i1 @"0000000000000001_vector_is_empty_BrzErKu8hVV1SC"(ptr %call_arg_01)
+  store i1 %retval, ptr %local_4, align 1
+  %not_src = load i1, ptr %local_4, align 1
+  %not_dst = xor i1 %not_src, true
+  store i1 %not_dst, ptr %local_5, align 1
+  %cnd = load i1, ptr %local_5, align 1
+  br i1 %cnd, label %bb_1, label %bb_0
+
+bb_1:                                             ; preds = %bb_3
+  br label %bb_2
+
+bb_2:                                             ; preds = %bb_1
+  %load_store_tmp = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp, ptr %local_6, align 8
+  store ptr %local_1, ptr %local_7, align 8
+  %loaded_alloca = load ptr, ptr %local_7, align 8
+  call void @move_native_vector_pop_back(ptr @__move_rttydesc_u8, ptr %loaded_alloca, ptr %local_8)
+  %loaded_alloca2 = load ptr, ptr %local_6, align 8
+  call void @move_native_vector_push_back(ptr @__move_rttydesc_u8, ptr %loaded_alloca2, ptr %local_8)
+  br label %bb_3
+
+bb_0:                                             ; preds = %bb_3
+  %load_store_tmp3 = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp3, ptr %local_9, align 8
+  %load_store_tmp4 = load { ptr, i64, i64 }, ptr %local_1, align 8
+  store { ptr, i64, i64 } %load_store_tmp4, ptr %local_10, align 8
+  call void @move_native_vector_destroy_empty(ptr @__move_rttydesc_u8, ptr %local_10)
+  ret void
+}
+
+define private void @"0000000000000001_vector_reverse_DYV9motnmmM5cs"(ptr noalias nonnull %0) {
+entry:
+  %local_0 = alloca ptr, align 8
+  %local_1 = alloca i64, align 8
+  %local_2 = alloca i64, align 8
+  %local_3 = alloca i64, align 8
+  %local_4 = alloca ptr, align 8
+  %local_5 = alloca ptr, align 8
+  %local_6 = alloca i64, align 8
+  %local_7 = alloca i64, align 8
+  %local_8 = alloca i64, align 8
+  %local_9 = alloca i1, align 1
+  %local_10 = alloca ptr, align 8
+  %local_11 = alloca i64, align 8
+  %local_12 = alloca i64, align 8
+  %local_13 = alloca i64, align 8
+  %local_14 = alloca i64, align 8
+  %local_15 = alloca i64, align 8
+  %local_16 = alloca i64, align 8
+  %local_17 = alloca i1, align 1
+  %local_18 = alloca ptr, align 8
+  %local_19 = alloca i64, align 8
+  %local_20 = alloca i64, align 8
+  %local_21 = alloca i64, align 8
+  %local_22 = alloca i64, align 8
+  %local_23 = alloca i64, align 8
+  %local_24 = alloca i64, align 8
+  %local_25 = alloca i64, align 8
+  %local_26 = alloca i64, align 8
+  %local_27 = alloca ptr, align 8
+  store ptr %0, ptr %local_0, align 8
+  %load_store_tmp = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp, ptr %local_4, align 8
+  %load_store_tmp1 = load ptr, ptr %local_4, align 8
+  store ptr %load_store_tmp1, ptr %local_5, align 8
+  %loaded_alloca = load ptr, ptr %local_5, align 8
+  %retval = call i64 @move_native_vector_length(ptr @__move_rttydesc_u8, ptr %loaded_alloca)
+  store i64 %retval, ptr %local_6, align 8
+  %load_store_tmp2 = load i64, ptr %local_6, align 8
+  store i64 %load_store_tmp2, ptr %local_3, align 8
+  %load_store_tmp3 = load i64, ptr %local_3, align 8
+  store i64 %load_store_tmp3, ptr %local_7, align 8
+  store i64 0, ptr %local_8, align 8
+  %eq_src_0 = load i64, ptr %local_7, align 8
+  %eq_src_1 = load i64, ptr %local_8, align 8
+  %eq_dst = icmp eq i64 %eq_src_0, %eq_src_1
+  store i1 %eq_dst, ptr %local_9, align 1
+  %cnd = load i1, ptr %local_9, align 1
+  br i1 %cnd, label %bb_1, label %bb_0
+
+bb_1:                                             ; preds = %entry
+  %load_store_tmp4 = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp4, ptr %local_10, align 8
+  ret void
+
+bb_0:                                             ; preds = %entry
+  store i64 0, ptr %local_11, align 8
+  %load_store_tmp5 = load i64, ptr %local_11, align 8
+  store i64 %load_store_tmp5, ptr %local_2, align 8
+  %load_store_tmp6 = load i64, ptr %local_3, align 8
+  store i64 %load_store_tmp6, ptr %local_12, align 8
+  store i64 1, ptr %local_13, align 8
+  %sub_src_0 = load i64, ptr %local_12, align 8
+  %sub_src_1 = load i64, ptr %local_13, align 8
+  %sub_dst = sub i64 %sub_src_0, %sub_src_1
+  %ovfcond = icmp ugt i64 %sub_dst, %sub_src_0
+  br i1 %ovfcond, label %then_bb, label %join_bb
+
+then_bb:                                          ; preds = %bb_0
+  call void @move_rt_abort(i64 4017)
+  unreachable
+
+join_bb:                                          ; preds = %bb_0
+  store i64 %sub_dst, ptr %local_14, align 8
+  %load_store_tmp7 = load i64, ptr %local_14, align 8
+  store i64 %load_store_tmp7, ptr %local_1, align 8
+  br label %bb_5
+
+bb_5:                                             ; preds = %join_bb28, %join_bb
+  %load_store_tmp8 = load i64, ptr %local_2, align 8
+  store i64 %load_store_tmp8, ptr %local_15, align 8
+  %load_store_tmp9 = load i64, ptr %local_1, align 8
+  store i64 %load_store_tmp9, ptr %local_16, align 8
+  %lt_src_0 = load i64, ptr %local_15, align 8
+  %lt_src_1 = load i64, ptr %local_16, align 8
+  %lt_dst = icmp ult i64 %lt_src_0, %lt_src_1
+  store i1 %lt_dst, ptr %local_17, align 1
+  %cnd10 = load i1, ptr %local_17, align 1
+  br i1 %cnd10, label %bb_3, label %bb_2
+
+bb_3:                                             ; preds = %bb_5
+  br label %bb_4
+
+bb_4:                                             ; preds = %bb_3
+  %load_store_tmp11 = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp11, ptr %local_18, align 8
+  %load_store_tmp12 = load i64, ptr %local_2, align 8
+  store i64 %load_store_tmp12, ptr %local_19, align 8
+  %load_store_tmp13 = load i64, ptr %local_1, align 8
+  store i64 %load_store_tmp13, ptr %local_20, align 8
+  %loaded_alloca14 = load ptr, ptr %local_18, align 8
+  %loaded_alloca15 = load i64, ptr %local_19, align 8
+  %loaded_alloca16 = load i64, ptr %local_20, align 8
+  call void @move_native_vector_swap(ptr @__move_rttydesc_u8, ptr %loaded_alloca14, i64 %loaded_alloca15, i64 %loaded_alloca16)
+  %load_store_tmp17 = load i64, ptr %local_2, align 8
+  store i64 %load_store_tmp17, ptr %local_21, align 8
+  store i64 1, ptr %local_22, align 8
+  %add_src_0 = load i64, ptr %local_21, align 8
+  %add_src_1 = load i64, ptr %local_22, align 8
+  %add_dst = add i64 %add_src_0, %add_src_1
+  %ovfcond18 = icmp ult i64 %add_dst, %add_src_0
+  br i1 %ovfcond18, label %then_bb19, label %join_bb20
+
+then_bb19:                                        ; preds = %bb_4
+  call void @move_rt_abort(i64 4017)
+  unreachable
+
+join_bb20:                                        ; preds = %bb_4
+  store i64 %add_dst, ptr %local_23, align 8
+  %load_store_tmp21 = load i64, ptr %local_23, align 8
+  store i64 %load_store_tmp21, ptr %local_2, align 8
+  %load_store_tmp22 = load i64, ptr %local_1, align 8
+  store i64 %load_store_tmp22, ptr %local_24, align 8
+  store i64 1, ptr %local_25, align 8
+  %sub_src_023 = load i64, ptr %local_24, align 8
+  %sub_src_124 = load i64, ptr %local_25, align 8
+  %sub_dst25 = sub i64 %sub_src_023, %sub_src_124
+  %ovfcond26 = icmp ugt i64 %sub_dst25, %sub_src_023
+  br i1 %ovfcond26, label %then_bb27, label %join_bb28
+
+then_bb27:                                        ; preds = %join_bb20
+  call void @move_rt_abort(i64 4017)
+  unreachable
+
+join_bb28:                                        ; preds = %join_bb20
+  store i64 %sub_dst25, ptr %local_26, align 8
+  %load_store_tmp29 = load i64, ptr %local_26, align 8
+  store i64 %load_store_tmp29, ptr %local_1, align 8
+  br label %bb_5
+
+bb_2:                                             ; preds = %bb_5
+  %load_store_tmp30 = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp30, ptr %local_27, align 8
+  ret void
+}
+
+declare void @move_native_vector_swap(ptr, ptr, i64, i64)
+
+define private i1 @"0000000000000001_vector_is_empty_BrzErKu8hVV1SC"(ptr nonnull readonly %0) {
+entry:
+  %local_0 = alloca ptr, align 8
+  %local_1 = alloca ptr, align 8
+  %local_2 = alloca i64, align 8
+  %local_3 = alloca i64, align 8
+  %local_4 = alloca i1, align 1
+  store ptr %0, ptr %local_0, align 8
+  %load_store_tmp = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp, ptr %local_1, align 8
+  %loaded_alloca = load ptr, ptr %local_1, align 8
+  %retval = call i64 @move_native_vector_length(ptr @__move_rttydesc_u8, ptr %loaded_alloca)
+  store i64 %retval, ptr %local_2, align 8
+  store i64 0, ptr %local_3, align 8
+  %eq_src_0 = load i64, ptr %local_2, align 8
+  %eq_src_1 = load i64, ptr %local_3, align 8
+  %eq_dst = icmp eq i64 %eq_src_0, %eq_src_1
+  store i1 %eq_dst, ptr %local_4, align 1
+  %retval1 = load i1, ptr %local_4, align 1
+  ret i1 %retval1
+}
+
+declare void @move_native_vector_pop_back(ptr, ptr, ptr)
+
+declare void @move_native_vector_push_back(ptr, ptr, ptr)
+
+declare void @move_native_vector_destroy_empty(ptr, ptr)
+
+declare { ptr, i64, i64 } @move_native_group_ops_internal_multi_scalar_mul(i8, ptr, ptr)
+
+define %struct.group_ops__Element_bls12381__G1_ @"0000000000000002_bls12381_g1_neg_6hN9ttPdR8YegC"(ptr nonnull readonly %0) {
+entry:
+  %local_0 = alloca ptr, align 8
+  %local_1 = alloca %struct.group_ops__Element_bls12381__G1_, align 8
+  %local_2 = alloca %struct.group_ops__Element_bls12381__G1_, align 8
+  %local_3 = alloca ptr, align 8
+  %local_4 = alloca ptr, align 8
+  %local_5 = alloca %struct.group_ops__Element_bls12381__G1_, align 8
+  store ptr %0, ptr %local_0, align 8
+  %retval = call %struct.group_ops__Element_bls12381__G1_ @"0000000000000002_bls12381_g1_identity_HC8zzhiRBbkvyU"()
+  store %struct.group_ops__Element_bls12381__G1_ %retval, ptr %local_2, align 8
+  %load_store_tmp = load %struct.group_ops__Element_bls12381__G1_, ptr %local_2, align 8
+  store %struct.group_ops__Element_bls12381__G1_ %load_store_tmp, ptr %local_1, align 8
+  store ptr %local_1, ptr %local_3, align 8
+  %load_store_tmp1 = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp1, ptr %local_4, align 8
+  %call_arg_0 = load ptr, ptr %local_3, align 8
+  %call_arg_1 = load ptr, ptr %local_4, align 8
+  %retval2 = call %struct.group_ops__Element_bls12381__G1_ @"0000000000000002_bls12381_g1_sub_3ry7MfF7roCAx2"(ptr %call_arg_0, ptr %call_arg_1)
+  store %struct.group_ops__Element_bls12381__G1_ %retval2, ptr %local_5, align 8
+  %retval3 = load %struct.group_ops__Element_bls12381__G1_, ptr %local_5, align 8
+  ret %struct.group_ops__Element_bls12381__G1_ %retval3
+}
+
+define %struct.group_ops__Element_bls12381__G1_ @"0000000000000002_bls12381_g1_sub_3ry7MfF7roCAx2"(ptr nonnull readonly %0, ptr nonnull readonly %1) {
+entry:
+  %local_0 = alloca ptr, align 8
+  %local_1 = alloca ptr, align 8
+  %local_2 = alloca i8, align 1
+  %local_3 = alloca ptr, align 8
+  %local_4 = alloca ptr, align 8
+  %local_5 = alloca %struct.group_ops__Element_bls12381__G1_, align 8
+  store ptr %0, ptr %local_0, align 8
+  store ptr %1, ptr %local_1, align 8
+  store i8 1, ptr %local_2, align 1
+  %load_store_tmp = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp, ptr %local_3, align 8
+  %load_store_tmp1 = load ptr, ptr %local_1, align 8
+  store ptr %load_store_tmp1, ptr %local_4, align 8
+  %call_arg_0 = load i8, ptr %local_2, align 1
+  %call_arg_1 = load ptr, ptr %local_3, align 8
+  %call_arg_2 = load ptr, ptr %local_4, align 8
+  %retval = call %struct.group_ops__Element_bls12381__G1_ @"0000000000000002_group_ops_sub_6kADPapx16rjVE"(i8 %call_arg_0, ptr %call_arg_1, ptr %call_arg_2)
+  store %struct.group_ops__Element_bls12381__G1_ %retval, ptr %local_5, align 8
+  %retval2 = load %struct.group_ops__Element_bls12381__G1_, ptr %local_5, align 8
+  ret %struct.group_ops__Element_bls12381__G1_ %retval2
+}
+
+define private %struct.group_ops__Element_bls12381__G1_ @"0000000000000002_group_ops_sub_6kADPapx16rjVE"(i8 %0, ptr nonnull readonly %1, ptr nonnull readonly %2) {
+entry:
+  %local_0 = alloca i8, align 1
+  %local_1 = alloca ptr, align 8
+  %local_2 = alloca ptr, align 8
+  %local_3 = alloca i8, align 1
+  %local_4 = alloca ptr, align 8
+  %local_5__bytes = alloca ptr, align 8
+  %local_6 = alloca ptr, align 8
+  %local_7__bytes = alloca ptr, align 8
+  %local_8__bytes = alloca { ptr, i64, i64 }, align 8
+  %local_9 = alloca %struct.group_ops__Element_bls12381__G1_, align 8
+  store i8 %0, ptr %local_0, align 1
+  store ptr %1, ptr %local_1, align 8
+  store ptr %2, ptr %local_2, align 8
+  %load_store_tmp = load i8, ptr %local_0, align 1
+  store i8 %load_store_tmp, ptr %local_3, align 1
+  %load_store_tmp1 = load ptr, ptr %local_1, align 8
+  store ptr %load_store_tmp1, ptr %local_4, align 8
+  %tmp = load ptr, ptr %local_4, align 8
+  %fld_ref = getelementptr inbounds %struct.group_ops__Element_bls12381__G1_, ptr %tmp, i32 0, i32 0
+  store ptr %fld_ref, ptr %local_5__bytes, align 8
+  %load_store_tmp2 = load ptr, ptr %local_2, align 8
+  store ptr %load_store_tmp2, ptr %local_6, align 8
+  %tmp3 = load ptr, ptr %local_6, align 8
+  %fld_ref4 = getelementptr inbounds %struct.group_ops__Element_bls12381__G1_, ptr %tmp3, i32 0, i32 0
+  store ptr %fld_ref4, ptr %local_7__bytes, align 8
+  %loaded_alloca = load i8, ptr %local_3, align 1
+  %loaded_alloca5 = load ptr, ptr %local_5__bytes, align 8
+  %loaded_alloca6 = load ptr, ptr %local_7__bytes, align 8
+  %retval = call { ptr, i64, i64 } @move_native_group_ops_internal_sub(i8 %loaded_alloca, ptr %loaded_alloca5, ptr %loaded_alloca6)
+  store { ptr, i64, i64 } %retval, ptr %local_8__bytes, align 8
+  %fv.0 = load { ptr, i64, i64 }, ptr %local_8__bytes, align 8
+  %insert_0 = insertvalue %struct.group_ops__Element_bls12381__G1_ undef, { ptr, i64, i64 } %fv.0, 0
+  store %struct.group_ops__Element_bls12381__G1_ %insert_0, ptr %local_9, align 8
+  %retval7 = load %struct.group_ops__Element_bls12381__G1_, ptr %local_9, align 8
+  ret %struct.group_ops__Element_bls12381__G1_ %retval7
+}
+
+declare { ptr, i64, i64 } @move_native_group_ops_internal_sub(i8, ptr, ptr)
+
+define %struct.group_ops__Element_bls12381__G2_ @"0000000000000002_bls12381_g2_add_GpqT23gboaXZF7"(ptr nonnull readonly %0, ptr nonnull readonly %1) {
+entry:
+  %local_0 = alloca ptr, align 8
+  %local_1 = alloca ptr, align 8
+  %local_2 = alloca i8, align 1
+  %local_3 = alloca ptr, align 8
+  %local_4 = alloca ptr, align 8
+  %local_5 = alloca %struct.group_ops__Element_bls12381__G2_, align 8
+  store ptr %0, ptr %local_0, align 8
+  store ptr %1, ptr %local_1, align 8
+  store i8 2, ptr %local_2, align 1
+  %load_store_tmp = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp, ptr %local_3, align 8
+  %load_store_tmp1 = load ptr, ptr %local_1, align 8
+  store ptr %load_store_tmp1, ptr %local_4, align 8
+  %call_arg_0 = load i8, ptr %local_2, align 1
+  %call_arg_1 = load ptr, ptr %local_3, align 8
+  %call_arg_2 = load ptr, ptr %local_4, align 8
+  %retval = call %struct.group_ops__Element_bls12381__G2_ @"0000000000000002_group_ops_add_9Uj64J4UymV5Lk"(i8 %call_arg_0, ptr %call_arg_1, ptr %call_arg_2)
+  store %struct.group_ops__Element_bls12381__G2_ %retval, ptr %local_5, align 8
+  %retval2 = load %struct.group_ops__Element_bls12381__G2_, ptr %local_5, align 8
+  ret %struct.group_ops__Element_bls12381__G2_ %retval2
+}
+
+define private %struct.group_ops__Element_bls12381__G2_ @"0000000000000002_group_ops_add_9Uj64J4UymV5Lk"(i8 %0, ptr nonnull readonly %1, ptr nonnull readonly %2) {
+entry:
+  %local_0 = alloca i8, align 1
+  %local_1 = alloca ptr, align 8
+  %local_2 = alloca ptr, align 8
+  %local_3 = alloca i8, align 1
+  %local_4 = alloca ptr, align 8
+  %local_5__bytes = alloca ptr, align 8
+  %local_6 = alloca ptr, align 8
+  %local_7__bytes = alloca ptr, align 8
+  %local_8__bytes = alloca { ptr, i64, i64 }, align 8
+  %local_9 = alloca %struct.group_ops__Element_bls12381__G2_, align 8
+  store i8 %0, ptr %local_0, align 1
+  store ptr %1, ptr %local_1, align 8
+  store ptr %2, ptr %local_2, align 8
+  %load_store_tmp = load i8, ptr %local_0, align 1
+  store i8 %load_store_tmp, ptr %local_3, align 1
+  %load_store_tmp1 = load ptr, ptr %local_1, align 8
+  store ptr %load_store_tmp1, ptr %local_4, align 8
+  %tmp = load ptr, ptr %local_4, align 8
+  %fld_ref = getelementptr inbounds %struct.group_ops__Element_bls12381__G2_, ptr %tmp, i32 0, i32 0
+  store ptr %fld_ref, ptr %local_5__bytes, align 8
+  %load_store_tmp2 = load ptr, ptr %local_2, align 8
+  store ptr %load_store_tmp2, ptr %local_6, align 8
+  %tmp3 = load ptr, ptr %local_6, align 8
+  %fld_ref4 = getelementptr inbounds %struct.group_ops__Element_bls12381__G2_, ptr %tmp3, i32 0, i32 0
+  store ptr %fld_ref4, ptr %local_7__bytes, align 8
+  %loaded_alloca = load i8, ptr %local_3, align 1
+  %loaded_alloca5 = load ptr, ptr %local_5__bytes, align 8
+  %loaded_alloca6 = load ptr, ptr %local_7__bytes, align 8
+  %retval = call { ptr, i64, i64 } @move_native_group_ops_internal_add(i8 %loaded_alloca, ptr %loaded_alloca5, ptr %loaded_alloca6)
+  store { ptr, i64, i64 } %retval, ptr %local_8__bytes, align 8
+  %fv.0 = load { ptr, i64, i64 }, ptr %local_8__bytes, align 8
+  %insert_0 = insertvalue %struct.group_ops__Element_bls12381__G2_ undef, { ptr, i64, i64 } %fv.0, 0
+  store %struct.group_ops__Element_bls12381__G2_ %insert_0, ptr %local_9, align 8
+  %retval7 = load %struct.group_ops__Element_bls12381__G2_, ptr %local_9, align 8
+  ret %struct.group_ops__Element_bls12381__G2_ %retval7
+}
+
+define %struct.group_ops__Element_bls12381__G2_ @"0000000000000002_bls12381_g2_div_B6no7gjLHngbNX"(ptr nonnull readonly %0, ptr nonnull readonly %1) {
+entry:
+  %local_0 = alloca ptr, align 8
+  %local_1 = alloca ptr, align 8
+  %local_2 = alloca i8, align 1
+  %local_3 = alloca ptr, align 8
+  %local_4 = alloca ptr, align 8
+  %local_5 = alloca %struct.group_ops__Element_bls12381__G2_, align 8
+  store ptr %0, ptr %local_0, align 8
+  store ptr %1, ptr %local_1, align 8
+  store i8 2, ptr %local_2, align 1
+  %load_store_tmp = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp, ptr %local_3, align 8
+  %load_store_tmp1 = load ptr, ptr %local_1, align 8
+  store ptr %load_store_tmp1, ptr %local_4, align 8
+  %call_arg_0 = load i8, ptr %local_2, align 1
+  %call_arg_1 = load ptr, ptr %local_3, align 8
+  %call_arg_2 = load ptr, ptr %local_4, align 8
+  %retval = call %struct.group_ops__Element_bls12381__G2_ @"0000000000000002_group_ops_div_HV1VuvUJEpsJzJ"(i8 %call_arg_0, ptr %call_arg_1, ptr %call_arg_2)
+  store %struct.group_ops__Element_bls12381__G2_ %retval, ptr %local_5, align 8
+  %retval2 = load %struct.group_ops__Element_bls12381__G2_, ptr %local_5, align 8
+  ret %struct.group_ops__Element_bls12381__G2_ %retval2
+}
+
+define private %struct.group_ops__Element_bls12381__G2_ @"0000000000000002_group_ops_div_HV1VuvUJEpsJzJ"(i8 %0, ptr nonnull readonly %1, ptr nonnull readonly %2) {
+entry:
+  %local_0 = alloca i8, align 1
+  %local_1 = alloca ptr, align 8
+  %local_2 = alloca ptr, align 8
+  %local_3 = alloca i8, align 1
+  %local_4 = alloca ptr, align 8
+  %local_5__bytes = alloca ptr, align 8
+  %local_6 = alloca ptr, align 8
+  %local_7__bytes = alloca ptr, align 8
+  %local_8__bytes = alloca { ptr, i64, i64 }, align 8
+  %local_9 = alloca %struct.group_ops__Element_bls12381__G2_, align 8
+  store i8 %0, ptr %local_0, align 1
+  store ptr %1, ptr %local_1, align 8
+  store ptr %2, ptr %local_2, align 8
+  %load_store_tmp = load i8, ptr %local_0, align 1
+  store i8 %load_store_tmp, ptr %local_3, align 1
+  %load_store_tmp1 = load ptr, ptr %local_1, align 8
+  store ptr %load_store_tmp1, ptr %local_4, align 8
+  %tmp = load ptr, ptr %local_4, align 8
+  %fld_ref = getelementptr inbounds %struct.group_ops__Element_bls12381__Scalar_, ptr %tmp, i32 0, i32 0
+  store ptr %fld_ref, ptr %local_5__bytes, align 8
+  %load_store_tmp2 = load ptr, ptr %local_2, align 8
+  store ptr %load_store_tmp2, ptr %local_6, align 8
+  %tmp3 = load ptr, ptr %local_6, align 8
+  %fld_ref4 = getelementptr inbounds %struct.group_ops__Element_bls12381__G2_, ptr %tmp3, i32 0, i32 0
+  store ptr %fld_ref4, ptr %local_7__bytes, align 8
+  %loaded_alloca = load i8, ptr %local_3, align 1
+  %loaded_alloca5 = load ptr, ptr %local_5__bytes, align 8
+  %loaded_alloca6 = load ptr, ptr %local_7__bytes, align 8
+  %retval = call { ptr, i64, i64 } @move_native_group_ops_internal_div(i8 %loaded_alloca, ptr %loaded_alloca5, ptr %loaded_alloca6)
+  store { ptr, i64, i64 } %retval, ptr %local_8__bytes, align 8
+  %fv.0 = load { ptr, i64, i64 }, ptr %local_8__bytes, align 8
+  %insert_0 = insertvalue %struct.group_ops__Element_bls12381__G2_ undef, { ptr, i64, i64 } %fv.0, 0
+  store %struct.group_ops__Element_bls12381__G2_ %insert_0, ptr %local_9, align 8
+  %retval7 = load %struct.group_ops__Element_bls12381__G2_, ptr %local_9, align 8
+  ret %struct.group_ops__Element_bls12381__G2_ %retval7
+}
+
+define %struct.group_ops__Element_bls12381__G2_ @"0000000000000002_bls12381_g2_from_bytes_31UyDF2TfxYWeM"(ptr nonnull readonly %0) {
+entry:
+  %local_0 = alloca ptr, align 8
+  %local_1 = alloca i8, align 1
+  %local_2 = alloca ptr, align 8
+  %local_3 = alloca i1, align 1
+  %local_4 = alloca %struct.group_ops__Element_bls12381__G2_, align 8
+  store ptr %0, ptr %local_0, align 8
+  store i8 2, ptr %local_1, align 1
+  %load_store_tmp = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp, ptr %local_2, align 8
+  store i1 false, ptr %local_3, align 1
+  %call_arg_0 = load i8, ptr %local_1, align 1
+  %call_arg_1 = load ptr, ptr %local_2, align 8
+  %call_arg_2 = load i1, ptr %local_3, align 1
+  %retval = call %struct.group_ops__Element_bls12381__G2_ @"0000000000000002_group_ops_from_bytes_j6smeGkgCxdVLn"(i8 %call_arg_0, ptr %call_arg_1, i1 %call_arg_2)
+  store %struct.group_ops__Element_bls12381__G2_ %retval, ptr %local_4, align 8
+  %retval1 = load %struct.group_ops__Element_bls12381__G2_, ptr %local_4, align 8
+  ret %struct.group_ops__Element_bls12381__G2_ %retval1
+}
+
+define private %struct.group_ops__Element_bls12381__G2_ @"0000000000000002_group_ops_from_bytes_j6smeGkgCxdVLn"(i8 %0, ptr nonnull readonly %1, i1 %2) {
+entry:
+  %local_0 = alloca i8, align 1
+  %local_1 = alloca ptr, align 8
+  %local_2 = alloca i1, align 1
+  %local_3 = alloca i1, align 1
+  %local_4 = alloca i1, align 1
+  %local_5 = alloca i1, align 1
+  %local_6 = alloca i8, align 1
+  %local_7 = alloca ptr, align 8
+  %local_8 = alloca i1, align 1
+  %local_9 = alloca i1, align 1
+  %local_10 = alloca ptr, align 8
+  %local_11 = alloca i64, align 8
+  %local_12 = alloca ptr, align 8
+  %local_13__bytes = alloca { ptr, i64, i64 }, align 8
+  %local_14 = alloca %struct.group_ops__Element_bls12381__G2_, align 8
+  store i8 %0, ptr %local_0, align 1
+  store ptr %1, ptr %local_1, align 8
+  store i1 %2, ptr %local_2, align 1
+  %load_store_tmp = load i1, ptr %local_2, align 1
+  store i1 %load_store_tmp, ptr %local_4, align 1
+  %cnd = load i1, ptr %local_4, align 1
+  br i1 %cnd, label %bb_1, label %bb_0
+
+bb_1:                                             ; preds = %entry
+  store i1 true, ptr %local_5, align 1
+  %load_store_tmp1 = load i1, ptr %local_5, align 1
+  store i1 %load_store_tmp1, ptr %local_3, align 1
+  br label %bb_2
+
+bb_0:                                             ; preds = %entry
+  %load_store_tmp2 = load i8, ptr %local_0, align 1
+  store i8 %load_store_tmp2, ptr %local_6, align 1
+  %load_store_tmp3 = load ptr, ptr %local_1, align 8
+  store ptr %load_store_tmp3, ptr %local_7, align 8
+  %loaded_alloca = load i8, ptr %local_6, align 1
+  %loaded_alloca4 = load ptr, ptr %local_7, align 8
+  %retval = call i1 @move_native_group_ops_internal_validate(i8 %loaded_alloca, ptr %loaded_alloca4)
+  store i1 %retval, ptr %local_8, align 1
+  %load_store_tmp5 = load i1, ptr %local_8, align 1
+  store i1 %load_store_tmp5, ptr %local_3, align 1
+  br label %bb_2
+
+bb_2:                                             ; preds = %bb_0, %bb_1
+  %load_store_tmp6 = load i1, ptr %local_3, align 1
+  store i1 %load_store_tmp6, ptr %local_9, align 1
+  %cnd7 = load i1, ptr %local_9, align 1
+  br i1 %cnd7, label %bb_4, label %bb_3
+
+bb_4:                                             ; preds = %bb_2
+  br label %bb_5
+
+bb_3:                                             ; preds = %bb_2
+  %load_store_tmp8 = load ptr, ptr %local_1, align 8
+  store ptr %load_store_tmp8, ptr %local_10, align 8
+  store i64 1, ptr %local_11, align 8
+  %call_arg_0 = load i64, ptr %local_11, align 8
+  call void @move_rt_abort(i64 %call_arg_0)
+  unreachable
+
+bb_5:                                             ; preds = %bb_4
+  %load_store_tmp9 = load ptr, ptr %local_1, align 8
+  store ptr %load_store_tmp9, ptr %local_12, align 8
+  %load_deref_store_tmp1 = load ptr, ptr %local_12, align 8
+  %load_deref_store_tmp2 = load { ptr, i64, i64 }, ptr %load_deref_store_tmp1, align 8
+  store { ptr, i64, i64 } %load_deref_store_tmp2, ptr %local_13__bytes, align 8
+  %fv.0 = load { ptr, i64, i64 }, ptr %local_13__bytes, align 8
+  %insert_0 = insertvalue %struct.group_ops__Element_bls12381__G2_ undef, { ptr, i64, i64 } %fv.0, 0
+  store %struct.group_ops__Element_bls12381__G2_ %insert_0, ptr %local_14, align 8
+  %retval10 = load %struct.group_ops__Element_bls12381__G2_, ptr %local_14, align 8
+  ret %struct.group_ops__Element_bls12381__G2_ %retval10
+}
+
+define %struct.group_ops__Element_bls12381__G2_ @"0000000000000002_bls12381_g2_generator_8ghjteC6GSs7vd"() {
+entry:
+  %newv = alloca { ptr, i64, i64 }, align 8
+  %local_0 = alloca { ptr, i64, i64 }, align 8
+  %local_1 = alloca { ptr, i64, i64 }, align 8
+  %local_2 = alloca i8, align 1
+  %local_3 = alloca ptr, align 8
+  %local_4 = alloca i1, align 1
+  %local_5 = alloca %struct.group_ops__Element_bls12381__G2_, align 8
+  %0 = call { ptr, i64, i64 } @move_rt_vec_empty(ptr @__move_rttydesc_u8)
+  store { ptr, i64, i64 } %0, ptr %newv, align 8
+  call void @move_rt_vec_copy(ptr @__move_rttydesc_u8, ptr %newv, ptr @vdesc.5)
+  %reload = load { ptr, i64, i64 }, ptr %newv, align 8
+  store { ptr, i64, i64 } %reload, ptr %local_1, align 8
+  %load_store_tmp = load { ptr, i64, i64 }, ptr %local_1, align 8
+  store { ptr, i64, i64 } %load_store_tmp, ptr %local_0, align 8
+  store i8 2, ptr %local_2, align 1
+  store ptr %local_0, ptr %local_3, align 8
+  store i1 true, ptr %local_4, align 1
+  %call_arg_0 = load i8, ptr %local_2, align 1
+  %call_arg_1 = load ptr, ptr %local_3, align 8
+  %call_arg_2 = load i1, ptr %local_4, align 1
+  %retval = call %struct.group_ops__Element_bls12381__G2_ @"0000000000000002_group_ops_from_bytes_j6smeGkgCxdVLn"(i8 %call_arg_0, ptr %call_arg_1, i1 %call_arg_2)
+  store %struct.group_ops__Element_bls12381__G2_ %retval, ptr %local_5, align 8
+  %retval1 = load %struct.group_ops__Element_bls12381__G2_, ptr %local_5, align 8
+  ret %struct.group_ops__Element_bls12381__G2_ %retval1
+}
+
+define %struct.group_ops__Element_bls12381__G2_ @"0000000000000002_bls12381_g2_identity_Cbvprps2eq1C5w"() {
+entry:
+  %newv = alloca { ptr, i64, i64 }, align 8
+  %local_0 = alloca { ptr, i64, i64 }, align 8
+  %local_1 = alloca { ptr, i64, i64 }, align 8
+  %local_2 = alloca i8, align 1
+  %local_3 = alloca ptr, align 8
+  %local_4 = alloca i1, align 1
+  %local_5 = alloca %struct.group_ops__Element_bls12381__G2_, align 8
+  %0 = call { ptr, i64, i64 } @move_rt_vec_empty(ptr @__move_rttydesc_u8)
+  store { ptr, i64, i64 } %0, ptr %newv, align 8
+  call void @move_rt_vec_copy(ptr @__move_rttydesc_u8, ptr %newv, ptr @vdesc.7)
+  %reload = load { ptr, i64, i64 }, ptr %newv, align 8
+  store { ptr, i64, i64 } %reload, ptr %local_1, align 8
+  %load_store_tmp = load { ptr, i64, i64 }, ptr %local_1, align 8
+  store { ptr, i64, i64 } %load_store_tmp, ptr %local_0, align 8
+  store i8 2, ptr %local_2, align 1
+  store ptr %local_0, ptr %local_3, align 8
+  store i1 true, ptr %local_4, align 1
+  %call_arg_0 = load i8, ptr %local_2, align 1
+  %call_arg_1 = load ptr, ptr %local_3, align 8
+  %call_arg_2 = load i1, ptr %local_4, align 1
+  %retval = call %struct.group_ops__Element_bls12381__G2_ @"0000000000000002_group_ops_from_bytes_j6smeGkgCxdVLn"(i8 %call_arg_0, ptr %call_arg_1, i1 %call_arg_2)
+  store %struct.group_ops__Element_bls12381__G2_ %retval, ptr %local_5, align 8
+  %retval1 = load %struct.group_ops__Element_bls12381__G2_, ptr %local_5, align 8
+  ret %struct.group_ops__Element_bls12381__G2_ %retval1
+}
+
+define %struct.group_ops__Element_bls12381__G2_ @"0000000000000002_bls12381_g2_mul_H9hm89jv8zuFjB"(ptr nonnull readonly %0, ptr nonnull readonly %1) {
+entry:
+  %local_0 = alloca ptr, align 8
+  %local_1 = alloca ptr, align 8
+  %local_2 = alloca i8, align 1
+  %local_3 = alloca ptr, align 8
+  %local_4 = alloca ptr, align 8
+  %local_5 = alloca %struct.group_ops__Element_bls12381__G2_, align 8
+  store ptr %0, ptr %local_0, align 8
+  store ptr %1, ptr %local_1, align 8
+  store i8 2, ptr %local_2, align 1
+  %load_store_tmp = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp, ptr %local_3, align 8
+  %load_store_tmp1 = load ptr, ptr %local_1, align 8
+  store ptr %load_store_tmp1, ptr %local_4, align 8
+  %call_arg_0 = load i8, ptr %local_2, align 1
+  %call_arg_1 = load ptr, ptr %local_3, align 8
+  %call_arg_2 = load ptr, ptr %local_4, align 8
+  %retval = call %struct.group_ops__Element_bls12381__G2_ @"0000000000000002_group_ops_mul_FrpjDyKsfcXUL6"(i8 %call_arg_0, ptr %call_arg_1, ptr %call_arg_2)
+  store %struct.group_ops__Element_bls12381__G2_ %retval, ptr %local_5, align 8
+  %retval2 = load %struct.group_ops__Element_bls12381__G2_, ptr %local_5, align 8
+  ret %struct.group_ops__Element_bls12381__G2_ %retval2
+}
+
+define private %struct.group_ops__Element_bls12381__G2_ @"0000000000000002_group_ops_mul_FrpjDyKsfcXUL6"(i8 %0, ptr nonnull readonly %1, ptr nonnull readonly %2) {
+entry:
+  %local_0 = alloca i8, align 1
+  %local_1 = alloca ptr, align 8
+  %local_2 = alloca ptr, align 8
+  %local_3 = alloca i8, align 1
+  %local_4 = alloca ptr, align 8
+  %local_5__bytes = alloca ptr, align 8
+  %local_6 = alloca ptr, align 8
+  %local_7__bytes = alloca ptr, align 8
+  %local_8__bytes = alloca { ptr, i64, i64 }, align 8
+  %local_9 = alloca %struct.group_ops__Element_bls12381__G2_, align 8
+  store i8 %0, ptr %local_0, align 1
+  store ptr %1, ptr %local_1, align 8
+  store ptr %2, ptr %local_2, align 8
+  %load_store_tmp = load i8, ptr %local_0, align 1
+  store i8 %load_store_tmp, ptr %local_3, align 1
+  %load_store_tmp1 = load ptr, ptr %local_1, align 8
+  store ptr %load_store_tmp1, ptr %local_4, align 8
+  %tmp = load ptr, ptr %local_4, align 8
+  %fld_ref = getelementptr inbounds %struct.group_ops__Element_bls12381__Scalar_, ptr %tmp, i32 0, i32 0
+  store ptr %fld_ref, ptr %local_5__bytes, align 8
+  %load_store_tmp2 = load ptr, ptr %local_2, align 8
+  store ptr %load_store_tmp2, ptr %local_6, align 8
+  %tmp3 = load ptr, ptr %local_6, align 8
+  %fld_ref4 = getelementptr inbounds %struct.group_ops__Element_bls12381__G2_, ptr %tmp3, i32 0, i32 0
+  store ptr %fld_ref4, ptr %local_7__bytes, align 8
+  %loaded_alloca = load i8, ptr %local_3, align 1
+  %loaded_alloca5 = load ptr, ptr %local_5__bytes, align 8
+  %loaded_alloca6 = load ptr, ptr %local_7__bytes, align 8
+  %retval = call { ptr, i64, i64 } @move_native_group_ops_internal_mul(i8 %loaded_alloca, ptr %loaded_alloca5, ptr %loaded_alloca6)
+  store { ptr, i64, i64 } %retval, ptr %local_8__bytes, align 8
+  %fv.0 = load { ptr, i64, i64 }, ptr %local_8__bytes, align 8
+  %insert_0 = insertvalue %struct.group_ops__Element_bls12381__G2_ undef, { ptr, i64, i64 } %fv.0, 0
+  store %struct.group_ops__Element_bls12381__G2_ %insert_0, ptr %local_9, align 8
+  %retval7 = load %struct.group_ops__Element_bls12381__G2_, ptr %local_9, align 8
+  ret %struct.group_ops__Element_bls12381__G2_ %retval7
+}
+
+define %struct.group_ops__Element_bls12381__G2_ @"0000000000000002_bls12381_g2_multi_scalar_FfCXhUKphu8UwK"(ptr nonnull readonly %0, ptr nonnull readonly %1) {
+entry:
+  %local_0 = alloca ptr, align 8
+  %local_1 = alloca ptr, align 8
+  %local_2 = alloca i8, align 1
+  %local_3 = alloca ptr, align 8
+  %local_4 = alloca ptr, align 8
+  %local_5 = alloca %struct.group_ops__Element_bls12381__G2_, align 8
+  store ptr %0, ptr %local_0, align 8
+  store ptr %1, ptr %local_1, align 8
+  store i8 2, ptr %local_2, align 1
+  %load_store_tmp = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp, ptr %local_3, align 8
+  %load_store_tmp1 = load ptr, ptr %local_1, align 8
+  store ptr %load_store_tmp1, ptr %local_4, align 8
+  %call_arg_0 = load i8, ptr %local_2, align 1
+  %call_arg_1 = load ptr, ptr %local_3, align 8
+  %call_arg_2 = load ptr, ptr %local_4, align 8
+  %retval = call %struct.group_ops__Element_bls12381__G2_ @"0000000000000002_group_ops_multi_scalar_mu_DJW5AsZPxgPZ6x"(i8 %call_arg_0, ptr %call_arg_1, ptr %call_arg_2)
+  store %struct.group_ops__Element_bls12381__G2_ %retval, ptr %local_5, align 8
+  %retval2 = load %struct.group_ops__Element_bls12381__G2_, ptr %local_5, align 8
+  ret %struct.group_ops__Element_bls12381__G2_ %retval2
+}
+
+define private %struct.group_ops__Element_bls12381__G2_ @"0000000000000002_group_ops_multi_scalar_mu_DJW5AsZPxgPZ6x"(i8 %0, ptr nonnull readonly %1, ptr nonnull readonly %2) {
+entry:
+  %local_0 = alloca i8, align 1
+  %local_1 = alloca ptr, align 8
+  %local_2 = alloca ptr, align 8
+  %local_3 = alloca %struct.group_ops__Element_bls12381__G2_, align 8
+  %local_4 = alloca { ptr, i64, i64 }, align 8
+  %local_5 = alloca i64, align 8
+  %local_6 = alloca %struct.group_ops__Element_bls12381__Scalar_, align 8
+  %local_7 = alloca { ptr, i64, i64 }, align 8
+  %local_8 = alloca ptr, align 8
+  %local_9 = alloca i64, align 8
+  %local_10 = alloca i64, align 8
+  %local_11 = alloca i1, align 1
+  %local_12 = alloca ptr, align 8
+  %local_13 = alloca ptr, align 8
+  %local_14 = alloca i64, align 8
+  %local_15 = alloca ptr, align 8
+  %local_16 = alloca i64, align 8
+  %local_17 = alloca ptr, align 8
+  %local_18 = alloca i64, align 8
+  %local_19 = alloca i1, align 1
+  %local_20 = alloca ptr, align 8
+  %local_21 = alloca ptr, align 8
+  %local_22 = alloca i64, align 8
+  %local_23 = alloca { ptr, i64, i64 }, align 8
+  %local_24 = alloca { ptr, i64, i64 }, align 8
+  %local_25 = alloca i64, align 8
+  %local_26 = alloca i64, align 8
+  %local_27 = alloca ptr, align 8
+  %local_28 = alloca i64, align 8
+  %local_29 = alloca i1, align 1
+  %local_30 = alloca ptr, align 8
+  %local_31 = alloca i64, align 8
+  %local_32 = alloca ptr, align 8
+  %local_33 = alloca %struct.group_ops__Element_bls12381__Scalar_, align 8
+  %local_34 = alloca ptr, align 8
+  %local_35 = alloca ptr, align 8
+  %local_36__bytes = alloca ptr, align 8
+  %local_37 = alloca { ptr, i64, i64 }, align 8
+  %local_38 = alloca ptr, align 8
+  %local_39 = alloca i64, align 8
+  %local_40 = alloca ptr, align 8
+  %local_41 = alloca %struct.group_ops__Element_bls12381__G2_, align 8
+  %local_42 = alloca ptr, align 8
+  %local_43 = alloca ptr, align 8
+  %local_44__bytes = alloca ptr, align 8
+  %local_45 = alloca { ptr, i64, i64 }, align 8
+  %local_46 = alloca i64, align 8
+  %local_47 = alloca i64, align 8
+  %local_48 = alloca i64, align 8
+  %local_49 = alloca ptr, align 8
+  %local_50 = alloca ptr, align 8
+  %local_51 = alloca i8, align 1
+  %local_52 = alloca ptr, align 8
+  %local_53 = alloca ptr, align 8
+  %local_54__bytes = alloca { ptr, i64, i64 }, align 8
+  %local_55 = alloca %struct.group_ops__Element_bls12381__G2_, align 8
+  store i8 %0, ptr %local_0, align 1
+  store ptr %1, ptr %local_1, align 8
+  store ptr %2, ptr %local_2, align 8
+  %load_store_tmp = load ptr, ptr %local_1, align 8
+  store ptr %load_store_tmp, ptr %local_8, align 8
+  %loaded_alloca = load ptr, ptr %local_8, align 8
+  %retval = call i64 @move_native_vector_length(ptr @__move_rttydesc_group_ops__Element_bls12381__Scalar_, ptr %loaded_alloca)
+  store i64 %retval, ptr %local_9, align 8
+  store i64 0, ptr %local_10, align 8
+  %gt_src_0 = load i64, ptr %local_9, align 8
+  %gt_src_1 = load i64, ptr %local_10, align 8
+  %gt_dst = icmp ugt i64 %gt_src_0, %gt_src_1
+  store i1 %gt_dst, ptr %local_11, align 1
+  %cnd = load i1, ptr %local_11, align 1
+  br i1 %cnd, label %bb_1, label %bb_0
+
+bb_1:                                             ; preds = %entry
+  br label %bb_2
+
+bb_0:                                             ; preds = %entry
+  %load_store_tmp1 = load ptr, ptr %local_1, align 8
+  store ptr %load_store_tmp1, ptr %local_12, align 8
+  %load_store_tmp2 = load ptr, ptr %local_2, align 8
+  store ptr %load_store_tmp2, ptr %local_13, align 8
+  store i64 1, ptr %local_14, align 8
+  %call_arg_0 = load i64, ptr %local_14, align 8
+  call void @move_rt_abort(i64 %call_arg_0)
+  unreachable
+
+bb_2:                                             ; preds = %bb_1
+  %load_store_tmp3 = load ptr, ptr %local_1, align 8
+  store ptr %load_store_tmp3, ptr %local_15, align 8
+  %loaded_alloca4 = load ptr, ptr %local_15, align 8
+  %retval5 = call i64 @move_native_vector_length(ptr @__move_rttydesc_group_ops__Element_bls12381__Scalar_, ptr %loaded_alloca4)
+  store i64 %retval5, ptr %local_16, align 8
+  %load_store_tmp6 = load ptr, ptr %local_2, align 8
+  store ptr %load_store_tmp6, ptr %local_17, align 8
+  %loaded_alloca7 = load ptr, ptr %local_17, align 8
+  %retval8 = call i64 @move_native_vector_length(ptr @__move_rttydesc_group_ops__Element_bls12381__G2_, ptr %loaded_alloca7)
+  store i64 %retval8, ptr %local_18, align 8
+  %eq_src_0 = load i64, ptr %local_16, align 8
+  %eq_src_1 = load i64, ptr %local_18, align 8
+  %eq_dst = icmp eq i64 %eq_src_0, %eq_src_1
+  store i1 %eq_dst, ptr %local_19, align 1
+  %cnd9 = load i1, ptr %local_19, align 1
+  br i1 %cnd9, label %bb_4, label %bb_3
+
+bb_4:                                             ; preds = %bb_2
+  br label %bb_5
+
+bb_3:                                             ; preds = %bb_2
+  %load_store_tmp10 = load ptr, ptr %local_1, align 8
+  store ptr %load_store_tmp10, ptr %local_20, align 8
+  %load_store_tmp11 = load ptr, ptr %local_2, align 8
+  store ptr %load_store_tmp11, ptr %local_21, align 8
+  store i64 1, ptr %local_22, align 8
+  %call_arg_012 = load i64, ptr %local_22, align 8
+  call void @move_rt_abort(i64 %call_arg_012)
+  unreachable
+
+bb_5:                                             ; preds = %bb_4
+  %retval13 = call { ptr, i64, i64 } @move_native_vector_empty(ptr @__move_rttydesc_u8)
+  store { ptr, i64, i64 } %retval13, ptr %local_23, align 8
+  %load_store_tmp14 = load { ptr, i64, i64 }, ptr %local_23, align 8
+  store { ptr, i64, i64 } %load_store_tmp14, ptr %local_7, align 8
+  %retval15 = call { ptr, i64, i64 } @move_native_vector_empty(ptr @__move_rttydesc_u8)
+  store { ptr, i64, i64 } %retval15, ptr %local_24, align 8
+  %load_store_tmp16 = load { ptr, i64, i64 }, ptr %local_24, align 8
+  store { ptr, i64, i64 } %load_store_tmp16, ptr %local_4, align 8
+  store i64 0, ptr %local_25, align 8
+  %load_store_tmp17 = load i64, ptr %local_25, align 8
+  store i64 %load_store_tmp17, ptr %local_5, align 8
+  br label %bb_9
+
+bb_9:                                             ; preds = %join_bb, %bb_5
+  %load_store_tmp18 = load i64, ptr %local_5, align 8
+  store i64 %load_store_tmp18, ptr %local_26, align 8
+  %load_store_tmp19 = load ptr, ptr %local_1, align 8
+  store ptr %load_store_tmp19, ptr %local_27, align 8
+  %loaded_alloca20 = load ptr, ptr %local_27, align 8
+  %retval21 = call i64 @move_native_vector_length(ptr @__move_rttydesc_group_ops__Element_bls12381__Scalar_, ptr %loaded_alloca20)
+  store i64 %retval21, ptr %local_28, align 8
+  %lt_src_0 = load i64, ptr %local_26, align 8
+  %lt_src_1 = load i64, ptr %local_28, align 8
+  %lt_dst = icmp ult i64 %lt_src_0, %lt_src_1
+  store i1 %lt_dst, ptr %local_29, align 1
+  %cnd22 = load i1, ptr %local_29, align 1
+  br i1 %cnd22, label %bb_7, label %bb_6
+
+bb_7:                                             ; preds = %bb_9
+  br label %bb_8
+
+bb_8:                                             ; preds = %bb_7
+  %load_store_tmp23 = load ptr, ptr %local_1, align 8
+  store ptr %load_store_tmp23, ptr %local_30, align 8
+  %load_store_tmp24 = load i64, ptr %local_5, align 8
+  store i64 %load_store_tmp24, ptr %local_31, align 8
+  %loaded_alloca25 = load ptr, ptr %local_30, align 8
+  %loaded_alloca26 = load i64, ptr %local_31, align 8
+  %retval27 = call ptr @move_native_vector_borrow(ptr @__move_rttydesc_group_ops__Element_bls12381__Scalar_, ptr %loaded_alloca25, i64 %loaded_alloca26)
+  store ptr %retval27, ptr %local_32, align 8
+  %load_deref_store_tmp1 = load ptr, ptr %local_32, align 8
+  %load_deref_store_tmp2 = load %struct.group_ops__Element_bls12381__Scalar_, ptr %load_deref_store_tmp1, align 8
+  store %struct.group_ops__Element_bls12381__Scalar_ %load_deref_store_tmp2, ptr %local_33, align 8
+  %load_store_tmp28 = load %struct.group_ops__Element_bls12381__Scalar_, ptr %local_33, align 8
+  store %struct.group_ops__Element_bls12381__Scalar_ %load_store_tmp28, ptr %local_6, align 8
+  store ptr %local_7, ptr %local_34, align 8
+  store ptr %local_6, ptr %local_35, align 8
+  %tmp = load ptr, ptr %local_35, align 8
+  %fld_ref = getelementptr inbounds %struct.group_ops__Element_bls12381__Scalar_, ptr %tmp, i32 0, i32 0
+  store ptr %fld_ref, ptr %local_36__bytes, align 8
+  %load_deref_store_tmp129 = load ptr, ptr %local_36__bytes, align 8
+  %load_deref_store_tmp230 = load { ptr, i64, i64 }, ptr %load_deref_store_tmp129, align 8
+  store { ptr, i64, i64 } %load_deref_store_tmp230, ptr %local_37, align 8
+  %call_arg_031 = load ptr, ptr %local_34, align 8
+  %call_arg_1 = load { ptr, i64, i64 }, ptr %local_37, align 8
+  call void @"0000000000000001_vector_append_9dqoPGavEhpvk5"(ptr %call_arg_031, { ptr, i64, i64 } %call_arg_1)
+  %load_store_tmp32 = load ptr, ptr %local_2, align 8
+  store ptr %load_store_tmp32, ptr %local_38, align 8
+  %load_store_tmp33 = load i64, ptr %local_5, align 8
+  store i64 %load_store_tmp33, ptr %local_39, align 8
+  %loaded_alloca34 = load ptr, ptr %local_38, align 8
+  %loaded_alloca35 = load i64, ptr %local_39, align 8
+  %retval36 = call ptr @move_native_vector_borrow(ptr @__move_rttydesc_group_ops__Element_bls12381__G2_, ptr %loaded_alloca34, i64 %loaded_alloca35)
+  store ptr %retval36, ptr %local_40, align 8
+  %load_deref_store_tmp137 = load ptr, ptr %local_40, align 8
+  %load_deref_store_tmp238 = load %struct.group_ops__Element_bls12381__G2_, ptr %load_deref_store_tmp137, align 8
+  store %struct.group_ops__Element_bls12381__G2_ %load_deref_store_tmp238, ptr %local_41, align 8
+  %load_store_tmp39 = load %struct.group_ops__Element_bls12381__G2_, ptr %local_41, align 8
+  store %struct.group_ops__Element_bls12381__G2_ %load_store_tmp39, ptr %local_3, align 8
+  store ptr %local_4, ptr %local_42, align 8
+  store ptr %local_3, ptr %local_43, align 8
+  %tmp40 = load ptr, ptr %local_43, align 8
+  %fld_ref41 = getelementptr inbounds %struct.group_ops__Element_bls12381__G2_, ptr %tmp40, i32 0, i32 0
+  store ptr %fld_ref41, ptr %local_44__bytes, align 8
+  %load_deref_store_tmp142 = load ptr, ptr %local_44__bytes, align 8
+  %load_deref_store_tmp243 = load { ptr, i64, i64 }, ptr %load_deref_store_tmp142, align 8
+  store { ptr, i64, i64 } %load_deref_store_tmp243, ptr %local_45, align 8
+  %call_arg_044 = load ptr, ptr %local_42, align 8
+  %call_arg_145 = load { ptr, i64, i64 }, ptr %local_45, align 8
+  call void @"0000000000000001_vector_append_9dqoPGavEhpvk5"(ptr %call_arg_044, { ptr, i64, i64 } %call_arg_145)
+  %load_store_tmp46 = load i64, ptr %local_5, align 8
+  store i64 %load_store_tmp46, ptr %local_46, align 8
+  store i64 1, ptr %local_47, align 8
+  %add_src_0 = load i64, ptr %local_46, align 8
+  %add_src_1 = load i64, ptr %local_47, align 8
+  %add_dst = add i64 %add_src_0, %add_src_1
+  %ovfcond = icmp ult i64 %add_dst, %add_src_0
+  br i1 %ovfcond, label %then_bb, label %join_bb
+
+then_bb:                                          ; preds = %bb_8
+  call void @move_rt_abort(i64 4017)
+  unreachable
+
+join_bb:                                          ; preds = %bb_8
+  store i64 %add_dst, ptr %local_48, align 8
+  %load_store_tmp47 = load i64, ptr %local_48, align 8
+  store i64 %load_store_tmp47, ptr %local_5, align 8
+  br label %bb_9
+
+bb_6:                                             ; preds = %bb_9
+  %load_store_tmp48 = load ptr, ptr %local_1, align 8
+  store ptr %load_store_tmp48, ptr %local_49, align 8
+  %load_store_tmp49 = load ptr, ptr %local_2, align 8
+  store ptr %load_store_tmp49, ptr %local_50, align 8
+  %load_store_tmp50 = load i8, ptr %local_0, align 1
+  store i8 %load_store_tmp50, ptr %local_51, align 1
+  store ptr %local_7, ptr %local_52, align 8
+  store ptr %local_4, ptr %local_53, align 8
+  %loaded_alloca51 = load i8, ptr %local_51, align 1
+  %loaded_alloca52 = load ptr, ptr %local_52, align 8
+  %loaded_alloca53 = load ptr, ptr %local_53, align 8
+  %retval54 = call { ptr, i64, i64 } @move_native_group_ops_internal_multi_scalar_mul(i8 %loaded_alloca51, ptr %loaded_alloca52, ptr %loaded_alloca53)
+  store { ptr, i64, i64 } %retval54, ptr %local_54__bytes, align 8
+  %fv.0 = load { ptr, i64, i64 }, ptr %local_54__bytes, align 8
+  %insert_0 = insertvalue %struct.group_ops__Element_bls12381__G2_ undef, { ptr, i64, i64 } %fv.0, 0
+  store %struct.group_ops__Element_bls12381__G2_ %insert_0, ptr %local_55, align 8
+  %retval55 = load %struct.group_ops__Element_bls12381__G2_, ptr %local_55, align 8
+  ret %struct.group_ops__Element_bls12381__G2_ %retval55
+}
+
+define %struct.group_ops__Element_bls12381__G2_ @"0000000000000002_bls12381_g2_neg_H4ym6hz9xkNuuk"(ptr nonnull readonly %0) {
+entry:
+  %local_0 = alloca ptr, align 8
+  %local_1 = alloca %struct.group_ops__Element_bls12381__G2_, align 8
+  %local_2 = alloca %struct.group_ops__Element_bls12381__G2_, align 8
+  %local_3 = alloca ptr, align 8
+  %local_4 = alloca ptr, align 8
+  %local_5 = alloca %struct.group_ops__Element_bls12381__G2_, align 8
+  store ptr %0, ptr %local_0, align 8
+  %retval = call %struct.group_ops__Element_bls12381__G2_ @"0000000000000002_bls12381_g2_identity_Cbvprps2eq1C5w"()
+  store %struct.group_ops__Element_bls12381__G2_ %retval, ptr %local_2, align 8
+  %load_store_tmp = load %struct.group_ops__Element_bls12381__G2_, ptr %local_2, align 8
+  store %struct.group_ops__Element_bls12381__G2_ %load_store_tmp, ptr %local_1, align 8
+  store ptr %local_1, ptr %local_3, align 8
+  %load_store_tmp1 = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp1, ptr %local_4, align 8
+  %call_arg_0 = load ptr, ptr %local_3, align 8
+  %call_arg_1 = load ptr, ptr %local_4, align 8
+  %retval2 = call %struct.group_ops__Element_bls12381__G2_ @"0000000000000002_bls12381_g2_sub_AQ5LyD8QWVfSHz"(ptr %call_arg_0, ptr %call_arg_1)
+  store %struct.group_ops__Element_bls12381__G2_ %retval2, ptr %local_5, align 8
+  %retval3 = load %struct.group_ops__Element_bls12381__G2_, ptr %local_5, align 8
+  ret %struct.group_ops__Element_bls12381__G2_ %retval3
+}
+
+define %struct.group_ops__Element_bls12381__G2_ @"0000000000000002_bls12381_g2_sub_AQ5LyD8QWVfSHz"(ptr nonnull readonly %0, ptr nonnull readonly %1) {
+entry:
+  %local_0 = alloca ptr, align 8
+  %local_1 = alloca ptr, align 8
+  %local_2 = alloca i8, align 1
+  %local_3 = alloca ptr, align 8
+  %local_4 = alloca ptr, align 8
+  %local_5 = alloca %struct.group_ops__Element_bls12381__G2_, align 8
+  store ptr %0, ptr %local_0, align 8
+  store ptr %1, ptr %local_1, align 8
+  store i8 2, ptr %local_2, align 1
+  %load_store_tmp = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp, ptr %local_3, align 8
+  %load_store_tmp1 = load ptr, ptr %local_1, align 8
+  store ptr %load_store_tmp1, ptr %local_4, align 8
+  %call_arg_0 = load i8, ptr %local_2, align 1
+  %call_arg_1 = load ptr, ptr %local_3, align 8
+  %call_arg_2 = load ptr, ptr %local_4, align 8
+  %retval = call %struct.group_ops__Element_bls12381__G2_ @"0000000000000002_group_ops_sub_GsSFg4v9cRvfKX"(i8 %call_arg_0, ptr %call_arg_1, ptr %call_arg_2)
+  store %struct.group_ops__Element_bls12381__G2_ %retval, ptr %local_5, align 8
+  %retval2 = load %struct.group_ops__Element_bls12381__G2_, ptr %local_5, align 8
+  ret %struct.group_ops__Element_bls12381__G2_ %retval2
+}
+
+define private %struct.group_ops__Element_bls12381__G2_ @"0000000000000002_group_ops_sub_GsSFg4v9cRvfKX"(i8 %0, ptr nonnull readonly %1, ptr nonnull readonly %2) {
+entry:
+  %local_0 = alloca i8, align 1
+  %local_1 = alloca ptr, align 8
+  %local_2 = alloca ptr, align 8
+  %local_3 = alloca i8, align 1
+  %local_4 = alloca ptr, align 8
+  %local_5__bytes = alloca ptr, align 8
+  %local_6 = alloca ptr, align 8
+  %local_7__bytes = alloca ptr, align 8
+  %local_8__bytes = alloca { ptr, i64, i64 }, align 8
+  %local_9 = alloca %struct.group_ops__Element_bls12381__G2_, align 8
+  store i8 %0, ptr %local_0, align 1
+  store ptr %1, ptr %local_1, align 8
+  store ptr %2, ptr %local_2, align 8
+  %load_store_tmp = load i8, ptr %local_0, align 1
+  store i8 %load_store_tmp, ptr %local_3, align 1
+  %load_store_tmp1 = load ptr, ptr %local_1, align 8
+  store ptr %load_store_tmp1, ptr %local_4, align 8
+  %tmp = load ptr, ptr %local_4, align 8
+  %fld_ref = getelementptr inbounds %struct.group_ops__Element_bls12381__G2_, ptr %tmp, i32 0, i32 0
+  store ptr %fld_ref, ptr %local_5__bytes, align 8
+  %load_store_tmp2 = load ptr, ptr %local_2, align 8
+  store ptr %load_store_tmp2, ptr %local_6, align 8
+  %tmp3 = load ptr, ptr %local_6, align 8
+  %fld_ref4 = getelementptr inbounds %struct.group_ops__Element_bls12381__G2_, ptr %tmp3, i32 0, i32 0
+  store ptr %fld_ref4, ptr %local_7__bytes, align 8
+  %loaded_alloca = load i8, ptr %local_3, align 1
+  %loaded_alloca5 = load ptr, ptr %local_5__bytes, align 8
+  %loaded_alloca6 = load ptr, ptr %local_7__bytes, align 8
+  %retval = call { ptr, i64, i64 } @move_native_group_ops_internal_sub(i8 %loaded_alloca, ptr %loaded_alloca5, ptr %loaded_alloca6)
+  store { ptr, i64, i64 } %retval, ptr %local_8__bytes, align 8
+  %fv.0 = load { ptr, i64, i64 }, ptr %local_8__bytes, align 8
+  %insert_0 = insertvalue %struct.group_ops__Element_bls12381__G2_ undef, { ptr, i64, i64 } %fv.0, 0
+  store %struct.group_ops__Element_bls12381__G2_ %insert_0, ptr %local_9, align 8
+  %retval7 = load %struct.group_ops__Element_bls12381__G2_, ptr %local_9, align 8
+  ret %struct.group_ops__Element_bls12381__G2_ %retval7
+}
+
+define %struct.group_ops__Element_bls12381__GT_ @"0000000000000002_bls12381_gt_add_2E8kwfE9TELhQe"(ptr nonnull readonly %0, ptr nonnull readonly %1) {
+entry:
+  %local_0 = alloca ptr, align 8
+  %local_1 = alloca ptr, align 8
+  %local_2 = alloca i8, align 1
+  %local_3 = alloca ptr, align 8
+  %local_4 = alloca ptr, align 8
+  %local_5 = alloca %struct.group_ops__Element_bls12381__GT_, align 8
+  store ptr %0, ptr %local_0, align 8
+  store ptr %1, ptr %local_1, align 8
+  store i8 3, ptr %local_2, align 1
+  %load_store_tmp = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp, ptr %local_3, align 8
+  %load_store_tmp1 = load ptr, ptr %local_1, align 8
+  store ptr %load_store_tmp1, ptr %local_4, align 8
+  %call_arg_0 = load i8, ptr %local_2, align 1
+  %call_arg_1 = load ptr, ptr %local_3, align 8
+  %call_arg_2 = load ptr, ptr %local_4, align 8
+  %retval = call %struct.group_ops__Element_bls12381__GT_ @"0000000000000002_group_ops_add_CwR1e8E5Fv2ezd"(i8 %call_arg_0, ptr %call_arg_1, ptr %call_arg_2)
+  store %struct.group_ops__Element_bls12381__GT_ %retval, ptr %local_5, align 8
+  %retval2 = load %struct.group_ops__Element_bls12381__GT_, ptr %local_5, align 8
+  ret %struct.group_ops__Element_bls12381__GT_ %retval2
+}
+
+define private %struct.group_ops__Element_bls12381__GT_ @"0000000000000002_group_ops_add_CwR1e8E5Fv2ezd"(i8 %0, ptr nonnull readonly %1, ptr nonnull readonly %2) {
+entry:
+  %local_0 = alloca i8, align 1
+  %local_1 = alloca ptr, align 8
+  %local_2 = alloca ptr, align 8
+  %local_3 = alloca i8, align 1
+  %local_4 = alloca ptr, align 8
+  %local_5__bytes = alloca ptr, align 8
+  %local_6 = alloca ptr, align 8
+  %local_7__bytes = alloca ptr, align 8
+  %local_8__bytes = alloca { ptr, i64, i64 }, align 8
+  %local_9 = alloca %struct.group_ops__Element_bls12381__GT_, align 8
+  store i8 %0, ptr %local_0, align 1
+  store ptr %1, ptr %local_1, align 8
+  store ptr %2, ptr %local_2, align 8
+  %load_store_tmp = load i8, ptr %local_0, align 1
+  store i8 %load_store_tmp, ptr %local_3, align 1
+  %load_store_tmp1 = load ptr, ptr %local_1, align 8
+  store ptr %load_store_tmp1, ptr %local_4, align 8
+  %tmp = load ptr, ptr %local_4, align 8
+  %fld_ref = getelementptr inbounds %struct.group_ops__Element_bls12381__GT_, ptr %tmp, i32 0, i32 0
+  store ptr %fld_ref, ptr %local_5__bytes, align 8
+  %load_store_tmp2 = load ptr, ptr %local_2, align 8
+  store ptr %load_store_tmp2, ptr %local_6, align 8
+  %tmp3 = load ptr, ptr %local_6, align 8
+  %fld_ref4 = getelementptr inbounds %struct.group_ops__Element_bls12381__GT_, ptr %tmp3, i32 0, i32 0
+  store ptr %fld_ref4, ptr %local_7__bytes, align 8
+  %loaded_alloca = load i8, ptr %local_3, align 1
+  %loaded_alloca5 = load ptr, ptr %local_5__bytes, align 8
+  %loaded_alloca6 = load ptr, ptr %local_7__bytes, align 8
+  %retval = call { ptr, i64, i64 } @move_native_group_ops_internal_add(i8 %loaded_alloca, ptr %loaded_alloca5, ptr %loaded_alloca6)
+  store { ptr, i64, i64 } %retval, ptr %local_8__bytes, align 8
+  %fv.0 = load { ptr, i64, i64 }, ptr %local_8__bytes, align 8
+  %insert_0 = insertvalue %struct.group_ops__Element_bls12381__GT_ undef, { ptr, i64, i64 } %fv.0, 0
+  store %struct.group_ops__Element_bls12381__GT_ %insert_0, ptr %local_9, align 8
+  %retval7 = load %struct.group_ops__Element_bls12381__GT_, ptr %local_9, align 8
+  ret %struct.group_ops__Element_bls12381__GT_ %retval7
+}
+
+define %struct.group_ops__Element_bls12381__GT_ @"0000000000000002_bls12381_gt_div_5nSAeJHJAZaNSA"(ptr nonnull readonly %0, ptr nonnull readonly %1) {
+entry:
+  %local_0 = alloca ptr, align 8
+  %local_1 = alloca ptr, align 8
+  %local_2 = alloca i8, align 1
+  %local_3 = alloca ptr, align 8
+  %local_4 = alloca ptr, align 8
+  %local_5 = alloca %struct.group_ops__Element_bls12381__GT_, align 8
+  store ptr %0, ptr %local_0, align 8
+  store ptr %1, ptr %local_1, align 8
+  store i8 3, ptr %local_2, align 1
+  %load_store_tmp = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp, ptr %local_3, align 8
+  %load_store_tmp1 = load ptr, ptr %local_1, align 8
+  store ptr %load_store_tmp1, ptr %local_4, align 8
+  %call_arg_0 = load i8, ptr %local_2, align 1
+  %call_arg_1 = load ptr, ptr %local_3, align 8
+  %call_arg_2 = load ptr, ptr %local_4, align 8
+  %retval = call %struct.group_ops__Element_bls12381__GT_ @"0000000000000002_group_ops_div_CzrnF6QRkgt6As"(i8 %call_arg_0, ptr %call_arg_1, ptr %call_arg_2)
+  store %struct.group_ops__Element_bls12381__GT_ %retval, ptr %local_5, align 8
+  %retval2 = load %struct.group_ops__Element_bls12381__GT_, ptr %local_5, align 8
+  ret %struct.group_ops__Element_bls12381__GT_ %retval2
+}
+
+define private %struct.group_ops__Element_bls12381__GT_ @"0000000000000002_group_ops_div_CzrnF6QRkgt6As"(i8 %0, ptr nonnull readonly %1, ptr nonnull readonly %2) {
+entry:
+  %local_0 = alloca i8, align 1
+  %local_1 = alloca ptr, align 8
+  %local_2 = alloca ptr, align 8
+  %local_3 = alloca i8, align 1
+  %local_4 = alloca ptr, align 8
+  %local_5__bytes = alloca ptr, align 8
+  %local_6 = alloca ptr, align 8
+  %local_7__bytes = alloca ptr, align 8
+  %local_8__bytes = alloca { ptr, i64, i64 }, align 8
+  %local_9 = alloca %struct.group_ops__Element_bls12381__GT_, align 8
+  store i8 %0, ptr %local_0, align 1
+  store ptr %1, ptr %local_1, align 8
+  store ptr %2, ptr %local_2, align 8
+  %load_store_tmp = load i8, ptr %local_0, align 1
+  store i8 %load_store_tmp, ptr %local_3, align 1
+  %load_store_tmp1 = load ptr, ptr %local_1, align 8
+  store ptr %load_store_tmp1, ptr %local_4, align 8
+  %tmp = load ptr, ptr %local_4, align 8
+  %fld_ref = getelementptr inbounds %struct.group_ops__Element_bls12381__Scalar_, ptr %tmp, i32 0, i32 0
+  store ptr %fld_ref, ptr %local_5__bytes, align 8
+  %load_store_tmp2 = load ptr, ptr %local_2, align 8
+  store ptr %load_store_tmp2, ptr %local_6, align 8
+  %tmp3 = load ptr, ptr %local_6, align 8
+  %fld_ref4 = getelementptr inbounds %struct.group_ops__Element_bls12381__GT_, ptr %tmp3, i32 0, i32 0
+  store ptr %fld_ref4, ptr %local_7__bytes, align 8
+  %loaded_alloca = load i8, ptr %local_3, align 1
+  %loaded_alloca5 = load ptr, ptr %local_5__bytes, align 8
+  %loaded_alloca6 = load ptr, ptr %local_7__bytes, align 8
+  %retval = call { ptr, i64, i64 } @move_native_group_ops_internal_div(i8 %loaded_alloca, ptr %loaded_alloca5, ptr %loaded_alloca6)
+  store { ptr, i64, i64 } %retval, ptr %local_8__bytes, align 8
+  %fv.0 = load { ptr, i64, i64 }, ptr %local_8__bytes, align 8
+  %insert_0 = insertvalue %struct.group_ops__Element_bls12381__GT_ undef, { ptr, i64, i64 } %fv.0, 0
+  store %struct.group_ops__Element_bls12381__GT_ %insert_0, ptr %local_9, align 8
+  %retval7 = load %struct.group_ops__Element_bls12381__GT_, ptr %local_9, align 8
+  ret %struct.group_ops__Element_bls12381__GT_ %retval7
+}
+
+define %struct.group_ops__Element_bls12381__GT_ @"0000000000000002_bls12381_gt_generator_BGUH3fLGPq88sk"() {
+entry:
+  %newv = alloca { ptr, i64, i64 }, align 8
+  %local_0 = alloca { ptr, i64, i64 }, align 8
+  %local_1 = alloca { ptr, i64, i64 }, align 8
+  %local_2 = alloca i8, align 1
+  %local_3 = alloca ptr, align 8
+  %local_4 = alloca i1, align 1
+  %local_5 = alloca %struct.group_ops__Element_bls12381__GT_, align 8
+  %0 = call { ptr, i64, i64 } @move_rt_vec_empty(ptr @__move_rttydesc_u8)
+  store { ptr, i64, i64 } %0, ptr %newv, align 8
+  call void @move_rt_vec_copy(ptr @__move_rttydesc_u8, ptr %newv, ptr @vdesc.10)
+  %reload = load { ptr, i64, i64 }, ptr %newv, align 8
+  store { ptr, i64, i64 } %reload, ptr %local_1, align 8
+  %load_store_tmp = load { ptr, i64, i64 }, ptr %local_1, align 8
+  store { ptr, i64, i64 } %load_store_tmp, ptr %local_0, align 8
+  store i8 3, ptr %local_2, align 1
+  store ptr %local_0, ptr %local_3, align 8
+  store i1 true, ptr %local_4, align 1
+  %call_arg_0 = load i8, ptr %local_2, align 1
+  %call_arg_1 = load ptr, ptr %local_3, align 8
+  %call_arg_2 = load i1, ptr %local_4, align 1
+  %retval = call %struct.group_ops__Element_bls12381__GT_ @"0000000000000002_group_ops_from_bytes_FuMD6t5SASexMZ"(i8 %call_arg_0, ptr %call_arg_1, i1 %call_arg_2)
+  store %struct.group_ops__Element_bls12381__GT_ %retval, ptr %local_5, align 8
+  %retval1 = load %struct.group_ops__Element_bls12381__GT_, ptr %local_5, align 8
+  ret %struct.group_ops__Element_bls12381__GT_ %retval1
+}
+
+define private %struct.group_ops__Element_bls12381__GT_ @"0000000000000002_group_ops_from_bytes_FuMD6t5SASexMZ"(i8 %0, ptr nonnull readonly %1, i1 %2) {
+entry:
+  %local_0 = alloca i8, align 1
+  %local_1 = alloca ptr, align 8
+  %local_2 = alloca i1, align 1
+  %local_3 = alloca i1, align 1
+  %local_4 = alloca i1, align 1
+  %local_5 = alloca i1, align 1
+  %local_6 = alloca i8, align 1
+  %local_7 = alloca ptr, align 8
+  %local_8 = alloca i1, align 1
+  %local_9 = alloca i1, align 1
+  %local_10 = alloca ptr, align 8
+  %local_11 = alloca i64, align 8
+  %local_12 = alloca ptr, align 8
+  %local_13__bytes = alloca { ptr, i64, i64 }, align 8
+  %local_14 = alloca %struct.group_ops__Element_bls12381__GT_, align 8
+  store i8 %0, ptr %local_0, align 1
+  store ptr %1, ptr %local_1, align 8
+  store i1 %2, ptr %local_2, align 1
+  %load_store_tmp = load i1, ptr %local_2, align 1
+  store i1 %load_store_tmp, ptr %local_4, align 1
+  %cnd = load i1, ptr %local_4, align 1
+  br i1 %cnd, label %bb_1, label %bb_0
+
+bb_1:                                             ; preds = %entry
+  store i1 true, ptr %local_5, align 1
+  %load_store_tmp1 = load i1, ptr %local_5, align 1
+  store i1 %load_store_tmp1, ptr %local_3, align 1
+  br label %bb_2
+
+bb_0:                                             ; preds = %entry
+  %load_store_tmp2 = load i8, ptr %local_0, align 1
+  store i8 %load_store_tmp2, ptr %local_6, align 1
+  %load_store_tmp3 = load ptr, ptr %local_1, align 8
+  store ptr %load_store_tmp3, ptr %local_7, align 8
+  %loaded_alloca = load i8, ptr %local_6, align 1
+  %loaded_alloca4 = load ptr, ptr %local_7, align 8
+  %retval = call i1 @move_native_group_ops_internal_validate(i8 %loaded_alloca, ptr %loaded_alloca4)
+  store i1 %retval, ptr %local_8, align 1
+  %load_store_tmp5 = load i1, ptr %local_8, align 1
+  store i1 %load_store_tmp5, ptr %local_3, align 1
+  br label %bb_2
+
+bb_2:                                             ; preds = %bb_0, %bb_1
+  %load_store_tmp6 = load i1, ptr %local_3, align 1
+  store i1 %load_store_tmp6, ptr %local_9, align 1
+  %cnd7 = load i1, ptr %local_9, align 1
+  br i1 %cnd7, label %bb_4, label %bb_3
+
+bb_4:                                             ; preds = %bb_2
+  br label %bb_5
+
+bb_3:                                             ; preds = %bb_2
+  %load_store_tmp8 = load ptr, ptr %local_1, align 8
+  store ptr %load_store_tmp8, ptr %local_10, align 8
+  store i64 1, ptr %local_11, align 8
+  %call_arg_0 = load i64, ptr %local_11, align 8
+  call void @move_rt_abort(i64 %call_arg_0)
+  unreachable
+
+bb_5:                                             ; preds = %bb_4
+  %load_store_tmp9 = load ptr, ptr %local_1, align 8
+  store ptr %load_store_tmp9, ptr %local_12, align 8
+  %load_deref_store_tmp1 = load ptr, ptr %local_12, align 8
+  %load_deref_store_tmp2 = load { ptr, i64, i64 }, ptr %load_deref_store_tmp1, align 8
+  store { ptr, i64, i64 } %load_deref_store_tmp2, ptr %local_13__bytes, align 8
+  %fv.0 = load { ptr, i64, i64 }, ptr %local_13__bytes, align 8
+  %insert_0 = insertvalue %struct.group_ops__Element_bls12381__GT_ undef, { ptr, i64, i64 } %fv.0, 0
+  store %struct.group_ops__Element_bls12381__GT_ %insert_0, ptr %local_14, align 8
+  %retval10 = load %struct.group_ops__Element_bls12381__GT_, ptr %local_14, align 8
+  ret %struct.group_ops__Element_bls12381__GT_ %retval10
+}
+
+define %struct.group_ops__Element_bls12381__GT_ @"0000000000000002_bls12381_gt_identity_EgfeSrVjdetfdh"() {
+entry:
+  %newv = alloca { ptr, i64, i64 }, align 8
+  %local_0 = alloca { ptr, i64, i64 }, align 8
+  %local_1 = alloca { ptr, i64, i64 }, align 8
+  %local_2 = alloca i8, align 1
+  %local_3 = alloca ptr, align 8
+  %local_4 = alloca i1, align 1
+  %local_5 = alloca %struct.group_ops__Element_bls12381__GT_, align 8
+  %0 = call { ptr, i64, i64 } @move_rt_vec_empty(ptr @__move_rttydesc_u8)
+  store { ptr, i64, i64 } %0, ptr %newv, align 8
+  call void @move_rt_vec_copy(ptr @__move_rttydesc_u8, ptr %newv, ptr @vdesc.12)
+  %reload = load { ptr, i64, i64 }, ptr %newv, align 8
+  store { ptr, i64, i64 } %reload, ptr %local_1, align 8
+  %load_store_tmp = load { ptr, i64, i64 }, ptr %local_1, align 8
+  store { ptr, i64, i64 } %load_store_tmp, ptr %local_0, align 8
+  store i8 3, ptr %local_2, align 1
+  store ptr %local_0, ptr %local_3, align 8
+  store i1 true, ptr %local_4, align 1
+  %call_arg_0 = load i8, ptr %local_2, align 1
+  %call_arg_1 = load ptr, ptr %local_3, align 8
+  %call_arg_2 = load i1, ptr %local_4, align 1
+  %retval = call %struct.group_ops__Element_bls12381__GT_ @"0000000000000002_group_ops_from_bytes_FuMD6t5SASexMZ"(i8 %call_arg_0, ptr %call_arg_1, i1 %call_arg_2)
+  store %struct.group_ops__Element_bls12381__GT_ %retval, ptr %local_5, align 8
+  %retval1 = load %struct.group_ops__Element_bls12381__GT_, ptr %local_5, align 8
+  ret %struct.group_ops__Element_bls12381__GT_ %retval1
+}
+
+define %struct.group_ops__Element_bls12381__GT_ @"0000000000000002_bls12381_gt_mul_5MkCHJT7ShGFSj"(ptr nonnull readonly %0, ptr nonnull readonly %1) {
+entry:
+  %local_0 = alloca ptr, align 8
+  %local_1 = alloca ptr, align 8
+  %local_2 = alloca i8, align 1
+  %local_3 = alloca ptr, align 8
+  %local_4 = alloca ptr, align 8
+  %local_5 = alloca %struct.group_ops__Element_bls12381__GT_, align 8
+  store ptr %0, ptr %local_0, align 8
+  store ptr %1, ptr %local_1, align 8
+  store i8 3, ptr %local_2, align 1
+  %load_store_tmp = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp, ptr %local_3, align 8
+  %load_store_tmp1 = load ptr, ptr %local_1, align 8
+  store ptr %load_store_tmp1, ptr %local_4, align 8
+  %call_arg_0 = load i8, ptr %local_2, align 1
+  %call_arg_1 = load ptr, ptr %local_3, align 8
+  %call_arg_2 = load ptr, ptr %local_4, align 8
+  %retval = call %struct.group_ops__Element_bls12381__GT_ @"0000000000000002_group_ops_mul_GejSxRwG4vDm6D"(i8 %call_arg_0, ptr %call_arg_1, ptr %call_arg_2)
+  store %struct.group_ops__Element_bls12381__GT_ %retval, ptr %local_5, align 8
+  %retval2 = load %struct.group_ops__Element_bls12381__GT_, ptr %local_5, align 8
+  ret %struct.group_ops__Element_bls12381__GT_ %retval2
+}
+
+define private %struct.group_ops__Element_bls12381__GT_ @"0000000000000002_group_ops_mul_GejSxRwG4vDm6D"(i8 %0, ptr nonnull readonly %1, ptr nonnull readonly %2) {
+entry:
+  %local_0 = alloca i8, align 1
+  %local_1 = alloca ptr, align 8
+  %local_2 = alloca ptr, align 8
+  %local_3 = alloca i8, align 1
+  %local_4 = alloca ptr, align 8
+  %local_5__bytes = alloca ptr, align 8
+  %local_6 = alloca ptr, align 8
+  %local_7__bytes = alloca ptr, align 8
+  %local_8__bytes = alloca { ptr, i64, i64 }, align 8
+  %local_9 = alloca %struct.group_ops__Element_bls12381__GT_, align 8
+  store i8 %0, ptr %local_0, align 1
+  store ptr %1, ptr %local_1, align 8
+  store ptr %2, ptr %local_2, align 8
+  %load_store_tmp = load i8, ptr %local_0, align 1
+  store i8 %load_store_tmp, ptr %local_3, align 1
+  %load_store_tmp1 = load ptr, ptr %local_1, align 8
+  store ptr %load_store_tmp1, ptr %local_4, align 8
+  %tmp = load ptr, ptr %local_4, align 8
+  %fld_ref = getelementptr inbounds %struct.group_ops__Element_bls12381__Scalar_, ptr %tmp, i32 0, i32 0
+  store ptr %fld_ref, ptr %local_5__bytes, align 8
+  %load_store_tmp2 = load ptr, ptr %local_2, align 8
+  store ptr %load_store_tmp2, ptr %local_6, align 8
+  %tmp3 = load ptr, ptr %local_6, align 8
+  %fld_ref4 = getelementptr inbounds %struct.group_ops__Element_bls12381__GT_, ptr %tmp3, i32 0, i32 0
+  store ptr %fld_ref4, ptr %local_7__bytes, align 8
+  %loaded_alloca = load i8, ptr %local_3, align 1
+  %loaded_alloca5 = load ptr, ptr %local_5__bytes, align 8
+  %loaded_alloca6 = load ptr, ptr %local_7__bytes, align 8
+  %retval = call { ptr, i64, i64 } @move_native_group_ops_internal_mul(i8 %loaded_alloca, ptr %loaded_alloca5, ptr %loaded_alloca6)
+  store { ptr, i64, i64 } %retval, ptr %local_8__bytes, align 8
+  %fv.0 = load { ptr, i64, i64 }, ptr %local_8__bytes, align 8
+  %insert_0 = insertvalue %struct.group_ops__Element_bls12381__GT_ undef, { ptr, i64, i64 } %fv.0, 0
+  store %struct.group_ops__Element_bls12381__GT_ %insert_0, ptr %local_9, align 8
+  %retval7 = load %struct.group_ops__Element_bls12381__GT_, ptr %local_9, align 8
+  ret %struct.group_ops__Element_bls12381__GT_ %retval7
+}
+
+define %struct.group_ops__Element_bls12381__GT_ @"0000000000000002_bls12381_gt_neg_A8rBbXAVLqf27R"(ptr nonnull readonly %0) {
+entry:
+  %local_0 = alloca ptr, align 8
+  %local_1 = alloca %struct.group_ops__Element_bls12381__GT_, align 8
+  %local_2 = alloca %struct.group_ops__Element_bls12381__GT_, align 8
+  %local_3 = alloca ptr, align 8
+  %local_4 = alloca ptr, align 8
+  %local_5 = alloca %struct.group_ops__Element_bls12381__GT_, align 8
+  store ptr %0, ptr %local_0, align 8
+  %retval = call %struct.group_ops__Element_bls12381__GT_ @"0000000000000002_bls12381_gt_identity_EgfeSrVjdetfdh"()
+  store %struct.group_ops__Element_bls12381__GT_ %retval, ptr %local_2, align 8
+  %load_store_tmp = load %struct.group_ops__Element_bls12381__GT_, ptr %local_2, align 8
+  store %struct.group_ops__Element_bls12381__GT_ %load_store_tmp, ptr %local_1, align 8
+  store ptr %local_1, ptr %local_3, align 8
+  %load_store_tmp1 = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp1, ptr %local_4, align 8
+  %call_arg_0 = load ptr, ptr %local_3, align 8
+  %call_arg_1 = load ptr, ptr %local_4, align 8
+  %retval2 = call %struct.group_ops__Element_bls12381__GT_ @"0000000000000002_bls12381_gt_sub_DboGQWAGWkpW8U"(ptr %call_arg_0, ptr %call_arg_1)
+  store %struct.group_ops__Element_bls12381__GT_ %retval2, ptr %local_5, align 8
+  %retval3 = load %struct.group_ops__Element_bls12381__GT_, ptr %local_5, align 8
+  ret %struct.group_ops__Element_bls12381__GT_ %retval3
+}
+
+define %struct.group_ops__Element_bls12381__GT_ @"0000000000000002_bls12381_gt_sub_DboGQWAGWkpW8U"(ptr nonnull readonly %0, ptr nonnull readonly %1) {
+entry:
+  %local_0 = alloca ptr, align 8
+  %local_1 = alloca ptr, align 8
+  %local_2 = alloca i8, align 1
+  %local_3 = alloca ptr, align 8
+  %local_4 = alloca ptr, align 8
+  %local_5 = alloca %struct.group_ops__Element_bls12381__GT_, align 8
+  store ptr %0, ptr %local_0, align 8
+  store ptr %1, ptr %local_1, align 8
+  store i8 3, ptr %local_2, align 1
+  %load_store_tmp = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp, ptr %local_3, align 8
+  %load_store_tmp1 = load ptr, ptr %local_1, align 8
+  store ptr %load_store_tmp1, ptr %local_4, align 8
+  %call_arg_0 = load i8, ptr %local_2, align 1
+  %call_arg_1 = load ptr, ptr %local_3, align 8
+  %call_arg_2 = load ptr, ptr %local_4, align 8
+  %retval = call %struct.group_ops__Element_bls12381__GT_ @"0000000000000002_group_ops_sub_8SPaEJkvZXAdtH"(i8 %call_arg_0, ptr %call_arg_1, ptr %call_arg_2)
+  store %struct.group_ops__Element_bls12381__GT_ %retval, ptr %local_5, align 8
+  %retval2 = load %struct.group_ops__Element_bls12381__GT_, ptr %local_5, align 8
+  ret %struct.group_ops__Element_bls12381__GT_ %retval2
+}
+
+define private %struct.group_ops__Element_bls12381__GT_ @"0000000000000002_group_ops_sub_8SPaEJkvZXAdtH"(i8 %0, ptr nonnull readonly %1, ptr nonnull readonly %2) {
+entry:
+  %local_0 = alloca i8, align 1
+  %local_1 = alloca ptr, align 8
+  %local_2 = alloca ptr, align 8
+  %local_3 = alloca i8, align 1
+  %local_4 = alloca ptr, align 8
+  %local_5__bytes = alloca ptr, align 8
+  %local_6 = alloca ptr, align 8
+  %local_7__bytes = alloca ptr, align 8
+  %local_8__bytes = alloca { ptr, i64, i64 }, align 8
+  %local_9 = alloca %struct.group_ops__Element_bls12381__GT_, align 8
+  store i8 %0, ptr %local_0, align 1
+  store ptr %1, ptr %local_1, align 8
+  store ptr %2, ptr %local_2, align 8
+  %load_store_tmp = load i8, ptr %local_0, align 1
+  store i8 %load_store_tmp, ptr %local_3, align 1
+  %load_store_tmp1 = load ptr, ptr %local_1, align 8
+  store ptr %load_store_tmp1, ptr %local_4, align 8
+  %tmp = load ptr, ptr %local_4, align 8
+  %fld_ref = getelementptr inbounds %struct.group_ops__Element_bls12381__GT_, ptr %tmp, i32 0, i32 0
+  store ptr %fld_ref, ptr %local_5__bytes, align 8
+  %load_store_tmp2 = load ptr, ptr %local_2, align 8
+  store ptr %load_store_tmp2, ptr %local_6, align 8
+  %tmp3 = load ptr, ptr %local_6, align 8
+  %fld_ref4 = getelementptr inbounds %struct.group_ops__Element_bls12381__GT_, ptr %tmp3, i32 0, i32 0
+  store ptr %fld_ref4, ptr %local_7__bytes, align 8
+  %loaded_alloca = load i8, ptr %local_3, align 1
+  %loaded_alloca5 = load ptr, ptr %local_5__bytes, align 8
+  %loaded_alloca6 = load ptr, ptr %local_7__bytes, align 8
+  %retval = call { ptr, i64, i64 } @move_native_group_ops_internal_sub(i8 %loaded_alloca, ptr %loaded_alloca5, ptr %loaded_alloca6)
+  store { ptr, i64, i64 } %retval, ptr %local_8__bytes, align 8
+  %fv.0 = load { ptr, i64, i64 }, ptr %local_8__bytes, align 8
+  %insert_0 = insertvalue %struct.group_ops__Element_bls12381__GT_ undef, { ptr, i64, i64 } %fv.0, 0
+  store %struct.group_ops__Element_bls12381__GT_ %insert_0, ptr %local_9, align 8
+  %retval7 = load %struct.group_ops__Element_bls12381__GT_, ptr %local_9, align 8
+  ret %struct.group_ops__Element_bls12381__GT_ %retval7
+}
+
+define %struct.group_ops__Element_bls12381__G1_ @"0000000000000002_bls12381_hash_to_g1_EUxhGYamoWxc2e"(ptr nonnull readonly %0) {
+entry:
+  %local_0 = alloca ptr, align 8
+  %local_1 = alloca i8, align 1
+  %local_2 = alloca ptr, align 8
+  %local_3 = alloca %struct.group_ops__Element_bls12381__G1_, align 8
+  store ptr %0, ptr %local_0, align 8
+  store i8 1, ptr %local_1, align 1
+  %load_store_tmp = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp, ptr %local_2, align 8
+  %call_arg_0 = load i8, ptr %local_1, align 1
+  %call_arg_1 = load ptr, ptr %local_2, align 8
+  %retval = call %struct.group_ops__Element_bls12381__G1_ @"0000000000000002_group_ops_hash_to_4wg9DKUCJrWNNk"(i8 %call_arg_0, ptr %call_arg_1)
+  store %struct.group_ops__Element_bls12381__G1_ %retval, ptr %local_3, align 8
+  %retval1 = load %struct.group_ops__Element_bls12381__G1_, ptr %local_3, align 8
+  ret %struct.group_ops__Element_bls12381__G1_ %retval1
+}
+
+define private %struct.group_ops__Element_bls12381__G1_ @"0000000000000002_group_ops_hash_to_4wg9DKUCJrWNNk"(i8 %0, ptr nonnull readonly %1) {
+entry:
+  %local_0 = alloca i8, align 1
+  %local_1 = alloca ptr, align 8
+  %local_2 = alloca i8, align 1
+  %local_3 = alloca ptr, align 8
+  %local_4__bytes = alloca { ptr, i64, i64 }, align 8
+  %local_5 = alloca %struct.group_ops__Element_bls12381__G1_, align 8
+  store i8 %0, ptr %local_0, align 1
+  store ptr %1, ptr %local_1, align 8
+  %load_store_tmp = load i8, ptr %local_0, align 1
+  store i8 %load_store_tmp, ptr %local_2, align 1
+  %load_store_tmp1 = load ptr, ptr %local_1, align 8
+  store ptr %load_store_tmp1, ptr %local_3, align 8
+  %loaded_alloca = load i8, ptr %local_2, align 1
+  %loaded_alloca2 = load ptr, ptr %local_3, align 8
+  %retval = call { ptr, i64, i64 } @move_native_group_ops_internal_hash_to(i8 %loaded_alloca, ptr %loaded_alloca2)
+  store { ptr, i64, i64 } %retval, ptr %local_4__bytes, align 8
+  %fv.0 = load { ptr, i64, i64 }, ptr %local_4__bytes, align 8
+  %insert_0 = insertvalue %struct.group_ops__Element_bls12381__G1_ undef, { ptr, i64, i64 } %fv.0, 0
+  store %struct.group_ops__Element_bls12381__G1_ %insert_0, ptr %local_5, align 8
+  %retval3 = load %struct.group_ops__Element_bls12381__G1_, ptr %local_5, align 8
+  ret %struct.group_ops__Element_bls12381__G1_ %retval3
+}
+
+declare { ptr, i64, i64 } @move_native_group_ops_internal_hash_to(i8, ptr)
+
+define %struct.group_ops__Element_bls12381__G2_ @"0000000000000002_bls12381_hash_to_g2_6WCAgW7nHpfMar"(ptr nonnull readonly %0) {
+entry:
+  %local_0 = alloca ptr, align 8
+  %local_1 = alloca i8, align 1
+  %local_2 = alloca ptr, align 8
+  %local_3 = alloca %struct.group_ops__Element_bls12381__G2_, align 8
+  store ptr %0, ptr %local_0, align 8
+  store i8 2, ptr %local_1, align 1
+  %load_store_tmp = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp, ptr %local_2, align 8
+  %call_arg_0 = load i8, ptr %local_1, align 1
+  %call_arg_1 = load ptr, ptr %local_2, align 8
+  %retval = call %struct.group_ops__Element_bls12381__G2_ @"0000000000000002_group_ops_hash_to_GakJnfvg8pmn4j"(i8 %call_arg_0, ptr %call_arg_1)
+  store %struct.group_ops__Element_bls12381__G2_ %retval, ptr %local_3, align 8
+  %retval1 = load %struct.group_ops__Element_bls12381__G2_, ptr %local_3, align 8
+  ret %struct.group_ops__Element_bls12381__G2_ %retval1
+}
+
+define private %struct.group_ops__Element_bls12381__G2_ @"0000000000000002_group_ops_hash_to_GakJnfvg8pmn4j"(i8 %0, ptr nonnull readonly %1) {
+entry:
+  %local_0 = alloca i8, align 1
+  %local_1 = alloca ptr, align 8
+  %local_2 = alloca i8, align 1
+  %local_3 = alloca ptr, align 8
+  %local_4__bytes = alloca { ptr, i64, i64 }, align 8
+  %local_5 = alloca %struct.group_ops__Element_bls12381__G2_, align 8
+  store i8 %0, ptr %local_0, align 1
+  store ptr %1, ptr %local_1, align 8
+  %load_store_tmp = load i8, ptr %local_0, align 1
+  store i8 %load_store_tmp, ptr %local_2, align 1
+  %load_store_tmp1 = load ptr, ptr %local_1, align 8
+  store ptr %load_store_tmp1, ptr %local_3, align 8
+  %loaded_alloca = load i8, ptr %local_2, align 1
+  %loaded_alloca2 = load ptr, ptr %local_3, align 8
+  %retval = call { ptr, i64, i64 } @move_native_group_ops_internal_hash_to(i8 %loaded_alloca, ptr %loaded_alloca2)
+  store { ptr, i64, i64 } %retval, ptr %local_4__bytes, align 8
+  %fv.0 = load { ptr, i64, i64 }, ptr %local_4__bytes, align 8
+  %insert_0 = insertvalue %struct.group_ops__Element_bls12381__G2_ undef, { ptr, i64, i64 } %fv.0, 0
+  store %struct.group_ops__Element_bls12381__G2_ %insert_0, ptr %local_5, align 8
+  %retval3 = load %struct.group_ops__Element_bls12381__G2_, ptr %local_5, align 8
+  ret %struct.group_ops__Element_bls12381__G2_ %retval3
+}
+
+define %struct.group_ops__Element_bls12381__Scalar_ @"0000000000000002_bls12381_scalar_add_BESryMqj22igY3"(ptr nonnull readonly %0, ptr nonnull readonly %1) {
+entry:
+  %local_0 = alloca ptr, align 8
+  %local_1 = alloca ptr, align 8
+  %local_2 = alloca i8, align 1
+  %local_3 = alloca ptr, align 8
+  %local_4 = alloca ptr, align 8
+  %local_5 = alloca %struct.group_ops__Element_bls12381__Scalar_, align 8
+  store ptr %0, ptr %local_0, align 8
+  store ptr %1, ptr %local_1, align 8
+  store i8 0, ptr %local_2, align 1
+  %load_store_tmp = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp, ptr %local_3, align 8
+  %load_store_tmp1 = load ptr, ptr %local_1, align 8
+  store ptr %load_store_tmp1, ptr %local_4, align 8
+  %call_arg_0 = load i8, ptr %local_2, align 1
+  %call_arg_1 = load ptr, ptr %local_3, align 8
+  %call_arg_2 = load ptr, ptr %local_4, align 8
+  %retval = call %struct.group_ops__Element_bls12381__Scalar_ @"0000000000000002_group_ops_add_GJSiPQ7w6ML4vC"(i8 %call_arg_0, ptr %call_arg_1, ptr %call_arg_2)
+  store %struct.group_ops__Element_bls12381__Scalar_ %retval, ptr %local_5, align 8
+  %retval2 = load %struct.group_ops__Element_bls12381__Scalar_, ptr %local_5, align 8
+  ret %struct.group_ops__Element_bls12381__Scalar_ %retval2
+}
+
+define private %struct.group_ops__Element_bls12381__Scalar_ @"0000000000000002_group_ops_add_GJSiPQ7w6ML4vC"(i8 %0, ptr nonnull readonly %1, ptr nonnull readonly %2) {
+entry:
+  %local_0 = alloca i8, align 1
+  %local_1 = alloca ptr, align 8
+  %local_2 = alloca ptr, align 8
+  %local_3 = alloca i8, align 1
+  %local_4 = alloca ptr, align 8
+  %local_5__bytes = alloca ptr, align 8
+  %local_6 = alloca ptr, align 8
+  %local_7__bytes = alloca ptr, align 8
+  %local_8__bytes = alloca { ptr, i64, i64 }, align 8
+  %local_9 = alloca %struct.group_ops__Element_bls12381__Scalar_, align 8
+  store i8 %0, ptr %local_0, align 1
+  store ptr %1, ptr %local_1, align 8
+  store ptr %2, ptr %local_2, align 8
+  %load_store_tmp = load i8, ptr %local_0, align 1
+  store i8 %load_store_tmp, ptr %local_3, align 1
+  %load_store_tmp1 = load ptr, ptr %local_1, align 8
+  store ptr %load_store_tmp1, ptr %local_4, align 8
+  %tmp = load ptr, ptr %local_4, align 8
+  %fld_ref = getelementptr inbounds %struct.group_ops__Element_bls12381__Scalar_, ptr %tmp, i32 0, i32 0
+  store ptr %fld_ref, ptr %local_5__bytes, align 8
+  %load_store_tmp2 = load ptr, ptr %local_2, align 8
+  store ptr %load_store_tmp2, ptr %local_6, align 8
+  %tmp3 = load ptr, ptr %local_6, align 8
+  %fld_ref4 = getelementptr inbounds %struct.group_ops__Element_bls12381__Scalar_, ptr %tmp3, i32 0, i32 0
+  store ptr %fld_ref4, ptr %local_7__bytes, align 8
+  %loaded_alloca = load i8, ptr %local_3, align 1
+  %loaded_alloca5 = load ptr, ptr %local_5__bytes, align 8
+  %loaded_alloca6 = load ptr, ptr %local_7__bytes, align 8
+  %retval = call { ptr, i64, i64 } @move_native_group_ops_internal_add(i8 %loaded_alloca, ptr %loaded_alloca5, ptr %loaded_alloca6)
+  store { ptr, i64, i64 } %retval, ptr %local_8__bytes, align 8
+  %fv.0 = load { ptr, i64, i64 }, ptr %local_8__bytes, align 8
+  %insert_0 = insertvalue %struct.group_ops__Element_bls12381__Scalar_ undef, { ptr, i64, i64 } %fv.0, 0
+  store %struct.group_ops__Element_bls12381__Scalar_ %insert_0, ptr %local_9, align 8
+  %retval7 = load %struct.group_ops__Element_bls12381__Scalar_, ptr %local_9, align 8
+  ret %struct.group_ops__Element_bls12381__Scalar_ %retval7
+}
+
+define %struct.group_ops__Element_bls12381__Scalar_ @"0000000000000002_bls12381_scalar_div_DtAMd7wbgP8xx8"(ptr nonnull readonly %0, ptr nonnull readonly %1) {
+entry:
+  %local_0 = alloca ptr, align 8
+  %local_1 = alloca ptr, align 8
+  %local_2 = alloca i8, align 1
+  %local_3 = alloca ptr, align 8
+  %local_4 = alloca ptr, align 8
+  %local_5 = alloca %struct.group_ops__Element_bls12381__Scalar_, align 8
+  store ptr %0, ptr %local_0, align 8
+  store ptr %1, ptr %local_1, align 8
+  store i8 0, ptr %local_2, align 1
+  %load_store_tmp = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp, ptr %local_3, align 8
+  %load_store_tmp1 = load ptr, ptr %local_1, align 8
+  store ptr %load_store_tmp1, ptr %local_4, align 8
+  %call_arg_0 = load i8, ptr %local_2, align 1
+  %call_arg_1 = load ptr, ptr %local_3, align 8
+  %call_arg_2 = load ptr, ptr %local_4, align 8
+  %retval = call %struct.group_ops__Element_bls12381__Scalar_ @"0000000000000002_group_ops_div_F6bX7bGTPt9VrL"(i8 %call_arg_0, ptr %call_arg_1, ptr %call_arg_2)
+  store %struct.group_ops__Element_bls12381__Scalar_ %retval, ptr %local_5, align 8
+  %retval2 = load %struct.group_ops__Element_bls12381__Scalar_, ptr %local_5, align 8
+  ret %struct.group_ops__Element_bls12381__Scalar_ %retval2
+}
+
+define private %struct.group_ops__Element_bls12381__Scalar_ @"0000000000000002_group_ops_div_F6bX7bGTPt9VrL"(i8 %0, ptr nonnull readonly %1, ptr nonnull readonly %2) {
+entry:
+  %local_0 = alloca i8, align 1
+  %local_1 = alloca ptr, align 8
+  %local_2 = alloca ptr, align 8
+  %local_3 = alloca i8, align 1
+  %local_4 = alloca ptr, align 8
+  %local_5__bytes = alloca ptr, align 8
+  %local_6 = alloca ptr, align 8
+  %local_7__bytes = alloca ptr, align 8
+  %local_8__bytes = alloca { ptr, i64, i64 }, align 8
+  %local_9 = alloca %struct.group_ops__Element_bls12381__Scalar_, align 8
+  store i8 %0, ptr %local_0, align 1
+  store ptr %1, ptr %local_1, align 8
+  store ptr %2, ptr %local_2, align 8
+  %load_store_tmp = load i8, ptr %local_0, align 1
+  store i8 %load_store_tmp, ptr %local_3, align 1
+  %load_store_tmp1 = load ptr, ptr %local_1, align 8
+  store ptr %load_store_tmp1, ptr %local_4, align 8
+  %tmp = load ptr, ptr %local_4, align 8
+  %fld_ref = getelementptr inbounds %struct.group_ops__Element_bls12381__Scalar_, ptr %tmp, i32 0, i32 0
+  store ptr %fld_ref, ptr %local_5__bytes, align 8
+  %load_store_tmp2 = load ptr, ptr %local_2, align 8
+  store ptr %load_store_tmp2, ptr %local_6, align 8
+  %tmp3 = load ptr, ptr %local_6, align 8
+  %fld_ref4 = getelementptr inbounds %struct.group_ops__Element_bls12381__Scalar_, ptr %tmp3, i32 0, i32 0
+  store ptr %fld_ref4, ptr %local_7__bytes, align 8
+  %loaded_alloca = load i8, ptr %local_3, align 1
+  %loaded_alloca5 = load ptr, ptr %local_5__bytes, align 8
+  %loaded_alloca6 = load ptr, ptr %local_7__bytes, align 8
+  %retval = call { ptr, i64, i64 } @move_native_group_ops_internal_div(i8 %loaded_alloca, ptr %loaded_alloca5, ptr %loaded_alloca6)
+  store { ptr, i64, i64 } %retval, ptr %local_8__bytes, align 8
+  %fv.0 = load { ptr, i64, i64 }, ptr %local_8__bytes, align 8
+  %insert_0 = insertvalue %struct.group_ops__Element_bls12381__Scalar_ undef, { ptr, i64, i64 } %fv.0, 0
+  store %struct.group_ops__Element_bls12381__Scalar_ %insert_0, ptr %local_9, align 8
+  %retval7 = load %struct.group_ops__Element_bls12381__Scalar_, ptr %local_9, align 8
+  ret %struct.group_ops__Element_bls12381__Scalar_ %retval7
+}
+
+define %struct.group_ops__Element_bls12381__Scalar_ @"0000000000000002_bls12381_scalar_from_byt_Gp7nPv942CNeM2"(ptr nonnull readonly %0) {
+entry:
+  %local_0 = alloca ptr, align 8
+  %local_1 = alloca i8, align 1
+  %local_2 = alloca ptr, align 8
+  %local_3 = alloca i1, align 1
+  %local_4 = alloca %struct.group_ops__Element_bls12381__Scalar_, align 8
+  store ptr %0, ptr %local_0, align 8
+  store i8 0, ptr %local_1, align 1
+  %load_store_tmp = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp, ptr %local_2, align 8
+  store i1 false, ptr %local_3, align 1
+  %call_arg_0 = load i8, ptr %local_1, align 1
+  %call_arg_1 = load ptr, ptr %local_2, align 8
+  %call_arg_2 = load i1, ptr %local_3, align 1
+  %retval = call %struct.group_ops__Element_bls12381__Scalar_ @"0000000000000002_group_ops_from_bytes_38Gnzow9pZZp2E"(i8 %call_arg_0, ptr %call_arg_1, i1 %call_arg_2)
+  store %struct.group_ops__Element_bls12381__Scalar_ %retval, ptr %local_4, align 8
+  %retval1 = load %struct.group_ops__Element_bls12381__Scalar_, ptr %local_4, align 8
+  ret %struct.group_ops__Element_bls12381__Scalar_ %retval1
+}
+
+define private %struct.group_ops__Element_bls12381__Scalar_ @"0000000000000002_group_ops_from_bytes_38Gnzow9pZZp2E"(i8 %0, ptr nonnull readonly %1, i1 %2) {
+entry:
+  %local_0 = alloca i8, align 1
+  %local_1 = alloca ptr, align 8
+  %local_2 = alloca i1, align 1
+  %local_3 = alloca i1, align 1
+  %local_4 = alloca i1, align 1
+  %local_5 = alloca i1, align 1
+  %local_6 = alloca i8, align 1
+  %local_7 = alloca ptr, align 8
+  %local_8 = alloca i1, align 1
+  %local_9 = alloca i1, align 1
+  %local_10 = alloca ptr, align 8
+  %local_11 = alloca i64, align 8
+  %local_12 = alloca ptr, align 8
+  %local_13__bytes = alloca { ptr, i64, i64 }, align 8
+  %local_14 = alloca %struct.group_ops__Element_bls12381__Scalar_, align 8
+  store i8 %0, ptr %local_0, align 1
+  store ptr %1, ptr %local_1, align 8
+  store i1 %2, ptr %local_2, align 1
+  %load_store_tmp = load i1, ptr %local_2, align 1
+  store i1 %load_store_tmp, ptr %local_4, align 1
+  %cnd = load i1, ptr %local_4, align 1
+  br i1 %cnd, label %bb_1, label %bb_0
+
+bb_1:                                             ; preds = %entry
+  store i1 true, ptr %local_5, align 1
+  %load_store_tmp1 = load i1, ptr %local_5, align 1
+  store i1 %load_store_tmp1, ptr %local_3, align 1
+  br label %bb_2
+
+bb_0:                                             ; preds = %entry
+  %load_store_tmp2 = load i8, ptr %local_0, align 1
+  store i8 %load_store_tmp2, ptr %local_6, align 1
+  %load_store_tmp3 = load ptr, ptr %local_1, align 8
+  store ptr %load_store_tmp3, ptr %local_7, align 8
+  %loaded_alloca = load i8, ptr %local_6, align 1
+  %loaded_alloca4 = load ptr, ptr %local_7, align 8
+  %retval = call i1 @move_native_group_ops_internal_validate(i8 %loaded_alloca, ptr %loaded_alloca4)
+  store i1 %retval, ptr %local_8, align 1
+  %load_store_tmp5 = load i1, ptr %local_8, align 1
+  store i1 %load_store_tmp5, ptr %local_3, align 1
+  br label %bb_2
+
+bb_2:                                             ; preds = %bb_0, %bb_1
+  %load_store_tmp6 = load i1, ptr %local_3, align 1
+  store i1 %load_store_tmp6, ptr %local_9, align 1
+  %cnd7 = load i1, ptr %local_9, align 1
+  br i1 %cnd7, label %bb_4, label %bb_3
+
+bb_4:                                             ; preds = %bb_2
+  br label %bb_5
+
+bb_3:                                             ; preds = %bb_2
+  %load_store_tmp8 = load ptr, ptr %local_1, align 8
+  store ptr %load_store_tmp8, ptr %local_10, align 8
+  store i64 1, ptr %local_11, align 8
+  %call_arg_0 = load i64, ptr %local_11, align 8
+  call void @move_rt_abort(i64 %call_arg_0)
+  unreachable
+
+bb_5:                                             ; preds = %bb_4
+  %load_store_tmp9 = load ptr, ptr %local_1, align 8
+  store ptr %load_store_tmp9, ptr %local_12, align 8
+  %load_deref_store_tmp1 = load ptr, ptr %local_12, align 8
+  %load_deref_store_tmp2 = load { ptr, i64, i64 }, ptr %load_deref_store_tmp1, align 8
+  store { ptr, i64, i64 } %load_deref_store_tmp2, ptr %local_13__bytes, align 8
+  %fv.0 = load { ptr, i64, i64 }, ptr %local_13__bytes, align 8
+  %insert_0 = insertvalue %struct.group_ops__Element_bls12381__Scalar_ undef, { ptr, i64, i64 } %fv.0, 0
+  store %struct.group_ops__Element_bls12381__Scalar_ %insert_0, ptr %local_14, align 8
+  %retval10 = load %struct.group_ops__Element_bls12381__Scalar_, ptr %local_14, align 8
+  ret %struct.group_ops__Element_bls12381__Scalar_ %retval10
+}
+
+define %struct.group_ops__Element_bls12381__Scalar_ @"0000000000000002_bls12381_scalar_from_u64_8S2gzGe5uefDne"(i64 %0) {
+entry:
+  %newv = alloca { ptr, i64, i64 }, align 8
+  %local_0 = alloca i64, align 8
+  %local_1 = alloca { ptr, i64, i64 }, align 8
+  %local_2 = alloca { ptr, i64, i64 }, align 8
+  %local_3 = alloca i64, align 8
+  %local_4 = alloca i1, align 1
+  %local_5 = alloca ptr, align 8
+  %local_6 = alloca i8, align 1
+  %local_7 = alloca ptr, align 8
+  %local_8 = alloca i1, align 1
+  %local_9 = alloca %struct.group_ops__Element_bls12381__Scalar_, align 8
+  store i64 %0, ptr %local_0, align 8
+  %1 = call { ptr, i64, i64 } @move_rt_vec_empty(ptr @__move_rttydesc_u8)
+  store { ptr, i64, i64 } %1, ptr %newv, align 8
+  call void @move_rt_vec_copy(ptr @__move_rttydesc_u8, ptr %newv, ptr @vdesc.14)
+  %reload = load { ptr, i64, i64 }, ptr %newv, align 8
+  store { ptr, i64, i64 } %reload, ptr %local_2, align 8
+  %load_store_tmp = load { ptr, i64, i64 }, ptr %local_2, align 8
+  store { ptr, i64, i64 } %load_store_tmp, ptr %local_1, align 8
+  %load_store_tmp1 = load i64, ptr %local_0, align 8
+  store i64 %load_store_tmp1, ptr %local_3, align 8
+  store i1 true, ptr %local_4, align 1
+  store ptr %local_1, ptr %local_5, align 8
+  %call_arg_0 = load i64, ptr %local_3, align 8
+  %call_arg_1 = load i1, ptr %local_4, align 1
+  %call_arg_2 = load ptr, ptr %local_5, align 8
+  call void @"0000000000000002_group_ops_set_as_prefix_6PXpVpsPpYLRpr"(i64 %call_arg_0, i1 %call_arg_1, ptr %call_arg_2)
+  store i8 0, ptr %local_6, align 1
+  store ptr %local_1, ptr %local_7, align 8
+  store i1 true, ptr %local_8, align 1
+  %call_arg_02 = load i8, ptr %local_6, align 1
+  %call_arg_13 = load ptr, ptr %local_7, align 8
+  %call_arg_24 = load i1, ptr %local_8, align 1
+  %retval = call %struct.group_ops__Element_bls12381__Scalar_ @"0000000000000002_group_ops_from_bytes_38Gnzow9pZZp2E"(i8 %call_arg_02, ptr %call_arg_13, i1 %call_arg_24)
+  store %struct.group_ops__Element_bls12381__Scalar_ %retval, ptr %local_9, align 8
+  %retval5 = load %struct.group_ops__Element_bls12381__Scalar_, ptr %local_9, align 8
+  ret %struct.group_ops__Element_bls12381__Scalar_ %retval5
+}
+
+declare void @"0000000000000002_group_ops_set_as_prefix_6PXpVpsPpYLRpr"(i64, i1, ptr noalias nonnull)
+
+define %struct.group_ops__Element_bls12381__Scalar_ @"0000000000000002_bls12381_scalar_inv_HoghGSgTkwTjna"(ptr nonnull readonly %0) {
+entry:
+  %local_0 = alloca ptr, align 8
+  %local_1 = alloca %struct.group_ops__Element_bls12381__Scalar_, align 8
+  %local_2 = alloca ptr, align 8
+  %local_3 = alloca ptr, align 8
+  %local_4 = alloca %struct.group_ops__Element_bls12381__Scalar_, align 8
+  %local_5 = alloca ptr, align 8
+  %local_6 = alloca ptr, align 8
+  %local_7 = alloca %struct.group_ops__Element_bls12381__Scalar_, align 8
+  store ptr %0, ptr %local_0, align 8
+  %load_store_tmp = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp, ptr %local_3, align 8
+  %load_store_tmp1 = load ptr, ptr %local_3, align 8
+  store ptr %load_store_tmp1, ptr %local_2, align 8
+  %retval = call %struct.group_ops__Element_bls12381__Scalar_ @"0000000000000002_bls12381_scalar_one_D5m3K5n6aApvSU"()
+  store %struct.group_ops__Element_bls12381__Scalar_ %retval, ptr %local_4, align 8
+  %load_store_tmp2 = load %struct.group_ops__Element_bls12381__Scalar_, ptr %local_4, align 8
+  store %struct.group_ops__Element_bls12381__Scalar_ %load_store_tmp2, ptr %local_1, align 8
+  %load_store_tmp3 = load ptr, ptr %local_2, align 8
+  store ptr %load_store_tmp3, ptr %local_5, align 8
+  store ptr %local_1, ptr %local_6, align 8
+  %call_arg_0 = load ptr, ptr %local_5, align 8
+  %call_arg_1 = load ptr, ptr %local_6, align 8
+  %retval4 = call %struct.group_ops__Element_bls12381__Scalar_ @"0000000000000002_bls12381_scalar_div_DtAMd7wbgP8xx8"(ptr %call_arg_0, ptr %call_arg_1)
+  store %struct.group_ops__Element_bls12381__Scalar_ %retval4, ptr %local_7, align 8
+  %retval5 = load %struct.group_ops__Element_bls12381__Scalar_, ptr %local_7, align 8
+  ret %struct.group_ops__Element_bls12381__Scalar_ %retval5
+}
+
+define %struct.group_ops__Element_bls12381__Scalar_ @"0000000000000002_bls12381_scalar_one_D5m3K5n6aApvSU"() {
+entry:
+  %newv = alloca { ptr, i64, i64 }, align 8
+  %local_0 = alloca { ptr, i64, i64 }, align 8
+  %local_1 = alloca { ptr, i64, i64 }, align 8
+  %local_2 = alloca i8, align 1
+  %local_3 = alloca ptr, align 8
+  %local_4 = alloca i1, align 1
+  %local_5 = alloca %struct.group_ops__Element_bls12381__Scalar_, align 8
+  %0 = call { ptr, i64, i64 } @move_rt_vec_empty(ptr @__move_rttydesc_u8)
+  store { ptr, i64, i64 } %0, ptr %newv, align 8
+  call void @move_rt_vec_copy(ptr @__move_rttydesc_u8, ptr %newv, ptr @vdesc.16)
+  %reload = load { ptr, i64, i64 }, ptr %newv, align 8
+  store { ptr, i64, i64 } %reload, ptr %local_1, align 8
+  %load_store_tmp = load { ptr, i64, i64 }, ptr %local_1, align 8
+  store { ptr, i64, i64 } %load_store_tmp, ptr %local_0, align 8
+  store i8 0, ptr %local_2, align 1
+  store ptr %local_0, ptr %local_3, align 8
+  store i1 true, ptr %local_4, align 1
+  %call_arg_0 = load i8, ptr %local_2, align 1
+  %call_arg_1 = load ptr, ptr %local_3, align 8
+  %call_arg_2 = load i1, ptr %local_4, align 1
+  %retval = call %struct.group_ops__Element_bls12381__Scalar_ @"0000000000000002_group_ops_from_bytes_38Gnzow9pZZp2E"(i8 %call_arg_0, ptr %call_arg_1, i1 %call_arg_2)
+  store %struct.group_ops__Element_bls12381__Scalar_ %retval, ptr %local_5, align 8
+  %retval1 = load %struct.group_ops__Element_bls12381__Scalar_, ptr %local_5, align 8
+  ret %struct.group_ops__Element_bls12381__Scalar_ %retval1
+}
+
+define %struct.group_ops__Element_bls12381__Scalar_ @"0000000000000002_bls12381_scalar_mul_6CB6WiFiTkwW9a"(ptr nonnull readonly %0, ptr nonnull readonly %1) {
+entry:
+  %local_0 = alloca ptr, align 8
+  %local_1 = alloca ptr, align 8
+  %local_2 = alloca i8, align 1
+  %local_3 = alloca ptr, align 8
+  %local_4 = alloca ptr, align 8
+  %local_5 = alloca %struct.group_ops__Element_bls12381__Scalar_, align 8
+  store ptr %0, ptr %local_0, align 8
+  store ptr %1, ptr %local_1, align 8
+  store i8 0, ptr %local_2, align 1
+  %load_store_tmp = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp, ptr %local_3, align 8
+  %load_store_tmp1 = load ptr, ptr %local_1, align 8
+  store ptr %load_store_tmp1, ptr %local_4, align 8
+  %call_arg_0 = load i8, ptr %local_2, align 1
+  %call_arg_1 = load ptr, ptr %local_3, align 8
+  %call_arg_2 = load ptr, ptr %local_4, align 8
+  %retval = call %struct.group_ops__Element_bls12381__Scalar_ @"0000000000000002_group_ops_mul_Hsskt4LuSthNz4"(i8 %call_arg_0, ptr %call_arg_1, ptr %call_arg_2)
+  store %struct.group_ops__Element_bls12381__Scalar_ %retval, ptr %local_5, align 8
+  %retval2 = load %struct.group_ops__Element_bls12381__Scalar_, ptr %local_5, align 8
+  ret %struct.group_ops__Element_bls12381__Scalar_ %retval2
+}
+
+define private %struct.group_ops__Element_bls12381__Scalar_ @"0000000000000002_group_ops_mul_Hsskt4LuSthNz4"(i8 %0, ptr nonnull readonly %1, ptr nonnull readonly %2) {
+entry:
+  %local_0 = alloca i8, align 1
+  %local_1 = alloca ptr, align 8
+  %local_2 = alloca ptr, align 8
+  %local_3 = alloca i8, align 1
+  %local_4 = alloca ptr, align 8
+  %local_5__bytes = alloca ptr, align 8
+  %local_6 = alloca ptr, align 8
+  %local_7__bytes = alloca ptr, align 8
+  %local_8__bytes = alloca { ptr, i64, i64 }, align 8
+  %local_9 = alloca %struct.group_ops__Element_bls12381__Scalar_, align 8
+  store i8 %0, ptr %local_0, align 1
+  store ptr %1, ptr %local_1, align 8
+  store ptr %2, ptr %local_2, align 8
+  %load_store_tmp = load i8, ptr %local_0, align 1
+  store i8 %load_store_tmp, ptr %local_3, align 1
+  %load_store_tmp1 = load ptr, ptr %local_1, align 8
+  store ptr %load_store_tmp1, ptr %local_4, align 8
+  %tmp = load ptr, ptr %local_4, align 8
+  %fld_ref = getelementptr inbounds %struct.group_ops__Element_bls12381__Scalar_, ptr %tmp, i32 0, i32 0
+  store ptr %fld_ref, ptr %local_5__bytes, align 8
+  %load_store_tmp2 = load ptr, ptr %local_2, align 8
+  store ptr %load_store_tmp2, ptr %local_6, align 8
+  %tmp3 = load ptr, ptr %local_6, align 8
+  %fld_ref4 = getelementptr inbounds %struct.group_ops__Element_bls12381__Scalar_, ptr %tmp3, i32 0, i32 0
+  store ptr %fld_ref4, ptr %local_7__bytes, align 8
+  %loaded_alloca = load i8, ptr %local_3, align 1
+  %loaded_alloca5 = load ptr, ptr %local_5__bytes, align 8
+  %loaded_alloca6 = load ptr, ptr %local_7__bytes, align 8
+  %retval = call { ptr, i64, i64 } @move_native_group_ops_internal_mul(i8 %loaded_alloca, ptr %loaded_alloca5, ptr %loaded_alloca6)
+  store { ptr, i64, i64 } %retval, ptr %local_8__bytes, align 8
+  %fv.0 = load { ptr, i64, i64 }, ptr %local_8__bytes, align 8
+  %insert_0 = insertvalue %struct.group_ops__Element_bls12381__Scalar_ undef, { ptr, i64, i64 } %fv.0, 0
+  store %struct.group_ops__Element_bls12381__Scalar_ %insert_0, ptr %local_9, align 8
+  %retval7 = load %struct.group_ops__Element_bls12381__Scalar_, ptr %local_9, align 8
+  ret %struct.group_ops__Element_bls12381__Scalar_ %retval7
+}
+
+define %struct.group_ops__Element_bls12381__Scalar_ @"0000000000000002_bls12381_scalar_neg_99BiB1T9HDRHUN"(ptr nonnull readonly %0) {
+entry:
+  %local_0 = alloca ptr, align 8
+  %local_1 = alloca %struct.group_ops__Element_bls12381__Scalar_, align 8
+  %local_2 = alloca %struct.group_ops__Element_bls12381__Scalar_, align 8
+  %local_3 = alloca ptr, align 8
+  %local_4 = alloca ptr, align 8
+  %local_5 = alloca %struct.group_ops__Element_bls12381__Scalar_, align 8
+  store ptr %0, ptr %local_0, align 8
+  %retval = call %struct.group_ops__Element_bls12381__Scalar_ @"0000000000000002_bls12381_scalar_zero_3EtCCr6FofoZmW"()
+  store %struct.group_ops__Element_bls12381__Scalar_ %retval, ptr %local_2, align 8
+  %load_store_tmp = load %struct.group_ops__Element_bls12381__Scalar_, ptr %local_2, align 8
+  store %struct.group_ops__Element_bls12381__Scalar_ %load_store_tmp, ptr %local_1, align 8
+  store ptr %local_1, ptr %local_3, align 8
+  %load_store_tmp1 = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp1, ptr %local_4, align 8
+  %call_arg_0 = load ptr, ptr %local_3, align 8
+  %call_arg_1 = load ptr, ptr %local_4, align 8
+  %retval2 = call %struct.group_ops__Element_bls12381__Scalar_ @"0000000000000002_bls12381_scalar_sub_J5q1BvQYs77kaD"(ptr %call_arg_0, ptr %call_arg_1)
+  store %struct.group_ops__Element_bls12381__Scalar_ %retval2, ptr %local_5, align 8
+  %retval3 = load %struct.group_ops__Element_bls12381__Scalar_, ptr %local_5, align 8
+  ret %struct.group_ops__Element_bls12381__Scalar_ %retval3
+}
+
+define %struct.group_ops__Element_bls12381__Scalar_ @"0000000000000002_bls12381_scalar_zero_3EtCCr6FofoZmW"() {
+entry:
+  %newv = alloca { ptr, i64, i64 }, align 8
+  %local_0 = alloca { ptr, i64, i64 }, align 8
+  %local_1 = alloca { ptr, i64, i64 }, align 8
+  %local_2 = alloca i8, align 1
+  %local_3 = alloca ptr, align 8
+  %local_4 = alloca i1, align 1
+  %local_5 = alloca %struct.group_ops__Element_bls12381__Scalar_, align 8
+  %0 = call { ptr, i64, i64 } @move_rt_vec_empty(ptr @__move_rttydesc_u8)
+  store { ptr, i64, i64 } %0, ptr %newv, align 8
+  call void @move_rt_vec_copy(ptr @__move_rttydesc_u8, ptr %newv, ptr @vdesc.18)
+  %reload = load { ptr, i64, i64 }, ptr %newv, align 8
+  store { ptr, i64, i64 } %reload, ptr %local_1, align 8
+  %load_store_tmp = load { ptr, i64, i64 }, ptr %local_1, align 8
+  store { ptr, i64, i64 } %load_store_tmp, ptr %local_0, align 8
+  store i8 0, ptr %local_2, align 1
+  store ptr %local_0, ptr %local_3, align 8
+  store i1 true, ptr %local_4, align 1
+  %call_arg_0 = load i8, ptr %local_2, align 1
+  %call_arg_1 = load ptr, ptr %local_3, align 8
+  %call_arg_2 = load i1, ptr %local_4, align 1
+  %retval = call %struct.group_ops__Element_bls12381__Scalar_ @"0000000000000002_group_ops_from_bytes_38Gnzow9pZZp2E"(i8 %call_arg_0, ptr %call_arg_1, i1 %call_arg_2)
+  store %struct.group_ops__Element_bls12381__Scalar_ %retval, ptr %local_5, align 8
+  %retval1 = load %struct.group_ops__Element_bls12381__Scalar_, ptr %local_5, align 8
+  ret %struct.group_ops__Element_bls12381__Scalar_ %retval1
+}
+
+define %struct.group_ops__Element_bls12381__Scalar_ @"0000000000000002_bls12381_scalar_sub_J5q1BvQYs77kaD"(ptr nonnull readonly %0, ptr nonnull readonly %1) {
+entry:
+  %local_0 = alloca ptr, align 8
+  %local_1 = alloca ptr, align 8
+  %local_2 = alloca i8, align 1
+  %local_3 = alloca ptr, align 8
+  %local_4 = alloca ptr, align 8
+  %local_5 = alloca %struct.group_ops__Element_bls12381__Scalar_, align 8
+  store ptr %0, ptr %local_0, align 8
+  store ptr %1, ptr %local_1, align 8
+  store i8 0, ptr %local_2, align 1
+  %load_store_tmp = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp, ptr %local_3, align 8
+  %load_store_tmp1 = load ptr, ptr %local_1, align 8
+  store ptr %load_store_tmp1, ptr %local_4, align 8
+  %call_arg_0 = load i8, ptr %local_2, align 1
+  %call_arg_1 = load ptr, ptr %local_3, align 8
+  %call_arg_2 = load ptr, ptr %local_4, align 8
+  %retval = call %struct.group_ops__Element_bls12381__Scalar_ @"0000000000000002_group_ops_sub_2GjcebmpuM3C2E"(i8 %call_arg_0, ptr %call_arg_1, ptr %call_arg_2)
+  store %struct.group_ops__Element_bls12381__Scalar_ %retval, ptr %local_5, align 8
+  %retval2 = load %struct.group_ops__Element_bls12381__Scalar_, ptr %local_5, align 8
+  ret %struct.group_ops__Element_bls12381__Scalar_ %retval2
+}
+
+define private %struct.group_ops__Element_bls12381__Scalar_ @"0000000000000002_group_ops_sub_2GjcebmpuM3C2E"(i8 %0, ptr nonnull readonly %1, ptr nonnull readonly %2) {
+entry:
+  %local_0 = alloca i8, align 1
+  %local_1 = alloca ptr, align 8
+  %local_2 = alloca ptr, align 8
+  %local_3 = alloca i8, align 1
+  %local_4 = alloca ptr, align 8
+  %local_5__bytes = alloca ptr, align 8
+  %local_6 = alloca ptr, align 8
+  %local_7__bytes = alloca ptr, align 8
+  %local_8__bytes = alloca { ptr, i64, i64 }, align 8
+  %local_9 = alloca %struct.group_ops__Element_bls12381__Scalar_, align 8
+  store i8 %0, ptr %local_0, align 1
+  store ptr %1, ptr %local_1, align 8
+  store ptr %2, ptr %local_2, align 8
+  %load_store_tmp = load i8, ptr %local_0, align 1
+  store i8 %load_store_tmp, ptr %local_3, align 1
+  %load_store_tmp1 = load ptr, ptr %local_1, align 8
+  store ptr %load_store_tmp1, ptr %local_4, align 8
+  %tmp = load ptr, ptr %local_4, align 8
+  %fld_ref = getelementptr inbounds %struct.group_ops__Element_bls12381__Scalar_, ptr %tmp, i32 0, i32 0
+  store ptr %fld_ref, ptr %local_5__bytes, align 8
+  %load_store_tmp2 = load ptr, ptr %local_2, align 8
+  store ptr %load_store_tmp2, ptr %local_6, align 8
+  %tmp3 = load ptr, ptr %local_6, align 8
+  %fld_ref4 = getelementptr inbounds %struct.group_ops__Element_bls12381__Scalar_, ptr %tmp3, i32 0, i32 0
+  store ptr %fld_ref4, ptr %local_7__bytes, align 8
+  %loaded_alloca = load i8, ptr %local_3, align 1
+  %loaded_alloca5 = load ptr, ptr %local_5__bytes, align 8
+  %loaded_alloca6 = load ptr, ptr %local_7__bytes, align 8
+  %retval = call { ptr, i64, i64 } @move_native_group_ops_internal_sub(i8 %loaded_alloca, ptr %loaded_alloca5, ptr %loaded_alloca6)
+  store { ptr, i64, i64 } %retval, ptr %local_8__bytes, align 8
+  %fv.0 = load { ptr, i64, i64 }, ptr %local_8__bytes, align 8
+  %insert_0 = insertvalue %struct.group_ops__Element_bls12381__Scalar_ undef, { ptr, i64, i64 } %fv.0, 0
+  store %struct.group_ops__Element_bls12381__Scalar_ %insert_0, ptr %local_9, align 8
+  %retval7 = load %struct.group_ops__Element_bls12381__Scalar_, ptr %local_9, align 8
+  ret %struct.group_ops__Element_bls12381__Scalar_ %retval7
+}
+
+declare void @move_rt_vec_destroy(ptr nonnull readonly dereferenceable(32), ptr)
+
+; Function Attrs: cold noreturn
+declare void @move_rt_abort(i64) #0
+
+declare { ptr, i64, i64 } @move_rt_vec_empty(ptr nonnull readonly dereferenceable(32))
+
+declare void @move_rt_vec_copy(ptr nonnull readonly dereferenceable(32), ptr nonnull dereferenceable(24), ptr nonnull readonly dereferenceable(24))
+
+attributes #0 = { cold noreturn }

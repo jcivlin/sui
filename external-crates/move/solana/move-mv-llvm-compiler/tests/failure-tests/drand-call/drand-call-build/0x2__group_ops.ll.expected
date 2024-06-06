@@ -1,0 +1,276 @@
+; ModuleID = '0x2__group_ops'
+source_filename = "../../../../../../../crates/sui-framework/packages/sui-framework/sources/crypto/group_ops.move"
+target datalayout = "e-m:e-p:64:64-i64:64-n32:64-S128"
+target triple = "sbf-solana-solana"
+
+%__move_rt_type = type { { ptr, i64 }, i64, ptr }
+
+@__move_rttydesc_signer = private unnamed_addr constant %__move_rt_type { { ptr, i64 } { ptr @__move_rttydesc_signer_name, i64 6 }, i64 9, ptr @__move_rttydesc_NOTHING_info }
+@__move_rttydesc_signer_name = private unnamed_addr constant [6 x i8] c"signer"
+@__move_rttydesc_NOTHING_info = private unnamed_addr constant i8 -1
+@__move_rttydesc_u8 = private unnamed_addr constant %__move_rt_type { { ptr, i64 } { ptr @__move_rttydesc_u8_name, i64 2 }, i64 2, ptr @__move_rttydesc_NOTHING_info }
+@__move_rttydesc_u8_name = private unnamed_addr constant [2 x i8] c"u8"
+@__move_rttydesc_u64 = private unnamed_addr constant %__move_rt_type { { ptr, i64 } { ptr @__move_rttydesc_u64_name, i64 3 }, i64 5, ptr @__move_rttydesc_NOTHING_info }
+@__move_rttydesc_u64_name = private unnamed_addr constant [3 x i8] c"u64"
+
+declare i32 @memcmp(ptr, ptr, i64)
+
+define void @"0000000000000002_group_ops_unit_test_poiso_DAngiQst9P5bBT"() {
+entry:
+  %local_0 = alloca i64, align 8
+  %local_1 = alloca { ptr, i64, i64 }, align 8
+  store i64 0, ptr %local_0, align 8
+  %loaded_alloca = load i64, ptr %local_0, align 8
+  %retval = call { ptr, i64, i64 } @move_native_unit_test_create_signers_for_testing(i64 %loaded_alloca)
+  store { ptr, i64, i64 } %retval, ptr %local_1, align 8
+  call void @move_rt_vec_destroy(ptr @__move_rttydesc_signer, ptr %local_1)
+  ret void
+}
+
+declare { ptr, i64, i64 } @move_native_unit_test_create_signers_for_testing(i64)
+
+declare { ptr, i64, i64 } @move_native_group_ops_internal_add(i8, ptr, ptr)
+
+declare { ptr, i64, i64 } @move_native_group_ops_internal_div(i8, ptr, ptr)
+
+declare { ptr, i64, i64 } @move_native_group_ops_internal_hash_to(i8, ptr)
+
+declare { ptr, i64, i64 } @move_native_group_ops_internal_mul(i8, ptr, ptr)
+
+declare { ptr, i64, i64 } @move_native_group_ops_internal_multi_scalar_mul(i8, ptr, ptr)
+
+declare { ptr, i64, i64 } @move_native_group_ops_internal_pairing(i8, ptr, ptr)
+
+declare { ptr, i64, i64 } @move_native_group_ops_internal_sub(i8, ptr, ptr)
+
+declare i1 @move_native_group_ops_internal_validate(i8, ptr)
+
+define void @"0000000000000002_group_ops_set_as_prefix_6PXpVpsPpYLRpr"(i64 %0, i1 %1, ptr noalias nonnull %2) {
+entry:
+  %local_0 = alloca i64, align 8
+  %local_1 = alloca i1, align 1
+  %local_2 = alloca ptr, align 8
+  %local_3 = alloca i64, align 8
+  %local_4 = alloca i64, align 8
+  %local_5 = alloca i64, align 8
+  %local_6 = alloca i64, align 8
+  %local_7 = alloca { ptr, i64, i64 }, align 8
+  %local_8 = alloca ptr, align 8
+  %local_9 = alloca ptr, align 8
+  %local_10 = alloca i64, align 8
+  %local_11 = alloca i64, align 8
+  %local_12 = alloca i64, align 8
+  %local_13 = alloca i1, align 1
+  %local_14 = alloca ptr, align 8
+  %local_15 = alloca i64, align 8
+  %local_16 = alloca ptr, align 8
+  %local_17 = alloca { ptr, i64, i64 }, align 8
+  %local_18 = alloca i64, align 8
+  %local_19 = alloca i64, align 8
+  %local_20 = alloca i64, align 8
+  %local_21 = alloca i1, align 1
+  %local_22 = alloca i1, align 1
+  %local_23 = alloca i64, align 8
+  %local_24 = alloca i64, align 8
+  %local_25 = alloca i64, align 8
+  %local_26 = alloca i64, align 8
+  %local_27 = alloca i64, align 8
+  %local_28 = alloca i64, align 8
+  %local_29 = alloca i64, align 8
+  %local_30 = alloca ptr, align 8
+  %local_31 = alloca i64, align 8
+  %local_32 = alloca ptr, align 8
+  %local_33 = alloca i8, align 1
+  %local_34 = alloca ptr, align 8
+  %local_35 = alloca i64, align 8
+  %local_36 = alloca ptr, align 8
+  %local_37 = alloca i64, align 8
+  %local_38 = alloca i64, align 8
+  %local_39 = alloca i64, align 8
+  %local_40 = alloca ptr, align 8
+  store i64 %0, ptr %local_0, align 8
+  store i1 %1, ptr %local_1, align 1
+  store ptr %2, ptr %local_2, align 8
+  %load_store_tmp = load ptr, ptr %local_2, align 8
+  store ptr %load_store_tmp, ptr %local_8, align 8
+  %load_store_tmp1 = load ptr, ptr %local_8, align 8
+  store ptr %load_store_tmp1, ptr %local_9, align 8
+  %loaded_alloca = load ptr, ptr %local_9, align 8
+  %retval = call i64 @move_native_vector_length(ptr @__move_rttydesc_u8, ptr %loaded_alloca)
+  store i64 %retval, ptr %local_10, align 8
+  %load_store_tmp2 = load i64, ptr %local_10, align 8
+  store i64 %load_store_tmp2, ptr %local_4, align 8
+  %load_store_tmp3 = load i64, ptr %local_4, align 8
+  store i64 %load_store_tmp3, ptr %local_11, align 8
+  store i64 7, ptr %local_12, align 8
+  %gt_src_0 = load i64, ptr %local_11, align 8
+  %gt_src_1 = load i64, ptr %local_12, align 8
+  %gt_dst = icmp ugt i64 %gt_src_0, %gt_src_1
+  store i1 %gt_dst, ptr %local_13, align 1
+  %cnd = load i1, ptr %local_13, align 1
+  br i1 %cnd, label %bb_1, label %bb_0
+
+bb_1:                                             ; preds = %entry
+  br label %bb_2
+
+bb_0:                                             ; preds = %entry
+  %load_store_tmp4 = load ptr, ptr %local_2, align 8
+  store ptr %load_store_tmp4, ptr %local_14, align 8
+  store i64 3, ptr %local_15, align 8
+  %call_arg_0 = load i64, ptr %local_15, align 8
+  call void @move_rt_abort(i64 %call_arg_0)
+  unreachable
+
+bb_2:                                             ; preds = %bb_1
+  store ptr %local_0, ptr %local_16, align 8
+  %call_arg_05 = load ptr, ptr %local_16, align 8
+  %retval6 = call { ptr, i64, i64 } @"0000000000000002_bcs_to_bytes_6NhXVWFo2aWmc9"(ptr %call_arg_05)
+  store { ptr, i64, i64 } %retval6, ptr %local_17, align 8
+  %load_store_tmp7 = load { ptr, i64, i64 }, ptr %local_17, align 8
+  store { ptr, i64, i64 } %load_store_tmp7, ptr %local_7, align 8
+  store i64 0, ptr %local_18, align 8
+  %load_store_tmp8 = load i64, ptr %local_18, align 8
+  store i64 %load_store_tmp8, ptr %local_5, align 8
+  br label %bb_9
+
+bb_9:                                             ; preds = %join_bb38, %bb_2
+  %load_store_tmp9 = load i64, ptr %local_5, align 8
+  store i64 %load_store_tmp9, ptr %local_19, align 8
+  store i64 8, ptr %local_20, align 8
+  %lt_src_0 = load i64, ptr %local_19, align 8
+  %lt_src_1 = load i64, ptr %local_20, align 8
+  %lt_dst = icmp ult i64 %lt_src_0, %lt_src_1
+  store i1 %lt_dst, ptr %local_21, align 1
+  %cnd10 = load i1, ptr %local_21, align 1
+  br i1 %cnd10, label %bb_4, label %bb_3
+
+bb_4:                                             ; preds = %bb_9
+  br label %bb_5
+
+bb_5:                                             ; preds = %bb_4
+  %load_store_tmp11 = load i1, ptr %local_1, align 1
+  store i1 %load_store_tmp11, ptr %local_22, align 1
+  %cnd12 = load i1, ptr %local_22, align 1
+  br i1 %cnd12, label %bb_7, label %bb_6
+
+bb_7:                                             ; preds = %bb_5
+  %load_store_tmp13 = load i64, ptr %local_4, align 8
+  store i64 %load_store_tmp13, ptr %local_23, align 8
+  %load_store_tmp14 = load i64, ptr %local_5, align 8
+  store i64 %load_store_tmp14, ptr %local_24, align 8
+  %sub_src_0 = load i64, ptr %local_23, align 8
+  %sub_src_1 = load i64, ptr %local_24, align 8
+  %sub_dst = sub i64 %sub_src_0, %sub_src_1
+  %ovfcond = icmp ugt i64 %sub_dst, %sub_src_0
+  br i1 %ovfcond, label %then_bb, label %join_bb
+
+then_bb:                                          ; preds = %bb_7
+  call void @move_rt_abort(i64 4017)
+  unreachable
+
+join_bb:                                          ; preds = %bb_7
+  store i64 %sub_dst, ptr %local_25, align 8
+  store i64 1, ptr %local_26, align 8
+  %sub_src_015 = load i64, ptr %local_25, align 8
+  %sub_src_116 = load i64, ptr %local_26, align 8
+  %sub_dst17 = sub i64 %sub_src_015, %sub_src_116
+  %ovfcond18 = icmp ugt i64 %sub_dst17, %sub_src_015
+  br i1 %ovfcond18, label %then_bb19, label %join_bb20
+
+then_bb19:                                        ; preds = %join_bb
+  call void @move_rt_abort(i64 4017)
+  unreachable
+
+join_bb20:                                        ; preds = %join_bb
+  store i64 %sub_dst17, ptr %local_27, align 8
+  %load_store_tmp21 = load i64, ptr %local_27, align 8
+  store i64 %load_store_tmp21, ptr %local_3, align 8
+  br label %bb_8
+
+bb_6:                                             ; preds = %bb_5
+  %load_store_tmp22 = load i64, ptr %local_5, align 8
+  store i64 %load_store_tmp22, ptr %local_28, align 8
+  %load_store_tmp23 = load i64, ptr %local_28, align 8
+  store i64 %load_store_tmp23, ptr %local_3, align 8
+  br label %bb_8
+
+bb_8:                                             ; preds = %bb_6, %join_bb20
+  %load_store_tmp24 = load i64, ptr %local_3, align 8
+  store i64 %load_store_tmp24, ptr %local_29, align 8
+  %load_store_tmp25 = load i64, ptr %local_29, align 8
+  store i64 %load_store_tmp25, ptr %local_6, align 8
+  store ptr %local_7, ptr %local_30, align 8
+  %load_store_tmp26 = load i64, ptr %local_5, align 8
+  store i64 %load_store_tmp26, ptr %local_31, align 8
+  %loaded_alloca27 = load ptr, ptr %local_30, align 8
+  %loaded_alloca28 = load i64, ptr %local_31, align 8
+  %retval29 = call ptr @move_native_vector_borrow(ptr @__move_rttydesc_u8, ptr %loaded_alloca27, i64 %loaded_alloca28)
+  store ptr %retval29, ptr %local_32, align 8
+  %load_deref_store_tmp1 = load ptr, ptr %local_32, align 8
+  %load_deref_store_tmp2 = load i8, ptr %load_deref_store_tmp1, align 1
+  store i8 %load_deref_store_tmp2, ptr %local_33, align 1
+  %load_store_tmp30 = load ptr, ptr %local_2, align 8
+  store ptr %load_store_tmp30, ptr %local_34, align 8
+  %load_store_tmp31 = load i64, ptr %local_6, align 8
+  store i64 %load_store_tmp31, ptr %local_35, align 8
+  %loaded_alloca32 = load ptr, ptr %local_34, align 8
+  %loaded_alloca33 = load i64, ptr %local_35, align 8
+  %retval34 = call ptr @move_native_vector_borrow_mut(ptr @__move_rttydesc_u8, ptr %loaded_alloca32, i64 %loaded_alloca33)
+  store ptr %retval34, ptr %local_36, align 8
+  %load_store_ref_src = load i8, ptr %local_33, align 1
+  %load_store_ref_dst_ptr = load ptr, ptr %local_36, align 8
+  store i8 %load_store_ref_src, ptr %load_store_ref_dst_ptr, align 1
+  %load_store_tmp35 = load i64, ptr %local_5, align 8
+  store i64 %load_store_tmp35, ptr %local_37, align 8
+  store i64 1, ptr %local_38, align 8
+  %add_src_0 = load i64, ptr %local_37, align 8
+  %add_src_1 = load i64, ptr %local_38, align 8
+  %add_dst = add i64 %add_src_0, %add_src_1
+  %ovfcond36 = icmp ult i64 %add_dst, %add_src_0
+  br i1 %ovfcond36, label %then_bb37, label %join_bb38
+
+then_bb37:                                        ; preds = %bb_8
+  call void @move_rt_abort(i64 4017)
+  unreachable
+
+join_bb38:                                        ; preds = %bb_8
+  store i64 %add_dst, ptr %local_39, align 8
+  %load_store_tmp39 = load i64, ptr %local_39, align 8
+  store i64 %load_store_tmp39, ptr %local_5, align 8
+  br label %bb_9
+
+bb_3:                                             ; preds = %bb_9
+  %load_store_tmp40 = load ptr, ptr %local_2, align 8
+  store ptr %load_store_tmp40, ptr %local_40, align 8
+  ret void
+}
+
+declare i64 @move_native_vector_length(ptr, ptr)
+
+define private { ptr, i64, i64 } @"0000000000000002_bcs_to_bytes_6NhXVWFo2aWmc9"(ptr nonnull readonly %0) {
+entry:
+  %local_0 = alloca ptr, align 8
+  %local_1 = alloca ptr, align 8
+  %local_2 = alloca { ptr, i64, i64 }, align 8
+  store ptr %0, ptr %local_0, align 8
+  %load_store_tmp = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp, ptr %local_1, align 8
+  %loaded_alloca = load ptr, ptr %local_1, align 8
+  %retval = call { ptr, i64, i64 } @move_native_bcs_to_bytes(ptr @__move_rttydesc_u64, ptr %loaded_alloca)
+  store { ptr, i64, i64 } %retval, ptr %local_2, align 8
+  %retval1 = load { ptr, i64, i64 }, ptr %local_2, align 8
+  ret { ptr, i64, i64 } %retval1
+}
+
+declare { ptr, i64, i64 } @move_native_bcs_to_bytes(ptr, ptr)
+
+declare ptr @move_native_vector_borrow(ptr, ptr, i64)
+
+declare ptr @move_native_vector_borrow_mut(ptr, ptr, i64)
+
+declare void @move_rt_vec_destroy(ptr nonnull readonly dereferenceable(32), ptr)
+
+; Function Attrs: cold noreturn
+declare void @move_rt_abort(i64) #0
+
+attributes #0 = { cold noreturn }

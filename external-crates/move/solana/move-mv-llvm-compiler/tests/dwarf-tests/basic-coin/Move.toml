@@ -6,5 +6,5 @@ version = "0.0.0"
 NamedAddr = "0xCAFE"
 std = "0x1"
 
-[dependencies]
-MoveStdlib = { local = "../../../../../crates/move-stdlib/" }
+# [dependencies]
+# MoveStdlib = { local = "../../../../../crates/move-stdlib/" }

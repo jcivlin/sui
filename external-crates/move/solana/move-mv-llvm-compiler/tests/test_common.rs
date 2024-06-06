@@ -9,6 +9,7 @@ use rand::Rng;
 use serde::{Deserialize, Serialize};
 use serde_json::Result;
 use std::{
+    env,
     ffi::OsStr,
     fs::{self, File},
     io::{BufRead, BufReader, BufWriter, Write},
