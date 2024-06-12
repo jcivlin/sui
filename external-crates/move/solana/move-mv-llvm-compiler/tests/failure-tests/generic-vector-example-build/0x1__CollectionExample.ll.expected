@@ -1,0 +1,603 @@
+; ModuleID = '0x1__CollectionExample'
+source_filename = "tests/failure-tests/CollectionExample.move"
+target datalayout = "e-m:e-p:64:64-i64:64-n32:64-S128"
+target triple = "sbf-solana-solana"
+
+%__move_rt_type = type { { ptr, i64 }, i64, ptr }
+%struct.Book__Book = type { i64, { ptr, i64, i64 }, { ptr, i64, i64 } }
+%struct.CollectionExample__Collection_u64_ = type { { ptr, i64, i64 } }
+%struct.CollectionExample__Collection_Book__Book_ = type { { ptr, i64, i64 } }
+%struct.CollectionExample__Collection_vector_u8__ = type { { ptr, i64, i64 } }
+
+@__move_rttydesc_signer = private unnamed_addr constant %__move_rt_type { { ptr, i64 } { ptr @__move_rttydesc_signer_name, i64 6 }, i64 9, ptr @__move_rttydesc_NOTHING_info }
+@__move_rttydesc_signer_name = private unnamed_addr constant [6 x i8] c"signer"
+@__move_rttydesc_NOTHING_info = private unnamed_addr constant i8 -1
+@vec_literal = internal constant [5 x i8] c"Hello"
+@vdesc = internal constant { ptr, i64, i64 } { ptr @vec_literal, i64 5, i64 5 }
+@__move_rttydesc_u8 = private unnamed_addr constant %__move_rt_type { { ptr, i64 } { ptr @__move_rttydesc_u8_name, i64 2 }, i64 2, ptr @__move_rttydesc_NOTHING_info }
+@__move_rttydesc_u8_name = private unnamed_addr constant [2 x i8] c"u8"
+@vec_literal.1 = internal constant [5 x i8] c"World"
+@vdesc.2 = internal constant { ptr, i64, i64 } { ptr @vec_literal.1, i64 5, i64 5 }
+@vec_literal.3 = internal constant [16 x i8] c"Move Programming"
+@vdesc.4 = internal constant { ptr, i64, i64 } { ptr @vec_literal.3, i64 16, i64 16 }
+@vec_literal.5 = internal constant [5 x i8] c"Alice"
+@vdesc.6 = internal constant { ptr, i64, i64 } { ptr @vec_literal.5, i64 5, i64 5 }
+@vec_literal.7 = internal constant [17 x i8] c"Blockchain Basics"
+@vdesc.8 = internal constant { ptr, i64, i64 } { ptr @vec_literal.7, i64 17, i64 17 }
+@vec_literal.9 = internal constant [3 x i8] c"Bob"
+@vdesc.10 = internal constant { ptr, i64, i64 } { ptr @vec_literal.9, i64 3, i64 3 }
+@__move_rttydesc_u64 = private unnamed_addr constant %__move_rt_type { { ptr, i64 } { ptr @__move_rttydesc_u64_name, i64 3 }, i64 5, ptr @__move_rttydesc_NOTHING_info }
+@__move_rttydesc_u64_name = private unnamed_addr constant [3 x i8] c"u64"
+@__move_rttydesc_vector_u8_ = private unnamed_addr constant %__move_rt_type { { ptr, i64 } { ptr @__move_rttydesc_vector_u8__name, i64 10 }, i64 10, ptr @__move_rttydesc_vector_u8__info }
+@__move_rttydesc_vector_u8__name = private unnamed_addr constant [10 x i8] c"vector<u8>"
+@__move_rttydesc_vector_u8__info = private unnamed_addr constant { ptr } { ptr @__move_rttydesc_u8 }
+@__move_rttydesc_Book__Book = private unnamed_addr constant %__move_rt_type { { ptr, i64 } { ptr @__move_rttydesc_Book__Book_name, i64 76 }, i64 11, ptr @__move_rttydesc_Book__Book_info }
+@__move_rttydesc_Book__Book_name = private unnamed_addr constant [76 x i8] c"0000000000000000000000000000000000000000000000000000000000000002::Book::Book"
+@0 = private unnamed_addr constant [4 x i8] c"isbn"
+@1 = private unnamed_addr constant [5 x i8] c"title"
+@2 = private unnamed_addr constant [6 x i8] c"author"
+@s_fld_array = private unnamed_addr constant [3 x { %__move_rt_type, i64, { ptr, i64 } }] [{ %__move_rt_type, i64, { ptr, i64 } } { %__move_rt_type { { ptr, i64 } { ptr @__move_rttydesc_u64_name, i64 3 }, i64 5, ptr @__move_rttydesc_NOTHING_info }, i64 0, { ptr, i64 } { ptr @0, i64 4 } }, { %__move_rt_type, i64, { ptr, i64 } } { %__move_rt_type { { ptr, i64 } { ptr @__move_rttydesc_vector_u8__name, i64 10 }, i64 10, ptr @__move_rttydesc_vector_u8__info }, i64 8, { ptr, i64 } { ptr @1, i64 5 } }, { %__move_rt_type, i64, { ptr, i64 } } { %__move_rt_type { { ptr, i64 } { ptr @__move_rttydesc_vector_u8__name, i64 10 }, i64 10, ptr @__move_rttydesc_vector_u8__info }, i64 32, { ptr, i64 } { ptr @2, i64 6 } }]
+@__move_rttydesc_Book__Book_info = private unnamed_addr constant { ptr, i64, i64, i64 } { ptr @s_fld_array, i64 3, i64 56, i64 8 }
+
+declare i32 @memcmp(ptr, ptr, i64)
+
+define void @"0000000000000001_CollectionExamp_unit_test_poiso_CwD2ejKPxw51q5"() {
+entry:
+  %local_0 = alloca i64, align 8
+  %local_1 = alloca { ptr, i64, i64 }, align 8
+  store i64 0, ptr %local_0, align 8
+  %loaded_alloca = load i64, ptr %local_0, align 8
+  %retval = call { ptr, i64, i64 } @move_native_unit_test_create_signers_for_testing(i64 %loaded_alloca)
+  store { ptr, i64, i64 } %retval, ptr %local_1, align 8
+  call void @move_rt_vec_destroy(ptr @__move_rttydesc_signer, ptr %local_1)
+  ret void
+}
+
+declare { ptr, i64, i64 } @move_native_unit_test_create_signers_for_testing(i64)
+
+define void @"0000000000000001_CollectionExamp_demonstrate_6uYYqSrymfRhcV"() {
+entry:
+  %newv29 = alloca { ptr, i64, i64 }, align 8
+  %newv27 = alloca { ptr, i64, i64 }, align 8
+  %newv19 = alloca { ptr, i64, i64 }, align 8
+  %newv17 = alloca { ptr, i64, i64 }, align 8
+  %newv10 = alloca { ptr, i64, i64 }, align 8
+  %newv = alloca { ptr, i64, i64 }, align 8
+  %local_0 = alloca %struct.Book__Book, align 8
+  %local_1 = alloca %struct.Book__Book, align 8
+  %local_2 = alloca %struct.CollectionExample__Collection_u64_, align 8
+  %local_3 = alloca %struct.CollectionExample__Collection_Book__Book_, align 8
+  %local_4 = alloca %struct.CollectionExample__Collection_vector_u8__, align 8
+  %local_5 = alloca %struct.CollectionExample__Collection_u64_, align 8
+  %local_6 = alloca ptr, align 8
+  %local_7 = alloca i64, align 8
+  %local_8 = alloca ptr, align 8
+  %local_9 = alloca i64, align 8
+  %local_10 = alloca ptr, align 8
+  %local_11 = alloca i64, align 8
+  %local_12 = alloca ptr, align 8
+  %local_13 = alloca %struct.CollectionExample__Collection_vector_u8__, align 8
+  %local_14 = alloca ptr, align 8
+  %local_15 = alloca { ptr, i64, i64 }, align 8
+  %local_16 = alloca ptr, align 8
+  %local_17 = alloca { ptr, i64, i64 }, align 8
+  %local_18 = alloca ptr, align 8
+  %local_19 = alloca %struct.CollectionExample__Collection_Book__Book_, align 8
+  %local_20 = alloca i64, align 8
+  %local_21 = alloca { ptr, i64, i64 }, align 8
+  %local_22 = alloca { ptr, i64, i64 }, align 8
+  %local_23 = alloca %struct.Book__Book, align 8
+  %local_24 = alloca ptr, align 8
+  %local_25 = alloca %struct.Book__Book, align 8
+  %local_26 = alloca i64, align 8
+  %local_27 = alloca { ptr, i64, i64 }, align 8
+  %local_28 = alloca { ptr, i64, i64 }, align 8
+  %local_29 = alloca %struct.Book__Book, align 8
+  %local_30 = alloca ptr, align 8
+  %local_31 = alloca %struct.Book__Book, align 8
+  %local_32 = alloca ptr, align 8
+  %retval = call %struct.CollectionExample__Collection_u64_ @"0000000000000001_CollectionExamp_new_collection_3rtcghdUb9r313"()
+  store %struct.CollectionExample__Collection_u64_ %retval, ptr %local_5, align 8
+  %load_store_tmp = load %struct.CollectionExample__Collection_u64_, ptr %local_5, align 8
+  store %struct.CollectionExample__Collection_u64_ %load_store_tmp, ptr %local_2, align 8
+  store ptr %local_2, ptr %local_6, align 8
+  store i64 1, ptr %local_7, align 8
+  %call_arg_0 = load ptr, ptr %local_6, align 8
+  %call_arg_1 = load i64, ptr %local_7, align 8
+  call void @"0000000000000001_CollectionExamp_add_item_Fd7UUzRf176zq4"(ptr %call_arg_0, i64 %call_arg_1)
+  store ptr %local_2, ptr %local_8, align 8
+  store i64 2, ptr %local_9, align 8
+  %call_arg_01 = load ptr, ptr %local_8, align 8
+  %call_arg_12 = load i64, ptr %local_9, align 8
+  call void @"0000000000000001_CollectionExamp_add_item_Fd7UUzRf176zq4"(ptr %call_arg_01, i64 %call_arg_12)
+  store ptr %local_2, ptr %local_10, align 8
+  store i64 3, ptr %local_11, align 8
+  %call_arg_03 = load ptr, ptr %local_10, align 8
+  %call_arg_14 = load i64, ptr %local_11, align 8
+  call void @"0000000000000001_CollectionExamp_add_item_Fd7UUzRf176zq4"(ptr %call_arg_03, i64 %call_arg_14)
+  store ptr %local_2, ptr %local_12, align 8
+  %call_arg_05 = load ptr, ptr %local_12, align 8
+  call void @"0000000000000001_CollectionExamp_print_collectio_2QbjxFe4tpVVDB"(ptr %call_arg_05)
+  %retval6 = call %struct.CollectionExample__Collection_vector_u8__ @"0000000000000001_CollectionExamp_new_collection_HjJWNJRLTLaXRM"()
+  store %struct.CollectionExample__Collection_vector_u8__ %retval6, ptr %local_13, align 8
+  %load_store_tmp7 = load %struct.CollectionExample__Collection_vector_u8__, ptr %local_13, align 8
+  store %struct.CollectionExample__Collection_vector_u8__ %load_store_tmp7, ptr %local_4, align 8
+  store ptr %local_4, ptr %local_14, align 8
+  %0 = call { ptr, i64, i64 } @move_rt_vec_empty(ptr @__move_rttydesc_u8)
+  store { ptr, i64, i64 } %0, ptr %newv, align 8
+  call void @move_rt_vec_copy(ptr @__move_rttydesc_u8, ptr %newv, ptr @vdesc)
+  %reload = load { ptr, i64, i64 }, ptr %newv, align 8
+  store { ptr, i64, i64 } %reload, ptr %local_15, align 8
+  %call_arg_08 = load ptr, ptr %local_14, align 8
+  %call_arg_19 = load { ptr, i64, i64 }, ptr %local_15, align 8
+  call void @"0000000000000001_CollectionExamp_add_item_DpZRo7mKZ8VRxZ"(ptr %call_arg_08, { ptr, i64, i64 } %call_arg_19)
+  store ptr %local_4, ptr %local_16, align 8
+  %1 = call { ptr, i64, i64 } @move_rt_vec_empty(ptr @__move_rttydesc_u8)
+  store { ptr, i64, i64 } %1, ptr %newv10, align 8
+  call void @move_rt_vec_copy(ptr @__move_rttydesc_u8, ptr %newv10, ptr @vdesc.2)
+  %reload11 = load { ptr, i64, i64 }, ptr %newv10, align 8
+  store { ptr, i64, i64 } %reload11, ptr %local_17, align 8
+  %call_arg_012 = load ptr, ptr %local_16, align 8
+  %call_arg_113 = load { ptr, i64, i64 }, ptr %local_17, align 8
+  call void @"0000000000000001_CollectionExamp_add_item_DpZRo7mKZ8VRxZ"(ptr %call_arg_012, { ptr, i64, i64 } %call_arg_113)
+  store ptr %local_4, ptr %local_18, align 8
+  %call_arg_014 = load ptr, ptr %local_18, align 8
+  call void @"0000000000000001_CollectionExamp_print_collectio_3juxqVQVFPnMgb"(ptr %call_arg_014)
+  %retval15 = call %struct.CollectionExample__Collection_Book__Book_ @"0000000000000001_CollectionExamp_new_collection_CMKUC1cWnPDoBZ"()
+  store %struct.CollectionExample__Collection_Book__Book_ %retval15, ptr %local_19, align 8
+  %load_store_tmp16 = load %struct.CollectionExample__Collection_Book__Book_, ptr %local_19, align 8
+  store %struct.CollectionExample__Collection_Book__Book_ %load_store_tmp16, ptr %local_3, align 8
+  store i64 9781234567890, ptr %local_20, align 8
+  %2 = call { ptr, i64, i64 } @move_rt_vec_empty(ptr @__move_rttydesc_u8)
+  store { ptr, i64, i64 } %2, ptr %newv17, align 8
+  call void @move_rt_vec_copy(ptr @__move_rttydesc_u8, ptr %newv17, ptr @vdesc.4)
+  %reload18 = load { ptr, i64, i64 }, ptr %newv17, align 8
+  store { ptr, i64, i64 } %reload18, ptr %local_21, align 8
+  %3 = call { ptr, i64, i64 } @move_rt_vec_empty(ptr @__move_rttydesc_u8)
+  store { ptr, i64, i64 } %3, ptr %newv19, align 8
+  call void @move_rt_vec_copy(ptr @__move_rttydesc_u8, ptr %newv19, ptr @vdesc.6)
+  %reload20 = load { ptr, i64, i64 }, ptr %newv19, align 8
+  store { ptr, i64, i64 } %reload20, ptr %local_22, align 8
+  %call_arg_021 = load i64, ptr %local_20, align 8
+  %call_arg_122 = load { ptr, i64, i64 }, ptr %local_21, align 8
+  %call_arg_2 = load { ptr, i64, i64 }, ptr %local_22, align 8
+  %retval23 = call %struct.Book__Book @"0000000000000002_Book_create_book_A6VjMTmdJ4WxYF"(i64 %call_arg_021, { ptr, i64, i64 } %call_arg_122, { ptr, i64, i64 } %call_arg_2)
+  store %struct.Book__Book %retval23, ptr %local_23, align 8
+  %load_store_tmp24 = load %struct.Book__Book, ptr %local_23, align 8
+  store %struct.Book__Book %load_store_tmp24, ptr %local_0, align 8
+  store ptr %local_3, ptr %local_24, align 8
+  %call_arg_025 = load ptr, ptr %local_24, align 8
+  %call_arg_126 = load %struct.Book__Book, ptr %local_0, align 8
+  call void @"0000000000000001_CollectionExamp_add_item_5nTpoTPQH59K2g"(ptr %call_arg_025, %struct.Book__Book %call_arg_126)
+  store i64 9780987654321, ptr %local_26, align 8
+  %4 = call { ptr, i64, i64 } @move_rt_vec_empty(ptr @__move_rttydesc_u8)
+  store { ptr, i64, i64 } %4, ptr %newv27, align 8
+  call void @move_rt_vec_copy(ptr @__move_rttydesc_u8, ptr %newv27, ptr @vdesc.8)
+  %reload28 = load { ptr, i64, i64 }, ptr %newv27, align 8
+  store { ptr, i64, i64 } %reload28, ptr %local_27, align 8
+  %5 = call { ptr, i64, i64 } @move_rt_vec_empty(ptr @__move_rttydesc_u8)
+  store { ptr, i64, i64 } %5, ptr %newv29, align 8
+  call void @move_rt_vec_copy(ptr @__move_rttydesc_u8, ptr %newv29, ptr @vdesc.10)
+  %reload30 = load { ptr, i64, i64 }, ptr %newv29, align 8
+  store { ptr, i64, i64 } %reload30, ptr %local_28, align 8
+  %call_arg_031 = load i64, ptr %local_26, align 8
+  %call_arg_132 = load { ptr, i64, i64 }, ptr %local_27, align 8
+  %call_arg_233 = load { ptr, i64, i64 }, ptr %local_28, align 8
+  %retval34 = call %struct.Book__Book @"0000000000000002_Book_create_book_A6VjMTmdJ4WxYF"(i64 %call_arg_031, { ptr, i64, i64 } %call_arg_132, { ptr, i64, i64 } %call_arg_233)
+  store %struct.Book__Book %retval34, ptr %local_29, align 8
+  %load_store_tmp35 = load %struct.Book__Book, ptr %local_29, align 8
+  store %struct.Book__Book %load_store_tmp35, ptr %local_1, align 8
+  store ptr %local_3, ptr %local_30, align 8
+  %call_arg_036 = load ptr, ptr %local_30, align 8
+  %call_arg_137 = load %struct.Book__Book, ptr %local_1, align 8
+  call void @"0000000000000001_CollectionExamp_add_item_5nTpoTPQH59K2g"(ptr %call_arg_036, %struct.Book__Book %call_arg_137)
+  store ptr %local_3, ptr %local_32, align 8
+  %call_arg_038 = load ptr, ptr %local_32, align 8
+  call void @"0000000000000001_CollectionExamp_print_collectio_E1X5FaEE2SWVjo"(ptr %call_arg_038)
+  ret void
+}
+
+define private %struct.CollectionExample__Collection_u64_ @"0000000000000001_CollectionExamp_new_collection_3rtcghdUb9r313"() {
+entry:
+  %local_0__items = alloca { ptr, i64, i64 }, align 8
+  %local_1 = alloca %struct.CollectionExample__Collection_u64_, align 8
+  %retval = call { ptr, i64, i64 } @move_native_vector_empty(ptr @__move_rttydesc_u64)
+  store { ptr, i64, i64 } %retval, ptr %local_0__items, align 8
+  %fv.0 = load { ptr, i64, i64 }, ptr %local_0__items, align 8
+  %insert_0 = insertvalue %struct.CollectionExample__Collection_u64_ undef, { ptr, i64, i64 } %fv.0, 0
+  store %struct.CollectionExample__Collection_u64_ %insert_0, ptr %local_1, align 8
+  %retval1 = load %struct.CollectionExample__Collection_u64_, ptr %local_1, align 8
+  ret %struct.CollectionExample__Collection_u64_ %retval1
+}
+
+declare { ptr, i64, i64 } @move_native_vector_empty(ptr)
+
+define private void @"0000000000000001_CollectionExamp_add_item_Fd7UUzRf176zq4"(ptr noalias nonnull %0, i64 %1) {
+entry:
+  %local_0 = alloca ptr, align 8
+  %local_1 = alloca i64, align 8
+  %local_2 = alloca ptr, align 8
+  %local_3__items = alloca ptr, align 8
+  %local_4 = alloca i64, align 8
+  store ptr %0, ptr %local_0, align 8
+  store i64 %1, ptr %local_1, align 8
+  %load_store_tmp = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp, ptr %local_2, align 8
+  %tmp = load ptr, ptr %local_2, align 8
+  %fld_ref = getelementptr inbounds %struct.CollectionExample__Collection_u64_, ptr %tmp, i32 0, i32 0
+  store ptr %fld_ref, ptr %local_3__items, align 8
+  %load_store_tmp1 = load i64, ptr %local_1, align 8
+  store i64 %load_store_tmp1, ptr %local_4, align 8
+  %loaded_alloca = load ptr, ptr %local_3__items, align 8
+  call void @move_native_vector_push_back(ptr @__move_rttydesc_u64, ptr %loaded_alloca, ptr %local_4)
+  ret void
+}
+
+declare void @move_native_vector_push_back(ptr, ptr, ptr)
+
+define private void @"0000000000000001_CollectionExamp_print_collectio_2QbjxFe4tpVVDB"(ptr nonnull readonly %0) {
+entry:
+  %local_0 = alloca ptr, align 8
+  %local_1 = alloca i64, align 8
+  %local_2 = alloca i64, align 8
+  %local_3 = alloca ptr, align 8
+  %local_4__items = alloca ptr, align 8
+  %local_5 = alloca i64, align 8
+  %local_6 = alloca ptr, align 8
+  %local_7 = alloca i64, align 8
+  %local_8 = alloca i64, align 8
+  %local_9 = alloca i64, align 8
+  %local_10 = alloca i1, align 1
+  %local_11 = alloca ptr, align 8
+  %local_12__items = alloca ptr, align 8
+  %local_13 = alloca i64, align 8
+  %local_14 = alloca ptr, align 8
+  %local_15 = alloca i64, align 8
+  %local_16 = alloca i64, align 8
+  %local_17 = alloca i64, align 8
+  %local_18 = alloca ptr, align 8
+  store ptr %0, ptr %local_0, align 8
+  %load_store_tmp = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp, ptr %local_3, align 8
+  %tmp = load ptr, ptr %local_3, align 8
+  %fld_ref = getelementptr inbounds %struct.CollectionExample__Collection_u64_, ptr %tmp, i32 0, i32 0
+  store ptr %fld_ref, ptr %local_4__items, align 8
+  %loaded_alloca = load ptr, ptr %local_4__items, align 8
+  %retval = call i64 @move_native_vector_length(ptr @__move_rttydesc_u64, ptr %loaded_alloca)
+  store i64 %retval, ptr %local_5, align 8
+  %load_store_tmp1 = load i64, ptr %local_5, align 8
+  store i64 %load_store_tmp1, ptr %local_2, align 8
+  store ptr %local_2, ptr %local_6, align 8
+  %loaded_alloca2 = load ptr, ptr %local_6, align 8
+  call void @move_native_debug_print(ptr @__move_rttydesc_u64, ptr %loaded_alloca2)
+  store i64 0, ptr %local_7, align 8
+  %load_store_tmp3 = load i64, ptr %local_7, align 8
+  store i64 %load_store_tmp3, ptr %local_1, align 8
+  br label %bb_3
+
+bb_3:                                             ; preds = %join_bb, %entry
+  %load_store_tmp4 = load i64, ptr %local_1, align 8
+  store i64 %load_store_tmp4, ptr %local_8, align 8
+  %load_store_tmp5 = load i64, ptr %local_2, align 8
+  store i64 %load_store_tmp5, ptr %local_9, align 8
+  %lt_src_0 = load i64, ptr %local_8, align 8
+  %lt_src_1 = load i64, ptr %local_9, align 8
+  %lt_dst = icmp ult i64 %lt_src_0, %lt_src_1
+  store i1 %lt_dst, ptr %local_10, align 1
+  %cnd = load i1, ptr %local_10, align 1
+  br i1 %cnd, label %bb_1, label %bb_0
+
+bb_1:                                             ; preds = %bb_3
+  br label %bb_2
+
+bb_2:                                             ; preds = %bb_1
+  %load_store_tmp6 = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp6, ptr %local_11, align 8
+  %tmp7 = load ptr, ptr %local_11, align 8
+  %fld_ref8 = getelementptr inbounds %struct.CollectionExample__Collection_u64_, ptr %tmp7, i32 0, i32 0
+  store ptr %fld_ref8, ptr %local_12__items, align 8
+  %load_store_tmp9 = load i64, ptr %local_1, align 8
+  store i64 %load_store_tmp9, ptr %local_13, align 8
+  %loaded_alloca10 = load ptr, ptr %local_12__items, align 8
+  %loaded_alloca11 = load i64, ptr %local_13, align 8
+  %retval12 = call ptr @move_native_vector_borrow(ptr @__move_rttydesc_u64, ptr %loaded_alloca10, i64 %loaded_alloca11)
+  store ptr %retval12, ptr %local_14, align 8
+  %loaded_alloca13 = load ptr, ptr %local_14, align 8
+  call void @move_native_debug_print(ptr @__move_rttydesc_u64, ptr %loaded_alloca13)
+  %load_store_tmp14 = load i64, ptr %local_1, align 8
+  store i64 %load_store_tmp14, ptr %local_15, align 8
+  store i64 1, ptr %local_16, align 8
+  %add_src_0 = load i64, ptr %local_15, align 8
+  %add_src_1 = load i64, ptr %local_16, align 8
+  %add_dst = add i64 %add_src_0, %add_src_1
+  %ovfcond = icmp ult i64 %add_dst, %add_src_0
+  br i1 %ovfcond, label %then_bb, label %join_bb
+
+then_bb:                                          ; preds = %bb_2
+  call void @move_rt_abort(i64 4017)
+  unreachable
+
+join_bb:                                          ; preds = %bb_2
+  store i64 %add_dst, ptr %local_17, align 8
+  %load_store_tmp15 = load i64, ptr %local_17, align 8
+  store i64 %load_store_tmp15, ptr %local_1, align 8
+  br label %bb_3
+
+bb_0:                                             ; preds = %bb_3
+  %load_store_tmp16 = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp16, ptr %local_18, align 8
+  ret void
+}
+
+declare i64 @move_native_vector_length(ptr, ptr)
+
+declare void @move_native_debug_print(ptr, ptr)
+
+declare ptr @move_native_vector_borrow(ptr, ptr, i64)
+
+define private %struct.CollectionExample__Collection_vector_u8__ @"0000000000000001_CollectionExamp_new_collection_HjJWNJRLTLaXRM"() {
+entry:
+  %local_0__items = alloca { ptr, i64, i64 }, align 8
+  %local_1 = alloca %struct.CollectionExample__Collection_vector_u8__, align 8
+  %retval = call { ptr, i64, i64 } @move_native_vector_empty(ptr @__move_rttydesc_vector_u8_)
+  store { ptr, i64, i64 } %retval, ptr %local_0__items, align 8
+  %fv.0 = load { ptr, i64, i64 }, ptr %local_0__items, align 8
+  %insert_0 = insertvalue %struct.CollectionExample__Collection_vector_u8__ undef, { ptr, i64, i64 } %fv.0, 0
+  store %struct.CollectionExample__Collection_vector_u8__ %insert_0, ptr %local_1, align 8
+  %retval1 = load %struct.CollectionExample__Collection_vector_u8__, ptr %local_1, align 8
+  ret %struct.CollectionExample__Collection_vector_u8__ %retval1
+}
+
+define private void @"0000000000000001_CollectionExamp_add_item_DpZRo7mKZ8VRxZ"(ptr noalias nonnull %0, { ptr, i64, i64 } %1) {
+entry:
+  %local_0 = alloca ptr, align 8
+  %local_1 = alloca { ptr, i64, i64 }, align 8
+  %local_2 = alloca ptr, align 8
+  %local_3__items = alloca ptr, align 8
+  %local_4 = alloca { ptr, i64, i64 }, align 8
+  store ptr %0, ptr %local_0, align 8
+  store { ptr, i64, i64 } %1, ptr %local_1, align 8
+  %load_store_tmp = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp, ptr %local_2, align 8
+  %tmp = load ptr, ptr %local_2, align 8
+  %fld_ref = getelementptr inbounds %struct.CollectionExample__Collection_vector_u8__, ptr %tmp, i32 0, i32 0
+  store ptr %fld_ref, ptr %local_3__items, align 8
+  %load_store_tmp1 = load { ptr, i64, i64 }, ptr %local_1, align 8
+  store { ptr, i64, i64 } %load_store_tmp1, ptr %local_4, align 8
+  %loaded_alloca = load ptr, ptr %local_3__items, align 8
+  call void @move_native_vector_push_back(ptr @__move_rttydesc_vector_u8_, ptr %loaded_alloca, ptr %local_4)
+  ret void
+}
+
+define private void @"0000000000000001_CollectionExamp_print_collectio_3juxqVQVFPnMgb"(ptr nonnull readonly %0) {
+entry:
+  %local_0 = alloca ptr, align 8
+  %local_1 = alloca i64, align 8
+  %local_2 = alloca i64, align 8
+  %local_3 = alloca ptr, align 8
+  %local_4__items = alloca ptr, align 8
+  %local_5 = alloca i64, align 8
+  %local_6 = alloca ptr, align 8
+  %local_7 = alloca i64, align 8
+  %local_8 = alloca i64, align 8
+  %local_9 = alloca i64, align 8
+  %local_10 = alloca i1, align 1
+  %local_11 = alloca ptr, align 8
+  %local_12__items = alloca ptr, align 8
+  %local_13 = alloca i64, align 8
+  %local_14 = alloca ptr, align 8
+  %local_15 = alloca i64, align 8
+  %local_16 = alloca i64, align 8
+  %local_17 = alloca i64, align 8
+  %local_18 = alloca ptr, align 8
+  store ptr %0, ptr %local_0, align 8
+  %load_store_tmp = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp, ptr %local_3, align 8
+  %tmp = load ptr, ptr %local_3, align 8
+  %fld_ref = getelementptr inbounds %struct.CollectionExample__Collection_vector_u8__, ptr %tmp, i32 0, i32 0
+  store ptr %fld_ref, ptr %local_4__items, align 8
+  %loaded_alloca = load ptr, ptr %local_4__items, align 8
+  %retval = call i64 @move_native_vector_length(ptr @__move_rttydesc_vector_u8_, ptr %loaded_alloca)
+  store i64 %retval, ptr %local_5, align 8
+  %load_store_tmp1 = load i64, ptr %local_5, align 8
+  store i64 %load_store_tmp1, ptr %local_2, align 8
+  store ptr %local_2, ptr %local_6, align 8
+  %loaded_alloca2 = load ptr, ptr %local_6, align 8
+  call void @move_native_debug_print(ptr @__move_rttydesc_u64, ptr %loaded_alloca2)
+  store i64 0, ptr %local_7, align 8
+  %load_store_tmp3 = load i64, ptr %local_7, align 8
+  store i64 %load_store_tmp3, ptr %local_1, align 8
+  br label %bb_3
+
+bb_3:                                             ; preds = %join_bb, %entry
+  %load_store_tmp4 = load i64, ptr %local_1, align 8
+  store i64 %load_store_tmp4, ptr %local_8, align 8
+  %load_store_tmp5 = load i64, ptr %local_2, align 8
+  store i64 %load_store_tmp5, ptr %local_9, align 8
+  %lt_src_0 = load i64, ptr %local_8, align 8
+  %lt_src_1 = load i64, ptr %local_9, align 8
+  %lt_dst = icmp ult i64 %lt_src_0, %lt_src_1
+  store i1 %lt_dst, ptr %local_10, align 1
+  %cnd = load i1, ptr %local_10, align 1
+  br i1 %cnd, label %bb_1, label %bb_0
+
+bb_1:                                             ; preds = %bb_3
+  br label %bb_2
+
+bb_2:                                             ; preds = %bb_1
+  %load_store_tmp6 = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp6, ptr %local_11, align 8
+  %tmp7 = load ptr, ptr %local_11, align 8
+  %fld_ref8 = getelementptr inbounds %struct.CollectionExample__Collection_vector_u8__, ptr %tmp7, i32 0, i32 0
+  store ptr %fld_ref8, ptr %local_12__items, align 8
+  %load_store_tmp9 = load i64, ptr %local_1, align 8
+  store i64 %load_store_tmp9, ptr %local_13, align 8
+  %loaded_alloca10 = load ptr, ptr %local_12__items, align 8
+  %loaded_alloca11 = load i64, ptr %local_13, align 8
+  %retval12 = call ptr @move_native_vector_borrow(ptr @__move_rttydesc_vector_u8_, ptr %loaded_alloca10, i64 %loaded_alloca11)
+  store ptr %retval12, ptr %local_14, align 8
+  %loaded_alloca13 = load ptr, ptr %local_14, align 8
+  call void @move_native_debug_print(ptr @__move_rttydesc_vector_u8_, ptr %loaded_alloca13)
+  %load_store_tmp14 = load i64, ptr %local_1, align 8
+  store i64 %load_store_tmp14, ptr %local_15, align 8
+  store i64 1, ptr %local_16, align 8
+  %add_src_0 = load i64, ptr %local_15, align 8
+  %add_src_1 = load i64, ptr %local_16, align 8
+  %add_dst = add i64 %add_src_0, %add_src_1
+  %ovfcond = icmp ult i64 %add_dst, %add_src_0
+  br i1 %ovfcond, label %then_bb, label %join_bb
+
+then_bb:                                          ; preds = %bb_2
+  call void @move_rt_abort(i64 4017)
+  unreachable
+
+join_bb:                                          ; preds = %bb_2
+  store i64 %add_dst, ptr %local_17, align 8
+  %load_store_tmp15 = load i64, ptr %local_17, align 8
+  store i64 %load_store_tmp15, ptr %local_1, align 8
+  br label %bb_3
+
+bb_0:                                             ; preds = %bb_3
+  %load_store_tmp16 = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp16, ptr %local_18, align 8
+  ret void
+}
+
+define private %struct.CollectionExample__Collection_Book__Book_ @"0000000000000001_CollectionExamp_new_collection_CMKUC1cWnPDoBZ"() {
+entry:
+  %local_0__items = alloca { ptr, i64, i64 }, align 8
+  %local_1 = alloca %struct.CollectionExample__Collection_Book__Book_, align 8
+  %retval = call { ptr, i64, i64 } @move_native_vector_empty(ptr @__move_rttydesc_Book__Book)
+  store { ptr, i64, i64 } %retval, ptr %local_0__items, align 8
+  %fv.0 = load { ptr, i64, i64 }, ptr %local_0__items, align 8
+  %insert_0 = insertvalue %struct.CollectionExample__Collection_Book__Book_ undef, { ptr, i64, i64 } %fv.0, 0
+  store %struct.CollectionExample__Collection_Book__Book_ %insert_0, ptr %local_1, align 8
+  %retval1 = load %struct.CollectionExample__Collection_Book__Book_, ptr %local_1, align 8
+  ret %struct.CollectionExample__Collection_Book__Book_ %retval1
+}
+
+declare %struct.Book__Book @"0000000000000002_Book_create_book_A6VjMTmdJ4WxYF"(i64, { ptr, i64, i64 }, { ptr, i64, i64 })
+
+define private void @"0000000000000001_CollectionExamp_add_item_5nTpoTPQH59K2g"(ptr noalias nonnull %0, %struct.Book__Book %1) {
+entry:
+  %local_0 = alloca ptr, align 8
+  %local_1 = alloca %struct.Book__Book, align 8
+  %local_2 = alloca ptr, align 8
+  %local_3__items = alloca ptr, align 8
+  %local_4 = alloca %struct.Book__Book, align 8
+  store ptr %0, ptr %local_0, align 8
+  store %struct.Book__Book %1, ptr %local_1, align 8
+  %load_store_tmp = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp, ptr %local_2, align 8
+  %tmp = load ptr, ptr %local_2, align 8
+  %fld_ref = getelementptr inbounds %struct.CollectionExample__Collection_Book__Book_, ptr %tmp, i32 0, i32 0
+  store ptr %fld_ref, ptr %local_3__items, align 8
+  %loaded_alloca = load ptr, ptr %local_3__items, align 8
+  call void @move_native_vector_push_back(ptr @__move_rttydesc_Book__Book, ptr %loaded_alloca, ptr %local_1)
+  ret void
+}
+
+define private void @"0000000000000001_CollectionExamp_print_collectio_E1X5FaEE2SWVjo"(ptr nonnull readonly %0) {
+entry:
+  %local_0 = alloca ptr, align 8
+  %local_1 = alloca i64, align 8
+  %local_2 = alloca i64, align 8
+  %local_3 = alloca ptr, align 8
+  %local_4__items = alloca ptr, align 8
+  %local_5 = alloca i64, align 8
+  %local_6 = alloca ptr, align 8
+  %local_7 = alloca i64, align 8
+  %local_8 = alloca i64, align 8
+  %local_9 = alloca i64, align 8
+  %local_10 = alloca i1, align 1
+  %local_11 = alloca ptr, align 8
+  %local_12__items = alloca ptr, align 8
+  %local_13 = alloca i64, align 8
+  %local_14 = alloca ptr, align 8
+  %local_15 = alloca i64, align 8
+  %local_16 = alloca i64, align 8
+  %local_17 = alloca i64, align 8
+  %local_18 = alloca ptr, align 8
+  store ptr %0, ptr %local_0, align 8
+  %load_store_tmp = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp, ptr %local_3, align 8
+  %tmp = load ptr, ptr %local_3, align 8
+  %fld_ref = getelementptr inbounds %struct.CollectionExample__Collection_Book__Book_, ptr %tmp, i32 0, i32 0
+  store ptr %fld_ref, ptr %local_4__items, align 8
+  %loaded_alloca = load ptr, ptr %local_4__items, align 8
+  %retval = call i64 @move_native_vector_length(ptr @__move_rttydesc_Book__Book, ptr %loaded_alloca)
+  store i64 %retval, ptr %local_5, align 8
+  %load_store_tmp1 = load i64, ptr %local_5, align 8
+  store i64 %load_store_tmp1, ptr %local_2, align 8
+  store ptr %local_2, ptr %local_6, align 8
+  %loaded_alloca2 = load ptr, ptr %local_6, align 8
+  call void @move_native_debug_print(ptr @__move_rttydesc_u64, ptr %loaded_alloca2)
+  store i64 0, ptr %local_7, align 8
+  %load_store_tmp3 = load i64, ptr %local_7, align 8
+  store i64 %load_store_tmp3, ptr %local_1, align 8
+  br label %bb_3
+
+bb_3:                                             ; preds = %join_bb, %entry
+  %load_store_tmp4 = load i64, ptr %local_1, align 8
+  store i64 %load_store_tmp4, ptr %local_8, align 8
+  %load_store_tmp5 = load i64, ptr %local_2, align 8
+  store i64 %load_store_tmp5, ptr %local_9, align 8
+  %lt_src_0 = load i64, ptr %local_8, align 8
+  %lt_src_1 = load i64, ptr %local_9, align 8
+  %lt_dst = icmp ult i64 %lt_src_0, %lt_src_1
+  store i1 %lt_dst, ptr %local_10, align 1
+  %cnd = load i1, ptr %local_10, align 1
+  br i1 %cnd, label %bb_1, label %bb_0
+
+bb_1:                                             ; preds = %bb_3
+  br label %bb_2
+
+bb_2:                                             ; preds = %bb_1
+  %load_store_tmp6 = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp6, ptr %local_11, align 8
+  %tmp7 = load ptr, ptr %local_11, align 8
+  %fld_ref8 = getelementptr inbounds %struct.CollectionExample__Collection_Book__Book_, ptr %tmp7, i32 0, i32 0
+  store ptr %fld_ref8, ptr %local_12__items, align 8
+  %load_store_tmp9 = load i64, ptr %local_1, align 8
+  store i64 %load_store_tmp9, ptr %local_13, align 8
+  %loaded_alloca10 = load ptr, ptr %local_12__items, align 8
+  %loaded_alloca11 = load i64, ptr %local_13, align 8
+  %retval12 = call ptr @move_native_vector_borrow(ptr @__move_rttydesc_Book__Book, ptr %loaded_alloca10, i64 %loaded_alloca11)
+  store ptr %retval12, ptr %local_14, align 8
+  %loaded_alloca13 = load ptr, ptr %local_14, align 8
+  call void @move_native_debug_print(ptr @__move_rttydesc_Book__Book, ptr %loaded_alloca13)
+  %load_store_tmp14 = load i64, ptr %local_1, align 8
+  store i64 %load_store_tmp14, ptr %local_15, align 8
+  store i64 1, ptr %local_16, align 8
+  %add_src_0 = load i64, ptr %local_15, align 8
+  %add_src_1 = load i64, ptr %local_16, align 8
+  %add_dst = add i64 %add_src_0, %add_src_1
+  %ovfcond = icmp ult i64 %add_dst, %add_src_0
+  br i1 %ovfcond, label %then_bb, label %join_bb
+
+then_bb:                                          ; preds = %bb_2
+  call void @move_rt_abort(i64 4017)
+  unreachable
+
+join_bb:                                          ; preds = %bb_2
+  store i64 %add_dst, ptr %local_17, align 8
+  %load_store_tmp15 = load i64, ptr %local_17, align 8
+  store i64 %load_store_tmp15, ptr %local_1, align 8
+  br label %bb_3
+
+bb_0:                                             ; preds = %bb_3
+  %load_store_tmp16 = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp16, ptr %local_18, align 8
+  ret void
+}
+
+declare void @move_rt_vec_destroy(ptr nonnull readonly dereferenceable(32), ptr)
+
+declare { ptr, i64, i64 } @move_rt_vec_empty(ptr nonnull readonly dereferenceable(32))
+
+declare void @move_rt_vec_copy(ptr nonnull readonly dereferenceable(32), ptr nonnull dereferenceable(24), ptr nonnull readonly dereferenceable(24))
+
+; Function Attrs: cold noreturn
+declare void @move_rt_abort(i64) #0
+
+attributes #0 = { cold noreturn }
