@@ -1,0 +1,103 @@
+; ModuleID = '0x2__Book'
+source_filename = "tests/failure-tests/CollectionExample.move"
+target datalayout = "e-m:e-p:64:64-i64:64-n32:64-S128"
+target triple = "sbf-solana-solana"
+
+%__move_rt_type = type { { ptr, i64 }, i64, ptr }
+%struct.Book__Book = type { i64, { ptr, i64, i64 }, { ptr, i64, i64 } }
+
+@__move_rttydesc_signer = private unnamed_addr constant %__move_rt_type { { ptr, i64 } { ptr @__move_rttydesc_signer_name, i64 6 }, i64 9, ptr @__move_rttydesc_NOTHING_info }
+@__move_rttydesc_signer_name = private unnamed_addr constant [6 x i8] c"signer"
+@__move_rttydesc_NOTHING_info = private unnamed_addr constant i8 -1
+
+declare i32 @memcmp(ptr, ptr, i64)
+
+define void @"0000000000000002_Book_unit_test_poiso_4mYQRWBR1UGANL"() {
+entry:
+  %local_0 = alloca i64, align 8
+  %local_1 = alloca { ptr, i64, i64 }, align 8
+  store i64 0, ptr %local_0, align 8
+  %loaded_alloca = load i64, ptr %local_0, align 8
+  %retval = call { ptr, i64, i64 } @move_native_unit_test_create_signers_for_testing(i64 %loaded_alloca)
+  store { ptr, i64, i64 } %retval, ptr %local_1, align 8
+  call void @move_rt_vec_destroy(ptr @__move_rttydesc_signer, ptr %local_1)
+  ret void
+}
+
+declare { ptr, i64, i64 } @move_native_unit_test_create_signers_for_testing(i64)
+
+define ptr @"0000000000000002_Book_author_A9dfRay29gm9Ve"(ptr nonnull readonly %0) {
+entry:
+  %local_0 = alloca ptr, align 8
+  %local_1 = alloca ptr, align 8
+  %local_2__author = alloca ptr, align 8
+  store ptr %0, ptr %local_0, align 8
+  %load_store_tmp = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp, ptr %local_1, align 8
+  %tmp = load ptr, ptr %local_1, align 8
+  %fld_ref = getelementptr inbounds %struct.Book__Book, ptr %tmp, i32 0, i32 2
+  store ptr %fld_ref, ptr %local_2__author, align 8
+  %retval = load ptr, ptr %local_2__author, align 8
+  ret ptr %retval
+}
+
+define %struct.Book__Book @"0000000000000002_Book_create_book_A6VjMTmdJ4WxYF"(i64 %0, { ptr, i64, i64 } %1, { ptr, i64, i64 } %2) {
+entry:
+  %local_0 = alloca i64, align 8
+  %local_1 = alloca { ptr, i64, i64 }, align 8
+  %local_2 = alloca { ptr, i64, i64 }, align 8
+  %local_3__isbn = alloca i64, align 8
+  %local_4__title = alloca { ptr, i64, i64 }, align 8
+  %local_5__author = alloca { ptr, i64, i64 }, align 8
+  %local_6 = alloca %struct.Book__Book, align 8
+  store i64 %0, ptr %local_0, align 8
+  store { ptr, i64, i64 } %1, ptr %local_1, align 8
+  store { ptr, i64, i64 } %2, ptr %local_2, align 8
+  %load_store_tmp = load i64, ptr %local_0, align 8
+  store i64 %load_store_tmp, ptr %local_3__isbn, align 8
+  %load_store_tmp1 = load { ptr, i64, i64 }, ptr %local_1, align 8
+  store { ptr, i64, i64 } %load_store_tmp1, ptr %local_4__title, align 8
+  %load_store_tmp2 = load { ptr, i64, i64 }, ptr %local_2, align 8
+  store { ptr, i64, i64 } %load_store_tmp2, ptr %local_5__author, align 8
+  %fv.0 = load i64, ptr %local_3__isbn, align 8
+  %fv.1 = load { ptr, i64, i64 }, ptr %local_4__title, align 8
+  %fv.2 = load { ptr, i64, i64 }, ptr %local_5__author, align 8
+  %insert_0 = insertvalue %struct.Book__Book undef, i64 %fv.0, 0
+  %insert_1 = insertvalue %struct.Book__Book %insert_0, { ptr, i64, i64 } %fv.1, 1
+  %insert_2 = insertvalue %struct.Book__Book %insert_1, { ptr, i64, i64 } %fv.2, 2
+  store %struct.Book__Book %insert_2, ptr %local_6, align 8
+  %retval = load %struct.Book__Book, ptr %local_6, align 8
+  ret %struct.Book__Book %retval
+}
+
+define ptr @"0000000000000002_Book_isbn_Dd152SvTsMuw2v"(ptr nonnull readonly %0) {
+entry:
+  %local_0 = alloca ptr, align 8
+  %local_1 = alloca ptr, align 8
+  %local_2__isbn = alloca ptr, align 8
+  store ptr %0, ptr %local_0, align 8
+  %load_store_tmp = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp, ptr %local_1, align 8
+  %tmp = load ptr, ptr %local_1, align 8
+  %fld_ref = getelementptr inbounds %struct.Book__Book, ptr %tmp, i32 0, i32 0
+  store ptr %fld_ref, ptr %local_2__isbn, align 8
+  %retval = load ptr, ptr %local_2__isbn, align 8
+  ret ptr %retval
+}
+
+define ptr @"0000000000000002_Book_title_ECBJiBpAkG2Sok"(ptr nonnull readonly %0) {
+entry:
+  %local_0 = alloca ptr, align 8
+  %local_1 = alloca ptr, align 8
+  %local_2__title = alloca ptr, align 8
+  store ptr %0, ptr %local_0, align 8
+  %load_store_tmp = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp, ptr %local_1, align 8
+  %tmp = load ptr, ptr %local_1, align 8
+  %fld_ref = getelementptr inbounds %struct.Book__Book, ptr %tmp, i32 0, i32 1
+  store ptr %fld_ref, ptr %local_2__title, align 8
+  %retval = load ptr, ptr %local_2__title, align 8
+  ret ptr %retval
+}
+
+declare void @move_rt_vec_destroy(ptr nonnull readonly dereferenceable(32), ptr)

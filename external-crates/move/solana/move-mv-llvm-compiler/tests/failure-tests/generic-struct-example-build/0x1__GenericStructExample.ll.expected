@@ -1,0 +1,204 @@
+; ModuleID = '0x1__GenericStructExample'
+source_filename = "tests/failure-tests/GenericStructExample.move"
+target datalayout = "e-m:e-p:64:64-i64:64-n32:64-S128"
+target triple = "sbf-solana-solana"
+
+%__move_rt_type = type { { ptr, i64 }, i64, ptr }
+%struct.GenericStruct__GenericStruct_InnerStruct__Inner_u8.u64__ = type { i64, %struct.InnerStruct__Inner_u8.u64_ }
+%struct.InnerStruct__Inner_u8.u64_ = type { i8, i64 }
+
+@__move_rttydesc_signer = private unnamed_addr constant %__move_rt_type { { ptr, i64 } { ptr @__move_rttydesc_signer_name, i64 6 }, i64 9, ptr @__move_rttydesc_NOTHING_info }
+@__move_rttydesc_signer_name = private unnamed_addr constant [6 x i8] c"signer"
+@__move_rttydesc_NOTHING_info = private unnamed_addr constant i8 -1
+@__move_rttydesc_u8 = private unnamed_addr constant %__move_rt_type { { ptr, i64 } { ptr @__move_rttydesc_u8_name, i64 2 }, i64 2, ptr @__move_rttydesc_NOTHING_info }
+@__move_rttydesc_u8_name = private unnamed_addr constant [2 x i8] c"u8"
+@__move_rttydesc_u64 = private unnamed_addr constant %__move_rt_type { { ptr, i64 } { ptr @__move_rttydesc_u64_name, i64 3 }, i64 5, ptr @__move_rttydesc_NOTHING_info }
+@__move_rttydesc_u64_name = private unnamed_addr constant [3 x i8] c"u64"
+
+declare i32 @memcmp(ptr, ptr, i64)
+
+define void @"0000000000000001_GenericStructEx_unit_test_poiso_9Rbx5DooiULcaB"() {
+entry:
+  %local_0 = alloca i64, align 8
+  %local_1 = alloca { ptr, i64, i64 }, align 8
+  store i64 0, ptr %local_0, align 8
+  %loaded_alloca = load i64, ptr %local_0, align 8
+  %retval = call { ptr, i64, i64 } @move_native_unit_test_create_signers_for_testing(i64 %loaded_alloca)
+  store { ptr, i64, i64 } %retval, ptr %local_1, align 8
+  call void @move_rt_vec_destroy(ptr @__move_rttydesc_signer, ptr %local_1)
+  ret void
+}
+
+declare { ptr, i64, i64 } @move_native_unit_test_create_signers_for_testing(i64)
+
+define void @"0000000000000001_GenericStructEx_test_Ag3gTQBSw6t1tT"() {
+entry:
+  %local_0 = alloca %struct.GenericStruct__GenericStruct_InnerStruct__Inner_u8.u64__, align 8
+  %local_1 = alloca %struct.InnerStruct__Inner_u8.u64_, align 8
+  %local_2 = alloca i8, align 1
+  %local_3 = alloca i64, align 8
+  %local_4 = alloca %struct.InnerStruct__Inner_u8.u64_, align 8
+  %local_5 = alloca ptr, align 8
+  %local_6 = alloca ptr, align 8
+  %local_7 = alloca ptr, align 8
+  %local_8 = alloca ptr, align 8
+  %local_9 = alloca ptr, align 8
+  %local_10 = alloca i64, align 8
+  %local_11 = alloca %struct.InnerStruct__Inner_u8.u64_, align 8
+  %local_12 = alloca %struct.GenericStruct__GenericStruct_InnerStruct__Inner_u8.u64__, align 8
+  %local_13 = alloca ptr, align 8
+  %local_14 = alloca ptr, align 8
+  store i8 1, ptr %local_2, align 1
+  store i64 100, ptr %local_3, align 8
+  %call_arg_0 = load i8, ptr %local_2, align 1
+  %call_arg_1 = load i64, ptr %local_3, align 8
+  %retval = call %struct.InnerStruct__Inner_u8.u64_ @"0000000000000004_InnerStruct_create_inner_DQGKSzLoTs8U11"(i8 %call_arg_0, i64 %call_arg_1)
+  store %struct.InnerStruct__Inner_u8.u64_ %retval, ptr %local_4, align 8
+  %load_store_tmp = load %struct.InnerStruct__Inner_u8.u64_, ptr %local_4, align 8
+  store %struct.InnerStruct__Inner_u8.u64_ %load_store_tmp, ptr %local_1, align 8
+  store ptr %local_1, ptr %local_5, align 8
+  %call_arg_01 = load ptr, ptr %local_5, align 8
+  %retval2 = call ptr @"0000000000000004_InnerStruct_get_inner_key_HWTB3emXmfsjhr"(ptr %call_arg_01)
+  store ptr %retval2, ptr %local_6, align 8
+  %loaded_alloca = load ptr, ptr %local_6, align 8
+  call void @move_native_debug_print(ptr @__move_rttydesc_u8, ptr %loaded_alloca)
+  store ptr %local_1, ptr %local_7, align 8
+  %call_arg_03 = load ptr, ptr %local_7, align 8
+  %retval4 = call ptr @"0000000000000004_InnerStruct_get_inner_val_2TqCtWEECy7swq"(ptr %call_arg_03)
+  store ptr %retval4, ptr %local_8, align 8
+  %loaded_alloca5 = load ptr, ptr %local_8, align 8
+  call void @move_native_debug_print(ptr @__move_rttydesc_u64, ptr %loaded_alloca5)
+  store ptr %local_1, ptr %local_9, align 8
+  %call_arg_06 = load ptr, ptr %local_9, align 8
+  call void @"0000000000000004_InnerStruct_print_Epw7mkZohyZ8zu"(ptr %call_arg_06)
+  store i64 42, ptr %local_10, align 8
+  %call_arg_07 = load i64, ptr %local_10, align 8
+  %call_arg_18 = load %struct.InnerStruct__Inner_u8.u64_, ptr %local_1, align 8
+  %retval9 = call %struct.GenericStruct__GenericStruct_InnerStruct__Inner_u8.u64__ @"0000000000000003_GenericStruct_create_generic__A6txmsaxeSKhTG"(i64 %call_arg_07, %struct.InnerStruct__Inner_u8.u64_ %call_arg_18)
+  store %struct.GenericStruct__GenericStruct_InnerStruct__Inner_u8.u64__ %retval9, ptr %local_12, align 8
+  %load_store_tmp10 = load %struct.GenericStruct__GenericStruct_InnerStruct__Inner_u8.u64__, ptr %local_12, align 8
+  store %struct.GenericStruct__GenericStruct_InnerStruct__Inner_u8.u64__ %load_store_tmp10, ptr %local_0, align 8
+  store ptr %local_0, ptr %local_13, align 8
+  %call_arg_011 = load ptr, ptr %local_13, align 8
+  %retval12 = call ptr @"0000000000000003_GenericStruct_inner_Gi2M8vPHYJSoc7"(ptr %call_arg_011)
+  store ptr %retval12, ptr %local_14, align 8
+  %call_arg_013 = load ptr, ptr %local_14, align 8
+  call void @"0000000000000004_InnerStruct_print_Epw7mkZohyZ8zu"(ptr %call_arg_013)
+  ret void
+}
+
+define private %struct.InnerStruct__Inner_u8.u64_ @"0000000000000004_InnerStruct_create_inner_DQGKSzLoTs8U11"(i8 %0, i64 %1) {
+entry:
+  %local_0 = alloca i8, align 1
+  %local_1 = alloca i64, align 8
+  %local_2__key = alloca i8, align 1
+  %local_3__val = alloca i64, align 8
+  %local_4 = alloca %struct.InnerStruct__Inner_u8.u64_, align 8
+  store i8 %0, ptr %local_0, align 1
+  store i64 %1, ptr %local_1, align 8
+  %load_store_tmp = load i8, ptr %local_0, align 1
+  store i8 %load_store_tmp, ptr %local_2__key, align 1
+  %load_store_tmp1 = load i64, ptr %local_1, align 8
+  store i64 %load_store_tmp1, ptr %local_3__val, align 8
+  %fv.0 = load i8, ptr %local_2__key, align 1
+  %fv.1 = load i64, ptr %local_3__val, align 8
+  %insert_0 = insertvalue %struct.InnerStruct__Inner_u8.u64_ undef, i8 %fv.0, 0
+  %insert_1 = insertvalue %struct.InnerStruct__Inner_u8.u64_ %insert_0, i64 %fv.1, 1
+  store %struct.InnerStruct__Inner_u8.u64_ %insert_1, ptr %local_4, align 8
+  %retval = load %struct.InnerStruct__Inner_u8.u64_, ptr %local_4, align 8
+  ret %struct.InnerStruct__Inner_u8.u64_ %retval
+}
+
+define private ptr @"0000000000000004_InnerStruct_get_inner_key_HWTB3emXmfsjhr"(ptr nonnull readonly %0) {
+entry:
+  %local_0 = alloca ptr, align 8
+  %local_1 = alloca ptr, align 8
+  %local_2__key = alloca ptr, align 8
+  store ptr %0, ptr %local_0, align 8
+  %load_store_tmp = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp, ptr %local_1, align 8
+  %tmp = load ptr, ptr %local_1, align 8
+  %fld_ref = getelementptr inbounds %struct.InnerStruct__Inner_u8.u64_, ptr %tmp, i32 0, i32 0
+  store ptr %fld_ref, ptr %local_2__key, align 8
+  %retval = load ptr, ptr %local_2__key, align 8
+  ret ptr %retval
+}
+
+declare void @move_native_debug_print(ptr, ptr)
+
+define private ptr @"0000000000000004_InnerStruct_get_inner_val_2TqCtWEECy7swq"(ptr nonnull readonly %0) {
+entry:
+  %local_0 = alloca ptr, align 8
+  %local_1 = alloca ptr, align 8
+  %local_2__val = alloca ptr, align 8
+  store ptr %0, ptr %local_0, align 8
+  %load_store_tmp = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp, ptr %local_1, align 8
+  %tmp = load ptr, ptr %local_1, align 8
+  %fld_ref = getelementptr inbounds %struct.InnerStruct__Inner_u8.u64_, ptr %tmp, i32 0, i32 1
+  store ptr %fld_ref, ptr %local_2__val, align 8
+  %retval = load ptr, ptr %local_2__val, align 8
+  ret ptr %retval
+}
+
+define private void @"0000000000000004_InnerStruct_print_Epw7mkZohyZ8zu"(ptr nonnull readonly %0) {
+entry:
+  %local_0 = alloca ptr, align 8
+  %local_1 = alloca ptr, align 8
+  %local_2__key = alloca ptr, align 8
+  %local_3 = alloca ptr, align 8
+  %local_4__val = alloca ptr, align 8
+  store ptr %0, ptr %local_0, align 8
+  %load_store_tmp = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp, ptr %local_1, align 8
+  %tmp = load ptr, ptr %local_1, align 8
+  %fld_ref = getelementptr inbounds %struct.InnerStruct__Inner_u8.u64_, ptr %tmp, i32 0, i32 0
+  store ptr %fld_ref, ptr %local_2__key, align 8
+  %loaded_alloca = load ptr, ptr %local_2__key, align 8
+  call void @move_native_debug_print(ptr @__move_rttydesc_u8, ptr %loaded_alloca)
+  %load_store_tmp1 = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp1, ptr %local_3, align 8
+  %tmp2 = load ptr, ptr %local_3, align 8
+  %fld_ref3 = getelementptr inbounds %struct.InnerStruct__Inner_u8.u64_, ptr %tmp2, i32 0, i32 1
+  store ptr %fld_ref3, ptr %local_4__val, align 8
+  %loaded_alloca4 = load ptr, ptr %local_4__val, align 8
+  call void @move_native_debug_print(ptr @__move_rttydesc_u64, ptr %loaded_alloca4)
+  ret void
+}
+
+define private %struct.GenericStruct__GenericStruct_InnerStruct__Inner_u8.u64__ @"0000000000000003_GenericStruct_create_generic__A6txmsaxeSKhTG"(i64 %0, %struct.InnerStruct__Inner_u8.u64_ %1) {
+entry:
+  %local_0 = alloca i64, align 8
+  %local_1 = alloca %struct.InnerStruct__Inner_u8.u64_, align 8
+  %local_2__id = alloca i64, align 8
+  %local_3__s = alloca %struct.InnerStruct__Inner_u8.u64_, align 8
+  %local_4 = alloca %struct.GenericStruct__GenericStruct_InnerStruct__Inner_u8.u64__, align 8
+  store i64 %0, ptr %local_0, align 8
+  store %struct.InnerStruct__Inner_u8.u64_ %1, ptr %local_1, align 8
+  %load_store_tmp = load i64, ptr %local_0, align 8
+  store i64 %load_store_tmp, ptr %local_2__id, align 8
+  %fv.0 = load i64, ptr %local_2__id, align 8
+  %fv.1 = load %struct.InnerStruct__Inner_u8.u64_, ptr %local_1, align 8
+  %insert_0 = insertvalue %struct.GenericStruct__GenericStruct_InnerStruct__Inner_u8.u64__ undef, i64 %fv.0, 0
+  %insert_1 = insertvalue %struct.GenericStruct__GenericStruct_InnerStruct__Inner_u8.u64__ %insert_0, %struct.InnerStruct__Inner_u8.u64_ %fv.1, 1
+  store %struct.GenericStruct__GenericStruct_InnerStruct__Inner_u8.u64__ %insert_1, ptr %local_4, align 8
+  %retval = load %struct.GenericStruct__GenericStruct_InnerStruct__Inner_u8.u64__, ptr %local_4, align 8
+  ret %struct.GenericStruct__GenericStruct_InnerStruct__Inner_u8.u64__ %retval
+}
+
+define private ptr @"0000000000000003_GenericStruct_inner_Gi2M8vPHYJSoc7"(ptr nonnull readonly %0) {
+entry:
+  %local_0 = alloca ptr, align 8
+  %local_1 = alloca ptr, align 8
+  %local_2__s = alloca ptr, align 8
+  store ptr %0, ptr %local_0, align 8
+  %load_store_tmp = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp, ptr %local_1, align 8
+  %tmp = load ptr, ptr %local_1, align 8
+  %fld_ref = getelementptr inbounds %struct.GenericStruct__GenericStruct_InnerStruct__Inner_u8.u64__, ptr %tmp, i32 0, i32 1
+  store ptr %fld_ref, ptr %local_2__s, align 8
+  %retval = load ptr, ptr %local_2__s, align 8
+  ret ptr %retval
+}
+
+declare void @move_rt_vec_destroy(ptr nonnull readonly dereferenceable(32), ptr)
