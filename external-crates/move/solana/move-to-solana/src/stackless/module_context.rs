@@ -25,7 +25,8 @@ use move_stackless_bytecode::{
     stackless_bytecode_generator::StacklessBytecodeGenerator,
 };
 use std::{
-    any::Any, collections::{BTreeMap, BTreeSet, VecDeque}, iter
+    collections::{BTreeMap, BTreeSet, VecDeque},
+    iter,
 };
 
 pub struct ModuleContext<'mm: 'up, 'up> {
@@ -176,7 +177,6 @@ impl<'mm: 'up, 'up> ModuleContext<'mm, 'up> {
         // StructDefInstantiation will induce a concrete expansion once fields are visited later.
         let this_module_data = &g_env.module_data[m_env.get_id().to_usize()];
         let cm = &this_module_data.module;
-        let mut likely_generic_struct: Vec<(mm::StructEnv, Vec<mty::Type>)> = vec![];
         for s_def_inst in cm.struct_instantiations() {
             let tys = m_env.get_type_actuals(Some(s_def_inst.type_parameters));
             let s_env = m_env.get_struct_by_def_idx(s_def_inst.def);
@@ -185,9 +185,6 @@ impl<'mm: 'up, 'up> ModuleContext<'mm, 'up> {
             if create_opaque_named_struct(&s_env, &tys) {
                 debug!(target: "structs", "Module {mod_name} created opaque named structure for {s_name}, case struct");
                 all_structs.push((s_env, tys));
-            } else {
-                debug!(target: "structs", "Module {mod_name} cannot create opaque named structure for likely generic {s_name}, case struct");
-                likely_generic_struct.push((s_env, tys));
             }
         }
 
@@ -240,9 +237,6 @@ impl<'mm: 'up, 'up> ModuleContext<'mm, 'up> {
         // The target layout is convenient in that the user field offsets [0..N) in the input IR
         // map one-to-one to values used to index into the LLVM struct with getelementptr,
         // extractvalue, and insertvalue.
-
-        //all_structs.append(&mut likely_generic_struct);
-
         for (s_env, tyvec) in &all_structs {
             self.translate_struct(s_env, tyvec);
 
@@ -705,7 +699,7 @@ impl<'mm: 'up, 'up> ModuleContext<'mm, 'up> {
                     None
                 }
             }
-            Type::Struct(m_id, _sid, ttys) => {
+            Type::Struct(_mid, _sid, ttys) => {
                 // First substitute any generic type parameters occuring in _tys.
                 let new_sty = mty.instantiate(tyvec);
                 let mod_name = &self.env.get_full_name_str();
@@ -726,9 +720,6 @@ impl<'mm: 'up, 'up> ModuleContext<'mm, 'up> {
                 // Then process the (possibly type-substituted) struct.
                 if let Type::Struct(declaring_module_id, struct_id, tys) = new_sty {
                     let global_env = &self.env.env;
-
-                    assert!(declaring_module_id == *m_id, "Temporary check that module is the same");
-
                     let struct_env = global_env
                         .get_module(declaring_module_id)
                         .into_struct(struct_id);
@@ -741,13 +732,7 @@ impl<'mm: 'up, 'up> ModuleContext<'mm, 'up> {
                     if let Some(stype) = self.llvm_cx.named_struct_type(&struct_name) {
                         Some(stype.as_any_type())
                     } else {
-                        debug!(target: "structs", "struct type for '{}' not found", &struct_name);
-                        let ll_name = struct_env.ll_struct_name_from_raw_name(&tys);
-                        dbg!(&struct_name);
-                        dbg!(&ll_name);
-
-                        assert!(!struct_env.get_type_parameters().is_empty());
-
+                        debug!(target: "structs", "struct type for '{}' not found, cretae it now", &struct_name);
                         let stype = self.translate_struct(&struct_env, &tys);
                         Some(stype.as_any_type())
                     }
