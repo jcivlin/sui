@@ -25,8 +25,7 @@ use move_stackless_bytecode::{
     stackless_bytecode_generator::StacklessBytecodeGenerator,
 };
 use std::{
-    collections::{BTreeMap, BTreeSet, VecDeque},
-    iter,
+    any::Any, collections::{BTreeMap, BTreeSet, VecDeque}, iter
 };
 
 pub struct ModuleContext<'mm: 'up, 'up> {
@@ -85,6 +84,7 @@ impl<'mm: 'up, 'up> ModuleContext<'mm, 'up> {
     fn declare_structs(&mut self) {
         use move_binary_format::{access::ModuleAccess, views::StructHandleView};
         let m_env = &self.env;
+        let mod_name = &m_env.get_full_name_str();
         let g_env = &m_env.env;
 
         // Collect all the externally defined structures (transitively) used within this module.
@@ -135,7 +135,7 @@ impl<'mm: 'up, 'up> ModuleContext<'mm, 'up> {
         all_structs.append(&mut local_structs);
 
         debug!(target: "structs",
-               "Combined list of all structs{}",
+               "Module {mod_name} combined list of all structs{}",
                self.dump_all_structs(&all_structs, false),
         );
 
@@ -176,11 +176,18 @@ impl<'mm: 'up, 'up> ModuleContext<'mm, 'up> {
         // StructDefInstantiation will induce a concrete expansion once fields are visited later.
         let this_module_data = &g_env.module_data[m_env.get_id().to_usize()];
         let cm = &this_module_data.module;
+        let mut likely_generic_struct: Vec<(mm::StructEnv, Vec<mty::Type>)> = vec![];
         for s_def_inst in cm.struct_instantiations() {
             let tys = m_env.get_type_actuals(Some(s_def_inst.type_parameters));
             let s_env = m_env.get_struct_by_def_idx(s_def_inst.def);
+            let s_name = s_env.ll_struct_name_from_raw_name(&tys);
+            debug!(target: "structs", "Module {mod_name} trying to create opaque named structure for {s_name}, case struct");
             if create_opaque_named_struct(&s_env, &tys) {
+                debug!(target: "structs", "Module {mod_name} created opaque named structure for {s_name}, case struct");
                 all_structs.push((s_env, tys));
+            } else {
+                debug!(target: "structs", "Module {mod_name} cannot create opaque named structure for likely generic {s_name}, case struct");
+                likely_generic_struct.push((s_env, tys));
             }
         }
 
@@ -189,7 +196,10 @@ impl<'mm: 'up, 'up> ModuleContext<'mm, 'up> {
             let fld_handle = cm.field_handle_at(f_inst.handle);
             let tys = m_env.get_type_actuals(Some(f_inst.type_parameters));
             let s_env = m_env.get_struct_by_def_idx(fld_handle.owner);
+            let s_name = s_env.ll_struct_name_from_raw_name(&tys);
+            debug!(target: "structs", "Module {mod_name} trying to create opaque named structure for {s_name}, case field");
             if create_opaque_named_struct(&s_env, &tys) {
+                debug!(target: "structs", "Module {mod_name} created opaque named structure for {s_name}, case field");
                 all_structs.push((s_env, tys));
             }
         }
@@ -214,7 +224,7 @@ impl<'mm: 'up, 'up> ModuleContext<'mm, 'up> {
         }
 
         debug!(target: "structs",
-               "Structs after visiting the signature table{}",
+               "Module {mod_name} structs after visiting the signature table{}",
                self.dump_all_structs(&all_structs, false),
         );
 
@@ -230,6 +240,9 @@ impl<'mm: 'up, 'up> ModuleContext<'mm, 'up> {
         // The target layout is convenient in that the user field offsets [0..N) in the input IR
         // map one-to-one to values used to index into the LLVM struct with getelementptr,
         // extractvalue, and insertvalue.
+
+        //all_structs.append(&mut likely_generic_struct);
+
         for (s_env, tyvec) in &all_structs {
             self.translate_struct(s_env, tyvec);
 
@@ -239,7 +252,7 @@ impl<'mm: 'up, 'up> ModuleContext<'mm, 'up> {
 
         debug!(
             target: "structs",
-            "Structs after translation{}",
+            "Module {mod_name} structs after translation{}",
             self.dump_all_structs(&all_structs, true),
         );
     }
@@ -250,23 +263,30 @@ impl<'mm: 'up, 'up> ModuleContext<'mm, 'up> {
     // are mixed in the nesting of type parameters,
     // e.g. Struct_A<Vector<Struct_B<T>>>, where T is substituted by a
     // concrete type, won't be declared correctly.
-    fn translate_struct(&self, s_env: &mm::StructEnv<'mm>, tyvec: &[mty::Type]) {
+    fn translate_struct(&self, s_env: &mm::StructEnv<'mm>, tyvec: &[mty::Type]) -> crate::stackless::StructType {
         let ll_name = s_env.ll_struct_name_from_raw_name(tyvec);
-        debug!(target: "structs", "translating struct {}", s_env.struct_raw_type_name(tyvec));
+        debug!(target: "structs", "translating struct {}", ll_name);
+        let g_env = self.env.env;
         // Visit each field in this struct, collecting field types.
         let mut ll_field_tys = Vec::with_capacity(s_env.get_field_count() + 1);
         for fld_env in s_env.get_fields() {
             debug!(target: "structs", "translating field {:?}", &fld_env.get_type());
-            if let mty::Type::Struct(_m, _s, _tys) = &fld_env.get_type() {
+            if let mty::Type::Struct(mod_id, s_id, tys) = &fld_env.get_type() {
+                let mod_env = &g_env.get_module(*mod_id);
+                let struct_env = mod_env.get_struct(*s_id);
+                let struct_name = struct_env.ll_struct_name_from_raw_name(&tys);
+                debug!(target: "debug", "translate_struct: case 1 param is a structure {struct_name}");
                 let new_sty = &fld_env.get_type().instantiate(tyvec);
                 if let mty::Type::Struct(m, s, tys) = new_sty {
-                    let g_env = &self.env.env;
                     let s_env = g_env.get_module(*m).into_struct(*s);
                     self.translate_struct(&s_env, tys);
                 }
             } else if let mty::Type::TypeParameter(x) = &fld_env.get_type() {
                 if let mty::Type::Struct(m, s, tys) = &tyvec[*x as usize] {
-                    let g_env = &self.env.env;
+                    let mod_env = &g_env.get_module(*m);
+                    let struct_env = mod_env.get_struct(*s);
+                    let struct_name = struct_env.ll_struct_name_from_raw_name(&tys);
+                    debug!(target: "debug", "translate_struct: case 2 param is a structure {struct_name}");
                     let s_env = g_env.get_module(*m).into_struct(*s);
                     self.translate_struct(&s_env, tys);
                 }
@@ -289,6 +309,10 @@ impl<'mm: 'up, 'up> ModuleContext<'mm, 'up> {
             .named_struct_type(&ll_name)
             .expect("no struct type");
         ll_sty.set_struct_body(&ll_field_tys);
+        let dump = ll_sty.dump_to_string();
+        debug!(target: "debug", "Dumping translated structure {ll_name} {}", dump);
+        assert!(!self.llvm_cx.named_struct_type(&ll_name).is_none(), "At this point struct {} should already get some type", &ll_name);
+        ll_sty
     }
 
     // This method is used to declare structs found when function
@@ -681,31 +705,51 @@ impl<'mm: 'up, 'up> ModuleContext<'mm, 'up> {
                     None
                 }
             }
-            Type::Struct(_mid, _sid, _tys) => {
+            Type::Struct(m_id, _sid, ttys) => {
                 // First substitute any generic type parameters occuring in _tys.
                 let new_sty = mty.instantiate(tyvec);
+                let mod_name = &self.env.get_full_name_str();
+                if Self::is_generic_struct(ttys) {
+                    debug!(target: "debug", "Module {mod_name} generic struct {:#?}", new_sty);
+                }
 
                 debug!(
                     target: "structs",
-                    "Instantiated struct {}",
+                    "Instantiated struct {}, Type {:#?}",
                     new_sty
                         .get_struct(self.env.env)
                         .unwrap()
                         .0
-                        .struct_raw_type_name(tyvec)
+                        .struct_raw_type_name(tyvec),
+                    new_sty
                 );
                 // Then process the (possibly type-substituted) struct.
                 if let Type::Struct(declaring_module_id, struct_id, tys) = new_sty {
                     let global_env = &self.env.env;
+
+                    assert!(declaring_module_id == *m_id, "Temporary check that module is the same");
+
                     let struct_env = global_env
                         .get_module(declaring_module_id)
                         .into_struct(struct_id);
+                    let decl_mod_name = global_env.get_module(declaring_module_id).get_full_name_str();
                     let struct_name = struct_env.ll_struct_name_from_raw_name(&tys);
+                    debug!(target: "debug", "Module {decl_mod_name} structure {struct_name}");
+                    if Self::is_generic_struct(&tys) {
+                        debug!(target: "debug", "Module {decl_mod_name} generic struct {:#?}", struct_name);
+                    }
                     if let Some(stype) = self.llvm_cx.named_struct_type(&struct_name) {
                         Some(stype.as_any_type())
                     } else {
                         debug!(target: "structs", "struct type for '{}' not found", &struct_name);
-                        None
+                        let ll_name = struct_env.ll_struct_name_from_raw_name(&tys);
+                        dbg!(&struct_name);
+                        dbg!(&ll_name);
+
+                        assert!(!struct_env.get_type_parameters().is_empty());
+
+                        let stype = self.translate_struct(&struct_env, &tys);
+                        Some(stype.as_any_type())
                     }
                 } else {
                     unreachable!("")

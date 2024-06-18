@@ -128,7 +128,8 @@ impl<'up> GlobalContext<'up> {
         #[cfg(feature = "solana")]
         assert!(account_address::AccountAddress::ZERO.len() == 32);
 
-        debug!(target: "globalenv", "{:#?}", env);
+        // Note: printing global env genarates huge output, but you can do it with the following line
+        // debug!(target: "globalenv", "{:#?}", env);
 
         GlobalContext {
             env,
@@ -275,13 +276,15 @@ impl<'mm, 'up> FunctionContext<'mm, 'up> {
             move_stackless_bytecode::function_target::FunctionTarget::new(&self.env, &fn_data);
         debug!(target: "sbc", "\n{}", func_target);
 
+        // The following code will collect nodes, but they are not used currently and printing is reserved.
         let g_env = self.get_global_env();
-        let map_node_to_type: BTreeMap<mm::NodeId, move_model::ty::Type> = g_env
+        let _map_node_to_type: BTreeMap<mm::NodeId, move_model::ty::Type> = g_env
             .get_nodes()
             .iter()
             .map(|nd| (*nd, g_env.get_node_type(*nd)))
             .collect();
-        debug!(target: "nodes", "\n{:#?}", &map_node_to_type);
+        // NOTE. Printing nodes is reserved for the future development of compiler
+        // debug!(target: "nodes", "\n{:#?}", &_map_node_to_type);
 
         // Write the control flow graph to a .dot file for viewing.
         let options = &self.module_cx.options;
@@ -334,15 +337,18 @@ impl<'mm, 'up> FunctionContext<'mm, 'up> {
         // Collect some local names from various structure field references.
         let mut named_locals = BTreeMap::new();
         self.collect_local_names(&fn_data, &mut named_locals);
+        debug!(target: "debug", "named_locals {:#?}", named_locals);
 
         // Declare all the locals as allocas
         {
             for (i, mty) in fn_data.local_types.iter().enumerate() {
-                let llty = self.module_cx.to_llvm_type(mty, self.type_params).unwrap();
                 let mut name = format!("local_{}", i);
+                debug!(target: "debug", "mty {i}");
                 if let Some(s) = named_locals.get(&i) {
                     name = format!("local_{}__{}", i, s);
+                    debug!(target: "debug", "name {name}");
                 }
+                let llty = self.module_cx.to_llvm_type(mty, self.type_params).unwrap();
                 let llval = self.module_cx.llvm_builder.build_alloca(llty, &name);
                 self.locals.push(Local {
                     mty: mty.instantiate(self.type_params),
@@ -643,6 +649,8 @@ impl<'mm, 'up> FunctionContext<'mm, 'up> {
         //
         for instr in &fn_data.code {
             use sbc::Operation;
+            debug!(target: "functions", "Bytecode {:#?}", &instr);
+
             if let sbc::Bytecode::Call(_, dst, op, src, None) = instr {
                 match op {
                     Operation::BorrowField(mod_id, struct_id, _types, offset) => {
@@ -665,6 +673,13 @@ impl<'mm, 'up> FunctionContext<'mm, 'up> {
                             .into_struct(*struct_id);
                         assert_eq!(dst.len(), 1);
                         assert_eq!(src.len(), senv.get_field_count());
+                        let s_full_name = senv.get_full_name_str();
+                        debug!(target: "functions", "Pack: mod and struct names {s_full_name} ");
+                        for (ii, field) in senv.get_fields().enumerate() {
+                            let f_name = field.get_name().display(senv.symbol_pool()).to_string();
+                            let ty = field.get_type();
+                            debug!(target: "functions", "Pack: {ii} field {f_name} type {:#?}", ty);
+                        }
                         for (offset, tmp_idx) in src.iter().enumerate() {
                             let fenv = senv.get_field_by_offset(offset);
                             let name = fenv.get_name().display(senv.symbol_pool()).to_string();
