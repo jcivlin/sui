@@ -128,8 +128,8 @@ impl<'up> GlobalContext<'up> {
         #[cfg(feature = "solana")]
         assert!(account_address::AccountAddress::ZERO.len() == 32);
 
-        // Note: printing global env genarates huge output, but you can do it with the following line
-        // debug!(target: "globalenv", "{:#?}", env);
+        // Note: printing global env genarates huge output
+        debug!(target: "globalenv", "{:#?}", env);
 
         GlobalContext {
             env,
@@ -276,15 +276,14 @@ impl<'mm, 'up> FunctionContext<'mm, 'up> {
             move_stackless_bytecode::function_target::FunctionTarget::new(&self.env, &fn_data);
         debug!(target: "sbc", "\n{}", func_target);
 
-        // The following code will collect nodes, but they are not used currently and printing is reserved.
+        // The following code will collect nodes, they are not used currently and but we print them for debugging.
         let g_env = self.get_global_env();
         let _map_node_to_type: BTreeMap<mm::NodeId, move_model::ty::Type> = g_env
             .get_nodes()
             .iter()
             .map(|nd| (*nd, g_env.get_node_type(*nd)))
             .collect();
-        // NOTE. Printing nodes is reserved for the future development of compiler
-        // debug!(target: "nodes", "\n{:#?}", &_map_node_to_type);
+        debug!(target: "nodes", "\n{:#?}", &_map_node_to_type);
 
         // Write the control flow graph to a .dot file for viewing.
         let options = &self.module_cx.options;
@@ -673,13 +672,9 @@ impl<'mm, 'up> FunctionContext<'mm, 'up> {
                             .into_struct(*struct_id);
                         assert_eq!(dst.len(), 1);
                         assert_eq!(src.len(), senv.get_field_count());
-                        let s_full_name = senv.get_full_name_str();
-                        debug!(target: "functions", "Pack: mod and struct names {s_full_name} ");
-                        for (ii, field) in senv.get_fields().enumerate() {
-                            let f_name = field.get_name().display(senv.symbol_pool()).to_string();
-                            let ty = field.get_type();
-                            debug!(target: "functions", "Pack: {ii} field {f_name} type {:#?}", ty);
-                        }
+
+                        debug!(target: "functions", "Pack: {}", senv.print_to_string());
+
                         for (offset, tmp_idx) in src.iter().enumerate() {
                             let fenv = senv.get_field_by_offset(offset);
                             let name = fenv.get_name().display(senv.symbol_pool()).to_string();
@@ -1630,6 +1625,41 @@ impl<'mm, 'up> FunctionContext<'mm, 'up> {
         _instr: &sbc::Bytecode,
     ) {
         let types = mty::Type::instantiate_vec(types.to_vec(), self.type_params);
+        for mty in &types {
+            match mty {
+                move_model::ty::Type::Struct(_mid, _sid, _ttys) => {
+                    let new_sty = mty.instantiate(&types);
+                    let mod_name = &self.env.get_full_name_str();
+                    let global_env = self.get_global_env();
+                    let s_name = new_sty
+                        .get_struct(global_env)
+                        .unwrap()
+                        .0
+                        .struct_raw_type_name(&types);
+                    debug!(target: "debug", "translate_native_fun_call module {mod_name} struct {s_name}");
+
+                    if let mty::Type::Struct(declaring_module_id, struct_id, tys) = new_sty {
+                        let struct_env = global_env
+                            .get_module(declaring_module_id)
+                            .into_struct(struct_id);
+                        let decl_mod_name = global_env.get_module(declaring_module_id).get_full_name_str();
+                        let struct_name = struct_env.ll_struct_name_from_raw_name(&tys);
+                        debug!(target: "debug", "Module {decl_mod_name} structure {struct_name}");
+                        // if let Some(stype) = self.llvm_cx.named_struct_type(&struct_name) {
+                        //     Some(stype.as_any_type())
+                        // } else {
+                        //     debug!(target: "structs", "struct type for '{}' not found, cretae it now", &struct_name);
+                        //     let stype = self.translate_struct(&struct_env, &tys);
+                        //     Some(stype.as_any_type())
+                        // }
+                        self.module_cx.translate_struct(&struct_env, &tys);
+                    } else {
+                        unreachable!("")
+                    }
+                }
+                _ => {}
+            }
+        }
         let typarams = self.module_cx.get_rttydesc_ptrs(&types);
 
         let dst_locals = dst.iter().map(|i| &self.locals[*i]).collect::<Vec<_>>();

@@ -271,6 +271,7 @@ impl<'mm, 'up> EntrypointGenerator<'mm, 'up> {
             self.llvm_builder.build_cond_br(condition, then_bb, else_bb);
             self.llvm_builder.position_at_end(then_bb);
             let fn_name = fun.llvm_symbol_name(&[]);
+            debug!(target: "debug", "add_entries: function {fn_name}");
             let fn_decls = self.fn_decls.borrow();
             let ll_fun = fn_decls.get(&fn_name).unwrap();
             let params = self.emit_entry_arguments(

@@ -257,7 +257,7 @@ impl<'mm: 'up, 'up> ModuleContext<'mm, 'up> {
     // are mixed in the nesting of type parameters,
     // e.g. Struct_A<Vector<Struct_B<T>>>, where T is substituted by a
     // concrete type, won't be declared correctly.
-    fn translate_struct(&self, s_env: &mm::StructEnv<'mm>, tyvec: &[mty::Type]) -> crate::stackless::StructType {
+    pub fn translate_struct(&self, s_env: &mm::StructEnv<'mm>, tyvec: &[mty::Type]) -> crate::stackless::StructType {
         let ll_name = s_env.ll_struct_name_from_raw_name(tyvec);
         debug!(target: "structs", "translating struct {}", ll_name);
         let g_env = self.env.env;
