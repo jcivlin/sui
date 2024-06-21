@@ -353,7 +353,11 @@ impl<'mm, 'up> RttyContext<'mm, 'up> {
             _ => unreachable!(),
         };
 
-        debug!(target: "debug", "s_env {:#?}", &s_env);
+        if let Some(f_env) = &self.f_env {
+            let f_name = f_env.get_full_name_str();
+            debug!(target: "rtty", "f_name {:#?}", &f_name);
+        }
+
 
         // Look up the corresponding LLVM struct type constructed earlier in the translation.
         // Use it to collect field offsets, struct size, and struct alignment as computed by LLVM.

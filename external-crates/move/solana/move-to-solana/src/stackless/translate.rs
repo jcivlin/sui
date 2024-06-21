@@ -128,6 +128,7 @@ impl<'up> GlobalContext<'up> {
         #[cfg(feature = "solana")]
         assert!(account_address::AccountAddress::ZERO.len() == 32);
 
+        // Note: printing global env genarates huge output
         debug!(target: "globalenv", "{:#?}", env);
 
         GlobalContext {
@@ -275,13 +276,14 @@ impl<'mm, 'up> FunctionContext<'mm, 'up> {
             move_stackless_bytecode::function_target::FunctionTarget::new(&self.env, &fn_data);
         debug!(target: "sbc", "\n{}", func_target);
 
+        // The following code will collect nodes, they are not used currently and but we print them for debugging.
         let g_env = self.get_global_env();
-        let map_node_to_type: BTreeMap<mm::NodeId, move_model::ty::Type> = g_env
+        let _map_node_to_type: BTreeMap<mm::NodeId, move_model::ty::Type> = g_env
             .get_nodes()
             .iter()
             .map(|nd| (*nd, g_env.get_node_type(*nd)))
             .collect();
-        debug!(target: "nodes", "\n{:#?}", &map_node_to_type);
+        debug!(target: "nodes", "\n{:#?}", &_map_node_to_type);
 
         // Write the control flow graph to a .dot file for viewing.
         let options = &self.module_cx.options;
@@ -334,15 +336,18 @@ impl<'mm, 'up> FunctionContext<'mm, 'up> {
         // Collect some local names from various structure field references.
         let mut named_locals = BTreeMap::new();
         self.collect_local_names(&fn_data, &mut named_locals);
+        debug!(target: "debug", "named_locals {:#?}", named_locals);
 
         // Declare all the locals as allocas
         {
             for (i, mty) in fn_data.local_types.iter().enumerate() {
-                let llty = self.module_cx.to_llvm_type(mty, self.type_params).unwrap();
                 let mut name = format!("local_{}", i);
+                debug!(target: "debug", "mty {i}");
                 if let Some(s) = named_locals.get(&i) {
                     name = format!("local_{}__{}", i, s);
+                    debug!(target: "debug", "name {name}");
                 }
+                let llty = self.module_cx.to_llvm_type(mty, self.type_params).unwrap();
                 let llval = self.module_cx.llvm_builder.build_alloca(llty, &name);
                 self.locals.push(Local {
                     mty: mty.instantiate(self.type_params),
@@ -643,6 +648,8 @@ impl<'mm, 'up> FunctionContext<'mm, 'up> {
         //
         for instr in &fn_data.code {
             use sbc::Operation;
+            debug!(target: "functions", "Bytecode {:#?}", &instr);
+
             if let sbc::Bytecode::Call(_, dst, op, src, None) = instr {
                 match op {
                     Operation::BorrowField(mod_id, struct_id, _types, offset) => {
@@ -665,6 +672,9 @@ impl<'mm, 'up> FunctionContext<'mm, 'up> {
                             .into_struct(*struct_id);
                         assert_eq!(dst.len(), 1);
                         assert_eq!(src.len(), senv.get_field_count());
+
+                        debug!(target: "functions", "Pack: {}", senv.print_to_string());
+
                         for (offset, tmp_idx) in src.iter().enumerate() {
                             let fenv = senv.get_field_by_offset(offset);
                             let name = fenv.get_name().display(senv.symbol_pool()).to_string();
@@ -1615,6 +1625,37 @@ impl<'mm, 'up> FunctionContext<'mm, 'up> {
         _instr: &sbc::Bytecode,
     ) {
         let types = mty::Type::instantiate_vec(types.to_vec(), self.type_params);
+        for mty in &types {
+            match mty {
+                move_model::ty::Type::Struct(_mid, _sid, _ttys) => {
+                    let new_sty = mty.instantiate(&types);
+                    let mod_name = &self.env.get_full_name_str();
+                    let global_env = self.get_global_env();
+                    let s_name = new_sty
+                        .get_struct(global_env)
+                        .unwrap()
+                        .0
+                        .struct_raw_type_name(&types);
+                    debug!(target: "debug", "translate_native_fun_call module {mod_name} struct {s_name}");
+
+                    if let mty::Type::Struct(declaring_module_id, struct_id, tys) = new_sty {
+                        let struct_env = global_env
+                            .get_module(declaring_module_id)
+                            .into_struct(struct_id);
+                        let st_decl_name = global_env.get_module(declaring_module_id).get_full_name_str();
+                        let struct_name = struct_env.ll_struct_name_from_raw_name(&tys);
+                        debug!(target: "debug", "translate_native_fun_call: module {mod_name} structure {struct_name} declared as {st_decl_name}");
+                        if let None = self.module_cx.llvm_cx.named_struct_type(&struct_name) {
+                            debug!(target: "structs", "struct type for '{}' not found, cretae it now", &struct_name);
+                            self.module_cx.translate_struct(&struct_env, &tys);
+                        }
+                    } else {
+                        unreachable!("")
+                    }
+                }
+                _ => {}
+            }
+        }
         let typarams = self.module_cx.get_rttydesc_ptrs(&types);
 
         let dst_locals = dst.iter().map(|i| &self.locals[*i]).collect::<Vec<_>>();

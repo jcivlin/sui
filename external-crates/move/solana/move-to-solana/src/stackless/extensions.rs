@@ -195,6 +195,14 @@ pub impl TypeExt for mty::Type {
             Type::Reference(_, _) => 64,
             Type::Vector(_) => 8 * MOVE_UNTYPED_VEC_DESC_SIZE,
             Type::Struct(_m, _s, ref tys) => tys.iter().fold(0, |acc, ty| acc + ty.get_bitwidth()),
+            Type::Fun(v, _r) => {
+                let mut sz: u64 = 64; // Adding size of pointer in Box, it should be the same as for Reference
+                for i in 0..v.len() {
+                    sz += v[i].get_bitwidth();
+                }
+                sz
+            }
+            Type::TypeParameter(_x) => 16,
             _ => {
                 todo!("{self:?}")
             }
