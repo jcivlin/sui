@@ -202,6 +202,7 @@ pub impl TypeExt for mty::Type {
                 }
                 sz
             }
+            Type::TypeParameter(_x) => 16,
             _ => {
                 todo!("{self:?}")
             }

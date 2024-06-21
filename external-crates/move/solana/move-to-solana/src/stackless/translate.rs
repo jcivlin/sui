@@ -1642,17 +1642,13 @@ impl<'mm, 'up> FunctionContext<'mm, 'up> {
                         let struct_env = global_env
                             .get_module(declaring_module_id)
                             .into_struct(struct_id);
-                        let decl_mod_name = global_env.get_module(declaring_module_id).get_full_name_str();
+                        let st_decl_name = global_env.get_module(declaring_module_id).get_full_name_str();
                         let struct_name = struct_env.ll_struct_name_from_raw_name(&tys);
-                        debug!(target: "debug", "Module {decl_mod_name} structure {struct_name}");
-                        // if let Some(stype) = self.llvm_cx.named_struct_type(&struct_name) {
-                        //     Some(stype.as_any_type())
-                        // } else {
-                        //     debug!(target: "structs", "struct type for '{}' not found, cretae it now", &struct_name);
-                        //     let stype = self.translate_struct(&struct_env, &tys);
-                        //     Some(stype.as_any_type())
-                        // }
-                        self.module_cx.translate_struct(&struct_env, &tys);
+                        debug!(target: "debug", "translate_native_fun_call: module {mod_name} structure {struct_name} declared as {st_decl_name}");
+                        if let None = self.module_cx.llvm_cx.named_struct_type(&struct_name) {
+                            debug!(target: "structs", "struct type for '{}' not found, cretae it now", &struct_name);
+                            self.module_cx.translate_struct(&struct_env, &tys);
+                        }
                     } else {
                         unreachable!("")
                     }
