@@ -128,8 +128,8 @@ impl<'up> GlobalContext<'up> {
         #[cfg(feature = "solana")]
         assert!(account_address::AccountAddress::ZERO.len() == 32);
 
-        // Note: printing global env genarates huge output, but you can do it with the following line
-        // debug!(target: "globalenv", "{:#?}", env);
+        // Note: printing global env genarates huge output
+        debug!(target: "globalenv", "{:#?}", env);
 
         GlobalContext {
             env,
@@ -283,8 +283,7 @@ impl<'mm, 'up> FunctionContext<'mm, 'up> {
             .iter()
             .map(|nd| (*nd, g_env.get_node_type(*nd)))
             .collect();
-        // NOTE. Printing nodes is reserved for the future development of compiler
-        // debug!(target: "nodes", "\n{:#?}", &_map_node_to_type);
+        debug!(target: "nodes", "\n{:#?}", &_map_node_to_type);
 
         // Write the control flow graph to a .dot file for viewing.
         let options = &self.module_cx.options;
@@ -673,13 +672,9 @@ impl<'mm, 'up> FunctionContext<'mm, 'up> {
                             .into_struct(*struct_id);
                         assert_eq!(dst.len(), 1);
                         assert_eq!(src.len(), senv.get_field_count());
-                        let s_full_name = senv.get_full_name_str();
-                        debug!(target: "functions", "Pack: mod and struct names {s_full_name} ");
-                        for (ii, field) in senv.get_fields().enumerate() {
-                            let f_name = field.get_name().display(senv.symbol_pool()).to_string();
-                            let ty = field.get_type();
-                            debug!(target: "functions", "Pack: {ii} field {f_name} type {:#?}", ty);
-                        }
+
+                        debug!(target: "functions", "Pack: {}", senv.print_to_string());
+
                         for (offset, tmp_idx) in src.iter().enumerate() {
                             let fenv = senv.get_field_by_offset(offset);
                             let name = fenv.get_name().display(senv.symbol_pool()).to_string();

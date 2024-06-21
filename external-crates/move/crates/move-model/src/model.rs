@@ -2259,6 +2259,20 @@ impl<'env> StructEnv<'env> {
             }
         }
     }
+
+    /// Printing fields of the structure to a String
+    pub fn print_to_string(&self) -> String {
+        let mut out = String::new();
+        let s_full_name = self.get_full_name_str();
+        out.push_str(&format!("Struct {}\n", s_full_name));
+        for (ii, field) in self.get_fields().enumerate() {
+            let f_name = field.get_name().display(self.symbol_pool()).to_string();
+            let ty = field.get_type();
+            out.push_str(&format!(" field {ii} name \'{}\' type {:#?}\n", f_name, ty));
+       }
+       out
+    }
+
 }
 
 // =================================================================================================
