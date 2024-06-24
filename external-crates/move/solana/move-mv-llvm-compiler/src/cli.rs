@@ -23,6 +23,11 @@ pub struct Args {
     #[clap(long = "skip-basic-blocks")]
     pub skip_basic_blocks: bool,
 
+    /// Skip undefined entry function.
+    // This allows to compile Sui pacages with generic entry point functions
+    #[clap(long = "skip-undefined-entries")]
+    pub skip_undefined_entries: bool,
+
     /// Treat input file as a script (default is to treat file as a module)
     #[clap(short = 's', long = "script")]
     pub is_script: bool,
