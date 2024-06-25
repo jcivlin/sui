@@ -278,12 +278,12 @@ impl<'mm, 'up> FunctionContext<'mm, 'up> {
 
         // The following code will collect nodes, they are not used currently and but we print them for debugging.
         let g_env = self.get_global_env();
-        let _map_node_to_type: BTreeMap<mm::NodeId, move_model::ty::Type> = g_env
+        let map_node_to_type: BTreeMap<mm::NodeId, move_model::ty::Type> = g_env
             .get_nodes()
             .iter()
             .map(|nd| (*nd, g_env.get_node_type(*nd)))
             .collect();
-        debug!(target: "nodes", "\n{:#?}", &_map_node_to_type);
+        debug!(target: "nodes", "\n{:#?}", &map_node_to_type);
 
         // Write the control flow graph to a .dot file for viewing.
         let options = &self.module_cx.options;

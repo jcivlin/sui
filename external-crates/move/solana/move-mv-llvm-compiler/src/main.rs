@@ -216,6 +216,7 @@ fn main() -> anyhow::Result<()> {
             bytecode_file_path: args.bytecode_file_path,
             opt_level: args.opt_level.clone(),
             print_assembly: args.print_assembly,
+            skip_undefined_entries: args.skip_undefined_entries,
             ..MoveToSolanaOptions::default()
         };
 

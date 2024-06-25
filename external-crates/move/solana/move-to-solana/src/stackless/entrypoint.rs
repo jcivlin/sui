@@ -9,7 +9,7 @@ use crate::{
         RtCall,
     },
 };
-use log::{debug, log_enabled, Level};
+use log::{debug, log_enabled, Level, warn};
 use move_core_types::u256::U256;
 use move_model::{model as mm, ty as mty};
 use move_native::shared::MOVE_UNTYPED_VEC_DESC_SIZE;
@@ -273,6 +273,16 @@ impl<'mm, 'up> EntrypointGenerator<'mm, 'up> {
             let fn_name = fun.llvm_symbol_name(&[]);
             debug!(target: "debug", "add_entries: function {fn_name}");
             let fn_decls = self.fn_decls.borrow();
+
+            // This function may be declared as generic and then it has not been instantiated,
+            // skip it if corresponding option allows.
+            // Note. This allows to compile Sui packages that use parametrized entry points,
+            // we however in Solana Move do not allow such things.
+            if fn_decls.get(&fn_name).is_none() && self.options.skip_undefined_entries  {
+                warn!("Entry point function {fn_name} will not be compiled since it is generic and remains undefined");
+                continue;
+            }
+
             let ll_fun = fn_decls.get(&fn_name).unwrap();
             let params = self.emit_entry_arguments(
                 mod_cx,
