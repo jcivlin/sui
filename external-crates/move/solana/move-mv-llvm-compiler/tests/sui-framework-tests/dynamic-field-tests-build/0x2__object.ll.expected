@@ -1,0 +1,405 @@
+; ModuleID = '0x2__object'
+source_filename = "../../../../../../crates/sui-framework/packages/sui-framework/sources/object.move"
+target datalayout = "e-m:e-p:64:64-i64:64-n32:64-S128"
+target triple = "sbf-solana-solana"
+
+%__move_rt_type = type { { ptr, i64 }, i64, ptr }
+%struct.object__UID = type { %struct.object__ID }
+%struct.object__ID = type { [32 x i8] }
+
+@__move_rttydesc_signer = private unnamed_addr constant %__move_rt_type { { ptr, i64 } { ptr @__move_rttydesc_signer_name, i64 6 }, i64 9, ptr @__move_rttydesc_NOTHING_info }
+@__move_rttydesc_signer_name = private unnamed_addr constant [6 x i8] c"signer"
+@__move_rttydesc_NOTHING_info = private unnamed_addr constant i8 -1
+@acct.addr = internal constant [32 x i8] c"\07\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00"
+@acct.addr.1 = internal constant [32 x i8] c"\06\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00"
+@__move_rttydesc_address = private unnamed_addr constant %__move_rt_type { { ptr, i64 } { ptr @__move_rttydesc_address_name, i64 7 }, i64 8, ptr @__move_rttydesc_NOTHING_info }
+@__move_rttydesc_address_name = private unnamed_addr constant [7 x i8] c"address"
+@acct.addr.2 = internal constant [32 x i8] c"\08\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00"
+@acct.addr.3 = internal constant [32 x i8] c"\03\04\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00"
+@acct.addr.4 = internal constant [32 x i8] zeroinitializer
+@acct.addr.5 = internal constant [32 x i8] c"\05\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00"
+
+declare i32 @memcmp(ptr, ptr, i64)
+
+define void @"0000000000000002_object_unit_test_poiso_5SyvRaN4E7bHSz"() {
+entry:
+  %local_0 = alloca i64, align 8
+  %local_1 = alloca { ptr, i64, i64 }, align 8
+  store i64 0, ptr %local_0, align 8
+  %loaded_alloca = load i64, ptr %local_0, align 8
+  %retval = call { ptr, i64, i64 } @move_native_unit_test_create_signers_for_testing(i64 %loaded_alloca)
+  store { ptr, i64, i64 } %retval, ptr %local_1, align 8
+  call void @move_rt_vec_destroy(ptr @__move_rttydesc_signer, ptr %local_1)
+  ret void
+}
+
+declare { ptr, i64, i64 } @move_native_unit_test_create_signers_for_testing(i64)
+
+define %struct.object__UID @"0000000000000002_object_new_7YpMdzkAYZzs1W"(ptr noalias nonnull %0) {
+entry:
+  %local_0 = alloca ptr, align 8
+  %local_1 = alloca ptr, align 8
+  %local_2__bytes = alloca [32 x i8], align 1
+  %local_3__id = alloca %struct.object__ID, align 8
+  %local_4 = alloca %struct.object__UID, align 8
+  store ptr %0, ptr %local_0, align 8
+  %load_store_tmp = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp, ptr %local_1, align 8
+  %call_arg_0 = load ptr, ptr %local_1, align 8
+  %retval = call [32 x i8] @"0000000000000002_tx_context_fresh_object_ad_CuVbwfzuRgXUZg"(ptr %call_arg_0)
+  store [32 x i8] %retval, ptr %local_2__bytes, align 1
+  %fv.0 = load [32 x i8], ptr %local_2__bytes, align 1
+  %insert_0 = insertvalue %struct.object__ID undef, [32 x i8] %fv.0, 0
+  store %struct.object__ID %insert_0, ptr %local_3__id, align 1
+  %fv.01 = load %struct.object__ID, ptr %local_3__id, align 1
+  %insert_02 = insertvalue %struct.object__UID undef, %struct.object__ID %fv.01, 0
+  store %struct.object__UID %insert_02, ptr %local_4, align 1
+  %retval3 = load %struct.object__UID, ptr %local_4, align 1
+  ret %struct.object__UID %retval3
+}
+
+declare [32 x i8] @"0000000000000002_tx_context_fresh_object_ad_CuVbwfzuRgXUZg"(ptr noalias nonnull)
+
+define %struct.object__UID @"0000000000000002_object_authenticator_s_77Cns4r7AbvjqA"() {
+entry:
+  %local_0__bytes = alloca [32 x i8], align 1
+  %local_1__id = alloca %struct.object__ID, align 8
+  %local_2 = alloca %struct.object__UID, align 8
+  %0 = load [32 x i8], ptr @acct.addr, align 1
+  store [32 x i8] %0, ptr %local_0__bytes, align 1
+  %fv.0 = load [32 x i8], ptr %local_0__bytes, align 1
+  %insert_0 = insertvalue %struct.object__ID undef, [32 x i8] %fv.0, 0
+  store %struct.object__ID %insert_0, ptr %local_1__id, align 1
+  %fv.01 = load %struct.object__ID, ptr %local_1__id, align 1
+  %insert_02 = insertvalue %struct.object__UID undef, %struct.object__ID %fv.01, 0
+  store %struct.object__UID %insert_02, ptr %local_2, align 1
+  %retval = load %struct.object__UID, ptr %local_2, align 1
+  ret %struct.object__UID %retval
+}
+
+declare ptr @move_native_object_borrow_uid(ptr, ptr)
+
+define %struct.object__UID @"0000000000000002_object_clock_CYm9uWutPZMceP"() {
+entry:
+  %local_0__bytes = alloca [32 x i8], align 1
+  %local_1__id = alloca %struct.object__ID, align 8
+  %local_2 = alloca %struct.object__UID, align 8
+  %0 = load [32 x i8], ptr @acct.addr.1, align 1
+  store [32 x i8] %0, ptr %local_0__bytes, align 1
+  %fv.0 = load [32 x i8], ptr %local_0__bytes, align 1
+  %insert_0 = insertvalue %struct.object__ID undef, [32 x i8] %fv.0, 0
+  store %struct.object__ID %insert_0, ptr %local_1__id, align 1
+  %fv.01 = load %struct.object__ID, ptr %local_1__id, align 1
+  %insert_02 = insertvalue %struct.object__UID undef, %struct.object__ID %fv.01, 0
+  store %struct.object__UID %insert_02, ptr %local_2, align 1
+  %retval = load %struct.object__UID, ptr %local_2, align 1
+  ret %struct.object__UID %retval
+}
+
+define void @"0000000000000002_object_delete_FRdqjKo1rYipTy"(%struct.object__UID %0) {
+entry:
+  %local_0 = alloca %struct.object__UID, align 8
+  %local_1 = alloca %struct.object__UID, align 8
+  %local_2__id = alloca %struct.object__ID, align 8
+  %local_3__bytes = alloca [32 x i8], align 1
+  store %struct.object__UID %0, ptr %local_0, align 1
+  %srcval = load %struct.object__UID, ptr %local_0, align 1
+  %ext_0 = extractvalue %struct.object__UID %srcval, 0
+  store %struct.object__ID %ext_0, ptr %local_2__id, align 1
+  %srcval1 = load %struct.object__ID, ptr %local_2__id, align 1
+  %ext_02 = extractvalue %struct.object__ID %srcval1, 0
+  store [32 x i8] %ext_02, ptr %local_3__bytes, align 1
+  %loaded_alloca = load [32 x i8], ptr %local_3__bytes, align 1
+  call void @move_native_object_delete_impl([32 x i8] %loaded_alloca)
+  ret void
+}
+
+declare void @move_native_object_delete_impl([32 x i8])
+
+define %struct.object__ID @"0000000000000002_object_id_from_address_28xsvrBSPPtPjh"([32 x i8] %0) {
+entry:
+  %local_0 = alloca [32 x i8], align 1
+  %local_1__bytes = alloca [32 x i8], align 1
+  %local_2 = alloca %struct.object__ID, align 8
+  store [32 x i8] %0, ptr %local_0, align 1
+  %fv.0 = load [32 x i8], ptr %local_0, align 1
+  %insert_0 = insertvalue %struct.object__ID undef, [32 x i8] %fv.0, 0
+  store %struct.object__ID %insert_0, ptr %local_2, align 1
+  %retval = load %struct.object__ID, ptr %local_2, align 1
+  ret %struct.object__ID %retval
+}
+
+define %struct.object__ID @"0000000000000002_object_id_from_bytes_9rNB5s5Mg8zLsz"({ ptr, i64, i64 } %0) {
+entry:
+  %local_0 = alloca { ptr, i64, i64 }, align 8
+  %local_1 = alloca { ptr, i64, i64 }, align 8
+  %local_2 = alloca [32 x i8], align 1
+  %local_3 = alloca %struct.object__ID, align 8
+  store { ptr, i64, i64 } %0, ptr %local_0, align 8
+  %load_store_tmp = load { ptr, i64, i64 }, ptr %local_0, align 8
+  store { ptr, i64, i64 } %load_store_tmp, ptr %local_1, align 8
+  %retval = call [32 x i8] @move_native_address_from_bytes(ptr %local_1)
+  store [32 x i8] %retval, ptr %local_2, align 1
+  %call_arg_0 = load [32 x i8], ptr %local_2, align 1
+  %retval1 = call %struct.object__ID @"0000000000000002_object_id_from_address_28xsvrBSPPtPjh"([32 x i8] %call_arg_0)
+  store %struct.object__ID %retval1, ptr %local_3, align 1
+  %retval2 = load %struct.object__ID, ptr %local_3, align 1
+  ret %struct.object__ID %retval2
+}
+
+declare [32 x i8] @move_native_address_from_bytes(ptr)
+
+define [32 x i8] @"0000000000000002_object_id_to_address_CesMLt6DpFbd4a"(ptr nonnull readonly %0) {
+entry:
+  %local_0 = alloca ptr, align 8
+  %local_1 = alloca ptr, align 8
+  %local_2__bytes = alloca ptr, align 8
+  %local_3 = alloca [32 x i8], align 1
+  store ptr %0, ptr %local_0, align 8
+  %load_store_tmp = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp, ptr %local_1, align 8
+  %tmp = load ptr, ptr %local_1, align 8
+  %fld_ref = getelementptr inbounds %struct.object__ID, ptr %tmp, i32 0, i32 0
+  store ptr %fld_ref, ptr %local_2__bytes, align 8
+  %load_deref_store_tmp1 = load ptr, ptr %local_2__bytes, align 8
+  %load_deref_store_tmp2 = load [32 x i8], ptr %load_deref_store_tmp1, align 1
+  store [32 x i8] %load_deref_store_tmp2, ptr %local_3, align 1
+  %retval = load [32 x i8], ptr %local_3, align 1
+  ret [32 x i8] %retval
+}
+
+define { ptr, i64, i64 } @"0000000000000002_object_id_to_bytes_5gVg483qnd8BLE"(ptr nonnull readonly %0) {
+entry:
+  %local_0 = alloca ptr, align 8
+  %local_1 = alloca ptr, align 8
+  %local_2__bytes = alloca ptr, align 8
+  %local_3 = alloca { ptr, i64, i64 }, align 8
+  store ptr %0, ptr %local_0, align 8
+  %load_store_tmp = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp, ptr %local_1, align 8
+  %tmp = load ptr, ptr %local_1, align 8
+  %fld_ref = getelementptr inbounds %struct.object__ID, ptr %tmp, i32 0, i32 0
+  store ptr %fld_ref, ptr %local_2__bytes, align 8
+  %loaded_alloca = load ptr, ptr %local_2__bytes, align 8
+  %retval = call { ptr, i64, i64 } @move_native_bcs_to_bytes(ptr @__move_rttydesc_address, ptr %loaded_alloca)
+  store { ptr, i64, i64 } %retval, ptr %local_3, align 8
+  %retval1 = load { ptr, i64, i64 }, ptr %local_3, align 8
+  ret { ptr, i64, i64 } %retval1
+}
+
+declare { ptr, i64, i64 } @move_native_bcs_to_bytes(ptr, ptr)
+
+define %struct.object__ID @"0000000000000002_object_last_created_Gzq4Wey2hqRhrC"(ptr nonnull readonly %0) {
+entry:
+  %local_0 = alloca ptr, align 8
+  %local_1 = alloca ptr, align 8
+  %local_2__bytes = alloca [32 x i8], align 1
+  %local_3 = alloca %struct.object__ID, align 8
+  store ptr %0, ptr %local_0, align 8
+  %load_store_tmp = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp, ptr %local_1, align 8
+  %call_arg_0 = load ptr, ptr %local_1, align 8
+  %retval = call [32 x i8] @"0000000000000002_tx_context_last_created_ob_F5FJ3HqHcxT4Gb"(ptr %call_arg_0)
+  store [32 x i8] %retval, ptr %local_2__bytes, align 1
+  %fv.0 = load [32 x i8], ptr %local_2__bytes, align 1
+  %insert_0 = insertvalue %struct.object__ID undef, [32 x i8] %fv.0, 0
+  store %struct.object__ID %insert_0, ptr %local_3, align 1
+  %retval1 = load %struct.object__ID, ptr %local_3, align 1
+  ret %struct.object__ID %retval1
+}
+
+declare [32 x i8] @"0000000000000002_tx_context_last_created_ob_F5FJ3HqHcxT4Gb"(ptr nonnull readonly)
+
+define %struct.object__UID @"0000000000000002_object_new_uid_from_ha_3qCxFQoQFKfVJZ"([32 x i8] %0) {
+entry:
+  %local_0 = alloca [32 x i8], align 1
+  %local_1 = alloca [32 x i8], align 1
+  %local_2__bytes = alloca [32 x i8], align 1
+  %local_3__id = alloca %struct.object__ID, align 8
+  %local_4 = alloca %struct.object__UID, align 8
+  store [32 x i8] %0, ptr %local_0, align 1
+  %load_store_tmp = load [32 x i8], ptr %local_0, align 1
+  store [32 x i8] %load_store_tmp, ptr %local_1, align 1
+  %loaded_alloca = load [32 x i8], ptr %local_1, align 1
+  call void @move_native_object_record_new_uid([32 x i8] %loaded_alloca)
+  %fv.0 = load [32 x i8], ptr %local_0, align 1
+  %insert_0 = insertvalue %struct.object__ID undef, [32 x i8] %fv.0, 0
+  store %struct.object__ID %insert_0, ptr %local_3__id, align 1
+  %fv.01 = load %struct.object__ID, ptr %local_3__id, align 1
+  %insert_02 = insertvalue %struct.object__UID undef, %struct.object__ID %fv.01, 0
+  store %struct.object__UID %insert_02, ptr %local_4, align 1
+  %retval = load %struct.object__UID, ptr %local_4, align 1
+  ret %struct.object__UID %retval
+}
+
+declare void @move_native_object_record_new_uid([32 x i8])
+
+define %struct.object__UID @"0000000000000002_object_randomness_stat_F2bSX7NgjPFJbo"() {
+entry:
+  %local_0__bytes = alloca [32 x i8], align 1
+  %local_1__id = alloca %struct.object__ID, align 8
+  %local_2 = alloca %struct.object__UID, align 8
+  %0 = load [32 x i8], ptr @acct.addr.2, align 1
+  store [32 x i8] %0, ptr %local_0__bytes, align 1
+  %fv.0 = load [32 x i8], ptr %local_0__bytes, align 1
+  %insert_0 = insertvalue %struct.object__ID undef, [32 x i8] %fv.0, 0
+  store %struct.object__ID %insert_0, ptr %local_1__id, align 1
+  %fv.01 = load %struct.object__ID, ptr %local_1__id, align 1
+  %insert_02 = insertvalue %struct.object__UID undef, %struct.object__ID %fv.01, 0
+  store %struct.object__UID %insert_02, ptr %local_2, align 1
+  %retval = load %struct.object__UID, ptr %local_2, align 1
+  ret %struct.object__UID %retval
+}
+
+define %struct.object__UID @"0000000000000002_object_sui_deny_list_o_B6BNRVv3wP9xqN"() {
+entry:
+  %local_0__bytes = alloca [32 x i8], align 1
+  %local_1__id = alloca %struct.object__ID, align 8
+  %local_2 = alloca %struct.object__UID, align 8
+  %0 = load [32 x i8], ptr @acct.addr.3, align 1
+  store [32 x i8] %0, ptr %local_0__bytes, align 1
+  %fv.0 = load [32 x i8], ptr %local_0__bytes, align 1
+  %insert_0 = insertvalue %struct.object__ID undef, [32 x i8] %fv.0, 0
+  store %struct.object__ID %insert_0, ptr %local_1__id, align 1
+  %fv.01 = load %struct.object__ID, ptr %local_1__id, align 1
+  %insert_02 = insertvalue %struct.object__UID undef, %struct.object__ID %fv.01, 0
+  store %struct.object__UID %insert_02, ptr %local_2, align 1
+  %retval = load %struct.object__UID, ptr %local_2, align 1
+  ret %struct.object__UID %retval
+}
+
+define private %struct.object__UID @"0000000000000002_object_sui_system_stat_FCzazNCPawB7Zq"(ptr nonnull readonly %0) {
+entry:
+  %local_0 = alloca ptr, align 8
+  %local_1 = alloca ptr, align 8
+  %local_2 = alloca [32 x i8], align 1
+  %local_3 = alloca [32 x i8], align 1
+  %local_4 = alloca i1, align 1
+  %local_5 = alloca i64, align 8
+  %local_6__bytes = alloca [32 x i8], align 1
+  %local_7__id = alloca %struct.object__ID, align 8
+  %local_8 = alloca %struct.object__UID, align 8
+  store ptr %0, ptr %local_0, align 8
+  %load_store_tmp = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp, ptr %local_1, align 8
+  %call_arg_0 = load ptr, ptr %local_1, align 8
+  %retval = call [32 x i8] @"0000000000000002_tx_context_sender_9nYw9GTwZ2W8pp"(ptr %call_arg_0)
+  store [32 x i8] %retval, ptr %local_2, align 1
+  %1 = load [32 x i8], ptr @acct.addr.4, align 1
+  store [32 x i8] %1, ptr %local_3, align 1
+  %2 = call i32 @memcmp(ptr %local_2, ptr %local_3, i64 32)
+  %eq_dst = icmp eq i32 %2, 0
+  store i1 %eq_dst, ptr %local_4, align 1
+  %cnd = load i1, ptr %local_4, align 1
+  br i1 %cnd, label %bb_1, label %bb_0
+
+bb_1:                                             ; preds = %entry
+  br label %bb_2
+
+bb_0:                                             ; preds = %entry
+  store i64 0, ptr %local_5, align 8
+  %call_arg_01 = load i64, ptr %local_5, align 8
+  call void @move_rt_abort(i64 %call_arg_01)
+  unreachable
+
+bb_2:                                             ; preds = %bb_1
+  %3 = load [32 x i8], ptr @acct.addr.5, align 1
+  store [32 x i8] %3, ptr %local_6__bytes, align 1
+  %fv.0 = load [32 x i8], ptr %local_6__bytes, align 1
+  %insert_0 = insertvalue %struct.object__ID undef, [32 x i8] %fv.0, 0
+  store %struct.object__ID %insert_0, ptr %local_7__id, align 1
+  %fv.02 = load %struct.object__ID, ptr %local_7__id, align 1
+  %insert_03 = insertvalue %struct.object__UID undef, %struct.object__ID %fv.02, 0
+  store %struct.object__UID %insert_03, ptr %local_8, align 1
+  %retval4 = load %struct.object__UID, ptr %local_8, align 1
+  ret %struct.object__UID %retval4
+}
+
+declare [32 x i8] @"0000000000000002_tx_context_sender_9nYw9GTwZ2W8pp"(ptr nonnull readonly)
+
+define ptr @"0000000000000002_object_uid_as_inner_J1jJegzug2nHjL"(ptr nonnull readonly %0) {
+entry:
+  %local_0 = alloca ptr, align 8
+  %local_1 = alloca ptr, align 8
+  %local_2__id = alloca ptr, align 8
+  store ptr %0, ptr %local_0, align 8
+  %load_store_tmp = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp, ptr %local_1, align 8
+  %tmp = load ptr, ptr %local_1, align 8
+  %fld_ref = getelementptr inbounds %struct.object__UID, ptr %tmp, i32 0, i32 0
+  store ptr %fld_ref, ptr %local_2__id, align 8
+  %retval = load ptr, ptr %local_2__id, align 8
+  ret ptr %retval
+}
+
+define [32 x i8] @"0000000000000002_object_uid_to_address_DdQo7Y9Arw6ggD"(ptr nonnull readonly %0) {
+entry:
+  %local_0 = alloca ptr, align 8
+  %local_1 = alloca ptr, align 8
+  %local_2__id = alloca ptr, align 8
+  %local_3__bytes = alloca ptr, align 8
+  %local_4 = alloca [32 x i8], align 1
+  store ptr %0, ptr %local_0, align 8
+  %load_store_tmp = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp, ptr %local_1, align 8
+  %tmp = load ptr, ptr %local_1, align 8
+  %fld_ref = getelementptr inbounds %struct.object__UID, ptr %tmp, i32 0, i32 0
+  store ptr %fld_ref, ptr %local_2__id, align 8
+  %tmp1 = load ptr, ptr %local_2__id, align 8
+  %fld_ref2 = getelementptr inbounds %struct.object__ID, ptr %tmp1, i32 0, i32 0
+  store ptr %fld_ref2, ptr %local_3__bytes, align 8
+  %load_deref_store_tmp1 = load ptr, ptr %local_3__bytes, align 8
+  %load_deref_store_tmp2 = load [32 x i8], ptr %load_deref_store_tmp1, align 1
+  store [32 x i8] %load_deref_store_tmp2, ptr %local_4, align 1
+  %retval = load [32 x i8], ptr %local_4, align 1
+  ret [32 x i8] %retval
+}
+
+define { ptr, i64, i64 } @"0000000000000002_object_uid_to_bytes_4YhVJcnmcV5bAq"(ptr nonnull readonly %0) {
+entry:
+  %local_0 = alloca ptr, align 8
+  %local_1 = alloca ptr, align 8
+  %local_2__id = alloca ptr, align 8
+  %local_3__bytes = alloca ptr, align 8
+  %local_4 = alloca { ptr, i64, i64 }, align 8
+  store ptr %0, ptr %local_0, align 8
+  %load_store_tmp = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp, ptr %local_1, align 8
+  %tmp = load ptr, ptr %local_1, align 8
+  %fld_ref = getelementptr inbounds %struct.object__UID, ptr %tmp, i32 0, i32 0
+  store ptr %fld_ref, ptr %local_2__id, align 8
+  %tmp1 = load ptr, ptr %local_2__id, align 8
+  %fld_ref2 = getelementptr inbounds %struct.object__ID, ptr %tmp1, i32 0, i32 0
+  store ptr %fld_ref2, ptr %local_3__bytes, align 8
+  %loaded_alloca = load ptr, ptr %local_3__bytes, align 8
+  %retval = call { ptr, i64, i64 } @move_native_bcs_to_bytes(ptr @__move_rttydesc_address, ptr %loaded_alloca)
+  store { ptr, i64, i64 } %retval, ptr %local_4, align 8
+  %retval3 = load { ptr, i64, i64 }, ptr %local_4, align 8
+  ret { ptr, i64, i64 } %retval3
+}
+
+define %struct.object__ID @"0000000000000002_object_uid_to_inner_6q9sC1GSiVxsc9"(ptr nonnull readonly %0) {
+entry:
+  %local_0 = alloca ptr, align 8
+  %local_1 = alloca ptr, align 8
+  %local_2__id = alloca ptr, align 8
+  %local_3 = alloca %struct.object__ID, align 8
+  store ptr %0, ptr %local_0, align 8
+  %load_store_tmp = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp, ptr %local_1, align 8
+  %tmp = load ptr, ptr %local_1, align 8
+  %fld_ref = getelementptr inbounds %struct.object__UID, ptr %tmp, i32 0, i32 0
+  store ptr %fld_ref, ptr %local_2__id, align 8
+  %load_deref_store_tmp1 = load ptr, ptr %local_2__id, align 8
+  %load_deref_store_tmp2 = load %struct.object__ID, ptr %load_deref_store_tmp1, align 1
+  store %struct.object__ID %load_deref_store_tmp2, ptr %local_3, align 1
+  %retval = load %struct.object__ID, ptr %local_3, align 1
+  ret %struct.object__ID %retval
+}
+
+declare void @move_rt_vec_destroy(ptr nonnull readonly dereferenceable(32), ptr)
+
+; Function Attrs: cold noreturn
+declare void @move_rt_abort(i64) #0
+
+attributes #0 = { cold noreturn }

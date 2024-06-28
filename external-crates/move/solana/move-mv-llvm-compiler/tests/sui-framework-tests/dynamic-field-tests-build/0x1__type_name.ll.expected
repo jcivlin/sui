@@ -1,0 +1,1069 @@
+; ModuleID = '0x1__type_name'
+source_filename = "../../../../../../crates/sui-framework/packages/move-stdlib/sources/type_name.move"
+target datalayout = "e-m:e-p:64:64-i64:64-n32:64-S128"
+target triple = "sbf-solana-solana"
+
+%__move_rt_type = type { { ptr, i64 }, i64, ptr }
+%struct.type_name__TypeName = type { %struct.ascii__String }
+%struct.ascii__String = type { { ptr, i64, i64 } }
+
+@__move_rttydesc_signer = private unnamed_addr constant %__move_rt_type { { ptr, i64 } { ptr @__move_rttydesc_signer_name, i64 6 }, i64 9, ptr @__move_rttydesc_NOTHING_info }
+@__move_rttydesc_signer_name = private unnamed_addr constant [6 x i8] c"signer"
+@__move_rttydesc_NOTHING_info = private unnamed_addr constant i8 -1
+@vec_literal = internal constant [0 x i8] zeroinitializer
+@vdesc = internal constant { ptr, i64, i64 } { ptr @vec_literal, i64 0, i64 0 }
+@__move_rttydesc_u8 = private unnamed_addr constant %__move_rt_type { { ptr, i64 } { ptr @__move_rttydesc_u8_name, i64 2 }, i64 2, ptr @__move_rttydesc_NOTHING_info }
+@__move_rttydesc_u8_name = private unnamed_addr constant [2 x i8] c"u8"
+@vec_literal.1 = internal constant [4 x i8] c"bool"
+@vdesc.2 = internal constant { ptr, i64, i64 } { ptr @vec_literal.1, i64 4, i64 4 }
+@vec_literal.3 = internal constant [2 x i8] c"u8"
+@vdesc.4 = internal constant { ptr, i64, i64 } { ptr @vec_literal.3, i64 2, i64 2 }
+@vec_literal.5 = internal constant [3 x i8] c"u16"
+@vdesc.6 = internal constant { ptr, i64, i64 } { ptr @vec_literal.5, i64 3, i64 3 }
+@vec_literal.7 = internal constant [3 x i8] c"u32"
+@vdesc.8 = internal constant { ptr, i64, i64 } { ptr @vec_literal.7, i64 3, i64 3 }
+@vec_literal.9 = internal constant [3 x i8] c"u64"
+@vdesc.10 = internal constant { ptr, i64, i64 } { ptr @vec_literal.9, i64 3, i64 3 }
+@vec_literal.11 = internal constant [4 x i8] c"u128"
+@vdesc.12 = internal constant { ptr, i64, i64 } { ptr @vec_literal.11, i64 4, i64 4 }
+@vec_literal.13 = internal constant [4 x i8] c"u256"
+@vdesc.14 = internal constant { ptr, i64, i64 } { ptr @vec_literal.13, i64 4, i64 4 }
+@vec_literal.15 = internal constant [7 x i8] c"address"
+@vdesc.16 = internal constant { ptr, i64, i64 } { ptr @vec_literal.15, i64 7, i64 7 }
+@vec_literal.17 = internal constant [0 x i8] zeroinitializer
+@vdesc.18 = internal constant { ptr, i64, i64 } { ptr @vec_literal.17, i64 0, i64 0 }
+
+declare i32 @memcmp(ptr, ptr, i64)
+
+define void @"0000000000000001_type_name_unit_test_poiso_6CDum9kLMBwnF6"() {
+entry:
+  %local_0 = alloca i64, align 8
+  %local_1 = alloca { ptr, i64, i64 }, align 8
+  store i64 0, ptr %local_0, align 8
+  %loaded_alloca = load i64, ptr %local_0, align 8
+  %retval = call { ptr, i64, i64 } @move_native_unit_test_create_signers_for_testing(i64 %loaded_alloca)
+  store { ptr, i64, i64 } %retval, ptr %local_1, align 8
+  call void @move_rt_vec_destroy(ptr @__move_rttydesc_signer, ptr %local_1)
+  ret void
+}
+
+declare { ptr, i64, i64 } @move_native_unit_test_create_signers_for_testing(i64)
+
+define ptr @"0000000000000001_type_name_borrow_string_6t1S3Zf6Z8bAVr"(ptr nonnull readonly %0) {
+entry:
+  %local_0 = alloca ptr, align 8
+  %local_1 = alloca ptr, align 8
+  %local_2__name = alloca ptr, align 8
+  store ptr %0, ptr %local_0, align 8
+  %load_store_tmp = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp, ptr %local_1, align 8
+  %tmp = load ptr, ptr %local_1, align 8
+  %fld_ref = getelementptr inbounds %struct.type_name__TypeName, ptr %tmp, i32 0, i32 0
+  store ptr %fld_ref, ptr %local_2__name, align 8
+  %retval = load ptr, ptr %local_2__name, align 8
+  ret ptr %retval
+}
+
+declare %struct.type_name__TypeName @move_native_type_name_get(ptr)
+
+define %struct.ascii__String @"0000000000000001_type_name_get_address_XgAdmam8mY8SN3"(ptr nonnull readonly %0) {
+entry:
+  %newv = alloca { ptr, i64, i64 }, align 8
+  %local_0 = alloca ptr, align 8
+  %local_1 = alloca { ptr, i64, i64 }, align 8
+  %local_2 = alloca i64, align 8
+  %local_3 = alloca i64, align 8
+  %local_4 = alloca ptr, align 8
+  %local_5 = alloca ptr, align 8
+  %local_6 = alloca i1, align 1
+  %local_7 = alloca i1, align 1
+  %local_8 = alloca ptr, align 8
+  %local_9 = alloca i64, align 8
+  %local_10 = alloca i64, align 8
+  %local_11 = alloca i64, align 8
+  %local_12 = alloca i64, align 8
+  %local_13 = alloca ptr, align 8
+  %local_14__name = alloca ptr, align 8
+  %local_15 = alloca ptr, align 8
+  %local_16 = alloca { ptr, i64, i64 }, align 8
+  %local_17 = alloca i64, align 8
+  %local_18 = alloca i64, align 8
+  %local_19 = alloca i64, align 8
+  %local_20 = alloca i1, align 1
+  %local_21 = alloca ptr, align 8
+  %local_22 = alloca ptr, align 8
+  %local_23 = alloca i64, align 8
+  %local_24 = alloca ptr, align 8
+  %local_25 = alloca i8, align 1
+  %local_26 = alloca i64, align 8
+  %local_27 = alloca i64, align 8
+  %local_28 = alloca i64, align 8
+  %local_29 = alloca ptr, align 8
+  %local_30 = alloca { ptr, i64, i64 }, align 8
+  %local_31 = alloca %struct.ascii__String, align 8
+  store ptr %0, ptr %local_0, align 8
+  %load_store_tmp = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp, ptr %local_5, align 8
+  %call_arg_0 = load ptr, ptr %local_5, align 8
+  %retval = call i1 @"0000000000000001_type_name_is_primitive_32JfaqUcCjKH4g"(ptr %call_arg_0)
+  store i1 %retval, ptr %local_6, align 1
+  %not_src = load i1, ptr %local_6, align 1
+  %not_dst = xor i1 %not_src, true
+  store i1 %not_dst, ptr %local_7, align 1
+  %cnd = load i1, ptr %local_7, align 1
+  br i1 %cnd, label %bb_1, label %bb_0
+
+bb_1:                                             ; preds = %entry
+  br label %bb_2
+
+bb_0:                                             ; preds = %entry
+  %load_store_tmp1 = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp1, ptr %local_8, align 8
+  store i64 0, ptr %local_9, align 8
+  %call_arg_02 = load i64, ptr %local_9, align 8
+  call void @move_rt_abort(i64 %call_arg_02)
+  unreachable
+
+bb_2:                                             ; preds = %bb_1
+  %retval3 = call i64 @"0000000000000001_address_length_BCf655p6LX13Y5"()
+  store i64 %retval3, ptr %local_10, align 8
+  store i64 2, ptr %local_11, align 8
+  %mul_src_0 = load i64, ptr %local_10, align 8
+  %mul_src_1 = load i64, ptr %local_11, align 8
+  %mul_val = call { i64, i1 } @llvm.umul.with.overflow.i64(i64 %mul_src_0, i64 %mul_src_1)
+  %mul_dst = extractvalue { i64, i1 } %mul_val, 0
+  %mul_ovf = extractvalue { i64, i1 } %mul_val, 1
+  br i1 %mul_ovf, label %then_bb, label %join_bb
+
+then_bb:                                          ; preds = %bb_2
+  call void @move_rt_abort(i64 4017)
+  unreachable
+
+join_bb:                                          ; preds = %bb_2
+  store i64 %mul_dst, ptr %local_12, align 8
+  %load_store_tmp4 = load i64, ptr %local_12, align 8
+  store i64 %load_store_tmp4, ptr %local_3, align 8
+  %load_store_tmp5 = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp5, ptr %local_13, align 8
+  %tmp = load ptr, ptr %local_13, align 8
+  %fld_ref = getelementptr inbounds %struct.type_name__TypeName, ptr %tmp, i32 0, i32 0
+  store ptr %fld_ref, ptr %local_14__name, align 8
+  %call_arg_06 = load ptr, ptr %local_14__name, align 8
+  %retval7 = call ptr @"0000000000000001_ascii_as_bytes_5TJmf5DLy2VeUn"(ptr %call_arg_06)
+  store ptr %retval7, ptr %local_15, align 8
+  %load_store_tmp8 = load ptr, ptr %local_15, align 8
+  store ptr %load_store_tmp8, ptr %local_4, align 8
+  %1 = call { ptr, i64, i64 } @move_rt_vec_empty(ptr @__move_rttydesc_u8)
+  store { ptr, i64, i64 } %1, ptr %newv, align 8
+  call void @move_rt_vec_copy(ptr @__move_rttydesc_u8, ptr %newv, ptr @vdesc)
+  %reload = load { ptr, i64, i64 }, ptr %newv, align 8
+  store { ptr, i64, i64 } %reload, ptr %local_16, align 8
+  %load_store_tmp9 = load { ptr, i64, i64 }, ptr %local_16, align 8
+  store { ptr, i64, i64 } %load_store_tmp9, ptr %local_1, align 8
+  store i64 0, ptr %local_17, align 8
+  %load_store_tmp10 = load i64, ptr %local_17, align 8
+  store i64 %load_store_tmp10, ptr %local_2, align 8
+  br label %bb_6
+
+bb_6:                                             ; preds = %join_bb21, %join_bb
+  %load_store_tmp11 = load i64, ptr %local_2, align 8
+  store i64 %load_store_tmp11, ptr %local_18, align 8
+  %load_store_tmp12 = load i64, ptr %local_3, align 8
+  store i64 %load_store_tmp12, ptr %local_19, align 8
+  %lt_src_0 = load i64, ptr %local_18, align 8
+  %lt_src_1 = load i64, ptr %local_19, align 8
+  %lt_dst = icmp ult i64 %lt_src_0, %lt_src_1
+  store i1 %lt_dst, ptr %local_20, align 1
+  %cnd13 = load i1, ptr %local_20, align 1
+  br i1 %cnd13, label %bb_4, label %bb_3
+
+bb_4:                                             ; preds = %bb_6
+  br label %bb_5
+
+bb_5:                                             ; preds = %bb_4
+  store ptr %local_1, ptr %local_21, align 8
+  %load_store_tmp14 = load ptr, ptr %local_4, align 8
+  store ptr %load_store_tmp14, ptr %local_22, align 8
+  %load_store_tmp15 = load i64, ptr %local_2, align 8
+  store i64 %load_store_tmp15, ptr %local_23, align 8
+  %loaded_alloca = load ptr, ptr %local_22, align 8
+  %loaded_alloca16 = load i64, ptr %local_23, align 8
+  %retval17 = call ptr @move_native_vector_borrow(ptr @__move_rttydesc_u8, ptr %loaded_alloca, i64 %loaded_alloca16)
+  store ptr %retval17, ptr %local_24, align 8
+  %load_deref_store_tmp1 = load ptr, ptr %local_24, align 8
+  %load_deref_store_tmp2 = load i8, ptr %load_deref_store_tmp1, align 1
+  store i8 %load_deref_store_tmp2, ptr %local_25, align 1
+  %loaded_alloca18 = load ptr, ptr %local_21, align 8
+  call void @move_native_vector_push_back(ptr @__move_rttydesc_u8, ptr %loaded_alloca18, ptr %local_25)
+  %load_store_tmp19 = load i64, ptr %local_2, align 8
+  store i64 %load_store_tmp19, ptr %local_26, align 8
+  store i64 1, ptr %local_27, align 8
+  %add_src_0 = load i64, ptr %local_26, align 8
+  %add_src_1 = load i64, ptr %local_27, align 8
+  %add_dst = add i64 %add_src_0, %add_src_1
+  %ovfcond = icmp ult i64 %add_dst, %add_src_0
+  br i1 %ovfcond, label %then_bb20, label %join_bb21
+
+then_bb20:                                        ; preds = %bb_5
+  call void @move_rt_abort(i64 4017)
+  unreachable
+
+join_bb21:                                        ; preds = %bb_5
+  store i64 %add_dst, ptr %local_28, align 8
+  %load_store_tmp22 = load i64, ptr %local_28, align 8
+  store i64 %load_store_tmp22, ptr %local_2, align 8
+  br label %bb_6
+
+bb_3:                                             ; preds = %bb_6
+  %load_store_tmp23 = load ptr, ptr %local_4, align 8
+  store ptr %load_store_tmp23, ptr %local_29, align 8
+  %load_store_tmp24 = load { ptr, i64, i64 }, ptr %local_1, align 8
+  store { ptr, i64, i64 } %load_store_tmp24, ptr %local_30, align 8
+  %call_arg_025 = load { ptr, i64, i64 }, ptr %local_30, align 8
+  %retval26 = call %struct.ascii__String @"0000000000000001_ascii_string_5ZneJ22oLb5aDc"({ ptr, i64, i64 } %call_arg_025)
+  store %struct.ascii__String %retval26, ptr %local_31, align 8
+  %retval27 = load %struct.ascii__String, ptr %local_31, align 8
+  ret %struct.ascii__String %retval27
+}
+
+define i1 @"0000000000000001_type_name_is_primitive_32JfaqUcCjKH4g"(ptr nonnull readonly %0) {
+entry:
+  %newv65 = alloca { ptr, i64, i64 }, align 8
+  %newv55 = alloca { ptr, i64, i64 }, align 8
+  %newv45 = alloca { ptr, i64, i64 }, align 8
+  %newv35 = alloca { ptr, i64, i64 }, align 8
+  %newv25 = alloca { ptr, i64, i64 }, align 8
+  %newv15 = alloca { ptr, i64, i64 }, align 8
+  %newv5 = alloca { ptr, i64, i64 }, align 8
+  %newv = alloca { ptr, i64, i64 }, align 8
+  %local_0 = alloca ptr, align 8
+  %local_1 = alloca { ptr, i64, i64 }, align 8
+  %local_2 = alloca i1, align 1
+  %local_3 = alloca i1, align 1
+  %local_4 = alloca i1, align 1
+  %local_5 = alloca i1, align 1
+  %local_6 = alloca i1, align 1
+  %local_7 = alloca i1, align 1
+  %local_8 = alloca i1, align 1
+  %local_9 = alloca i1, align 1
+  %local_10 = alloca i1, align 1
+  %local_11 = alloca i1, align 1
+  %local_12 = alloca { ptr, i64, i64 }, align 8
+  %local_13 = alloca i1, align 1
+  %local_14 = alloca i1, align 1
+  %local_15 = alloca i1, align 1
+  %local_16 = alloca { ptr, i64, i64 }, align 8
+  %local_17 = alloca { ptr, i64, i64 }, align 8
+  %local_18 = alloca { ptr, i64, i64 }, align 8
+  %local_19 = alloca { ptr, i64, i64 }, align 8
+  %local_20 = alloca { ptr, i64, i64 }, align 8
+  %local_21 = alloca { ptr, i64, i64 }, align 8
+  %local_22 = alloca i1, align 1
+  %local_23 = alloca ptr, align 8
+  %local_24 = alloca ptr, align 8
+  %local_25__name = alloca ptr, align 8
+  %local_26 = alloca ptr, align 8
+  %local_27 = alloca { ptr, i64, i64 }, align 8
+  %local_28 = alloca ptr, align 8
+  %local_29 = alloca ptr, align 8
+  %local_30 = alloca i1, align 1
+  %local_31 = alloca i1, align 1
+  %local_32 = alloca { ptr, i64, i64 }, align 8
+  %local_33 = alloca ptr, align 8
+  %local_34 = alloca ptr, align 8
+  %local_35 = alloca i1, align 1
+  %local_36 = alloca i1, align 1
+  %local_37 = alloca i1, align 1
+  %local_38 = alloca { ptr, i64, i64 }, align 8
+  %local_39 = alloca ptr, align 8
+  %local_40 = alloca ptr, align 8
+  %local_41 = alloca i1, align 1
+  %local_42 = alloca i1, align 1
+  %local_43 = alloca i1, align 1
+  %local_44 = alloca { ptr, i64, i64 }, align 8
+  %local_45 = alloca ptr, align 8
+  %local_46 = alloca ptr, align 8
+  %local_47 = alloca i1, align 1
+  %local_48 = alloca i1, align 1
+  %local_49 = alloca i1, align 1
+  %local_50 = alloca { ptr, i64, i64 }, align 8
+  %local_51 = alloca ptr, align 8
+  %local_52 = alloca ptr, align 8
+  %local_53 = alloca i1, align 1
+  %local_54 = alloca i1, align 1
+  %local_55 = alloca i1, align 1
+  %local_56 = alloca { ptr, i64, i64 }, align 8
+  %local_57 = alloca ptr, align 8
+  %local_58 = alloca ptr, align 8
+  %local_59 = alloca i1, align 1
+  %local_60 = alloca i1, align 1
+  %local_61 = alloca i1, align 1
+  %local_62 = alloca { ptr, i64, i64 }, align 8
+  %local_63 = alloca ptr, align 8
+  %local_64 = alloca ptr, align 8
+  %local_65 = alloca i1, align 1
+  %local_66 = alloca i1, align 1
+  %local_67 = alloca i1, align 1
+  %local_68 = alloca { ptr, i64, i64 }, align 8
+  %local_69 = alloca ptr, align 8
+  %local_70 = alloca ptr, align 8
+  %local_71 = alloca i1, align 1
+  %local_72 = alloca i1, align 1
+  %local_73 = alloca ptr, align 8
+  %local_74 = alloca i1, align 1
+  %local_75 = alloca ptr, align 8
+  %local_76 = alloca i64, align 8
+  %local_77 = alloca i64, align 8
+  %local_78 = alloca i1, align 1
+  %local_79 = alloca ptr, align 8
+  %local_80 = alloca i64, align 8
+  %local_81 = alloca ptr, align 8
+  %local_82 = alloca i8, align 1
+  %local_83 = alloca i8, align 1
+  %local_84 = alloca i1, align 1
+  %local_85 = alloca i1, align 1
+  %local_86 = alloca i1, align 1
+  %local_87 = alloca ptr, align 8
+  %local_88 = alloca i64, align 8
+  %local_89 = alloca ptr, align 8
+  %local_90 = alloca i8, align 1
+  %local_91 = alloca i8, align 1
+  %local_92 = alloca i1, align 1
+  %local_93 = alloca i1, align 1
+  %local_94 = alloca i1, align 1
+  %local_95 = alloca ptr, align 8
+  %local_96 = alloca i64, align 8
+  %local_97 = alloca ptr, align 8
+  %local_98 = alloca i8, align 1
+  %local_99 = alloca i8, align 1
+  %local_100 = alloca i1, align 1
+  %local_101 = alloca i1, align 1
+  %local_102 = alloca i1, align 1
+  %local_103 = alloca ptr, align 8
+  %local_104 = alloca i64, align 8
+  %local_105 = alloca ptr, align 8
+  %local_106 = alloca i8, align 1
+  %local_107 = alloca i8, align 1
+  %local_108 = alloca i1, align 1
+  %local_109 = alloca i1, align 1
+  %local_110 = alloca i1, align 1
+  %local_111 = alloca ptr, align 8
+  %local_112 = alloca i64, align 8
+  %local_113 = alloca ptr, align 8
+  %local_114 = alloca i8, align 1
+  %local_115 = alloca i8, align 1
+  %local_116 = alloca i1, align 1
+  %local_117 = alloca i1, align 1
+  %local_118 = alloca i1, align 1
+  %local_119 = alloca ptr, align 8
+  %local_120 = alloca i64, align 8
+  %local_121 = alloca ptr, align 8
+  %local_122 = alloca i8, align 1
+  %local_123 = alloca i8, align 1
+  %local_124 = alloca i1, align 1
+  %local_125 = alloca ptr, align 8
+  %local_126 = alloca i1, align 1
+  %local_127 = alloca i1, align 1
+  %local_128 = alloca i1, align 1
+  store ptr %0, ptr %local_0, align 8
+  %load_store_tmp = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp, ptr %local_24, align 8
+  %tmp = load ptr, ptr %local_24, align 8
+  %fld_ref = getelementptr inbounds %struct.type_name__TypeName, ptr %tmp, i32 0, i32 0
+  store ptr %fld_ref, ptr %local_25__name, align 8
+  %call_arg_0 = load ptr, ptr %local_25__name, align 8
+  %retval = call ptr @"0000000000000001_ascii_as_bytes_5TJmf5DLy2VeUn"(ptr %call_arg_0)
+  store ptr %retval, ptr %local_26, align 8
+  %load_store_tmp1 = load ptr, ptr %local_26, align 8
+  store ptr %load_store_tmp1, ptr %local_23, align 8
+  %1 = call { ptr, i64, i64 } @move_rt_vec_empty(ptr @__move_rttydesc_u8)
+  store { ptr, i64, i64 } %1, ptr %newv, align 8
+  call void @move_rt_vec_copy(ptr @__move_rttydesc_u8, ptr %newv, ptr @vdesc.2)
+  %reload = load { ptr, i64, i64 }, ptr %newv, align 8
+  store { ptr, i64, i64 } %reload, ptr %local_27, align 8
+  %load_store_tmp2 = load { ptr, i64, i64 }, ptr %local_27, align 8
+  store { ptr, i64, i64 } %load_store_tmp2, ptr %local_1, align 8
+  %load_store_tmp3 = load ptr, ptr %local_23, align 8
+  store ptr %load_store_tmp3, ptr %local_28, align 8
+  store ptr %local_1, ptr %local_29, align 8
+  %eq_indsrc_0 = load ptr, ptr %local_28, align 8
+  %eq_indsrc_1 = load ptr, ptr %local_29, align 8
+  %2 = call i1 @move_rt_vec_cmp_eq(ptr @__move_rttydesc_u8, ptr %eq_indsrc_0, ptr %eq_indsrc_1)
+  store i1 %2, ptr %local_30, align 1
+  %cnd = load i1, ptr %local_30, align 1
+  br i1 %cnd, label %bb_1, label %bb_0
+
+bb_1:                                             ; preds = %entry
+  store i1 true, ptr %local_31, align 1
+  %load_store_tmp4 = load i1, ptr %local_31, align 1
+  store i1 %load_store_tmp4, ptr %local_7, align 1
+  br label %bb_2
+
+bb_0:                                             ; preds = %entry
+  %3 = call { ptr, i64, i64 } @move_rt_vec_empty(ptr @__move_rttydesc_u8)
+  store { ptr, i64, i64 } %3, ptr %newv5, align 8
+  call void @move_rt_vec_copy(ptr @__move_rttydesc_u8, ptr %newv5, ptr @vdesc.4)
+  %reload6 = load { ptr, i64, i64 }, ptr %newv5, align 8
+  store { ptr, i64, i64 } %reload6, ptr %local_32, align 8
+  %load_store_tmp7 = load { ptr, i64, i64 }, ptr %local_32, align 8
+  store { ptr, i64, i64 } %load_store_tmp7, ptr %local_12, align 8
+  %load_store_tmp8 = load ptr, ptr %local_23, align 8
+  store ptr %load_store_tmp8, ptr %local_33, align 8
+  store ptr %local_12, ptr %local_34, align 8
+  %eq_indsrc_09 = load ptr, ptr %local_33, align 8
+  %eq_indsrc_110 = load ptr, ptr %local_34, align 8
+  %4 = call i1 @move_rt_vec_cmp_eq(ptr @__move_rttydesc_u8, ptr %eq_indsrc_09, ptr %eq_indsrc_110)
+  store i1 %4, ptr %local_35, align 1
+  %load_store_tmp11 = load i1, ptr %local_35, align 1
+  store i1 %load_store_tmp11, ptr %local_7, align 1
+  br label %bb_2
+
+bb_2:                                             ; preds = %bb_0, %bb_1
+  %load_store_tmp12 = load i1, ptr %local_7, align 1
+  store i1 %load_store_tmp12, ptr %local_36, align 1
+  %cnd13 = load i1, ptr %local_36, align 1
+  br i1 %cnd13, label %bb_4, label %bb_3
+
+bb_4:                                             ; preds = %bb_2
+  store i1 true, ptr %local_37, align 1
+  %load_store_tmp14 = load i1, ptr %local_37, align 1
+  store i1 %load_store_tmp14, ptr %local_8, align 1
+  br label %bb_5
+
+bb_3:                                             ; preds = %bb_2
+  %5 = call { ptr, i64, i64 } @move_rt_vec_empty(ptr @__move_rttydesc_u8)
+  store { ptr, i64, i64 } %5, ptr %newv15, align 8
+  call void @move_rt_vec_copy(ptr @__move_rttydesc_u8, ptr %newv15, ptr @vdesc.6)
+  %reload16 = load { ptr, i64, i64 }, ptr %newv15, align 8
+  store { ptr, i64, i64 } %reload16, ptr %local_38, align 8
+  %load_store_tmp17 = load { ptr, i64, i64 }, ptr %local_38, align 8
+  store { ptr, i64, i64 } %load_store_tmp17, ptr %local_16, align 8
+  %load_store_tmp18 = load ptr, ptr %local_23, align 8
+  store ptr %load_store_tmp18, ptr %local_39, align 8
+  store ptr %local_16, ptr %local_40, align 8
+  %eq_indsrc_019 = load ptr, ptr %local_39, align 8
+  %eq_indsrc_120 = load ptr, ptr %local_40, align 8
+  %6 = call i1 @move_rt_vec_cmp_eq(ptr @__move_rttydesc_u8, ptr %eq_indsrc_019, ptr %eq_indsrc_120)
+  store i1 %6, ptr %local_41, align 1
+  %load_store_tmp21 = load i1, ptr %local_41, align 1
+  store i1 %load_store_tmp21, ptr %local_8, align 1
+  br label %bb_5
+
+bb_5:                                             ; preds = %bb_3, %bb_4
+  %load_store_tmp22 = load i1, ptr %local_8, align 1
+  store i1 %load_store_tmp22, ptr %local_42, align 1
+  %cnd23 = load i1, ptr %local_42, align 1
+  br i1 %cnd23, label %bb_7, label %bb_6
+
+bb_7:                                             ; preds = %bb_5
+  store i1 true, ptr %local_43, align 1
+  %load_store_tmp24 = load i1, ptr %local_43, align 1
+  store i1 %load_store_tmp24, ptr %local_9, align 1
+  br label %bb_8
+
+bb_6:                                             ; preds = %bb_5
+  %7 = call { ptr, i64, i64 } @move_rt_vec_empty(ptr @__move_rttydesc_u8)
+  store { ptr, i64, i64 } %7, ptr %newv25, align 8
+  call void @move_rt_vec_copy(ptr @__move_rttydesc_u8, ptr %newv25, ptr @vdesc.8)
+  %reload26 = load { ptr, i64, i64 }, ptr %newv25, align 8
+  store { ptr, i64, i64 } %reload26, ptr %local_44, align 8
+  %load_store_tmp27 = load { ptr, i64, i64 }, ptr %local_44, align 8
+  store { ptr, i64, i64 } %load_store_tmp27, ptr %local_17, align 8
+  %load_store_tmp28 = load ptr, ptr %local_23, align 8
+  store ptr %load_store_tmp28, ptr %local_45, align 8
+  store ptr %local_17, ptr %local_46, align 8
+  %eq_indsrc_029 = load ptr, ptr %local_45, align 8
+  %eq_indsrc_130 = load ptr, ptr %local_46, align 8
+  %8 = call i1 @move_rt_vec_cmp_eq(ptr @__move_rttydesc_u8, ptr %eq_indsrc_029, ptr %eq_indsrc_130)
+  store i1 %8, ptr %local_47, align 1
+  %load_store_tmp31 = load i1, ptr %local_47, align 1
+  store i1 %load_store_tmp31, ptr %local_9, align 1
+  br label %bb_8
+
+bb_8:                                             ; preds = %bb_6, %bb_7
+  %load_store_tmp32 = load i1, ptr %local_9, align 1
+  store i1 %load_store_tmp32, ptr %local_48, align 1
+  %cnd33 = load i1, ptr %local_48, align 1
+  br i1 %cnd33, label %bb_10, label %bb_9
+
+bb_10:                                            ; preds = %bb_8
+  store i1 true, ptr %local_49, align 1
+  %load_store_tmp34 = load i1, ptr %local_49, align 1
+  store i1 %load_store_tmp34, ptr %local_10, align 1
+  br label %bb_11
+
+bb_9:                                             ; preds = %bb_8
+  %9 = call { ptr, i64, i64 } @move_rt_vec_empty(ptr @__move_rttydesc_u8)
+  store { ptr, i64, i64 } %9, ptr %newv35, align 8
+  call void @move_rt_vec_copy(ptr @__move_rttydesc_u8, ptr %newv35, ptr @vdesc.10)
+  %reload36 = load { ptr, i64, i64 }, ptr %newv35, align 8
+  store { ptr, i64, i64 } %reload36, ptr %local_50, align 8
+  %load_store_tmp37 = load { ptr, i64, i64 }, ptr %local_50, align 8
+  store { ptr, i64, i64 } %load_store_tmp37, ptr %local_18, align 8
+  %load_store_tmp38 = load ptr, ptr %local_23, align 8
+  store ptr %load_store_tmp38, ptr %local_51, align 8
+  store ptr %local_18, ptr %local_52, align 8
+  %eq_indsrc_039 = load ptr, ptr %local_51, align 8
+  %eq_indsrc_140 = load ptr, ptr %local_52, align 8
+  %10 = call i1 @move_rt_vec_cmp_eq(ptr @__move_rttydesc_u8, ptr %eq_indsrc_039, ptr %eq_indsrc_140)
+  store i1 %10, ptr %local_53, align 1
+  %load_store_tmp41 = load i1, ptr %local_53, align 1
+  store i1 %load_store_tmp41, ptr %local_10, align 1
+  br label %bb_11
+
+bb_11:                                            ; preds = %bb_9, %bb_10
+  %load_store_tmp42 = load i1, ptr %local_10, align 1
+  store i1 %load_store_tmp42, ptr %local_54, align 1
+  %cnd43 = load i1, ptr %local_54, align 1
+  br i1 %cnd43, label %bb_13, label %bb_12
+
+bb_13:                                            ; preds = %bb_11
+  store i1 true, ptr %local_55, align 1
+  %load_store_tmp44 = load i1, ptr %local_55, align 1
+  store i1 %load_store_tmp44, ptr %local_11, align 1
+  br label %bb_14
+
+bb_12:                                            ; preds = %bb_11
+  %11 = call { ptr, i64, i64 } @move_rt_vec_empty(ptr @__move_rttydesc_u8)
+  store { ptr, i64, i64 } %11, ptr %newv45, align 8
+  call void @move_rt_vec_copy(ptr @__move_rttydesc_u8, ptr %newv45, ptr @vdesc.12)
+  %reload46 = load { ptr, i64, i64 }, ptr %newv45, align 8
+  store { ptr, i64, i64 } %reload46, ptr %local_56, align 8
+  %load_store_tmp47 = load { ptr, i64, i64 }, ptr %local_56, align 8
+  store { ptr, i64, i64 } %load_store_tmp47, ptr %local_19, align 8
+  %load_store_tmp48 = load ptr, ptr %local_23, align 8
+  store ptr %load_store_tmp48, ptr %local_57, align 8
+  store ptr %local_19, ptr %local_58, align 8
+  %eq_indsrc_049 = load ptr, ptr %local_57, align 8
+  %eq_indsrc_150 = load ptr, ptr %local_58, align 8
+  %12 = call i1 @move_rt_vec_cmp_eq(ptr @__move_rttydesc_u8, ptr %eq_indsrc_049, ptr %eq_indsrc_150)
+  store i1 %12, ptr %local_59, align 1
+  %load_store_tmp51 = load i1, ptr %local_59, align 1
+  store i1 %load_store_tmp51, ptr %local_11, align 1
+  br label %bb_14
+
+bb_14:                                            ; preds = %bb_12, %bb_13
+  %load_store_tmp52 = load i1, ptr %local_11, align 1
+  store i1 %load_store_tmp52, ptr %local_60, align 1
+  %cnd53 = load i1, ptr %local_60, align 1
+  br i1 %cnd53, label %bb_16, label %bb_15
+
+bb_16:                                            ; preds = %bb_14
+  store i1 true, ptr %local_61, align 1
+  %load_store_tmp54 = load i1, ptr %local_61, align 1
+  store i1 %load_store_tmp54, ptr %local_13, align 1
+  br label %bb_17
+
+bb_15:                                            ; preds = %bb_14
+  %13 = call { ptr, i64, i64 } @move_rt_vec_empty(ptr @__move_rttydesc_u8)
+  store { ptr, i64, i64 } %13, ptr %newv55, align 8
+  call void @move_rt_vec_copy(ptr @__move_rttydesc_u8, ptr %newv55, ptr @vdesc.14)
+  %reload56 = load { ptr, i64, i64 }, ptr %newv55, align 8
+  store { ptr, i64, i64 } %reload56, ptr %local_62, align 8
+  %load_store_tmp57 = load { ptr, i64, i64 }, ptr %local_62, align 8
+  store { ptr, i64, i64 } %load_store_tmp57, ptr %local_20, align 8
+  %load_store_tmp58 = load ptr, ptr %local_23, align 8
+  store ptr %load_store_tmp58, ptr %local_63, align 8
+  store ptr %local_20, ptr %local_64, align 8
+  %eq_indsrc_059 = load ptr, ptr %local_63, align 8
+  %eq_indsrc_160 = load ptr, ptr %local_64, align 8
+  %14 = call i1 @move_rt_vec_cmp_eq(ptr @__move_rttydesc_u8, ptr %eq_indsrc_059, ptr %eq_indsrc_160)
+  store i1 %14, ptr %local_65, align 1
+  %load_store_tmp61 = load i1, ptr %local_65, align 1
+  store i1 %load_store_tmp61, ptr %local_13, align 1
+  br label %bb_17
+
+bb_17:                                            ; preds = %bb_15, %bb_16
+  %load_store_tmp62 = load i1, ptr %local_13, align 1
+  store i1 %load_store_tmp62, ptr %local_66, align 1
+  %cnd63 = load i1, ptr %local_66, align 1
+  br i1 %cnd63, label %bb_19, label %bb_18
+
+bb_19:                                            ; preds = %bb_17
+  store i1 true, ptr %local_67, align 1
+  %load_store_tmp64 = load i1, ptr %local_67, align 1
+  store i1 %load_store_tmp64, ptr %local_14, align 1
+  br label %bb_20
+
+bb_18:                                            ; preds = %bb_17
+  %15 = call { ptr, i64, i64 } @move_rt_vec_empty(ptr @__move_rttydesc_u8)
+  store { ptr, i64, i64 } %15, ptr %newv65, align 8
+  call void @move_rt_vec_copy(ptr @__move_rttydesc_u8, ptr %newv65, ptr @vdesc.16)
+  %reload66 = load { ptr, i64, i64 }, ptr %newv65, align 8
+  store { ptr, i64, i64 } %reload66, ptr %local_68, align 8
+  %load_store_tmp67 = load { ptr, i64, i64 }, ptr %local_68, align 8
+  store { ptr, i64, i64 } %load_store_tmp67, ptr %local_21, align 8
+  %load_store_tmp68 = load ptr, ptr %local_23, align 8
+  store ptr %load_store_tmp68, ptr %local_69, align 8
+  store ptr %local_21, ptr %local_70, align 8
+  %eq_indsrc_069 = load ptr, ptr %local_69, align 8
+  %eq_indsrc_170 = load ptr, ptr %local_70, align 8
+  %16 = call i1 @move_rt_vec_cmp_eq(ptr @__move_rttydesc_u8, ptr %eq_indsrc_069, ptr %eq_indsrc_170)
+  store i1 %16, ptr %local_71, align 1
+  %load_store_tmp71 = load i1, ptr %local_71, align 1
+  store i1 %load_store_tmp71, ptr %local_14, align 1
+  br label %bb_20
+
+bb_20:                                            ; preds = %bb_18, %bb_19
+  %load_store_tmp72 = load i1, ptr %local_14, align 1
+  store i1 %load_store_tmp72, ptr %local_72, align 1
+  %cnd73 = load i1, ptr %local_72, align 1
+  br i1 %cnd73, label %bb_22, label %bb_21
+
+bb_22:                                            ; preds = %bb_20
+  %load_store_tmp74 = load ptr, ptr %local_23, align 8
+  store ptr %load_store_tmp74, ptr %local_73, align 8
+  store i1 true, ptr %local_74, align 1
+  %load_store_tmp75 = load i1, ptr %local_74, align 1
+  store i1 %load_store_tmp75, ptr %local_15, align 1
+  br label %bb_23
+
+bb_21:                                            ; preds = %bb_20
+  %load_store_tmp76 = load ptr, ptr %local_23, align 8
+  store ptr %load_store_tmp76, ptr %local_75, align 8
+  %loaded_alloca = load ptr, ptr %local_75, align 8
+  %retval77 = call i64 @move_native_vector_length(ptr @__move_rttydesc_u8, ptr %loaded_alloca)
+  store i64 %retval77, ptr %local_76, align 8
+  store i64 6, ptr %local_77, align 8
+  %ge_src_0 = load i64, ptr %local_76, align 8
+  %ge_src_1 = load i64, ptr %local_77, align 8
+  %ge_dst = icmp uge i64 %ge_src_0, %ge_src_1
+  store i1 %ge_dst, ptr %local_78, align 1
+  %cnd78 = load i1, ptr %local_78, align 1
+  br i1 %cnd78, label %bb_25, label %bb_24
+
+bb_25:                                            ; preds = %bb_21
+  %load_store_tmp79 = load ptr, ptr %local_23, align 8
+  store ptr %load_store_tmp79, ptr %local_79, align 8
+  store i64 0, ptr %local_80, align 8
+  %loaded_alloca80 = load ptr, ptr %local_79, align 8
+  %loaded_alloca81 = load i64, ptr %local_80, align 8
+  %retval82 = call ptr @move_native_vector_borrow(ptr @__move_rttydesc_u8, ptr %loaded_alloca80, i64 %loaded_alloca81)
+  store ptr %retval82, ptr %local_81, align 8
+  %load_deref_store_tmp1 = load ptr, ptr %local_81, align 8
+  %load_deref_store_tmp2 = load i8, ptr %load_deref_store_tmp1, align 1
+  store i8 %load_deref_store_tmp2, ptr %local_82, align 1
+  store i8 118, ptr %local_83, align 1
+  %eq_src_0 = load i8, ptr %local_82, align 1
+  %eq_src_1 = load i8, ptr %local_83, align 1
+  %eq_dst = icmp eq i8 %eq_src_0, %eq_src_1
+  store i1 %eq_dst, ptr %local_84, align 1
+  %load_store_tmp83 = load i1, ptr %local_84, align 1
+  store i1 %load_store_tmp83, ptr %local_22, align 1
+  br label %bb_26
+
+bb_24:                                            ; preds = %bb_21
+  store i1 false, ptr %local_85, align 1
+  %load_store_tmp84 = load i1, ptr %local_85, align 1
+  store i1 %load_store_tmp84, ptr %local_22, align 1
+  br label %bb_26
+
+bb_26:                                            ; preds = %bb_24, %bb_25
+  %load_store_tmp85 = load i1, ptr %local_22, align 1
+  store i1 %load_store_tmp85, ptr %local_86, align 1
+  %cnd86 = load i1, ptr %local_86, align 1
+  br i1 %cnd86, label %bb_28, label %bb_27
+
+bb_28:                                            ; preds = %bb_26
+  %load_store_tmp87 = load ptr, ptr %local_23, align 8
+  store ptr %load_store_tmp87, ptr %local_87, align 8
+  store i64 1, ptr %local_88, align 8
+  %loaded_alloca88 = load ptr, ptr %local_87, align 8
+  %loaded_alloca89 = load i64, ptr %local_88, align 8
+  %retval90 = call ptr @move_native_vector_borrow(ptr @__move_rttydesc_u8, ptr %loaded_alloca88, i64 %loaded_alloca89)
+  store ptr %retval90, ptr %local_89, align 8
+  %load_deref_store_tmp191 = load ptr, ptr %local_89, align 8
+  %load_deref_store_tmp292 = load i8, ptr %load_deref_store_tmp191, align 1
+  store i8 %load_deref_store_tmp292, ptr %local_90, align 1
+  store i8 101, ptr %local_91, align 1
+  %eq_src_093 = load i8, ptr %local_90, align 1
+  %eq_src_194 = load i8, ptr %local_91, align 1
+  %eq_dst95 = icmp eq i8 %eq_src_093, %eq_src_194
+  store i1 %eq_dst95, ptr %local_92, align 1
+  %load_store_tmp96 = load i1, ptr %local_92, align 1
+  store i1 %load_store_tmp96, ptr %local_2, align 1
+  br label %bb_29
+
+bb_27:                                            ; preds = %bb_26
+  store i1 false, ptr %local_93, align 1
+  %load_store_tmp97 = load i1, ptr %local_93, align 1
+  store i1 %load_store_tmp97, ptr %local_2, align 1
+  br label %bb_29
+
+bb_29:                                            ; preds = %bb_27, %bb_28
+  %load_store_tmp98 = load i1, ptr %local_2, align 1
+  store i1 %load_store_tmp98, ptr %local_94, align 1
+  %cnd99 = load i1, ptr %local_94, align 1
+  br i1 %cnd99, label %bb_31, label %bb_30
+
+bb_31:                                            ; preds = %bb_29
+  %load_store_tmp100 = load ptr, ptr %local_23, align 8
+  store ptr %load_store_tmp100, ptr %local_95, align 8
+  store i64 2, ptr %local_96, align 8
+  %loaded_alloca101 = load ptr, ptr %local_95, align 8
+  %loaded_alloca102 = load i64, ptr %local_96, align 8
+  %retval103 = call ptr @move_native_vector_borrow(ptr @__move_rttydesc_u8, ptr %loaded_alloca101, i64 %loaded_alloca102)
+  store ptr %retval103, ptr %local_97, align 8
+  %load_deref_store_tmp1104 = load ptr, ptr %local_97, align 8
+  %load_deref_store_tmp2105 = load i8, ptr %load_deref_store_tmp1104, align 1
+  store i8 %load_deref_store_tmp2105, ptr %local_98, align 1
+  store i8 99, ptr %local_99, align 1
+  %eq_src_0106 = load i8, ptr %local_98, align 1
+  %eq_src_1107 = load i8, ptr %local_99, align 1
+  %eq_dst108 = icmp eq i8 %eq_src_0106, %eq_src_1107
+  store i1 %eq_dst108, ptr %local_100, align 1
+  %load_store_tmp109 = load i1, ptr %local_100, align 1
+  store i1 %load_store_tmp109, ptr %local_3, align 1
+  br label %bb_32
+
+bb_30:                                            ; preds = %bb_29
+  store i1 false, ptr %local_101, align 1
+  %load_store_tmp110 = load i1, ptr %local_101, align 1
+  store i1 %load_store_tmp110, ptr %local_3, align 1
+  br label %bb_32
+
+bb_32:                                            ; preds = %bb_30, %bb_31
+  %load_store_tmp111 = load i1, ptr %local_3, align 1
+  store i1 %load_store_tmp111, ptr %local_102, align 1
+  %cnd112 = load i1, ptr %local_102, align 1
+  br i1 %cnd112, label %bb_34, label %bb_33
+
+bb_34:                                            ; preds = %bb_32
+  %load_store_tmp113 = load ptr, ptr %local_23, align 8
+  store ptr %load_store_tmp113, ptr %local_103, align 8
+  store i64 3, ptr %local_104, align 8
+  %loaded_alloca114 = load ptr, ptr %local_103, align 8
+  %loaded_alloca115 = load i64, ptr %local_104, align 8
+  %retval116 = call ptr @move_native_vector_borrow(ptr @__move_rttydesc_u8, ptr %loaded_alloca114, i64 %loaded_alloca115)
+  store ptr %retval116, ptr %local_105, align 8
+  %load_deref_store_tmp1117 = load ptr, ptr %local_105, align 8
+  %load_deref_store_tmp2118 = load i8, ptr %load_deref_store_tmp1117, align 1
+  store i8 %load_deref_store_tmp2118, ptr %local_106, align 1
+  store i8 116, ptr %local_107, align 1
+  %eq_src_0119 = load i8, ptr %local_106, align 1
+  %eq_src_1120 = load i8, ptr %local_107, align 1
+  %eq_dst121 = icmp eq i8 %eq_src_0119, %eq_src_1120
+  store i1 %eq_dst121, ptr %local_108, align 1
+  %load_store_tmp122 = load i1, ptr %local_108, align 1
+  store i1 %load_store_tmp122, ptr %local_4, align 1
+  br label %bb_35
+
+bb_33:                                            ; preds = %bb_32
+  store i1 false, ptr %local_109, align 1
+  %load_store_tmp123 = load i1, ptr %local_109, align 1
+  store i1 %load_store_tmp123, ptr %local_4, align 1
+  br label %bb_35
+
+bb_35:                                            ; preds = %bb_33, %bb_34
+  %load_store_tmp124 = load i1, ptr %local_4, align 1
+  store i1 %load_store_tmp124, ptr %local_110, align 1
+  %cnd125 = load i1, ptr %local_110, align 1
+  br i1 %cnd125, label %bb_37, label %bb_36
+
+bb_37:                                            ; preds = %bb_35
+  %load_store_tmp126 = load ptr, ptr %local_23, align 8
+  store ptr %load_store_tmp126, ptr %local_111, align 8
+  store i64 4, ptr %local_112, align 8
+  %loaded_alloca127 = load ptr, ptr %local_111, align 8
+  %loaded_alloca128 = load i64, ptr %local_112, align 8
+  %retval129 = call ptr @move_native_vector_borrow(ptr @__move_rttydesc_u8, ptr %loaded_alloca127, i64 %loaded_alloca128)
+  store ptr %retval129, ptr %local_113, align 8
+  %load_deref_store_tmp1130 = load ptr, ptr %local_113, align 8
+  %load_deref_store_tmp2131 = load i8, ptr %load_deref_store_tmp1130, align 1
+  store i8 %load_deref_store_tmp2131, ptr %local_114, align 1
+  store i8 111, ptr %local_115, align 1
+  %eq_src_0132 = load i8, ptr %local_114, align 1
+  %eq_src_1133 = load i8, ptr %local_115, align 1
+  %eq_dst134 = icmp eq i8 %eq_src_0132, %eq_src_1133
+  store i1 %eq_dst134, ptr %local_116, align 1
+  %load_store_tmp135 = load i1, ptr %local_116, align 1
+  store i1 %load_store_tmp135, ptr %local_5, align 1
+  br label %bb_38
+
+bb_36:                                            ; preds = %bb_35
+  store i1 false, ptr %local_117, align 1
+  %load_store_tmp136 = load i1, ptr %local_117, align 1
+  store i1 %load_store_tmp136, ptr %local_5, align 1
+  br label %bb_38
+
+bb_38:                                            ; preds = %bb_36, %bb_37
+  %load_store_tmp137 = load i1, ptr %local_5, align 1
+  store i1 %load_store_tmp137, ptr %local_118, align 1
+  %cnd138 = load i1, ptr %local_118, align 1
+  br i1 %cnd138, label %bb_40, label %bb_39
+
+bb_40:                                            ; preds = %bb_38
+  %load_store_tmp139 = load ptr, ptr %local_23, align 8
+  store ptr %load_store_tmp139, ptr %local_119, align 8
+  store i64 5, ptr %local_120, align 8
+  %loaded_alloca140 = load ptr, ptr %local_119, align 8
+  %loaded_alloca141 = load i64, ptr %local_120, align 8
+  %retval142 = call ptr @move_native_vector_borrow(ptr @__move_rttydesc_u8, ptr %loaded_alloca140, i64 %loaded_alloca141)
+  store ptr %retval142, ptr %local_121, align 8
+  %load_deref_store_tmp1143 = load ptr, ptr %local_121, align 8
+  %load_deref_store_tmp2144 = load i8, ptr %load_deref_store_tmp1143, align 1
+  store i8 %load_deref_store_tmp2144, ptr %local_122, align 1
+  store i8 114, ptr %local_123, align 1
+  %eq_src_0145 = load i8, ptr %local_122, align 1
+  %eq_src_1146 = load i8, ptr %local_123, align 1
+  %eq_dst147 = icmp eq i8 %eq_src_0145, %eq_src_1146
+  store i1 %eq_dst147, ptr %local_124, align 1
+  %load_store_tmp148 = load i1, ptr %local_124, align 1
+  store i1 %load_store_tmp148, ptr %local_6, align 1
+  br label %bb_41
+
+bb_39:                                            ; preds = %bb_38
+  %load_store_tmp149 = load ptr, ptr %local_23, align 8
+  store ptr %load_store_tmp149, ptr %local_125, align 8
+  store i1 false, ptr %local_126, align 1
+  %load_store_tmp150 = load i1, ptr %local_126, align 1
+  store i1 %load_store_tmp150, ptr %local_6, align 1
+  br label %bb_41
+
+bb_41:                                            ; preds = %bb_39, %bb_40
+  %load_store_tmp151 = load i1, ptr %local_6, align 1
+  store i1 %load_store_tmp151, ptr %local_127, align 1
+  %load_store_tmp152 = load i1, ptr %local_127, align 1
+  store i1 %load_store_tmp152, ptr %local_15, align 1
+  br label %bb_23
+
+bb_23:                                            ; preds = %bb_41, %bb_22
+  %load_store_tmp153 = load i1, ptr %local_15, align 1
+  store i1 %load_store_tmp153, ptr %local_128, align 1
+  %retval154 = load i1, ptr %local_128, align 1
+  ret i1 %retval154
+}
+
+declare ptr @"0000000000000001_ascii_as_bytes_5TJmf5DLy2VeUn"(ptr nonnull readonly)
+
+declare i64 @move_native_vector_length(ptr, ptr)
+
+declare ptr @move_native_vector_borrow(ptr, ptr, i64)
+
+declare i64 @"0000000000000001_address_length_BCf655p6LX13Y5"()
+
+declare void @move_native_vector_push_back(ptr, ptr, ptr)
+
+declare %struct.ascii__String @"0000000000000001_ascii_string_5ZneJ22oLb5aDc"({ ptr, i64, i64 })
+
+define %struct.ascii__String @"0000000000000001_type_name_get_module_HWb7tQwBooPKSd"(ptr nonnull readonly %0) {
+entry:
+  %newv = alloca { ptr, i64, i64 }, align 8
+  %local_0 = alloca ptr, align 8
+  %local_1 = alloca i8, align 1
+  %local_2 = alloca ptr, align 8
+  %local_3 = alloca i64, align 8
+  %local_4 = alloca { ptr, i64, i64 }, align 8
+  %local_5 = alloca ptr, align 8
+  %local_6 = alloca ptr, align 8
+  %local_7 = alloca i1, align 1
+  %local_8 = alloca i1, align 1
+  %local_9 = alloca ptr, align 8
+  %local_10 = alloca i64, align 8
+  %local_11 = alloca i64, align 8
+  %local_12 = alloca i64, align 8
+  %local_13 = alloca i64, align 8
+  %local_14 = alloca i64, align 8
+  %local_15 = alloca i64, align 8
+  %local_16 = alloca ptr, align 8
+  %local_17__name = alloca ptr, align 8
+  %local_18 = alloca ptr, align 8
+  %local_19 = alloca { ptr, i64, i64 }, align 8
+  %local_20 = alloca ptr, align 8
+  %local_21 = alloca i64, align 8
+  %local_22 = alloca ptr, align 8
+  %local_23 = alloca i8, align 1
+  %local_24 = alloca ptr, align 8
+  %local_25 = alloca ptr, align 8
+  %local_26 = alloca i1, align 1
+  %local_27 = alloca ptr, align 8
+  %local_28 = alloca ptr, align 8
+  %local_29 = alloca i8, align 1
+  %local_30 = alloca i64, align 8
+  %local_31 = alloca i64, align 8
+  %local_32 = alloca i64, align 8
+  %local_33 = alloca ptr, align 8
+  %local_34 = alloca ptr, align 8
+  %local_35 = alloca { ptr, i64, i64 }, align 8
+  %local_36 = alloca %struct.ascii__String, align 8
+  store ptr %0, ptr %local_0, align 8
+  %load_store_tmp = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp, ptr %local_6, align 8
+  %call_arg_0 = load ptr, ptr %local_6, align 8
+  %retval = call i1 @"0000000000000001_type_name_is_primitive_32JfaqUcCjKH4g"(ptr %call_arg_0)
+  store i1 %retval, ptr %local_7, align 1
+  %not_src = load i1, ptr %local_7, align 1
+  %not_dst = xor i1 %not_src, true
+  store i1 %not_dst, ptr %local_8, align 1
+  %cnd = load i1, ptr %local_8, align 1
+  br i1 %cnd, label %bb_1, label %bb_0
+
+bb_1:                                             ; preds = %entry
+  br label %bb_2
+
+bb_0:                                             ; preds = %entry
+  %load_store_tmp1 = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp1, ptr %local_9, align 8
+  store i64 0, ptr %local_10, align 8
+  %call_arg_02 = load i64, ptr %local_10, align 8
+  call void @move_rt_abort(i64 %call_arg_02)
+  unreachable
+
+bb_2:                                             ; preds = %bb_1
+  %retval3 = call i64 @"0000000000000001_address_length_BCf655p6LX13Y5"()
+  store i64 %retval3, ptr %local_11, align 8
+  store i64 2, ptr %local_12, align 8
+  %mul_src_0 = load i64, ptr %local_11, align 8
+  %mul_src_1 = load i64, ptr %local_12, align 8
+  %mul_val = call { i64, i1 } @llvm.umul.with.overflow.i64(i64 %mul_src_0, i64 %mul_src_1)
+  %mul_dst = extractvalue { i64, i1 } %mul_val, 0
+  %mul_ovf = extractvalue { i64, i1 } %mul_val, 1
+  br i1 %mul_ovf, label %then_bb, label %join_bb
+
+then_bb:                                          ; preds = %bb_2
+  call void @move_rt_abort(i64 4017)
+  unreachable
+
+join_bb:                                          ; preds = %bb_2
+  store i64 %mul_dst, ptr %local_13, align 8
+  store i64 2, ptr %local_14, align 8
+  %add_src_0 = load i64, ptr %local_13, align 8
+  %add_src_1 = load i64, ptr %local_14, align 8
+  %add_dst = add i64 %add_src_0, %add_src_1
+  %ovfcond = icmp ult i64 %add_dst, %add_src_0
+  br i1 %ovfcond, label %then_bb4, label %join_bb5
+
+then_bb4:                                         ; preds = %join_bb
+  call void @move_rt_abort(i64 4017)
+  unreachable
+
+join_bb5:                                         ; preds = %join_bb
+  store i64 %add_dst, ptr %local_15, align 8
+  %load_store_tmp6 = load i64, ptr %local_15, align 8
+  store i64 %load_store_tmp6, ptr %local_3, align 8
+  %load_store_tmp7 = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp7, ptr %local_16, align 8
+  %tmp = load ptr, ptr %local_16, align 8
+  %fld_ref = getelementptr inbounds %struct.type_name__TypeName, ptr %tmp, i32 0, i32 0
+  store ptr %fld_ref, ptr %local_17__name, align 8
+  %call_arg_08 = load ptr, ptr %local_17__name, align 8
+  %retval9 = call ptr @"0000000000000001_ascii_as_bytes_5TJmf5DLy2VeUn"(ptr %call_arg_08)
+  store ptr %retval9, ptr %local_18, align 8
+  %load_store_tmp10 = load ptr, ptr %local_18, align 8
+  store ptr %load_store_tmp10, ptr %local_5, align 8
+  %1 = call { ptr, i64, i64 } @move_rt_vec_empty(ptr @__move_rttydesc_u8)
+  store { ptr, i64, i64 } %1, ptr %newv, align 8
+  call void @move_rt_vec_copy(ptr @__move_rttydesc_u8, ptr %newv, ptr @vdesc.18)
+  %reload = load { ptr, i64, i64 }, ptr %newv, align 8
+  store { ptr, i64, i64 } %reload, ptr %local_19, align 8
+  %load_store_tmp11 = load { ptr, i64, i64 }, ptr %local_19, align 8
+  store { ptr, i64, i64 } %load_store_tmp11, ptr %local_4, align 8
+  br label %bb_6
+
+bb_6:                                             ; preds = %join_bb28, %join_bb5
+  %load_store_tmp12 = load ptr, ptr %local_5, align 8
+  store ptr %load_store_tmp12, ptr %local_20, align 8
+  %load_store_tmp13 = load i64, ptr %local_3, align 8
+  store i64 %load_store_tmp13, ptr %local_21, align 8
+  %loaded_alloca = load ptr, ptr %local_20, align 8
+  %loaded_alloca14 = load i64, ptr %local_21, align 8
+  %retval15 = call ptr @move_native_vector_borrow(ptr @__move_rttydesc_u8, ptr %loaded_alloca, i64 %loaded_alloca14)
+  store ptr %retval15, ptr %local_22, align 8
+  %load_store_tmp16 = load ptr, ptr %local_22, align 8
+  store ptr %load_store_tmp16, ptr %local_2, align 8
+  store i8 58, ptr %local_23, align 1
+  %load_store_tmp17 = load i8, ptr %local_23, align 1
+  store i8 %load_store_tmp17, ptr %local_1, align 1
+  %load_store_tmp18 = load ptr, ptr %local_2, align 8
+  store ptr %load_store_tmp18, ptr %local_24, align 8
+  store ptr %local_1, ptr %local_25, align 8
+  %ne_src_0 = load ptr, ptr %local_24, align 8
+  %ne_src_1 = load ptr, ptr %local_25, align 8
+  %ne_indsrc_0 = load i8, ptr %ne_src_0, align 1
+  %ne_indsrc_1 = load i8, ptr %ne_src_1, align 1
+  %ne_dst = icmp ne i8 %ne_indsrc_0, %ne_indsrc_1
+  store i1 %ne_dst, ptr %local_26, align 1
+  %cnd19 = load i1, ptr %local_26, align 1
+  br i1 %cnd19, label %bb_4, label %bb_3
+
+bb_4:                                             ; preds = %bb_6
+  br label %bb_5
+
+bb_5:                                             ; preds = %bb_4
+  store ptr %local_4, ptr %local_27, align 8
+  %load_store_tmp20 = load ptr, ptr %local_2, align 8
+  store ptr %load_store_tmp20, ptr %local_28, align 8
+  %load_deref_store_tmp1 = load ptr, ptr %local_28, align 8
+  %load_deref_store_tmp2 = load i8, ptr %load_deref_store_tmp1, align 1
+  store i8 %load_deref_store_tmp2, ptr %local_29, align 1
+  %loaded_alloca21 = load ptr, ptr %local_27, align 8
+  call void @move_native_vector_push_back(ptr @__move_rttydesc_u8, ptr %loaded_alloca21, ptr %local_29)
+  %load_store_tmp22 = load i64, ptr %local_3, align 8
+  store i64 %load_store_tmp22, ptr %local_30, align 8
+  store i64 1, ptr %local_31, align 8
+  %add_src_023 = load i64, ptr %local_30, align 8
+  %add_src_124 = load i64, ptr %local_31, align 8
+  %add_dst25 = add i64 %add_src_023, %add_src_124
+  %ovfcond26 = icmp ult i64 %add_dst25, %add_src_023
+  br i1 %ovfcond26, label %then_bb27, label %join_bb28
+
+then_bb27:                                        ; preds = %bb_5
+  call void @move_rt_abort(i64 4017)
+  unreachable
+
+join_bb28:                                        ; preds = %bb_5
+  store i64 %add_dst25, ptr %local_32, align 8
+  %load_store_tmp29 = load i64, ptr %local_32, align 8
+  store i64 %load_store_tmp29, ptr %local_3, align 8
+  br label %bb_6
+
+bb_3:                                             ; preds = %bb_6
+  %load_store_tmp30 = load ptr, ptr %local_5, align 8
+  store ptr %load_store_tmp30, ptr %local_33, align 8
+  %load_store_tmp31 = load ptr, ptr %local_2, align 8
+  store ptr %load_store_tmp31, ptr %local_34, align 8
+  %load_store_tmp32 = load { ptr, i64, i64 }, ptr %local_4, align 8
+  store { ptr, i64, i64 } %load_store_tmp32, ptr %local_35, align 8
+  %call_arg_033 = load { ptr, i64, i64 }, ptr %local_35, align 8
+  %retval34 = call %struct.ascii__String @"0000000000000001_ascii_string_5ZneJ22oLb5aDc"({ ptr, i64, i64 } %call_arg_033)
+  store %struct.ascii__String %retval34, ptr %local_36, align 8
+  %retval35 = load %struct.ascii__String, ptr %local_36, align 8
+  ret %struct.ascii__String %retval35
+}
+
+declare %struct.type_name__TypeName @move_native_type_name_get_with_original_ids(ptr)
+
+define %struct.ascii__String @"0000000000000001_type_name_into_string_9edxYN95c1in7H"(%struct.type_name__TypeName %0) {
+entry:
+  %local_0 = alloca %struct.type_name__TypeName, align 8
+  %local_1 = alloca ptr, align 8
+  %local_2__name = alloca ptr, align 8
+  %local_3 = alloca %struct.ascii__String, align 8
+  store %struct.type_name__TypeName %0, ptr %local_0, align 8
+  store ptr %local_0, ptr %local_1, align 8
+  %tmp = load ptr, ptr %local_1, align 8
+  %fld_ref = getelementptr inbounds %struct.type_name__TypeName, ptr %tmp, i32 0, i32 0
+  store ptr %fld_ref, ptr %local_2__name, align 8
+  %load_deref_store_tmp1 = load ptr, ptr %local_2__name, align 8
+  %load_deref_store_tmp2 = load %struct.ascii__String, ptr %load_deref_store_tmp1, align 8
+  store %struct.ascii__String %load_deref_store_tmp2, ptr %local_3, align 8
+  %retval = load %struct.ascii__String, ptr %local_3, align 8
+  ret %struct.ascii__String %retval
+}
+
+declare void @move_rt_vec_destroy(ptr nonnull readonly dereferenceable(32), ptr)
+
+; Function Attrs: cold noreturn
+declare void @move_rt_abort(i64) #0
+
+; Function Attrs: nocallback nofree nosync nounwind speculatable willreturn memory(none)
+declare { i64, i1 } @llvm.umul.with.overflow.i64(i64, i64) #1
+
+declare { ptr, i64, i64 } @move_rt_vec_empty(ptr nonnull readonly dereferenceable(32))
+
+declare void @move_rt_vec_copy(ptr nonnull readonly dereferenceable(32), ptr nonnull dereferenceable(24), ptr nonnull readonly dereferenceable(24))
+
+declare i1 @move_rt_vec_cmp_eq(ptr nonnull readonly dereferenceable(32), ptr nonnull readonly dereferenceable(24), ptr nonnull readonly dereferenceable(24))
+
+attributes #0 = { cold noreturn }
+attributes #1 = { nocallback nofree nosync nounwind speculatable willreturn memory(none) }
