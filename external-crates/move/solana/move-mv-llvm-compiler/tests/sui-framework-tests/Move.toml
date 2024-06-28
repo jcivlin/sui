@@ -1,13 +1,9 @@
 [package]
-name = "Dynamic-field-tests"
+name = "Sui-framework-dynamic-field-tests"
 version = "0.0.1"
 # published-at = "0x2"
 
 [dependencies]
-# MoveStdlib = { local = "../move-stdlib" }
-# MoveStdlib = { local = "../../../../../../../crates/sui-framework/packages/sui-framework/../move-stdlib" }
-# Sui = { local = "../../../../../../../crates/sui-framework/packages/sui-framework", address = "0x2", package = "Sui" }
-
 Sui = { local = "/home/sol/work/git/sui-solana-032024/crates/sui-framework/packages/sui-framework" }
 
 [addresses]

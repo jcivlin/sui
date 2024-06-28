@@ -41,14 +41,10 @@
 //! If the `PROMOTE_LLVM_IR` env var is set, the actual IR is promoted to the
 //! expected IR.
 //!
-//! MVIR files may contain "test directives" instructing the harness
-//! how to behave. These are specially-interpreted comments of the form
-//!
-//! - `// ignore` - don't run the test
 
-use anyhow::{anyhow, bail};
+use anyhow::bail;
 use log::debug;
-use std::{env, fs, io, path::{Path, PathBuf}};
+use std::{env, path::{Path, PathBuf}};
 
 mod test_common;
 use test_common as tc;
@@ -126,35 +122,6 @@ fn run_test_inner(test_path: &Path) -> anyhow::Result<()> {
     tc::compare_results(&test_plan)?;
 
     Ok(())
-}
-
-fn check_files_with_extensions(dir: &PathBuf, ext1: &str, ext2: &str) -> Result<Vec<String>, io::Error> {
-    let mut missing_files = Vec::new();
-
-    // Read the contents of the directory
-    let entries = fs::read_dir(dir)?;
-
-    for entry in entries {
-        let entry = entry?;
-        let path = entry.path();
-        // Check if the entry is a file with the specified ext1 extension
-        if path.is_file() && path.extension().and_then(|e| e.to_str()) == Some(ext1) {
-            debug!("Found {}-file {}", ext1, &path.to_string_lossy());
-            // Construct the corresponding file path with ext2 extension
-            let mut new_path = path.clone();
-            new_path.set_extension(ext2);
-            debug!("Checking for correspondin {}-file {}", ext2, &new_path.to_string_lossy());
-            // Check if the corresponding file exists
-            if !new_path.exists() {
-                if let Some(stem) = path.file_stem().and_then(|s| s.to_str()) {
-                    let missed = format!("{}.{}", stem.to_string(), ext2);
-                    // missing_files.push(stem.to_string());
-                    missing_files.push(missed);
-                }
-            }
-        }
-    }
-    Ok(missing_files)
 }
 
 fn find_move_toml(dir: &str) -> Option<PathBuf> {
