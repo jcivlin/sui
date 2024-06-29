@@ -312,8 +312,9 @@ impl<'mm, 'up> EntrypointGenerator<'mm, 'up> {
         self.emit_exit();
         let output_file = out_path.join("solana_entrypoint.o");
         let output_file = output_file.to_str().unwrap();
-        self.target_machine
-            .emit_to_obj_file(self.llvm_module, output_file, None)?;
+        if !self.options.skip_undefined_entries { // when option set, generating entrypoint useless
+            self.target_machine.emit_to_obj_file(self.llvm_module, output_file, None)?
+        }
         Ok(output_file.to_string())
     }
 

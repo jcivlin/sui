@@ -1,0 +1,938 @@
+; ModuleID = '0x1__string'
+source_filename = "../../../../../../crates/sui-framework/packages/move-stdlib/sources/string.move"
+target datalayout = "e-m:e-p:64:64-i64:64-n32:64-S128"
+target triple = "sbf-solana-solana"
+
+%__move_rt_type = type { { ptr, i64 }, i64, ptr }
+%struct.string__String = type { { ptr, i64, i64 } }
+%struct.ascii__String = type { { ptr, i64, i64 } }
+%struct.option__Option_string__String_ = type { { ptr, i64, i64 } }
+
+@__move_rttydesc_signer = private unnamed_addr constant %__move_rt_type { { ptr, i64 } { ptr @__move_rttydesc_signer_name, i64 6 }, i64 9, ptr @__move_rttydesc_NOTHING_info }
+@__move_rttydesc_signer_name = private unnamed_addr constant [6 x i8] c"signer"
+@__move_rttydesc_NOTHING_info = private unnamed_addr constant i8 -1
+@__move_rttydesc_u8 = private unnamed_addr constant %__move_rt_type { { ptr, i64 } { ptr @__move_rttydesc_u8_name, i64 2 }, i64 2, ptr @__move_rttydesc_NOTHING_info }
+@__move_rttydesc_u8_name = private unnamed_addr constant [2 x i8] c"u8"
+@__move_rttydesc_string__String = private unnamed_addr constant %__move_rt_type { { ptr, i64 } { ptr @__move_rttydesc_string__String_name, i64 80 }, i64 11, ptr @__move_rttydesc_string__String_info }
+@__move_rttydesc_string__String_name = private unnamed_addr constant [80 x i8] c"0000000000000000000000000000000000000000000000000000000000000001::string::String"
+@__move_rttydesc_vector_u8__name = private unnamed_addr constant [10 x i8] c"vector<u8>"
+@__move_rttydesc_vector_u8__info = private unnamed_addr constant { ptr } { ptr @__move_rttydesc_u8 }
+@0 = private unnamed_addr constant [5 x i8] c"bytes"
+@s_fld_array = private unnamed_addr constant [1 x { %__move_rt_type, i64, { ptr, i64 } }] [{ %__move_rt_type, i64, { ptr, i64 } } { %__move_rt_type { { ptr, i64 } { ptr @__move_rttydesc_vector_u8__name, i64 10 }, i64 10, ptr @__move_rttydesc_vector_u8__info }, i64 0, { ptr, i64 } { ptr @0, i64 5 } }]
+@__move_rttydesc_string__String_info = private unnamed_addr constant { ptr, i64, i64, i64 } { ptr @s_fld_array, i64 1, i64 24, i64 8 }
+
+declare i32 @memcmp(ptr, ptr, i64)
+
+define void @"0000000000000001_string_unit_test_poiso_2MTPKgM8Q5KsZh"() {
+entry:
+  %local_0 = alloca i64, align 8
+  %local_1 = alloca { ptr, i64, i64 }, align 8
+  store i64 0, ptr %local_0, align 8
+  %loaded_alloca = load i64, ptr %local_0, align 8
+  %retval = call { ptr, i64, i64 } @move_native_unit_test_create_signers_for_testing(i64 %loaded_alloca)
+  store { ptr, i64, i64 } %retval, ptr %local_1, align 8
+  call void @move_rt_vec_destroy(ptr @__move_rttydesc_signer, ptr %local_1)
+  ret void
+}
+
+declare { ptr, i64, i64 } @move_native_unit_test_create_signers_for_testing(i64)
+
+define i64 @"0000000000000001_string_length_E7W2v3PBGDje29"(ptr nonnull readonly %0) {
+entry:
+  %local_0 = alloca ptr, align 8
+  %local_1 = alloca ptr, align 8
+  %local_2__bytes = alloca ptr, align 8
+  %local_3 = alloca i64, align 8
+  store ptr %0, ptr %local_0, align 8
+  %load_store_tmp = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp, ptr %local_1, align 8
+  %tmp = load ptr, ptr %local_1, align 8
+  %fld_ref = getelementptr inbounds %struct.string__String, ptr %tmp, i32 0, i32 0
+  store ptr %fld_ref, ptr %local_2__bytes, align 8
+  %loaded_alloca = load ptr, ptr %local_2__bytes, align 8
+  %retval = call i64 @move_native_vector_length(ptr @__move_rttydesc_u8, ptr %loaded_alloca)
+  store i64 %retval, ptr %local_3, align 8
+  %retval1 = load i64, ptr %local_3, align 8
+  ret i64 %retval1
+}
+
+declare i64 @move_native_vector_length(ptr, ptr)
+
+define void @"0000000000000001_string_append_DQe8grw7AGnkHc"(ptr noalias nonnull %0, %struct.string__String %1) {
+entry:
+  %local_0 = alloca ptr, align 8
+  %local_1 = alloca %struct.string__String, align 8
+  %local_2 = alloca ptr, align 8
+  %local_3__bytes = alloca ptr, align 8
+  %local_4 = alloca ptr, align 8
+  %local_5__bytes = alloca ptr, align 8
+  %local_6 = alloca { ptr, i64, i64 }, align 8
+  store ptr %0, ptr %local_0, align 8
+  store %struct.string__String %1, ptr %local_1, align 8
+  %load_store_tmp = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp, ptr %local_2, align 8
+  %tmp = load ptr, ptr %local_2, align 8
+  %fld_ref = getelementptr inbounds %struct.string__String, ptr %tmp, i32 0, i32 0
+  store ptr %fld_ref, ptr %local_3__bytes, align 8
+  store ptr %local_1, ptr %local_4, align 8
+  %tmp1 = load ptr, ptr %local_4, align 8
+  %fld_ref2 = getelementptr inbounds %struct.string__String, ptr %tmp1, i32 0, i32 0
+  store ptr %fld_ref2, ptr %local_5__bytes, align 8
+  %load_deref_store_tmp1 = load ptr, ptr %local_5__bytes, align 8
+  %load_deref_store_tmp2 = load { ptr, i64, i64 }, ptr %load_deref_store_tmp1, align 8
+  store { ptr, i64, i64 } %load_deref_store_tmp2, ptr %local_6, align 8
+  %call_arg_0 = load ptr, ptr %local_3__bytes, align 8
+  %call_arg_1 = load { ptr, i64, i64 }, ptr %local_6, align 8
+  call void @"0000000000000001_vector_append_9dqoPGavEhpvk5"(ptr %call_arg_0, { ptr, i64, i64 } %call_arg_1)
+  ret void
+}
+
+define private void @"0000000000000001_vector_append_9dqoPGavEhpvk5"(ptr noalias nonnull %0, { ptr, i64, i64 } %1) {
+entry:
+  %local_0 = alloca ptr, align 8
+  %local_1 = alloca { ptr, i64, i64 }, align 8
+  %local_2 = alloca ptr, align 8
+  %local_3 = alloca ptr, align 8
+  %local_4 = alloca i1, align 1
+  %local_5 = alloca i1, align 1
+  %local_6 = alloca ptr, align 8
+  %local_7 = alloca ptr, align 8
+  %local_8 = alloca i8, align 1
+  %local_9 = alloca ptr, align 8
+  %local_10 = alloca { ptr, i64, i64 }, align 8
+  store ptr %0, ptr %local_0, align 8
+  store { ptr, i64, i64 } %1, ptr %local_1, align 8
+  store ptr %local_1, ptr %local_2, align 8
+  %call_arg_0 = load ptr, ptr %local_2, align 8
+  call void @"0000000000000001_vector_reverse_DYV9motnmmM5cs"(ptr %call_arg_0)
+  br label %bb_3
+
+bb_3:                                             ; preds = %bb_2, %entry
+  store ptr %local_1, ptr %local_3, align 8
+  %call_arg_01 = load ptr, ptr %local_3, align 8
+  %retval = call i1 @"0000000000000001_vector_is_empty_BrzErKu8hVV1SC"(ptr %call_arg_01)
+  store i1 %retval, ptr %local_4, align 1
+  %not_src = load i1, ptr %local_4, align 1
+  %not_dst = xor i1 %not_src, true
+  store i1 %not_dst, ptr %local_5, align 1
+  %cnd = load i1, ptr %local_5, align 1
+  br i1 %cnd, label %bb_1, label %bb_0
+
+bb_1:                                             ; preds = %bb_3
+  br label %bb_2
+
+bb_2:                                             ; preds = %bb_1
+  %load_store_tmp = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp, ptr %local_6, align 8
+  store ptr %local_1, ptr %local_7, align 8
+  %loaded_alloca = load ptr, ptr %local_7, align 8
+  call void @move_native_vector_pop_back(ptr @__move_rttydesc_u8, ptr %loaded_alloca, ptr %local_8)
+  %loaded_alloca2 = load ptr, ptr %local_6, align 8
+  call void @move_native_vector_push_back(ptr @__move_rttydesc_u8, ptr %loaded_alloca2, ptr %local_8)
+  br label %bb_3
+
+bb_0:                                             ; preds = %bb_3
+  %load_store_tmp3 = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp3, ptr %local_9, align 8
+  %load_store_tmp4 = load { ptr, i64, i64 }, ptr %local_1, align 8
+  store { ptr, i64, i64 } %load_store_tmp4, ptr %local_10, align 8
+  call void @move_native_vector_destroy_empty(ptr @__move_rttydesc_u8, ptr %local_10)
+  ret void
+}
+
+define private void @"0000000000000001_vector_reverse_DYV9motnmmM5cs"(ptr noalias nonnull %0) {
+entry:
+  %local_0 = alloca ptr, align 8
+  %local_1 = alloca i64, align 8
+  %local_2 = alloca i64, align 8
+  %local_3 = alloca i64, align 8
+  %local_4 = alloca ptr, align 8
+  %local_5 = alloca ptr, align 8
+  %local_6 = alloca i64, align 8
+  %local_7 = alloca i64, align 8
+  %local_8 = alloca i64, align 8
+  %local_9 = alloca i1, align 1
+  %local_10 = alloca ptr, align 8
+  %local_11 = alloca i64, align 8
+  %local_12 = alloca i64, align 8
+  %local_13 = alloca i64, align 8
+  %local_14 = alloca i64, align 8
+  %local_15 = alloca i64, align 8
+  %local_16 = alloca i64, align 8
+  %local_17 = alloca i1, align 1
+  %local_18 = alloca ptr, align 8
+  %local_19 = alloca i64, align 8
+  %local_20 = alloca i64, align 8
+  %local_21 = alloca i64, align 8
+  %local_22 = alloca i64, align 8
+  %local_23 = alloca i64, align 8
+  %local_24 = alloca i64, align 8
+  %local_25 = alloca i64, align 8
+  %local_26 = alloca i64, align 8
+  %local_27 = alloca ptr, align 8
+  store ptr %0, ptr %local_0, align 8
+  %load_store_tmp = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp, ptr %local_4, align 8
+  %load_store_tmp1 = load ptr, ptr %local_4, align 8
+  store ptr %load_store_tmp1, ptr %local_5, align 8
+  %loaded_alloca = load ptr, ptr %local_5, align 8
+  %retval = call i64 @move_native_vector_length(ptr @__move_rttydesc_u8, ptr %loaded_alloca)
+  store i64 %retval, ptr %local_6, align 8
+  %load_store_tmp2 = load i64, ptr %local_6, align 8
+  store i64 %load_store_tmp2, ptr %local_3, align 8
+  %load_store_tmp3 = load i64, ptr %local_3, align 8
+  store i64 %load_store_tmp3, ptr %local_7, align 8
+  store i64 0, ptr %local_8, align 8
+  %eq_src_0 = load i64, ptr %local_7, align 8
+  %eq_src_1 = load i64, ptr %local_8, align 8
+  %eq_dst = icmp eq i64 %eq_src_0, %eq_src_1
+  store i1 %eq_dst, ptr %local_9, align 1
+  %cnd = load i1, ptr %local_9, align 1
+  br i1 %cnd, label %bb_1, label %bb_0
+
+bb_1:                                             ; preds = %entry
+  %load_store_tmp4 = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp4, ptr %local_10, align 8
+  ret void
+
+bb_0:                                             ; preds = %entry
+  store i64 0, ptr %local_11, align 8
+  %load_store_tmp5 = load i64, ptr %local_11, align 8
+  store i64 %load_store_tmp5, ptr %local_2, align 8
+  %load_store_tmp6 = load i64, ptr %local_3, align 8
+  store i64 %load_store_tmp6, ptr %local_12, align 8
+  store i64 1, ptr %local_13, align 8
+  %sub_src_0 = load i64, ptr %local_12, align 8
+  %sub_src_1 = load i64, ptr %local_13, align 8
+  %sub_dst = sub i64 %sub_src_0, %sub_src_1
+  %ovfcond = icmp ugt i64 %sub_dst, %sub_src_0
+  br i1 %ovfcond, label %then_bb, label %join_bb
+
+then_bb:                                          ; preds = %bb_0
+  call void @move_rt_abort(i64 4017)
+  unreachable
+
+join_bb:                                          ; preds = %bb_0
+  store i64 %sub_dst, ptr %local_14, align 8
+  %load_store_tmp7 = load i64, ptr %local_14, align 8
+  store i64 %load_store_tmp7, ptr %local_1, align 8
+  br label %bb_5
+
+bb_5:                                             ; preds = %join_bb28, %join_bb
+  %load_store_tmp8 = load i64, ptr %local_2, align 8
+  store i64 %load_store_tmp8, ptr %local_15, align 8
+  %load_store_tmp9 = load i64, ptr %local_1, align 8
+  store i64 %load_store_tmp9, ptr %local_16, align 8
+  %lt_src_0 = load i64, ptr %local_15, align 8
+  %lt_src_1 = load i64, ptr %local_16, align 8
+  %lt_dst = icmp ult i64 %lt_src_0, %lt_src_1
+  store i1 %lt_dst, ptr %local_17, align 1
+  %cnd10 = load i1, ptr %local_17, align 1
+  br i1 %cnd10, label %bb_3, label %bb_2
+
+bb_3:                                             ; preds = %bb_5
+  br label %bb_4
+
+bb_4:                                             ; preds = %bb_3
+  %load_store_tmp11 = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp11, ptr %local_18, align 8
+  %load_store_tmp12 = load i64, ptr %local_2, align 8
+  store i64 %load_store_tmp12, ptr %local_19, align 8
+  %load_store_tmp13 = load i64, ptr %local_1, align 8
+  store i64 %load_store_tmp13, ptr %local_20, align 8
+  %loaded_alloca14 = load ptr, ptr %local_18, align 8
+  %loaded_alloca15 = load i64, ptr %local_19, align 8
+  %loaded_alloca16 = load i64, ptr %local_20, align 8
+  call void @move_native_vector_swap(ptr @__move_rttydesc_u8, ptr %loaded_alloca14, i64 %loaded_alloca15, i64 %loaded_alloca16)
+  %load_store_tmp17 = load i64, ptr %local_2, align 8
+  store i64 %load_store_tmp17, ptr %local_21, align 8
+  store i64 1, ptr %local_22, align 8
+  %add_src_0 = load i64, ptr %local_21, align 8
+  %add_src_1 = load i64, ptr %local_22, align 8
+  %add_dst = add i64 %add_src_0, %add_src_1
+  %ovfcond18 = icmp ult i64 %add_dst, %add_src_0
+  br i1 %ovfcond18, label %then_bb19, label %join_bb20
+
+then_bb19:                                        ; preds = %bb_4
+  call void @move_rt_abort(i64 4017)
+  unreachable
+
+join_bb20:                                        ; preds = %bb_4
+  store i64 %add_dst, ptr %local_23, align 8
+  %load_store_tmp21 = load i64, ptr %local_23, align 8
+  store i64 %load_store_tmp21, ptr %local_2, align 8
+  %load_store_tmp22 = load i64, ptr %local_1, align 8
+  store i64 %load_store_tmp22, ptr %local_24, align 8
+  store i64 1, ptr %local_25, align 8
+  %sub_src_023 = load i64, ptr %local_24, align 8
+  %sub_src_124 = load i64, ptr %local_25, align 8
+  %sub_dst25 = sub i64 %sub_src_023, %sub_src_124
+  %ovfcond26 = icmp ugt i64 %sub_dst25, %sub_src_023
+  br i1 %ovfcond26, label %then_bb27, label %join_bb28
+
+then_bb27:                                        ; preds = %join_bb20
+  call void @move_rt_abort(i64 4017)
+  unreachable
+
+join_bb28:                                        ; preds = %join_bb20
+  store i64 %sub_dst25, ptr %local_26, align 8
+  %load_store_tmp29 = load i64, ptr %local_26, align 8
+  store i64 %load_store_tmp29, ptr %local_1, align 8
+  br label %bb_5
+
+bb_2:                                             ; preds = %bb_5
+  %load_store_tmp30 = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp30, ptr %local_27, align 8
+  ret void
+}
+
+declare void @move_native_vector_swap(ptr, ptr, i64, i64)
+
+define private i1 @"0000000000000001_vector_is_empty_BrzErKu8hVV1SC"(ptr nonnull readonly %0) {
+entry:
+  %local_0 = alloca ptr, align 8
+  %local_1 = alloca ptr, align 8
+  %local_2 = alloca i64, align 8
+  %local_3 = alloca i64, align 8
+  %local_4 = alloca i1, align 1
+  store ptr %0, ptr %local_0, align 8
+  %load_store_tmp = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp, ptr %local_1, align 8
+  %loaded_alloca = load ptr, ptr %local_1, align 8
+  %retval = call i64 @move_native_vector_length(ptr @__move_rttydesc_u8, ptr %loaded_alloca)
+  store i64 %retval, ptr %local_2, align 8
+  store i64 0, ptr %local_3, align 8
+  %eq_src_0 = load i64, ptr %local_2, align 8
+  %eq_src_1 = load i64, ptr %local_3, align 8
+  %eq_dst = icmp eq i64 %eq_src_0, %eq_src_1
+  store i1 %eq_dst, ptr %local_4, align 1
+  %retval1 = load i1, ptr %local_4, align 1
+  ret i1 %retval1
+}
+
+declare void @move_native_vector_pop_back(ptr, ptr, ptr)
+
+declare void @move_native_vector_push_back(ptr, ptr, ptr)
+
+declare void @move_native_vector_destroy_empty(ptr, ptr)
+
+define i64 @"0000000000000001_string_index_of_7QkiC8witPS2sP"(ptr nonnull readonly %0, ptr nonnull readonly %1) {
+entry:
+  %local_0 = alloca ptr, align 8
+  %local_1 = alloca ptr, align 8
+  %local_2 = alloca ptr, align 8
+  %local_3__bytes = alloca ptr, align 8
+  %local_4 = alloca ptr, align 8
+  %local_5__bytes = alloca ptr, align 8
+  %local_6 = alloca i64, align 8
+  store ptr %0, ptr %local_0, align 8
+  store ptr %1, ptr %local_1, align 8
+  %load_store_tmp = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp, ptr %local_2, align 8
+  %tmp = load ptr, ptr %local_2, align 8
+  %fld_ref = getelementptr inbounds %struct.string__String, ptr %tmp, i32 0, i32 0
+  store ptr %fld_ref, ptr %local_3__bytes, align 8
+  %load_store_tmp1 = load ptr, ptr %local_1, align 8
+  store ptr %load_store_tmp1, ptr %local_4, align 8
+  %tmp2 = load ptr, ptr %local_4, align 8
+  %fld_ref3 = getelementptr inbounds %struct.string__String, ptr %tmp2, i32 0, i32 0
+  store ptr %fld_ref3, ptr %local_5__bytes, align 8
+  %loaded_alloca = load ptr, ptr %local_3__bytes, align 8
+  %loaded_alloca4 = load ptr, ptr %local_5__bytes, align 8
+  %retval = call i64 @move_native_string_internal_index_of(ptr %loaded_alloca, ptr %loaded_alloca4)
+  store i64 %retval, ptr %local_6, align 8
+  %retval5 = load i64, ptr %local_6, align 8
+  ret i64 %retval5
+}
+
+declare i64 @move_native_string_internal_index_of(ptr, ptr)
+
+define void @"0000000000000001_string_insert_Eqvs2kAUgYa7K7"(ptr noalias nonnull %0, i64 %1, %struct.string__String %2) {
+entry:
+  %local_0 = alloca ptr, align 8
+  %local_1 = alloca i64, align 8
+  %local_2 = alloca %struct.string__String, align 8
+  %local_3 = alloca i1, align 1
+  %local_4 = alloca i64, align 8
+  %local_5 = alloca i64, align 8
+  %local_6 = alloca i64, align 8
+  %local_7 = alloca ptr, align 8
+  %local_8 = alloca %struct.string__String, align 8
+  %local_9 = alloca %struct.string__String, align 8
+  %local_10 = alloca i64, align 8
+  %local_11 = alloca ptr, align 8
+  %local_12__bytes = alloca ptr, align 8
+  %local_13 = alloca i64, align 8
+  %local_14 = alloca ptr, align 8
+  %local_15 = alloca i64, align 8
+  %local_16 = alloca i1, align 1
+  %local_17 = alloca ptr, align 8
+  %local_18 = alloca i64, align 8
+  %local_19 = alloca i1, align 1
+  %local_20 = alloca ptr, align 8
+  %local_21 = alloca i1, align 1
+  %local_22 = alloca i1, align 1
+  %local_23 = alloca ptr, align 8
+  %local_24 = alloca i64, align 8
+  %local_25 = alloca ptr, align 8
+  %local_26 = alloca ptr, align 8
+  %local_27 = alloca i64, align 8
+  %local_28 = alloca ptr, align 8
+  %local_29 = alloca i64, align 8
+  %local_30 = alloca ptr, align 8
+  %local_31 = alloca i64, align 8
+  %local_32 = alloca i64, align 8
+  %local_33 = alloca %struct.string__String, align 8
+  %local_34 = alloca ptr, align 8
+  %local_35 = alloca i64, align 8
+  %local_36 = alloca i64, align 8
+  %local_37 = alloca ptr, align 8
+  %local_38 = alloca i64, align 8
+  %local_39 = alloca i64, align 8
+  %local_40 = alloca %struct.string__String, align 8
+  %local_41 = alloca ptr, align 8
+  %local_42 = alloca %struct.string__String, align 8
+  %local_43 = alloca ptr, align 8
+  %local_44 = alloca %struct.string__String, align 8
+  %local_45 = alloca %struct.string__String, align 8
+  %local_46 = alloca ptr, align 8
+  store ptr %0, ptr %local_0, align 8
+  store i64 %1, ptr %local_1, align 8
+  store %struct.string__String %2, ptr %local_2, align 8
+  %load_store_tmp = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp, ptr %local_11, align 8
+  %tmp = load ptr, ptr %local_11, align 8
+  %fld_ref = getelementptr inbounds %struct.string__String, ptr %tmp, i32 0, i32 0
+  store ptr %fld_ref, ptr %local_12__bytes, align 8
+  %load_store_tmp1 = load ptr, ptr %local_12__bytes, align 8
+  store ptr %load_store_tmp1, ptr %local_7, align 8
+  %load_store_tmp2 = load i64, ptr %local_1, align 8
+  store i64 %load_store_tmp2, ptr %local_13, align 8
+  %load_store_tmp3 = load ptr, ptr %local_7, align 8
+  store ptr %load_store_tmp3, ptr %local_14, align 8
+  %loaded_alloca = load ptr, ptr %local_14, align 8
+  %retval = call i64 @move_native_vector_length(ptr @__move_rttydesc_u8, ptr %loaded_alloca)
+  store i64 %retval, ptr %local_15, align 8
+  %le_src_0 = load i64, ptr %local_13, align 8
+  %le_src_1 = load i64, ptr %local_15, align 8
+  %le_dst = icmp ule i64 %le_src_0, %le_src_1
+  store i1 %le_dst, ptr %local_16, align 1
+  %cnd = load i1, ptr %local_16, align 1
+  br i1 %cnd, label %bb_1, label %bb_0
+
+bb_1:                                             ; preds = %entry
+  %load_store_tmp4 = load ptr, ptr %local_7, align 8
+  store ptr %load_store_tmp4, ptr %local_17, align 8
+  %load_store_tmp5 = load i64, ptr %local_1, align 8
+  store i64 %load_store_tmp5, ptr %local_18, align 8
+  %loaded_alloca6 = load ptr, ptr %local_17, align 8
+  %loaded_alloca7 = load i64, ptr %local_18, align 8
+  %retval8 = call i1 @move_native_string_internal_is_char_boundary(ptr %loaded_alloca6, i64 %loaded_alloca7)
+  store i1 %retval8, ptr %local_19, align 1
+  %load_store_tmp9 = load i1, ptr %local_19, align 1
+  store i1 %load_store_tmp9, ptr %local_3, align 1
+  br label %bb_2
+
+bb_0:                                             ; preds = %entry
+  %load_store_tmp10 = load ptr, ptr %local_7, align 8
+  store ptr %load_store_tmp10, ptr %local_20, align 8
+  store i1 false, ptr %local_21, align 1
+  %load_store_tmp11 = load i1, ptr %local_21, align 1
+  store i1 %load_store_tmp11, ptr %local_3, align 1
+  br label %bb_2
+
+bb_2:                                             ; preds = %bb_0, %bb_1
+  %load_store_tmp12 = load i1, ptr %local_3, align 1
+  store i1 %load_store_tmp12, ptr %local_22, align 1
+  %cnd13 = load i1, ptr %local_22, align 1
+  br i1 %cnd13, label %bb_4, label %bb_3
+
+bb_4:                                             ; preds = %bb_2
+  br label %bb_5
+
+bb_3:                                             ; preds = %bb_2
+  %load_store_tmp14 = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp14, ptr %local_23, align 8
+  store i64 2, ptr %local_24, align 8
+  %call_arg_0 = load i64, ptr %local_24, align 8
+  call void @move_rt_abort(i64 %call_arg_0)
+  unreachable
+
+bb_5:                                             ; preds = %bb_4
+  %load_store_tmp15 = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp15, ptr %local_25, align 8
+  %load_store_tmp16 = load ptr, ptr %local_25, align 8
+  store ptr %load_store_tmp16, ptr %local_26, align 8
+  %call_arg_017 = load ptr, ptr %local_26, align 8
+  %retval18 = call i64 @"0000000000000001_string_length_E7W2v3PBGDje29"(ptr %call_arg_017)
+  store i64 %retval18, ptr %local_27, align 8
+  %load_store_tmp19 = load i64, ptr %local_27, align 8
+  store i64 %load_store_tmp19, ptr %local_10, align 8
+  %load_store_tmp20 = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp20, ptr %local_28, align 8
+  %load_store_tmp21 = load i64, ptr %local_1, align 8
+  store i64 %load_store_tmp21, ptr %local_29, align 8
+  %load_store_tmp22 = load i64, ptr %local_29, align 8
+  store i64 %load_store_tmp22, ptr %local_4, align 8
+  %load_store_tmp23 = load ptr, ptr %local_28, align 8
+  store ptr %load_store_tmp23, ptr %local_30, align 8
+  store i64 0, ptr %local_31, align 8
+  %load_store_tmp24 = load i64, ptr %local_4, align 8
+  store i64 %load_store_tmp24, ptr %local_32, align 8
+  %call_arg_025 = load ptr, ptr %local_30, align 8
+  %call_arg_1 = load i64, ptr %local_31, align 8
+  %call_arg_2 = load i64, ptr %local_32, align 8
+  %retval26 = call %struct.string__String @"0000000000000001_string_sub_string_2bURZha8gEy1QH"(ptr %call_arg_025, i64 %call_arg_1, i64 %call_arg_2)
+  store %struct.string__String %retval26, ptr %local_33, align 8
+  %load_store_tmp27 = load %struct.string__String, ptr %local_33, align 8
+  store %struct.string__String %load_store_tmp27, ptr %local_9, align 8
+  %load_store_tmp28 = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp28, ptr %local_34, align 8
+  %load_store_tmp29 = load i64, ptr %local_1, align 8
+  store i64 %load_store_tmp29, ptr %local_35, align 8
+  %load_store_tmp30 = load i64, ptr %local_10, align 8
+  store i64 %load_store_tmp30, ptr %local_36, align 8
+  %load_store_tmp31 = load i64, ptr %local_36, align 8
+  store i64 %load_store_tmp31, ptr %local_6, align 8
+  %load_store_tmp32 = load i64, ptr %local_35, align 8
+  store i64 %load_store_tmp32, ptr %local_5, align 8
+  %load_store_tmp33 = load ptr, ptr %local_34, align 8
+  store ptr %load_store_tmp33, ptr %local_37, align 8
+  %load_store_tmp34 = load i64, ptr %local_5, align 8
+  store i64 %load_store_tmp34, ptr %local_38, align 8
+  %load_store_tmp35 = load i64, ptr %local_6, align 8
+  store i64 %load_store_tmp35, ptr %local_39, align 8
+  %call_arg_036 = load ptr, ptr %local_37, align 8
+  %call_arg_137 = load i64, ptr %local_38, align 8
+  %call_arg_238 = load i64, ptr %local_39, align 8
+  %retval39 = call %struct.string__String @"0000000000000001_string_sub_string_2bURZha8gEy1QH"(ptr %call_arg_036, i64 %call_arg_137, i64 %call_arg_238)
+  store %struct.string__String %retval39, ptr %local_40, align 8
+  %load_store_tmp40 = load %struct.string__String, ptr %local_40, align 8
+  store %struct.string__String %load_store_tmp40, ptr %local_8, align 8
+  store ptr %local_9, ptr %local_41, align 8
+  %call_arg_041 = load ptr, ptr %local_41, align 8
+  %call_arg_142 = load %struct.string__String, ptr %local_2, align 8
+  call void @"0000000000000001_string_append_DQe8grw7AGnkHc"(ptr %call_arg_041, %struct.string__String %call_arg_142)
+  store ptr %local_9, ptr %local_43, align 8
+  %call_arg_043 = load ptr, ptr %local_43, align 8
+  %call_arg_144 = load %struct.string__String, ptr %local_8, align 8
+  call void @"0000000000000001_string_append_DQe8grw7AGnkHc"(ptr %call_arg_043, %struct.string__String %call_arg_144)
+  %load_store_tmp45 = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp45, ptr %local_46, align 8
+  %load_store_ref_src = load %struct.string__String, ptr %local_9, align 8
+  %load_store_ref_dst_ptr = load ptr, ptr %local_46, align 8
+  store %struct.string__String %load_store_ref_src, ptr %load_store_ref_dst_ptr, align 8
+  ret void
+}
+
+declare i1 @move_native_string_internal_is_char_boundary(ptr, i64)
+
+define %struct.string__String @"0000000000000001_string_sub_string_2bURZha8gEy1QH"(ptr nonnull readonly %0, i64 %1, i64 %2) {
+entry:
+  %local_0 = alloca ptr, align 8
+  %local_1 = alloca i64, align 8
+  %local_2 = alloca i64, align 8
+  %local_3 = alloca i1, align 1
+  %local_4 = alloca i1, align 1
+  %local_5 = alloca i1, align 1
+  %local_6 = alloca ptr, align 8
+  %local_7 = alloca i64, align 8
+  %local_8 = alloca ptr, align 8
+  %local_9__bytes = alloca ptr, align 8
+  %local_10 = alloca ptr, align 8
+  %local_11 = alloca i64, align 8
+  %local_12 = alloca i64, align 8
+  %local_13 = alloca i64, align 8
+  %local_14 = alloca i1, align 1
+  %local_15 = alloca i64, align 8
+  %local_16 = alloca i64, align 8
+  %local_17 = alloca i1, align 1
+  %local_18 = alloca i1, align 1
+  %local_19 = alloca i1, align 1
+  %local_20 = alloca ptr, align 8
+  %local_21 = alloca i64, align 8
+  %local_22 = alloca i1, align 1
+  %local_23 = alloca i1, align 1
+  %local_24 = alloca i1, align 1
+  %local_25 = alloca ptr, align 8
+  %local_26 = alloca i64, align 8
+  %local_27 = alloca i1, align 1
+  %local_28 = alloca i1, align 1
+  %local_29 = alloca i1, align 1
+  %local_30 = alloca ptr, align 8
+  %local_31 = alloca i64, align 8
+  %local_32 = alloca ptr, align 8
+  %local_33 = alloca i64, align 8
+  %local_34 = alloca i64, align 8
+  %local_35__bytes = alloca { ptr, i64, i64 }, align 8
+  %local_36 = alloca %struct.string__String, align 8
+  store ptr %0, ptr %local_0, align 8
+  store i64 %1, ptr %local_1, align 8
+  store i64 %2, ptr %local_2, align 8
+  %load_store_tmp = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp, ptr %local_8, align 8
+  %tmp = load ptr, ptr %local_8, align 8
+  %fld_ref = getelementptr inbounds %struct.string__String, ptr %tmp, i32 0, i32 0
+  store ptr %fld_ref, ptr %local_9__bytes, align 8
+  %load_store_tmp1 = load ptr, ptr %local_9__bytes, align 8
+  store ptr %load_store_tmp1, ptr %local_6, align 8
+  %load_store_tmp2 = load ptr, ptr %local_6, align 8
+  store ptr %load_store_tmp2, ptr %local_10, align 8
+  %loaded_alloca = load ptr, ptr %local_10, align 8
+  %retval = call i64 @move_native_vector_length(ptr @__move_rttydesc_u8, ptr %loaded_alloca)
+  store i64 %retval, ptr %local_11, align 8
+  %load_store_tmp3 = load i64, ptr %local_11, align 8
+  store i64 %load_store_tmp3, ptr %local_7, align 8
+  %load_store_tmp4 = load i64, ptr %local_2, align 8
+  store i64 %load_store_tmp4, ptr %local_12, align 8
+  %load_store_tmp5 = load i64, ptr %local_7, align 8
+  store i64 %load_store_tmp5, ptr %local_13, align 8
+  %le_src_0 = load i64, ptr %local_12, align 8
+  %le_src_1 = load i64, ptr %local_13, align 8
+  %le_dst = icmp ule i64 %le_src_0, %le_src_1
+  store i1 %le_dst, ptr %local_14, align 1
+  %cnd = load i1, ptr %local_14, align 1
+  br i1 %cnd, label %bb_1, label %bb_0
+
+bb_1:                                             ; preds = %entry
+  %load_store_tmp6 = load i64, ptr %local_1, align 8
+  store i64 %load_store_tmp6, ptr %local_15, align 8
+  %load_store_tmp7 = load i64, ptr %local_2, align 8
+  store i64 %load_store_tmp7, ptr %local_16, align 8
+  %le_src_08 = load i64, ptr %local_15, align 8
+  %le_src_19 = load i64, ptr %local_16, align 8
+  %le_dst10 = icmp ule i64 %le_src_08, %le_src_19
+  store i1 %le_dst10, ptr %local_17, align 1
+  %load_store_tmp11 = load i1, ptr %local_17, align 1
+  store i1 %load_store_tmp11, ptr %local_3, align 1
+  br label %bb_2
+
+bb_0:                                             ; preds = %entry
+  store i1 false, ptr %local_18, align 1
+  %load_store_tmp12 = load i1, ptr %local_18, align 1
+  store i1 %load_store_tmp12, ptr %local_3, align 1
+  br label %bb_2
+
+bb_2:                                             ; preds = %bb_0, %bb_1
+  %load_store_tmp13 = load i1, ptr %local_3, align 1
+  store i1 %load_store_tmp13, ptr %local_19, align 1
+  %cnd14 = load i1, ptr %local_19, align 1
+  br i1 %cnd14, label %bb_4, label %bb_3
+
+bb_4:                                             ; preds = %bb_2
+  %load_store_tmp15 = load ptr, ptr %local_6, align 8
+  store ptr %load_store_tmp15, ptr %local_20, align 8
+  %load_store_tmp16 = load i64, ptr %local_1, align 8
+  store i64 %load_store_tmp16, ptr %local_21, align 8
+  %loaded_alloca17 = load ptr, ptr %local_20, align 8
+  %loaded_alloca18 = load i64, ptr %local_21, align 8
+  %retval19 = call i1 @move_native_string_internal_is_char_boundary(ptr %loaded_alloca17, i64 %loaded_alloca18)
+  store i1 %retval19, ptr %local_22, align 1
+  %load_store_tmp20 = load i1, ptr %local_22, align 1
+  store i1 %load_store_tmp20, ptr %local_4, align 1
+  br label %bb_5
+
+bb_3:                                             ; preds = %bb_2
+  store i1 false, ptr %local_23, align 1
+  %load_store_tmp21 = load i1, ptr %local_23, align 1
+  store i1 %load_store_tmp21, ptr %local_4, align 1
+  br label %bb_5
+
+bb_5:                                             ; preds = %bb_3, %bb_4
+  %load_store_tmp22 = load i1, ptr %local_4, align 1
+  store i1 %load_store_tmp22, ptr %local_24, align 1
+  %cnd23 = load i1, ptr %local_24, align 1
+  br i1 %cnd23, label %bb_7, label %bb_6
+
+bb_7:                                             ; preds = %bb_5
+  %load_store_tmp24 = load ptr, ptr %local_6, align 8
+  store ptr %load_store_tmp24, ptr %local_25, align 8
+  %load_store_tmp25 = load i64, ptr %local_2, align 8
+  store i64 %load_store_tmp25, ptr %local_26, align 8
+  %loaded_alloca26 = load ptr, ptr %local_25, align 8
+  %loaded_alloca27 = load i64, ptr %local_26, align 8
+  %retval28 = call i1 @move_native_string_internal_is_char_boundary(ptr %loaded_alloca26, i64 %loaded_alloca27)
+  store i1 %retval28, ptr %local_27, align 1
+  %load_store_tmp29 = load i1, ptr %local_27, align 1
+  store i1 %load_store_tmp29, ptr %local_5, align 1
+  br label %bb_8
+
+bb_6:                                             ; preds = %bb_5
+  store i1 false, ptr %local_28, align 1
+  %load_store_tmp30 = load i1, ptr %local_28, align 1
+  store i1 %load_store_tmp30, ptr %local_5, align 1
+  br label %bb_8
+
+bb_8:                                             ; preds = %bb_6, %bb_7
+  %load_store_tmp31 = load i1, ptr %local_5, align 1
+  store i1 %load_store_tmp31, ptr %local_29, align 1
+  %cnd32 = load i1, ptr %local_29, align 1
+  br i1 %cnd32, label %bb_10, label %bb_9
+
+bb_10:                                            ; preds = %bb_8
+  br label %bb_11
+
+bb_9:                                             ; preds = %bb_8
+  %load_store_tmp33 = load ptr, ptr %local_6, align 8
+  store ptr %load_store_tmp33, ptr %local_30, align 8
+  store i64 2, ptr %local_31, align 8
+  %call_arg_0 = load i64, ptr %local_31, align 8
+  call void @move_rt_abort(i64 %call_arg_0)
+  unreachable
+
+bb_11:                                            ; preds = %bb_10
+  %load_store_tmp34 = load ptr, ptr %local_6, align 8
+  store ptr %load_store_tmp34, ptr %local_32, align 8
+  %load_store_tmp35 = load i64, ptr %local_1, align 8
+  store i64 %load_store_tmp35, ptr %local_33, align 8
+  %load_store_tmp36 = load i64, ptr %local_2, align 8
+  store i64 %load_store_tmp36, ptr %local_34, align 8
+  %loaded_alloca37 = load ptr, ptr %local_32, align 8
+  %loaded_alloca38 = load i64, ptr %local_33, align 8
+  %loaded_alloca39 = load i64, ptr %local_34, align 8
+  %retval40 = call { ptr, i64, i64 } @move_native_string_internal_sub_string(ptr %loaded_alloca37, i64 %loaded_alloca38, i64 %loaded_alloca39)
+  store { ptr, i64, i64 } %retval40, ptr %local_35__bytes, align 8
+  %fv.0 = load { ptr, i64, i64 }, ptr %local_35__bytes, align 8
+  %insert_0 = insertvalue %struct.string__String undef, { ptr, i64, i64 } %fv.0, 0
+  store %struct.string__String %insert_0, ptr %local_36, align 8
+  %retval41 = load %struct.string__String, ptr %local_36, align 8
+  ret %struct.string__String %retval41
+}
+
+declare { ptr, i64, i64 } @move_native_string_internal_sub_string(ptr, i64, i64)
+
+define i1 @"0000000000000001_string_is_empty_7SgPmUng9142UN"(ptr nonnull readonly %0) {
+entry:
+  %local_0 = alloca ptr, align 8
+  %local_1 = alloca ptr, align 8
+  %local_2__bytes = alloca ptr, align 8
+  %local_3 = alloca i1, align 1
+  store ptr %0, ptr %local_0, align 8
+  %load_store_tmp = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp, ptr %local_1, align 8
+  %tmp = load ptr, ptr %local_1, align 8
+  %fld_ref = getelementptr inbounds %struct.string__String, ptr %tmp, i32 0, i32 0
+  store ptr %fld_ref, ptr %local_2__bytes, align 8
+  %call_arg_0 = load ptr, ptr %local_2__bytes, align 8
+  %retval = call i1 @"0000000000000001_vector_is_empty_BrzErKu8hVV1SC"(ptr %call_arg_0)
+  store i1 %retval, ptr %local_3, align 1
+  %retval1 = load i1, ptr %local_3, align 1
+  ret i1 %retval1
+}
+
+define ptr @"0000000000000001_string_bytes_BCEq1G4JAYfFBc"(ptr nonnull readonly %0) {
+entry:
+  %local_0 = alloca ptr, align 8
+  %local_1 = alloca ptr, align 8
+  %local_2__bytes = alloca ptr, align 8
+  store ptr %0, ptr %local_0, align 8
+  %load_store_tmp = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp, ptr %local_1, align 8
+  %tmp = load ptr, ptr %local_1, align 8
+  %fld_ref = getelementptr inbounds %struct.string__String, ptr %tmp, i32 0, i32 0
+  store ptr %fld_ref, ptr %local_2__bytes, align 8
+  %retval = load ptr, ptr %local_2__bytes, align 8
+  ret ptr %retval
+}
+
+define void @"0000000000000001_string_append_utf8_HaK14brxmLbJBp"(ptr noalias nonnull %0, { ptr, i64, i64 } %1) {
+entry:
+  %local_0 = alloca ptr, align 8
+  %local_1 = alloca { ptr, i64, i64 }, align 8
+  %local_2 = alloca ptr, align 8
+  %local_3 = alloca { ptr, i64, i64 }, align 8
+  %local_4 = alloca %struct.string__String, align 8
+  store ptr %0, ptr %local_0, align 8
+  store { ptr, i64, i64 } %1, ptr %local_1, align 8
+  %load_store_tmp = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp, ptr %local_2, align 8
+  %load_store_tmp1 = load { ptr, i64, i64 }, ptr %local_1, align 8
+  store { ptr, i64, i64 } %load_store_tmp1, ptr %local_3, align 8
+  %call_arg_0 = load { ptr, i64, i64 }, ptr %local_3, align 8
+  %retval = call %struct.string__String @"0000000000000001_string_utf8_Fy6EqsEL4pdfgC"({ ptr, i64, i64 } %call_arg_0)
+  store %struct.string__String %retval, ptr %local_4, align 8
+  %call_arg_02 = load ptr, ptr %local_2, align 8
+  %call_arg_1 = load %struct.string__String, ptr %local_4, align 8
+  call void @"0000000000000001_string_append_DQe8grw7AGnkHc"(ptr %call_arg_02, %struct.string__String %call_arg_1)
+  ret void
+}
+
+define %struct.string__String @"0000000000000001_string_utf8_Fy6EqsEL4pdfgC"({ ptr, i64, i64 } %0) {
+entry:
+  %local_0 = alloca { ptr, i64, i64 }, align 8
+  %local_1 = alloca ptr, align 8
+  %local_2 = alloca i1, align 1
+  %local_3 = alloca i64, align 8
+  %local_4__bytes = alloca { ptr, i64, i64 }, align 8
+  %local_5 = alloca %struct.string__String, align 8
+  store { ptr, i64, i64 } %0, ptr %local_0, align 8
+  store ptr %local_0, ptr %local_1, align 8
+  %loaded_alloca = load ptr, ptr %local_1, align 8
+  %retval = call i1 @move_native_string_internal_check_utf8(ptr %loaded_alloca)
+  store i1 %retval, ptr %local_2, align 1
+  %cnd = load i1, ptr %local_2, align 1
+  br i1 %cnd, label %bb_1, label %bb_0
+
+bb_1:                                             ; preds = %entry
+  br label %bb_2
+
+bb_0:                                             ; preds = %entry
+  store i64 1, ptr %local_3, align 8
+  %call_arg_0 = load i64, ptr %local_3, align 8
+  call void @move_rt_abort(i64 %call_arg_0)
+  unreachable
+
+bb_2:                                             ; preds = %bb_1
+  %load_store_tmp = load { ptr, i64, i64 }, ptr %local_0, align 8
+  store { ptr, i64, i64 } %load_store_tmp, ptr %local_4__bytes, align 8
+  %fv.0 = load { ptr, i64, i64 }, ptr %local_4__bytes, align 8
+  %insert_0 = insertvalue %struct.string__String undef, { ptr, i64, i64 } %fv.0, 0
+  store %struct.string__String %insert_0, ptr %local_5, align 8
+  %retval1 = load %struct.string__String, ptr %local_5, align 8
+  ret %struct.string__String %retval1
+}
+
+declare i1 @move_native_string_internal_check_utf8(ptr)
+
+define %struct.string__String @"0000000000000001_string_from_ascii_231x8gDp4D9p4F"(%struct.ascii__String %0) {
+entry:
+  %local_0 = alloca %struct.ascii__String, align 8
+  %local_1 = alloca %struct.ascii__String, align 8
+  %local_2__bytes = alloca { ptr, i64, i64 }, align 8
+  %local_3 = alloca %struct.string__String, align 8
+  store %struct.ascii__String %0, ptr %local_0, align 8
+  %call_arg_0 = load %struct.ascii__String, ptr %local_0, align 8
+  %retval = call { ptr, i64, i64 } @"0000000000000001_ascii_into_bytes_FDcNSCdomW72yz"(%struct.ascii__String %call_arg_0)
+  store { ptr, i64, i64 } %retval, ptr %local_2__bytes, align 8
+  %fv.0 = load { ptr, i64, i64 }, ptr %local_2__bytes, align 8
+  %insert_0 = insertvalue %struct.string__String undef, { ptr, i64, i64 } %fv.0, 0
+  store %struct.string__String %insert_0, ptr %local_3, align 8
+  %retval1 = load %struct.string__String, ptr %local_3, align 8
+  ret %struct.string__String %retval1
+}
+
+declare { ptr, i64, i64 } @"0000000000000001_ascii_into_bytes_FDcNSCdomW72yz"(%struct.ascii__String)
+
+define %struct.ascii__String @"0000000000000001_string_to_ascii_6WSfsLe3JUejhz"(%struct.string__String %0) {
+entry:
+  %local_0 = alloca %struct.string__String, align 8
+  %local_1 = alloca %struct.string__String, align 8
+  %local_2__bytes = alloca { ptr, i64, i64 }, align 8
+  %local_3 = alloca %struct.ascii__String, align 8
+  store %struct.string__String %0, ptr %local_0, align 8
+  %srcval = load %struct.string__String, ptr %local_0, align 8
+  %ext_0 = extractvalue %struct.string__String %srcval, 0
+  store { ptr, i64, i64 } %ext_0, ptr %local_2__bytes, align 8
+  %call_arg_0 = load { ptr, i64, i64 }, ptr %local_2__bytes, align 8
+  %retval = call %struct.ascii__String @"0000000000000001_ascii_string_5ZneJ22oLb5aDc"({ ptr, i64, i64 } %call_arg_0)
+  store %struct.ascii__String %retval, ptr %local_3, align 8
+  %retval1 = load %struct.ascii__String, ptr %local_3, align 8
+  ret %struct.ascii__String %retval1
+}
+
+declare %struct.ascii__String @"0000000000000001_ascii_string_5ZneJ22oLb5aDc"({ ptr, i64, i64 })
+
+define %struct.option__Option_string__String_ @"0000000000000001_string_try_utf8_2NDjMousZSxnZr"({ ptr, i64, i64 } %0) {
+entry:
+  %local_0 = alloca { ptr, i64, i64 }, align 8
+  %local_1 = alloca %struct.option__Option_string__String_, align 8
+  %local_2 = alloca ptr, align 8
+  %local_3 = alloca i1, align 1
+  %local_4__bytes = alloca { ptr, i64, i64 }, align 8
+  %local_5 = alloca %struct.string__String, align 8
+  %local_6 = alloca %struct.option__Option_string__String_, align 8
+  %local_7 = alloca %struct.option__Option_string__String_, align 8
+  %local_8 = alloca %struct.option__Option_string__String_, align 8
+  store { ptr, i64, i64 } %0, ptr %local_0, align 8
+  store ptr %local_0, ptr %local_2, align 8
+  %loaded_alloca = load ptr, ptr %local_2, align 8
+  %retval = call i1 @move_native_string_internal_check_utf8(ptr %loaded_alloca)
+  store i1 %retval, ptr %local_3, align 1
+  %cnd = load i1, ptr %local_3, align 1
+  br i1 %cnd, label %bb_1, label %bb_0
+
+bb_1:                                             ; preds = %entry
+  %load_store_tmp = load { ptr, i64, i64 }, ptr %local_0, align 8
+  store { ptr, i64, i64 } %load_store_tmp, ptr %local_4__bytes, align 8
+  %fv.0 = load { ptr, i64, i64 }, ptr %local_4__bytes, align 8
+  %insert_0 = insertvalue %struct.string__String undef, { ptr, i64, i64 } %fv.0, 0
+  store %struct.string__String %insert_0, ptr %local_5, align 8
+  %call_arg_0 = load %struct.string__String, ptr %local_5, align 8
+  %retval1 = call %struct.option__Option_string__String_ @"0000000000000001_option_some_873wyos5WUFAHC"(%struct.string__String %call_arg_0)
+  store %struct.option__Option_string__String_ %retval1, ptr %local_6, align 8
+  %load_store_tmp2 = load %struct.option__Option_string__String_, ptr %local_6, align 8
+  store %struct.option__Option_string__String_ %load_store_tmp2, ptr %local_1, align 8
+  br label %bb_2
+
+bb_0:                                             ; preds = %entry
+  %retval3 = call %struct.option__Option_string__String_ @"0000000000000001_option_none_DbiPSiGprCceap"()
+  store %struct.option__Option_string__String_ %retval3, ptr %local_7, align 8
+  %load_store_tmp4 = load %struct.option__Option_string__String_, ptr %local_7, align 8
+  store %struct.option__Option_string__String_ %load_store_tmp4, ptr %local_1, align 8
+  br label %bb_2
+
+bb_2:                                             ; preds = %bb_0, %bb_1
+  %retval5 = load %struct.option__Option_string__String_, ptr %local_1, align 8
+  ret %struct.option__Option_string__String_ %retval5
+}
+
+define private %struct.option__Option_string__String_ @"0000000000000001_option_some_873wyos5WUFAHC"(%struct.string__String %0) {
+entry:
+  %local_0 = alloca %struct.string__String, align 8
+  %local_1 = alloca %struct.string__String, align 8
+  %local_2__vec = alloca { ptr, i64, i64 }, align 8
+  %local_3 = alloca %struct.option__Option_string__String_, align 8
+  store %struct.string__String %0, ptr %local_0, align 8
+  %call_arg_0 = load %struct.string__String, ptr %local_0, align 8
+  %retval = call { ptr, i64, i64 } @"0000000000000001_vector_singleton_GrW9zHe4R7RfoV"(%struct.string__String %call_arg_0)
+  store { ptr, i64, i64 } %retval, ptr %local_2__vec, align 8
+  %fv.0 = load { ptr, i64, i64 }, ptr %local_2__vec, align 8
+  %insert_0 = insertvalue %struct.option__Option_string__String_ undef, { ptr, i64, i64 } %fv.0, 0
+  store %struct.option__Option_string__String_ %insert_0, ptr %local_3, align 8
+  %retval1 = load %struct.option__Option_string__String_, ptr %local_3, align 8
+  ret %struct.option__Option_string__String_ %retval1
+}
+
+define private { ptr, i64, i64 } @"0000000000000001_vector_singleton_GrW9zHe4R7RfoV"(%struct.string__String %0) {
+entry:
+  %local_0 = alloca %struct.string__String, align 8
+  %local_1 = alloca { ptr, i64, i64 }, align 8
+  %local_2 = alloca { ptr, i64, i64 }, align 8
+  %local_3 = alloca ptr, align 8
+  %local_4 = alloca %struct.string__String, align 8
+  %local_5 = alloca { ptr, i64, i64 }, align 8
+  store %struct.string__String %0, ptr %local_0, align 8
+  %retval = call { ptr, i64, i64 } @move_native_vector_empty(ptr @__move_rttydesc_string__String)
+  store { ptr, i64, i64 } %retval, ptr %local_2, align 8
+  %load_store_tmp = load { ptr, i64, i64 }, ptr %local_2, align 8
+  store { ptr, i64, i64 } %load_store_tmp, ptr %local_1, align 8
+  store ptr %local_1, ptr %local_3, align 8
+  %loaded_alloca = load ptr, ptr %local_3, align 8
+  call void @move_native_vector_push_back(ptr @__move_rttydesc_string__String, ptr %loaded_alloca, ptr %local_0)
+  %load_store_tmp1 = load { ptr, i64, i64 }, ptr %local_1, align 8
+  store { ptr, i64, i64 } %load_store_tmp1, ptr %local_5, align 8
+  %retval2 = load { ptr, i64, i64 }, ptr %local_5, align 8
+  ret { ptr, i64, i64 } %retval2
+}
+
+declare { ptr, i64, i64 } @move_native_vector_empty(ptr)
+
+define private %struct.option__Option_string__String_ @"0000000000000001_option_none_DbiPSiGprCceap"() {
+entry:
+  %local_0__vec = alloca { ptr, i64, i64 }, align 8
+  %local_1 = alloca %struct.option__Option_string__String_, align 8
+  %retval = call { ptr, i64, i64 } @move_native_vector_empty(ptr @__move_rttydesc_string__String)
+  store { ptr, i64, i64 } %retval, ptr %local_0__vec, align 8
+  %fv.0 = load { ptr, i64, i64 }, ptr %local_0__vec, align 8
+  %insert_0 = insertvalue %struct.option__Option_string__String_ undef, { ptr, i64, i64 } %fv.0, 0
+  store %struct.option__Option_string__String_ %insert_0, ptr %local_1, align 8
+  %retval1 = load %struct.option__Option_string__String_, ptr %local_1, align 8
+  ret %struct.option__Option_string__String_ %retval1
+}
+
+declare void @move_rt_vec_destroy(ptr nonnull readonly dereferenceable(32), ptr)
+
+; Function Attrs: cold noreturn
+declare void @move_rt_abort(i64) #0
+
+attributes #0 = { cold noreturn }

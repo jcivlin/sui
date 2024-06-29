@@ -1,0 +1,1135 @@
+; ModuleID = '0x2__random'
+source_filename = "../../../../../../crates/sui-framework/packages/sui-framework/sources/random.move"
+target datalayout = "e-m:e-p:64:64-i64:64-n32:64-S128"
+target triple = "sbf-solana-solana"
+
+%__move_rt_type = type { { ptr, i64 }, i64, ptr }
+%struct.random__RandomInner = type { i64, i64, i64, { ptr, i64, i64 } }
+%struct.object__UID = type { %struct.object__ID }
+%struct.object__ID = type { [32 x i8] }
+%struct.versioned__Versioned = type { %struct.object__UID, i64 }
+%struct.random__Random = type { %struct.object__UID, %struct.versioned__Versioned }
+%struct.dynamic_field__Field_u64.random__RandomInner_ = type { %struct.object__UID, i64, %struct.random__RandomInner }
+
+@__move_rttydesc_signer = private unnamed_addr constant %__move_rt_type { { ptr, i64 } { ptr @__move_rttydesc_signer_name, i64 6 }, i64 9, ptr @__move_rttydesc_NOTHING_info }
+@__move_rttydesc_signer_name = private unnamed_addr constant [6 x i8] c"signer"
+@__move_rttydesc_NOTHING_info = private unnamed_addr constant i8 -1
+@acct.addr = internal constant [32 x i8] zeroinitializer
+@vec_literal = internal constant [0 x i8] zeroinitializer
+@vdesc = internal constant { ptr, i64, i64 } { ptr @vec_literal, i64 0, i64 0 }
+@__move_rttydesc_u8 = private unnamed_addr constant %__move_rt_type { { ptr, i64 } { ptr @__move_rttydesc_u8_name, i64 2 }, i64 2, ptr @__move_rttydesc_NOTHING_info }
+@__move_rttydesc_u8_name = private unnamed_addr constant [2 x i8] c"u8"
+@__move_rttydesc_u64 = private unnamed_addr constant %__move_rt_type { { ptr, i64 } { ptr @__move_rttydesc_u64_name, i64 3 }, i64 5, ptr @__move_rttydesc_NOTHING_info }
+@__move_rttydesc_u64_name = private unnamed_addr constant [3 x i8] c"u64"
+@"__move_rttydesc_dynamic_field__Field_u64, random__RandomInner_" = private unnamed_addr constant %__move_rt_type { { ptr, i64 } { ptr @"__move_rttydesc_dynamic_field__Field_u64, random__RandomInner__name", i64 177 }, i64 11, ptr @"__move_rttydesc_dynamic_field__Field_u64, random__RandomInner__info" }
+@"__move_rttydesc_dynamic_field__Field_u64, random__RandomInner__name" = private unnamed_addr constant [177 x i8] c"0000000000000000000000000000000000000000000000000000000000000002::dynamic_field::Field<u64,0000000000000000000000000000000000000000000000000000000000000002::random::RandomInner>"
+@__move_rttydesc_object__UID_name = private unnamed_addr constant [77 x i8] c"0000000000000000000000000000000000000000000000000000000000000002::object::UID"
+@__move_rttydesc_object__ID_name = private unnamed_addr constant [76 x i8] c"0000000000000000000000000000000000000000000000000000000000000002::object::ID"
+@__move_rttydesc_address_name = private unnamed_addr constant [7 x i8] c"address"
+@0 = private unnamed_addr constant [5 x i8] c"bytes"
+@s_fld_array = private unnamed_addr constant [1 x { %__move_rt_type, i64, { ptr, i64 } }] [{ %__move_rt_type, i64, { ptr, i64 } } { %__move_rt_type { { ptr, i64 } { ptr @__move_rttydesc_address_name, i64 7 }, i64 8, ptr @__move_rttydesc_NOTHING_info }, i64 0, { ptr, i64 } { ptr @0, i64 5 } }]
+@__move_rttydesc_object__ID_info = private unnamed_addr constant { ptr, i64, i64, i64 } { ptr @s_fld_array, i64 1, i64 32, i64 1 }
+@1 = private unnamed_addr constant [2 x i8] c"id"
+@s_fld_array.1 = private unnamed_addr constant [1 x { %__move_rt_type, i64, { ptr, i64 } }] [{ %__move_rt_type, i64, { ptr, i64 } } { %__move_rt_type { { ptr, i64 } { ptr @__move_rttydesc_object__ID_name, i64 76 }, i64 11, ptr @__move_rttydesc_object__ID_info }, i64 0, { ptr, i64 } { ptr @1, i64 2 } }]
+@__move_rttydesc_object__UID_info = private unnamed_addr constant { ptr, i64, i64, i64 } { ptr @s_fld_array.1, i64 1, i64 32, i64 1 }
+@2 = private unnamed_addr constant [2 x i8] c"id"
+@3 = private unnamed_addr constant [4 x i8] c"name"
+@__move_rttydesc_random__RandomInner_name = private unnamed_addr constant [85 x i8] c"0000000000000000000000000000000000000000000000000000000000000002::random::RandomInner"
+@4 = private unnamed_addr constant [7 x i8] c"version"
+@5 = private unnamed_addr constant [5 x i8] c"epoch"
+@6 = private unnamed_addr constant [16 x i8] c"randomness_round"
+@__move_rttydesc_vector_u8__name = private unnamed_addr constant [10 x i8] c"vector<u8>"
+@__move_rttydesc_vector_u8__info = private unnamed_addr constant { ptr } { ptr @__move_rttydesc_u8 }
+@7 = private unnamed_addr constant [12 x i8] c"random_bytes"
+@s_fld_array.2 = private unnamed_addr constant [4 x { %__move_rt_type, i64, { ptr, i64 } }] [{ %__move_rt_type, i64, { ptr, i64 } } { %__move_rt_type { { ptr, i64 } { ptr @__move_rttydesc_u64_name, i64 3 }, i64 5, ptr @__move_rttydesc_NOTHING_info }, i64 0, { ptr, i64 } { ptr @4, i64 7 } }, { %__move_rt_type, i64, { ptr, i64 } } { %__move_rt_type { { ptr, i64 } { ptr @__move_rttydesc_u64_name, i64 3 }, i64 5, ptr @__move_rttydesc_NOTHING_info }, i64 8, { ptr, i64 } { ptr @5, i64 5 } }, { %__move_rt_type, i64, { ptr, i64 } } { %__move_rt_type { { ptr, i64 } { ptr @__move_rttydesc_u64_name, i64 3 }, i64 5, ptr @__move_rttydesc_NOTHING_info }, i64 16, { ptr, i64 } { ptr @6, i64 16 } }, { %__move_rt_type, i64, { ptr, i64 } } { %__move_rt_type { { ptr, i64 } { ptr @__move_rttydesc_vector_u8__name, i64 10 }, i64 10, ptr @__move_rttydesc_vector_u8__info }, i64 24, { ptr, i64 } { ptr @7, i64 12 } }]
+@__move_rttydesc_random__RandomInner_info = private unnamed_addr constant { ptr, i64, i64, i64 } { ptr @s_fld_array.2, i64 4, i64 48, i64 8 }
+@8 = private unnamed_addr constant [5 x i8] c"value"
+@s_fld_array.3 = private unnamed_addr constant [3 x { %__move_rt_type, i64, { ptr, i64 } }] [{ %__move_rt_type, i64, { ptr, i64 } } { %__move_rt_type { { ptr, i64 } { ptr @__move_rttydesc_object__UID_name, i64 77 }, i64 11, ptr @__move_rttydesc_object__UID_info }, i64 0, { ptr, i64 } { ptr @2, i64 2 } }, { %__move_rt_type, i64, { ptr, i64 } } { %__move_rt_type { { ptr, i64 } { ptr @__move_rttydesc_u64_name, i64 3 }, i64 5, ptr @__move_rttydesc_NOTHING_info }, i64 32, { ptr, i64 } { ptr @3, i64 4 } }, { %__move_rt_type, i64, { ptr, i64 } } { %__move_rt_type { { ptr, i64 } { ptr @__move_rttydesc_random__RandomInner_name, i64 85 }, i64 11, ptr @__move_rttydesc_random__RandomInner_info }, i64 40, { ptr, i64 } { ptr @8, i64 5 } }]
+@"__move_rttydesc_dynamic_field__Field_u64, random__RandomInner__info" = private unnamed_addr constant { ptr, i64, i64, i64 } { ptr @s_fld_array.3, i64 3, i64 88, i64 8 }
+@__move_rttydesc_random__Random = private unnamed_addr constant %__move_rt_type { { ptr, i64 } { ptr @__move_rttydesc_random__Random_name, i64 80 }, i64 11, ptr @__move_rttydesc_random__Random_info }
+@__move_rttydesc_random__Random_name = private unnamed_addr constant [80 x i8] c"0000000000000000000000000000000000000000000000000000000000000002::random::Random"
+@9 = private unnamed_addr constant [2 x i8] c"id"
+@__move_rttydesc_versioned__Versioned_name = private unnamed_addr constant [86 x i8] c"0000000000000000000000000000000000000000000000000000000000000002::versioned::Versioned"
+@10 = private unnamed_addr constant [2 x i8] c"id"
+@11 = private unnamed_addr constant [7 x i8] c"version"
+@s_fld_array.4 = private unnamed_addr constant [2 x { %__move_rt_type, i64, { ptr, i64 } }] [{ %__move_rt_type, i64, { ptr, i64 } } { %__move_rt_type { { ptr, i64 } { ptr @__move_rttydesc_object__UID_name, i64 77 }, i64 11, ptr @__move_rttydesc_object__UID_info }, i64 0, { ptr, i64 } { ptr @10, i64 2 } }, { %__move_rt_type, i64, { ptr, i64 } } { %__move_rt_type { { ptr, i64 } { ptr @__move_rttydesc_u64_name, i64 3 }, i64 5, ptr @__move_rttydesc_NOTHING_info }, i64 32, { ptr, i64 } { ptr @11, i64 7 } }]
+@__move_rttydesc_versioned__Versioned_info = private unnamed_addr constant { ptr, i64, i64, i64 } { ptr @s_fld_array.4, i64 2, i64 40, i64 8 }
+@12 = private unnamed_addr constant [5 x i8] c"inner"
+@s_fld_array.5 = private unnamed_addr constant [2 x { %__move_rt_type, i64, { ptr, i64 } }] [{ %__move_rt_type, i64, { ptr, i64 } } { %__move_rt_type { { ptr, i64 } { ptr @__move_rttydesc_object__UID_name, i64 77 }, i64 11, ptr @__move_rttydesc_object__UID_info }, i64 0, { ptr, i64 } { ptr @9, i64 2 } }, { %__move_rt_type, i64, { ptr, i64 } } { %__move_rt_type { { ptr, i64 } { ptr @__move_rttydesc_versioned__Versioned_name, i64 86 }, i64 11, ptr @__move_rttydesc_versioned__Versioned_info }, i64 32, { ptr, i64 } { ptr @12, i64 5 } }]
+@__move_rttydesc_random__Random_info = private unnamed_addr constant { ptr, i64, i64, i64 } { ptr @s_fld_array.5, i64 2, i64 72, i64 8 }
+@acct.addr.6 = internal constant [32 x i8] zeroinitializer
+
+declare i32 @memcmp(ptr, ptr, i64)
+
+define void @"0000000000000002_random_unit_test_poiso_9xVFiNC534DgTP"() {
+entry:
+  %local_0 = alloca i64, align 8
+  %local_1 = alloca { ptr, i64, i64 }, align 8
+  store i64 0, ptr %local_0, align 8
+  %loaded_alloca = load i64, ptr %local_0, align 8
+  %retval = call { ptr, i64, i64 } @move_native_unit_test_create_signers_for_testing(i64 %loaded_alloca)
+  store { ptr, i64, i64 } %retval, ptr %local_1, align 8
+  call void @move_rt_vec_destroy(ptr @__move_rttydesc_signer, ptr %local_1)
+  ret void
+}
+
+declare { ptr, i64, i64 } @move_native_unit_test_create_signers_for_testing(i64)
+
+define private void @"0000000000000002_random_create_FpkkPJuxc4RfJB"(ptr noalias nonnull %0) {
+entry:
+  %newv = alloca { ptr, i64, i64 }, align 8
+  %local_0 = alloca ptr, align 8
+  %local_1 = alloca %struct.random__RandomInner, align 8
+  %local_2 = alloca i64, align 8
+  %local_3 = alloca ptr, align 8
+  %local_4 = alloca ptr, align 8
+  %local_5 = alloca [32 x i8], align 1
+  %local_6 = alloca [32 x i8], align 1
+  %local_7 = alloca i1, align 1
+  %local_8 = alloca ptr, align 8
+  %local_9 = alloca i64, align 8
+  %local_10 = alloca i64, align 8
+  %local_11__version = alloca i64, align 8
+  %local_12 = alloca ptr, align 8
+  %local_13 = alloca ptr, align 8
+  %local_14__epoch = alloca i64, align 8
+  %local_15__randomness_round = alloca i64, align 8
+  %local_16__random_bytes = alloca { ptr, i64, i64 }, align 8
+  %local_17 = alloca %struct.random__RandomInner, align 8
+  %local_18__id = alloca %struct.object__UID, align 8
+  %local_19 = alloca i64, align 8
+  %local_20 = alloca %struct.random__RandomInner, align 8
+  %local_21 = alloca ptr, align 8
+  %local_22__inner = alloca %struct.versioned__Versioned, align 8
+  %local_23 = alloca %struct.random__Random, align 8
+  store ptr %0, ptr %local_0, align 8
+  %load_store_tmp = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp, ptr %local_3, align 8
+  %load_store_tmp1 = load ptr, ptr %local_3, align 8
+  store ptr %load_store_tmp1, ptr %local_4, align 8
+  %call_arg_0 = load ptr, ptr %local_4, align 8
+  %retval = call [32 x i8] @"0000000000000002_tx_context_sender_9nYw9GTwZ2W8pp"(ptr %call_arg_0)
+  store [32 x i8] %retval, ptr %local_5, align 1
+  %1 = load [32 x i8], ptr @acct.addr, align 1
+  store [32 x i8] %1, ptr %local_6, align 1
+  %2 = call i32 @memcmp(ptr %local_5, ptr %local_6, i64 32)
+  %eq_dst = icmp eq i32 %2, 0
+  store i1 %eq_dst, ptr %local_7, align 1
+  %cnd = load i1, ptr %local_7, align 1
+  br i1 %cnd, label %bb_1, label %bb_0
+
+bb_1:                                             ; preds = %entry
+  br label %bb_2
+
+bb_0:                                             ; preds = %entry
+  %load_store_tmp2 = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp2, ptr %local_8, align 8
+  store i64 0, ptr %local_9, align 8
+  %call_arg_03 = load i64, ptr %local_9, align 8
+  call void @move_rt_abort(i64 %call_arg_03)
+  unreachable
+
+bb_2:                                             ; preds = %bb_1
+  store i64 1, ptr %local_10, align 8
+  %load_store_tmp4 = load i64, ptr %local_10, align 8
+  store i64 %load_store_tmp4, ptr %local_2, align 8
+  %load_store_tmp5 = load i64, ptr %local_2, align 8
+  store i64 %load_store_tmp5, ptr %local_11__version, align 8
+  %load_store_tmp6 = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp6, ptr %local_12, align 8
+  %load_store_tmp7 = load ptr, ptr %local_12, align 8
+  store ptr %load_store_tmp7, ptr %local_13, align 8
+  %call_arg_08 = load ptr, ptr %local_13, align 8
+  %retval9 = call i64 @"0000000000000002_tx_context_epoch_D93PCrdoigPcah"(ptr %call_arg_08)
+  store i64 %retval9, ptr %local_14__epoch, align 8
+  store i64 0, ptr %local_15__randomness_round, align 8
+  %3 = call { ptr, i64, i64 } @move_rt_vec_empty(ptr @__move_rttydesc_u8)
+  store { ptr, i64, i64 } %3, ptr %newv, align 8
+  call void @move_rt_vec_copy(ptr @__move_rttydesc_u8, ptr %newv, ptr @vdesc)
+  %reload = load { ptr, i64, i64 }, ptr %newv, align 8
+  store { ptr, i64, i64 } %reload, ptr %local_16__random_bytes, align 8
+  %fv.0 = load i64, ptr %local_11__version, align 8
+  %fv.1 = load i64, ptr %local_14__epoch, align 8
+  %fv.2 = load i64, ptr %local_15__randomness_round, align 8
+  %fv.3 = load { ptr, i64, i64 }, ptr %local_16__random_bytes, align 8
+  %insert_0 = insertvalue %struct.random__RandomInner undef, i64 %fv.0, 0
+  %insert_1 = insertvalue %struct.random__RandomInner %insert_0, i64 %fv.1, 1
+  %insert_2 = insertvalue %struct.random__RandomInner %insert_1, i64 %fv.2, 2
+  %insert_3 = insertvalue %struct.random__RandomInner %insert_2, { ptr, i64, i64 } %fv.3, 3
+  store %struct.random__RandomInner %insert_3, ptr %local_17, align 8
+  %load_store_tmp10 = load %struct.random__RandomInner, ptr %local_17, align 8
+  store %struct.random__RandomInner %load_store_tmp10, ptr %local_1, align 8
+  %retval11 = call %struct.object__UID @"0000000000000002_object_randomness_stat_F2bSX7NgjPFJbo"()
+  store %struct.object__UID %retval11, ptr %local_18__id, align 1
+  %load_store_tmp12 = load i64, ptr %local_2, align 8
+  store i64 %load_store_tmp12, ptr %local_19, align 8
+  %load_store_tmp13 = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp13, ptr %local_21, align 8
+  %call_arg_014 = load i64, ptr %local_19, align 8
+  %call_arg_1 = load %struct.random__RandomInner, ptr %local_1, align 8
+  %call_arg_2 = load ptr, ptr %local_21, align 8
+  %retval15 = call %struct.versioned__Versioned @"0000000000000002_versioned_create_4Equga6fwSBmzB"(i64 %call_arg_014, %struct.random__RandomInner %call_arg_1, ptr %call_arg_2)
+  store %struct.versioned__Versioned %retval15, ptr %local_22__inner, align 8
+  %fv.016 = load %struct.object__UID, ptr %local_18__id, align 1
+  %fv.117 = load %struct.versioned__Versioned, ptr %local_22__inner, align 8
+  %insert_018 = insertvalue %struct.random__Random undef, %struct.object__UID %fv.016, 0
+  %insert_119 = insertvalue %struct.random__Random %insert_018, %struct.versioned__Versioned %fv.117, 1
+  store %struct.random__Random %insert_119, ptr %local_23, align 8
+  %call_arg_020 = load %struct.random__Random, ptr %local_23, align 8
+  call void @"0000000000000002_transfer_share_object_GN7HxZ1htutrzs"(%struct.random__Random %call_arg_020)
+  ret void
+}
+
+declare [32 x i8] @"0000000000000002_tx_context_sender_9nYw9GTwZ2W8pp"(ptr nonnull readonly)
+
+declare i64 @"0000000000000002_tx_context_epoch_D93PCrdoigPcah"(ptr nonnull readonly)
+
+declare %struct.object__UID @"0000000000000002_object_randomness_stat_F2bSX7NgjPFJbo"()
+
+define private %struct.versioned__Versioned @"0000000000000002_versioned_create_4Equga6fwSBmzB"(i64 %0, %struct.random__RandomInner %1, ptr noalias nonnull %2) {
+entry:
+  %local_0 = alloca i64, align 8
+  %local_1 = alloca %struct.random__RandomInner, align 8
+  %local_2 = alloca ptr, align 8
+  %local_3 = alloca %struct.versioned__Versioned, align 8
+  %local_4 = alloca ptr, align 8
+  %local_5__id = alloca %struct.object__UID, align 8
+  %local_6__version = alloca i64, align 8
+  %local_7 = alloca %struct.versioned__Versioned, align 8
+  %local_8 = alloca ptr, align 8
+  %local_9__id = alloca ptr, align 8
+  %local_10 = alloca i64, align 8
+  %local_11 = alloca %struct.random__RandomInner, align 8
+  %local_12 = alloca %struct.versioned__Versioned, align 8
+  store i64 %0, ptr %local_0, align 8
+  store %struct.random__RandomInner %1, ptr %local_1, align 8
+  store ptr %2, ptr %local_2, align 8
+  %load_store_tmp = load ptr, ptr %local_2, align 8
+  store ptr %load_store_tmp, ptr %local_4, align 8
+  %call_arg_0 = load ptr, ptr %local_4, align 8
+  %retval = call %struct.object__UID @"0000000000000002_object_new_7YpMdzkAYZzs1W"(ptr %call_arg_0)
+  store %struct.object__UID %retval, ptr %local_5__id, align 1
+  %load_store_tmp1 = load i64, ptr %local_0, align 8
+  store i64 %load_store_tmp1, ptr %local_6__version, align 8
+  %fv.0 = load %struct.object__UID, ptr %local_5__id, align 1
+  %fv.1 = load i64, ptr %local_6__version, align 8
+  %insert_0 = insertvalue %struct.versioned__Versioned undef, %struct.object__UID %fv.0, 0
+  %insert_1 = insertvalue %struct.versioned__Versioned %insert_0, i64 %fv.1, 1
+  store %struct.versioned__Versioned %insert_1, ptr %local_7, align 8
+  %load_store_tmp2 = load %struct.versioned__Versioned, ptr %local_7, align 8
+  store %struct.versioned__Versioned %load_store_tmp2, ptr %local_3, align 8
+  store ptr %local_3, ptr %local_8, align 8
+  %tmp = load ptr, ptr %local_8, align 8
+  %fld_ref = getelementptr inbounds %struct.versioned__Versioned, ptr %tmp, i32 0, i32 0
+  store ptr %fld_ref, ptr %local_9__id, align 8
+  %load_store_tmp3 = load i64, ptr %local_0, align 8
+  store i64 %load_store_tmp3, ptr %local_10, align 8
+  %call_arg_04 = load ptr, ptr %local_9__id, align 8
+  %call_arg_1 = load i64, ptr %local_10, align 8
+  %call_arg_2 = load %struct.random__RandomInner, ptr %local_1, align 8
+  call void @"0000000000000002_dynamic_field_add_3HULj7U5K931Zx"(ptr %call_arg_04, i64 %call_arg_1, %struct.random__RandomInner %call_arg_2)
+  %retval5 = load %struct.versioned__Versioned, ptr %local_3, align 8
+  ret %struct.versioned__Versioned %retval5
+}
+
+declare %struct.object__UID @"0000000000000002_object_new_7YpMdzkAYZzs1W"(ptr noalias nonnull)
+
+define private void @"0000000000000002_dynamic_field_add_3HULj7U5K931Zx"(ptr noalias nonnull %0, i64 %1, %struct.random__RandomInner %2) {
+entry:
+  %local_0 = alloca ptr, align 8
+  %local_1 = alloca i64, align 8
+  %local_2 = alloca %struct.random__RandomInner, align 8
+  %local_3 = alloca %struct.dynamic_field__Field_u64.random__RandomInner_, align 8
+  %local_4 = alloca [32 x i8], align 1
+  %local_5 = alloca [32 x i8], align 1
+  %local_6 = alloca ptr, align 8
+  %local_7 = alloca ptr, align 8
+  %local_8 = alloca [32 x i8], align 1
+  %local_9 = alloca [32 x i8], align 1
+  %local_10 = alloca i64, align 8
+  %local_11 = alloca [32 x i8], align 1
+  %local_12 = alloca [32 x i8], align 1
+  %local_13 = alloca [32 x i8], align 1
+  %local_14 = alloca i1, align 1
+  %local_15 = alloca i1, align 1
+  %local_16 = alloca i64, align 8
+  %local_17 = alloca [32 x i8], align 1
+  %local_18__id = alloca %struct.object__UID, align 8
+  %local_19__name = alloca i64, align 8
+  %local_20__value = alloca %struct.random__RandomInner, align 8
+  %local_21 = alloca %struct.dynamic_field__Field_u64.random__RandomInner_, align 8
+  %local_22 = alloca [32 x i8], align 1
+  %local_23 = alloca %struct.dynamic_field__Field_u64.random__RandomInner_, align 8
+  store ptr %0, ptr %local_0, align 8
+  store i64 %1, ptr %local_1, align 8
+  store %struct.random__RandomInner %2, ptr %local_2, align 8
+  %load_store_tmp = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp, ptr %local_6, align 8
+  %load_store_tmp1 = load ptr, ptr %local_6, align 8
+  store ptr %load_store_tmp1, ptr %local_7, align 8
+  %call_arg_0 = load ptr, ptr %local_7, align 8
+  %retval = call [32 x i8] @"0000000000000002_object_uid_to_address_DdQo7Y9Arw6ggD"(ptr %call_arg_0)
+  store [32 x i8] %retval, ptr %local_8, align 1
+  %load_store_tmp2 = load [32 x i8], ptr %local_8, align 1
+  store [32 x i8] %load_store_tmp2, ptr %local_5, align 1
+  %load_store_tmp3 = load [32 x i8], ptr %local_5, align 1
+  store [32 x i8] %load_store_tmp3, ptr %local_9, align 1
+  %load_store_tmp4 = load i64, ptr %local_1, align 8
+  store i64 %load_store_tmp4, ptr %local_10, align 8
+  %loaded_alloca = load [32 x i8], ptr %local_9, align 1
+  %retval5 = call [32 x i8] @move_native_dynamic_field_hash_type_and_key(ptr @__move_rttydesc_u64, [32 x i8] %loaded_alloca, ptr %local_10)
+  store [32 x i8] %retval5, ptr %local_11, align 1
+  %load_store_tmp6 = load [32 x i8], ptr %local_11, align 1
+  store [32 x i8] %load_store_tmp6, ptr %local_4, align 1
+  %load_store_tmp7 = load [32 x i8], ptr %local_5, align 1
+  store [32 x i8] %load_store_tmp7, ptr %local_12, align 1
+  %load_store_tmp8 = load [32 x i8], ptr %local_4, align 1
+  store [32 x i8] %load_store_tmp8, ptr %local_13, align 1
+  %loaded_alloca9 = load [32 x i8], ptr %local_12, align 1
+  %loaded_alloca10 = load [32 x i8], ptr %local_13, align 1
+  %retval11 = call i1 @move_native_dynamic_field_has_child_object([32 x i8] %loaded_alloca9, [32 x i8] %loaded_alloca10)
+  store i1 %retval11, ptr %local_14, align 1
+  %not_src = load i1, ptr %local_14, align 1
+  %not_dst = xor i1 %not_src, true
+  store i1 %not_dst, ptr %local_15, align 1
+  %cnd = load i1, ptr %local_15, align 1
+  br i1 %cnd, label %bb_1, label %bb_0
+
+bb_1:                                             ; preds = %entry
+  br label %bb_2
+
+bb_0:                                             ; preds = %entry
+  store i64 0, ptr %local_16, align 8
+  %call_arg_012 = load i64, ptr %local_16, align 8
+  call void @move_rt_abort(i64 %call_arg_012)
+  unreachable
+
+bb_2:                                             ; preds = %bb_1
+  %call_arg_013 = load [32 x i8], ptr %local_4, align 1
+  %retval14 = call %struct.object__UID @"0000000000000002_object_new_uid_from_ha_3qCxFQoQFKfVJZ"([32 x i8] %call_arg_013)
+  store %struct.object__UID %retval14, ptr %local_18__id, align 1
+  %load_store_tmp15 = load i64, ptr %local_1, align 8
+  store i64 %load_store_tmp15, ptr %local_19__name, align 8
+  %fv.0 = load %struct.object__UID, ptr %local_18__id, align 1
+  %fv.1 = load i64, ptr %local_19__name, align 8
+  %fv.2 = load %struct.random__RandomInner, ptr %local_2, align 8
+  %insert_0 = insertvalue %struct.dynamic_field__Field_u64.random__RandomInner_ undef, %struct.object__UID %fv.0, 0
+  %insert_1 = insertvalue %struct.dynamic_field__Field_u64.random__RandomInner_ %insert_0, i64 %fv.1, 1
+  %insert_2 = insertvalue %struct.dynamic_field__Field_u64.random__RandomInner_ %insert_1, %struct.random__RandomInner %fv.2, 2
+  store %struct.dynamic_field__Field_u64.random__RandomInner_ %insert_2, ptr %local_21, align 8
+  %load_store_tmp16 = load %struct.dynamic_field__Field_u64.random__RandomInner_, ptr %local_21, align 8
+  store %struct.dynamic_field__Field_u64.random__RandomInner_ %load_store_tmp16, ptr %local_3, align 8
+  %loaded_alloca17 = load [32 x i8], ptr %local_5, align 1
+  call void @move_native_dynamic_field_add_child_object(ptr @"__move_rttydesc_dynamic_field__Field_u64, random__RandomInner_", [32 x i8] %loaded_alloca17, ptr %local_3)
+  ret void
+}
+
+declare [32 x i8] @"0000000000000002_object_uid_to_address_DdQo7Y9Arw6ggD"(ptr nonnull readonly)
+
+declare [32 x i8] @move_native_dynamic_field_hash_type_and_key(ptr, [32 x i8], ptr)
+
+declare i1 @move_native_dynamic_field_has_child_object([32 x i8], [32 x i8])
+
+declare %struct.object__UID @"0000000000000002_object_new_uid_from_ha_3qCxFQoQFKfVJZ"([32 x i8])
+
+declare void @move_native_dynamic_field_add_child_object(ptr, [32 x i8], ptr)
+
+define private void @"0000000000000002_transfer_share_object_GN7HxZ1htutrzs"(%struct.random__Random %0) {
+entry:
+  %local_0 = alloca %struct.random__Random, align 8
+  %local_1 = alloca %struct.random__Random, align 8
+  store %struct.random__Random %0, ptr %local_0, align 8
+  call void @move_native_transfer_share_object_impl(ptr @__move_rttydesc_random__Random, ptr %local_0)
+  ret void
+}
+
+declare void @move_native_transfer_share_object_impl(ptr, ptr)
+
+define void @"0000000000000002_random_create_for_test_GGp1v92FA6Z3iD"(ptr noalias nonnull %0) {
+entry:
+  %local_0 = alloca ptr, align 8
+  %local_1 = alloca ptr, align 8
+  store ptr %0, ptr %local_0, align 8
+  %load_store_tmp = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp, ptr %local_1, align 8
+  %call_arg_0 = load ptr, ptr %local_1, align 8
+  call void @"0000000000000002_random_create_FpkkPJuxc4RfJB"(ptr %call_arg_0)
+  ret void
+}
+
+define private ptr @"0000000000000002_random_load_inner_M9GzCdbRAQarZ9"(ptr nonnull readonly %0) {
+entry:
+  %local_0 = alloca ptr, align 8
+  %local_1 = alloca ptr, align 8
+  %local_2 = alloca i64, align 8
+  %local_3 = alloca ptr, align 8
+  %local_4__inner = alloca ptr, align 8
+  %local_5 = alloca i64, align 8
+  %local_6 = alloca i64, align 8
+  %local_7 = alloca i64, align 8
+  %local_8 = alloca i1, align 1
+  %local_9 = alloca ptr, align 8
+  %local_10 = alloca i64, align 8
+  %local_11 = alloca ptr, align 8
+  %local_12__inner = alloca ptr, align 8
+  %local_13 = alloca ptr, align 8
+  %local_14 = alloca ptr, align 8
+  %local_15__version = alloca ptr, align 8
+  %local_16 = alloca i64, align 8
+  %local_17 = alloca i64, align 8
+  %local_18 = alloca i1, align 1
+  %local_19 = alloca ptr, align 8
+  %local_20 = alloca i64, align 8
+  %local_21 = alloca ptr, align 8
+  store ptr %0, ptr %local_0, align 8
+  %load_store_tmp = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp, ptr %local_3, align 8
+  %tmp = load ptr, ptr %local_3, align 8
+  %fld_ref = getelementptr inbounds %struct.random__Random, ptr %tmp, i32 0, i32 1
+  store ptr %fld_ref, ptr %local_4__inner, align 8
+  %call_arg_0 = load ptr, ptr %local_4__inner, align 8
+  %retval = call i64 @"0000000000000002_versioned_version_8JZ7hWJTzaisGi"(ptr %call_arg_0)
+  store i64 %retval, ptr %local_5, align 8
+  %load_store_tmp1 = load i64, ptr %local_5, align 8
+  store i64 %load_store_tmp1, ptr %local_2, align 8
+  %load_store_tmp2 = load i64, ptr %local_2, align 8
+  store i64 %load_store_tmp2, ptr %local_6, align 8
+  store i64 1, ptr %local_7, align 8
+  %eq_src_0 = load i64, ptr %local_6, align 8
+  %eq_src_1 = load i64, ptr %local_7, align 8
+  %eq_dst = icmp eq i64 %eq_src_0, %eq_src_1
+  store i1 %eq_dst, ptr %local_8, align 1
+  %cnd = load i1, ptr %local_8, align 1
+  br i1 %cnd, label %bb_1, label %bb_0
+
+bb_1:                                             ; preds = %entry
+  br label %bb_2
+
+bb_0:                                             ; preds = %entry
+  %load_store_tmp3 = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp3, ptr %local_9, align 8
+  store i64 1, ptr %local_10, align 8
+  %call_arg_04 = load i64, ptr %local_10, align 8
+  call void @move_rt_abort(i64 %call_arg_04)
+  unreachable
+
+bb_2:                                             ; preds = %bb_1
+  %load_store_tmp5 = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp5, ptr %local_11, align 8
+  %tmp6 = load ptr, ptr %local_11, align 8
+  %fld_ref7 = getelementptr inbounds %struct.random__Random, ptr %tmp6, i32 0, i32 1
+  store ptr %fld_ref7, ptr %local_12__inner, align 8
+  %call_arg_08 = load ptr, ptr %local_12__inner, align 8
+  %retval9 = call ptr @"0000000000000002_versioned_load_value_GYiC2X5enCY1cj"(ptr %call_arg_08)
+  store ptr %retval9, ptr %local_13, align 8
+  %load_store_tmp10 = load ptr, ptr %local_13, align 8
+  store ptr %load_store_tmp10, ptr %local_1, align 8
+  %load_store_tmp11 = load ptr, ptr %local_1, align 8
+  store ptr %load_store_tmp11, ptr %local_14, align 8
+  %tmp12 = load ptr, ptr %local_14, align 8
+  %fld_ref13 = getelementptr inbounds %struct.random__RandomInner, ptr %tmp12, i32 0, i32 0
+  store ptr %fld_ref13, ptr %local_15__version, align 8
+  %load_deref_store_tmp1 = load ptr, ptr %local_15__version, align 8
+  %load_deref_store_tmp2 = load i64, ptr %load_deref_store_tmp1, align 8
+  store i64 %load_deref_store_tmp2, ptr %local_16, align 8
+  %load_store_tmp14 = load i64, ptr %local_2, align 8
+  store i64 %load_store_tmp14, ptr %local_17, align 8
+  %eq_src_015 = load i64, ptr %local_16, align 8
+  %eq_src_116 = load i64, ptr %local_17, align 8
+  %eq_dst17 = icmp eq i64 %eq_src_015, %eq_src_116
+  store i1 %eq_dst17, ptr %local_18, align 1
+  %cnd18 = load i1, ptr %local_18, align 1
+  br i1 %cnd18, label %bb_4, label %bb_3
+
+bb_4:                                             ; preds = %bb_2
+  br label %bb_5
+
+bb_3:                                             ; preds = %bb_2
+  %load_store_tmp19 = load ptr, ptr %local_1, align 8
+  store ptr %load_store_tmp19, ptr %local_19, align 8
+  store i64 1, ptr %local_20, align 8
+  %call_arg_020 = load i64, ptr %local_20, align 8
+  call void @move_rt_abort(i64 %call_arg_020)
+  unreachable
+
+bb_5:                                             ; preds = %bb_4
+  %load_store_tmp21 = load ptr, ptr %local_1, align 8
+  store ptr %load_store_tmp21, ptr %local_21, align 8
+  %retval22 = load ptr, ptr %local_21, align 8
+  ret ptr %retval22
+}
+
+declare i64 @"0000000000000002_versioned_version_8JZ7hWJTzaisGi"(ptr nonnull readonly)
+
+define private ptr @"0000000000000002_versioned_load_value_GYiC2X5enCY1cj"(ptr nonnull readonly %0) {
+entry:
+  %local_0 = alloca ptr, align 8
+  %local_1 = alloca ptr, align 8
+  %local_2__id = alloca ptr, align 8
+  %local_3 = alloca ptr, align 8
+  %local_4__version = alloca ptr, align 8
+  %local_5 = alloca i64, align 8
+  %local_6 = alloca ptr, align 8
+  store ptr %0, ptr %local_0, align 8
+  %load_store_tmp = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp, ptr %local_1, align 8
+  %tmp = load ptr, ptr %local_1, align 8
+  %fld_ref = getelementptr inbounds %struct.versioned__Versioned, ptr %tmp, i32 0, i32 0
+  store ptr %fld_ref, ptr %local_2__id, align 8
+  %load_store_tmp1 = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp1, ptr %local_3, align 8
+  %tmp2 = load ptr, ptr %local_3, align 8
+  %fld_ref3 = getelementptr inbounds %struct.versioned__Versioned, ptr %tmp2, i32 0, i32 1
+  store ptr %fld_ref3, ptr %local_4__version, align 8
+  %load_deref_store_tmp1 = load ptr, ptr %local_4__version, align 8
+  %load_deref_store_tmp2 = load i64, ptr %load_deref_store_tmp1, align 8
+  store i64 %load_deref_store_tmp2, ptr %local_5, align 8
+  %call_arg_0 = load ptr, ptr %local_2__id, align 8
+  %call_arg_1 = load i64, ptr %local_5, align 8
+  %retval = call ptr @"0000000000000002_dynamic_field_borrow_146KrxPv41HujF"(ptr %call_arg_0, i64 %call_arg_1)
+  store ptr %retval, ptr %local_6, align 8
+  %retval4 = load ptr, ptr %local_6, align 8
+  ret ptr %retval4
+}
+
+define private ptr @"0000000000000002_dynamic_field_borrow_146KrxPv41HujF"(ptr nonnull readonly %0, i64 %1) {
+entry:
+  %local_0 = alloca ptr, align 8
+  %local_1 = alloca i64, align 8
+  %local_2 = alloca [32 x i8], align 1
+  %local_3 = alloca ptr, align 8
+  %local_4 = alloca [32 x i8], align 1
+  %local_5 = alloca i64, align 8
+  %local_6 = alloca [32 x i8], align 1
+  %local_7 = alloca ptr, align 8
+  %local_8 = alloca [32 x i8], align 1
+  %local_9 = alloca ptr, align 8
+  %local_10__value = alloca ptr, align 8
+  store ptr %0, ptr %local_0, align 8
+  store i64 %1, ptr %local_1, align 8
+  %load_store_tmp = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp, ptr %local_3, align 8
+  %call_arg_0 = load ptr, ptr %local_3, align 8
+  %retval = call [32 x i8] @"0000000000000002_object_uid_to_address_DdQo7Y9Arw6ggD"(ptr %call_arg_0)
+  store [32 x i8] %retval, ptr %local_4, align 1
+  %load_store_tmp1 = load i64, ptr %local_1, align 8
+  store i64 %load_store_tmp1, ptr %local_5, align 8
+  %loaded_alloca = load [32 x i8], ptr %local_4, align 1
+  %retval2 = call [32 x i8] @move_native_dynamic_field_hash_type_and_key(ptr @__move_rttydesc_u64, [32 x i8] %loaded_alloca, ptr %local_5)
+  store [32 x i8] %retval2, ptr %local_6, align 1
+  %load_store_tmp3 = load [32 x i8], ptr %local_6, align 1
+  store [32 x i8] %load_store_tmp3, ptr %local_2, align 1
+  %load_store_tmp4 = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp4, ptr %local_7, align 8
+  %loaded_alloca5 = load ptr, ptr %local_7, align 8
+  %loaded_alloca6 = load [32 x i8], ptr %local_2, align 1
+  %retval7 = call ptr @move_native_dynamic_field_borrow_child_object(ptr @"__move_rttydesc_dynamic_field__Field_u64, random__RandomInner_", ptr %loaded_alloca5, [32 x i8] %loaded_alloca6)
+  store ptr %retval7, ptr %local_9, align 8
+  %tmp = load ptr, ptr %local_9, align 8
+  %fld_ref = getelementptr inbounds %struct.dynamic_field__Field_u64.random__RandomInner_, ptr %tmp, i32 0, i32 2
+  store ptr %fld_ref, ptr %local_10__value, align 8
+  %retval8 = load ptr, ptr %local_10__value, align 8
+  ret ptr %retval8
+}
+
+declare ptr @move_native_dynamic_field_borrow_child_object(ptr, ptr, [32 x i8])
+
+define private ptr @"0000000000000002_random_load_inner_mut_EM2R84v3viWytF"(ptr noalias nonnull %0) {
+entry:
+  %local_0 = alloca ptr, align 8
+  %local_1 = alloca ptr, align 8
+  %local_2 = alloca i64, align 8
+  %local_3 = alloca ptr, align 8
+  %local_4__inner = alloca ptr, align 8
+  %local_5 = alloca i64, align 8
+  %local_6 = alloca i64, align 8
+  %local_7 = alloca i64, align 8
+  %local_8 = alloca i1, align 1
+  %local_9 = alloca ptr, align 8
+  %local_10 = alloca i64, align 8
+  %local_11 = alloca ptr, align 8
+  %local_12__inner = alloca ptr, align 8
+  %local_13 = alloca ptr, align 8
+  %local_14 = alloca ptr, align 8
+  %local_15__version = alloca ptr, align 8
+  %local_16 = alloca i64, align 8
+  %local_17 = alloca i64, align 8
+  %local_18 = alloca i1, align 1
+  %local_19 = alloca ptr, align 8
+  %local_20 = alloca i64, align 8
+  %local_21 = alloca ptr, align 8
+  store ptr %0, ptr %local_0, align 8
+  %load_store_tmp = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp, ptr %local_3, align 8
+  %tmp = load ptr, ptr %local_3, align 8
+  %fld_ref = getelementptr inbounds %struct.random__Random, ptr %tmp, i32 0, i32 1
+  store ptr %fld_ref, ptr %local_4__inner, align 8
+  %call_arg_0 = load ptr, ptr %local_4__inner, align 8
+  %retval = call i64 @"0000000000000002_versioned_version_8JZ7hWJTzaisGi"(ptr %call_arg_0)
+  store i64 %retval, ptr %local_5, align 8
+  %load_store_tmp1 = load i64, ptr %local_5, align 8
+  store i64 %load_store_tmp1, ptr %local_2, align 8
+  %load_store_tmp2 = load i64, ptr %local_2, align 8
+  store i64 %load_store_tmp2, ptr %local_6, align 8
+  store i64 1, ptr %local_7, align 8
+  %eq_src_0 = load i64, ptr %local_6, align 8
+  %eq_src_1 = load i64, ptr %local_7, align 8
+  %eq_dst = icmp eq i64 %eq_src_0, %eq_src_1
+  store i1 %eq_dst, ptr %local_8, align 1
+  %cnd = load i1, ptr %local_8, align 1
+  br i1 %cnd, label %bb_1, label %bb_0
+
+bb_1:                                             ; preds = %entry
+  br label %bb_2
+
+bb_0:                                             ; preds = %entry
+  %load_store_tmp3 = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp3, ptr %local_9, align 8
+  store i64 1, ptr %local_10, align 8
+  %call_arg_04 = load i64, ptr %local_10, align 8
+  call void @move_rt_abort(i64 %call_arg_04)
+  unreachable
+
+bb_2:                                             ; preds = %bb_1
+  %load_store_tmp5 = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp5, ptr %local_11, align 8
+  %tmp6 = load ptr, ptr %local_11, align 8
+  %fld_ref7 = getelementptr inbounds %struct.random__Random, ptr %tmp6, i32 0, i32 1
+  store ptr %fld_ref7, ptr %local_12__inner, align 8
+  %call_arg_08 = load ptr, ptr %local_12__inner, align 8
+  %retval9 = call ptr @"0000000000000002_versioned_load_value_mut_J3Myd7BSrh18mM"(ptr %call_arg_08)
+  store ptr %retval9, ptr %local_13, align 8
+  %load_store_tmp10 = load ptr, ptr %local_13, align 8
+  store ptr %load_store_tmp10, ptr %local_1, align 8
+  %load_store_tmp11 = load ptr, ptr %local_1, align 8
+  store ptr %load_store_tmp11, ptr %local_14, align 8
+  %tmp12 = load ptr, ptr %local_14, align 8
+  %fld_ref13 = getelementptr inbounds %struct.random__RandomInner, ptr %tmp12, i32 0, i32 0
+  store ptr %fld_ref13, ptr %local_15__version, align 8
+  %load_deref_store_tmp1 = load ptr, ptr %local_15__version, align 8
+  %load_deref_store_tmp2 = load i64, ptr %load_deref_store_tmp1, align 8
+  store i64 %load_deref_store_tmp2, ptr %local_16, align 8
+  %load_store_tmp14 = load i64, ptr %local_2, align 8
+  store i64 %load_store_tmp14, ptr %local_17, align 8
+  %eq_src_015 = load i64, ptr %local_16, align 8
+  %eq_src_116 = load i64, ptr %local_17, align 8
+  %eq_dst17 = icmp eq i64 %eq_src_015, %eq_src_116
+  store i1 %eq_dst17, ptr %local_18, align 1
+  %cnd18 = load i1, ptr %local_18, align 1
+  br i1 %cnd18, label %bb_4, label %bb_3
+
+bb_4:                                             ; preds = %bb_2
+  br label %bb_5
+
+bb_3:                                             ; preds = %bb_2
+  %load_store_tmp19 = load ptr, ptr %local_1, align 8
+  store ptr %load_store_tmp19, ptr %local_19, align 8
+  store i64 1, ptr %local_20, align 8
+  %call_arg_020 = load i64, ptr %local_20, align 8
+  call void @move_rt_abort(i64 %call_arg_020)
+  unreachable
+
+bb_5:                                             ; preds = %bb_4
+  %load_store_tmp21 = load ptr, ptr %local_1, align 8
+  store ptr %load_store_tmp21, ptr %local_21, align 8
+  %retval22 = load ptr, ptr %local_21, align 8
+  ret ptr %retval22
+}
+
+define private ptr @"0000000000000002_versioned_load_value_mut_J3Myd7BSrh18mM"(ptr noalias nonnull %0) {
+entry:
+  %local_0 = alloca ptr, align 8
+  %local_1 = alloca ptr, align 8
+  %local_2__id = alloca ptr, align 8
+  %local_3 = alloca ptr, align 8
+  %local_4__version = alloca ptr, align 8
+  %local_5 = alloca i64, align 8
+  %local_6 = alloca ptr, align 8
+  store ptr %0, ptr %local_0, align 8
+  %load_store_tmp = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp, ptr %local_1, align 8
+  %tmp = load ptr, ptr %local_1, align 8
+  %fld_ref = getelementptr inbounds %struct.versioned__Versioned, ptr %tmp, i32 0, i32 0
+  store ptr %fld_ref, ptr %local_2__id, align 8
+  %load_store_tmp1 = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp1, ptr %local_3, align 8
+  %tmp2 = load ptr, ptr %local_3, align 8
+  %fld_ref3 = getelementptr inbounds %struct.versioned__Versioned, ptr %tmp2, i32 0, i32 1
+  store ptr %fld_ref3, ptr %local_4__version, align 8
+  %load_deref_store_tmp1 = load ptr, ptr %local_4__version, align 8
+  %load_deref_store_tmp2 = load i64, ptr %load_deref_store_tmp1, align 8
+  store i64 %load_deref_store_tmp2, ptr %local_5, align 8
+  %call_arg_0 = load ptr, ptr %local_2__id, align 8
+  %call_arg_1 = load i64, ptr %local_5, align 8
+  %retval = call ptr @"0000000000000002_dynamic_field_borrow_mut_3S6ws5AgQoPm43"(ptr %call_arg_0, i64 %call_arg_1)
+  store ptr %retval, ptr %local_6, align 8
+  %retval4 = load ptr, ptr %local_6, align 8
+  ret ptr %retval4
+}
+
+define private ptr @"0000000000000002_dynamic_field_borrow_mut_3S6ws5AgQoPm43"(ptr noalias nonnull %0, i64 %1) {
+entry:
+  %local_0 = alloca ptr, align 8
+  %local_1 = alloca i64, align 8
+  %local_2 = alloca [32 x i8], align 1
+  %local_3 = alloca ptr, align 8
+  %local_4 = alloca ptr, align 8
+  %local_5 = alloca [32 x i8], align 1
+  %local_6 = alloca i64, align 8
+  %local_7 = alloca [32 x i8], align 1
+  %local_8 = alloca ptr, align 8
+  %local_9 = alloca [32 x i8], align 1
+  %local_10 = alloca ptr, align 8
+  %local_11__value = alloca ptr, align 8
+  store ptr %0, ptr %local_0, align 8
+  store i64 %1, ptr %local_1, align 8
+  %load_store_tmp = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp, ptr %local_3, align 8
+  %load_store_tmp1 = load ptr, ptr %local_3, align 8
+  store ptr %load_store_tmp1, ptr %local_4, align 8
+  %call_arg_0 = load ptr, ptr %local_4, align 8
+  %retval = call [32 x i8] @"0000000000000002_object_uid_to_address_DdQo7Y9Arw6ggD"(ptr %call_arg_0)
+  store [32 x i8] %retval, ptr %local_5, align 1
+  %load_store_tmp2 = load i64, ptr %local_1, align 8
+  store i64 %load_store_tmp2, ptr %local_6, align 8
+  %loaded_alloca = load [32 x i8], ptr %local_5, align 1
+  %retval3 = call [32 x i8] @move_native_dynamic_field_hash_type_and_key(ptr @__move_rttydesc_u64, [32 x i8] %loaded_alloca, ptr %local_6)
+  store [32 x i8] %retval3, ptr %local_7, align 1
+  %load_store_tmp4 = load [32 x i8], ptr %local_7, align 1
+  store [32 x i8] %load_store_tmp4, ptr %local_2, align 1
+  %load_store_tmp5 = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp5, ptr %local_8, align 8
+  %loaded_alloca6 = load ptr, ptr %local_8, align 8
+  %loaded_alloca7 = load [32 x i8], ptr %local_2, align 1
+  %retval8 = call ptr @move_native_dynamic_field_borrow_child_object_mut(ptr @"__move_rttydesc_dynamic_field__Field_u64, random__RandomInner_", ptr %loaded_alloca6, [32 x i8] %loaded_alloca7)
+  store ptr %retval8, ptr %local_10, align 8
+  %tmp = load ptr, ptr %local_10, align 8
+  %fld_ref = getelementptr inbounds %struct.dynamic_field__Field_u64.random__RandomInner_, ptr %tmp, i32 0, i32 2
+  store ptr %fld_ref, ptr %local_11__value, align 8
+  %retval9 = load ptr, ptr %local_11__value, align 8
+  ret ptr %retval9
+}
+
+declare ptr @move_native_dynamic_field_borrow_child_object_mut(ptr, ptr, [32 x i8])
+
+define private void @"0000000000000002_random_update_randomne_5fQ1bEWWX11hkJ"(ptr noalias nonnull %0, i64 %1, { ptr, i64, i64 } %2, ptr nonnull readonly %3) {
+entry:
+  %local_0 = alloca ptr, align 8
+  %local_1 = alloca i64, align 8
+  %local_2 = alloca { ptr, i64, i64 }, align 8
+  %local_3 = alloca ptr, align 8
+  %local_4 = alloca i1, align 1
+  %local_5 = alloca i1, align 1
+  %local_6 = alloca i1, align 1
+  %local_7 = alloca i1, align 1
+  %local_8 = alloca i64, align 8
+  %local_9 = alloca ptr, align 8
+  %local_10 = alloca ptr, align 8
+  %local_11 = alloca [32 x i8], align 1
+  %local_12 = alloca [32 x i8], align 1
+  %local_13 = alloca i1, align 1
+  %local_14 = alloca ptr, align 8
+  %local_15 = alloca ptr, align 8
+  %local_16 = alloca i64, align 8
+  %local_17 = alloca ptr, align 8
+  %local_18 = alloca i64, align 8
+  %local_19 = alloca ptr, align 8
+  %local_20 = alloca ptr, align 8
+  %local_21 = alloca ptr, align 8
+  %local_22__randomness_round = alloca ptr, align 8
+  %local_23 = alloca i64, align 8
+  %local_24 = alloca i64, align 8
+  %local_25 = alloca i1, align 1
+  %local_26 = alloca ptr, align 8
+  %local_27__epoch = alloca ptr, align 8
+  %local_28 = alloca i64, align 8
+  %local_29 = alloca i64, align 8
+  %local_30 = alloca i1, align 1
+  %local_31 = alloca i1, align 1
+  %local_32 = alloca i1, align 1
+  %local_33 = alloca ptr, align 8
+  %local_34__random_bytes = alloca ptr, align 8
+  %local_35 = alloca i1, align 1
+  %local_36 = alloca i1, align 1
+  %local_37 = alloca i1, align 1
+  %local_38 = alloca i64, align 8
+  %local_39 = alloca i64, align 8
+  %local_40 = alloca i1, align 1
+  %local_41 = alloca ptr, align 8
+  %local_42 = alloca ptr, align 8
+  %local_43 = alloca i64, align 8
+  %local_44 = alloca i64, align 8
+  %local_45 = alloca ptr, align 8
+  %local_46__epoch = alloca ptr, align 8
+  %local_47 = alloca i64, align 8
+  %local_48 = alloca i1, align 1
+  %local_49 = alloca i64, align 8
+  %local_50 = alloca i64, align 8
+  %local_51 = alloca i1, align 1
+  %local_52 = alloca i1, align 1
+  %local_53 = alloca i1, align 1
+  %local_54 = alloca i1, align 1
+  %local_55 = alloca i64, align 8
+  %local_56 = alloca ptr, align 8
+  %local_57__randomness_round = alloca ptr, align 8
+  %local_58 = alloca i64, align 8
+  %local_59 = alloca i64, align 8
+  %local_60 = alloca i64, align 8
+  %local_61 = alloca i1, align 1
+  %local_62 = alloca i1, align 1
+  %local_63 = alloca ptr, align 8
+  %local_64 = alloca ptr, align 8
+  %local_65 = alloca i64, align 8
+  %local_66 = alloca ptr, align 8
+  %local_67 = alloca i64, align 8
+  %local_68 = alloca ptr, align 8
+  %local_69__epoch = alloca ptr, align 8
+  %local_70 = alloca i64, align 8
+  %local_71 = alloca ptr, align 8
+  %local_72__randomness_round = alloca ptr, align 8
+  %local_73 = alloca { ptr, i64, i64 }, align 8
+  %local_74 = alloca ptr, align 8
+  %local_75__random_bytes = alloca ptr, align 8
+  store ptr %0, ptr %local_0, align 8
+  store i64 %1, ptr %local_1, align 8
+  store { ptr, i64, i64 } %2, ptr %local_2, align 8
+  store ptr %3, ptr %local_3, align 8
+  %load_store_tmp = load ptr, ptr %local_3, align 8
+  store ptr %load_store_tmp, ptr %local_10, align 8
+  %call_arg_0 = load ptr, ptr %local_10, align 8
+  %retval = call [32 x i8] @"0000000000000002_tx_context_sender_9nYw9GTwZ2W8pp"(ptr %call_arg_0)
+  store [32 x i8] %retval, ptr %local_11, align 1
+  %4 = load [32 x i8], ptr @acct.addr.6, align 1
+  store [32 x i8] %4, ptr %local_12, align 1
+  %5 = call i32 @memcmp(ptr %local_11, ptr %local_12, i64 32)
+  %eq_dst = icmp eq i32 %5, 0
+  store i1 %eq_dst, ptr %local_13, align 1
+  %cnd = load i1, ptr %local_13, align 1
+  br i1 %cnd, label %bb_1, label %bb_0
+
+bb_1:                                             ; preds = %entry
+  br label %bb_2
+
+bb_0:                                             ; preds = %entry
+  %load_store_tmp1 = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp1, ptr %local_14, align 8
+  %load_store_tmp2 = load ptr, ptr %local_3, align 8
+  store ptr %load_store_tmp2, ptr %local_15, align 8
+  store i64 0, ptr %local_16, align 8
+  %call_arg_03 = load i64, ptr %local_16, align 8
+  call void @move_rt_abort(i64 %call_arg_03)
+  unreachable
+
+bb_2:                                             ; preds = %bb_1
+  %load_store_tmp4 = load ptr, ptr %local_3, align 8
+  store ptr %load_store_tmp4, ptr %local_17, align 8
+  %call_arg_05 = load ptr, ptr %local_17, align 8
+  %retval6 = call i64 @"0000000000000002_tx_context_epoch_D93PCrdoigPcah"(ptr %call_arg_05)
+  store i64 %retval6, ptr %local_18, align 8
+  %load_store_tmp7 = load i64, ptr %local_18, align 8
+  store i64 %load_store_tmp7, ptr %local_8, align 8
+  %load_store_tmp8 = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp8, ptr %local_19, align 8
+  %call_arg_09 = load ptr, ptr %local_19, align 8
+  %retval10 = call ptr @"0000000000000002_random_load_inner_mut_EM2R84v3viWytF"(ptr %call_arg_09)
+  store ptr %retval10, ptr %local_20, align 8
+  %load_store_tmp11 = load ptr, ptr %local_20, align 8
+  store ptr %load_store_tmp11, ptr %local_9, align 8
+  %load_store_tmp12 = load ptr, ptr %local_9, align 8
+  store ptr %load_store_tmp12, ptr %local_21, align 8
+  %tmp = load ptr, ptr %local_21, align 8
+  %fld_ref = getelementptr inbounds %struct.random__RandomInner, ptr %tmp, i32 0, i32 2
+  store ptr %fld_ref, ptr %local_22__randomness_round, align 8
+  %load_deref_store_tmp1 = load ptr, ptr %local_22__randomness_round, align 8
+  %load_deref_store_tmp2 = load i64, ptr %load_deref_store_tmp1, align 8
+  store i64 %load_deref_store_tmp2, ptr %local_23, align 8
+  store i64 0, ptr %local_24, align 8
+  %eq_src_0 = load i64, ptr %local_23, align 8
+  %eq_src_1 = load i64, ptr %local_24, align 8
+  %eq_dst13 = icmp eq i64 %eq_src_0, %eq_src_1
+  store i1 %eq_dst13, ptr %local_25, align 1
+  %cnd14 = load i1, ptr %local_25, align 1
+  br i1 %cnd14, label %bb_4, label %bb_3
+
+bb_4:                                             ; preds = %bb_2
+  %load_store_tmp15 = load ptr, ptr %local_9, align 8
+  store ptr %load_store_tmp15, ptr %local_26, align 8
+  %tmp16 = load ptr, ptr %local_26, align 8
+  %fld_ref17 = getelementptr inbounds %struct.random__RandomInner, ptr %tmp16, i32 0, i32 1
+  store ptr %fld_ref17, ptr %local_27__epoch, align 8
+  %load_deref_store_tmp118 = load ptr, ptr %local_27__epoch, align 8
+  %load_deref_store_tmp219 = load i64, ptr %load_deref_store_tmp118, align 8
+  store i64 %load_deref_store_tmp219, ptr %local_28, align 8
+  store i64 0, ptr %local_29, align 8
+  %eq_src_020 = load i64, ptr %local_28, align 8
+  %eq_src_121 = load i64, ptr %local_29, align 8
+  %eq_dst22 = icmp eq i64 %eq_src_020, %eq_src_121
+  store i1 %eq_dst22, ptr %local_30, align 1
+  %load_store_tmp23 = load i1, ptr %local_30, align 1
+  store i1 %load_store_tmp23, ptr %local_4, align 1
+  br label %bb_5
+
+bb_3:                                             ; preds = %bb_2
+  store i1 false, ptr %local_31, align 1
+  %load_store_tmp24 = load i1, ptr %local_31, align 1
+  store i1 %load_store_tmp24, ptr %local_4, align 1
+  br label %bb_5
+
+bb_5:                                             ; preds = %bb_3, %bb_4
+  %load_store_tmp25 = load i1, ptr %local_4, align 1
+  store i1 %load_store_tmp25, ptr %local_32, align 1
+  %cnd26 = load i1, ptr %local_32, align 1
+  br i1 %cnd26, label %bb_7, label %bb_6
+
+bb_7:                                             ; preds = %bb_5
+  %load_store_tmp27 = load ptr, ptr %local_9, align 8
+  store ptr %load_store_tmp27, ptr %local_33, align 8
+  %tmp28 = load ptr, ptr %local_33, align 8
+  %fld_ref29 = getelementptr inbounds %struct.random__RandomInner, ptr %tmp28, i32 0, i32 3
+  store ptr %fld_ref29, ptr %local_34__random_bytes, align 8
+  %call_arg_030 = load ptr, ptr %local_34__random_bytes, align 8
+  %retval31 = call i1 @"0000000000000001_vector_is_empty_BrzErKu8hVV1SC"(ptr %call_arg_030)
+  store i1 %retval31, ptr %local_35, align 1
+  %load_store_tmp32 = load i1, ptr %local_35, align 1
+  store i1 %load_store_tmp32, ptr %local_5, align 1
+  br label %bb_8
+
+bb_6:                                             ; preds = %bb_5
+  store i1 false, ptr %local_36, align 1
+  %load_store_tmp33 = load i1, ptr %local_36, align 1
+  store i1 %load_store_tmp33, ptr %local_5, align 1
+  br label %bb_8
+
+bb_8:                                             ; preds = %bb_6, %bb_7
+  %load_store_tmp34 = load i1, ptr %local_5, align 1
+  store i1 %load_store_tmp34, ptr %local_37, align 1
+  %cnd35 = load i1, ptr %local_37, align 1
+  br i1 %cnd35, label %bb_10, label %bb_9
+
+bb_10:                                            ; preds = %bb_8
+  %load_store_tmp36 = load i64, ptr %local_1, align 8
+  store i64 %load_store_tmp36, ptr %local_38, align 8
+  store i64 0, ptr %local_39, align 8
+  %eq_src_037 = load i64, ptr %local_38, align 8
+  %eq_src_138 = load i64, ptr %local_39, align 8
+  %eq_dst39 = icmp eq i64 %eq_src_037, %eq_src_138
+  store i1 %eq_dst39, ptr %local_40, align 1
+  %cnd40 = load i1, ptr %local_40, align 1
+  br i1 %cnd40, label %bb_12, label %bb_11
+
+bb_12:                                            ; preds = %bb_10
+  br label %bb_13
+
+bb_11:                                            ; preds = %bb_10
+  %load_store_tmp41 = load ptr, ptr %local_9, align 8
+  store ptr %load_store_tmp41, ptr %local_41, align 8
+  %load_store_tmp42 = load ptr, ptr %local_3, align 8
+  store ptr %load_store_tmp42, ptr %local_42, align 8
+  store i64 2, ptr %local_43, align 8
+  %call_arg_043 = load i64, ptr %local_43, align 8
+  call void @move_rt_abort(i64 %call_arg_043)
+  unreachable
+
+bb_13:                                            ; preds = %bb_12
+  br label %bb_14
+
+bb_9:                                             ; preds = %bb_8
+  %load_store_tmp44 = load i64, ptr %local_8, align 8
+  store i64 %load_store_tmp44, ptr %local_44, align 8
+  %load_store_tmp45 = load ptr, ptr %local_9, align 8
+  store ptr %load_store_tmp45, ptr %local_45, align 8
+  %tmp46 = load ptr, ptr %local_45, align 8
+  %fld_ref47 = getelementptr inbounds %struct.random__RandomInner, ptr %tmp46, i32 0, i32 1
+  store ptr %fld_ref47, ptr %local_46__epoch, align 8
+  %load_deref_store_tmp148 = load ptr, ptr %local_46__epoch, align 8
+  %load_deref_store_tmp249 = load i64, ptr %load_deref_store_tmp148, align 8
+  store i64 %load_deref_store_tmp249, ptr %local_47, align 8
+  %gt_src_0 = load i64, ptr %local_44, align 8
+  %gt_src_1 = load i64, ptr %local_47, align 8
+  %gt_dst = icmp ugt i64 %gt_src_0, %gt_src_1
+  store i1 %gt_dst, ptr %local_48, align 1
+  %cnd50 = load i1, ptr %local_48, align 1
+  br i1 %cnd50, label %bb_16, label %bb_15
+
+bb_16:                                            ; preds = %bb_9
+  %load_store_tmp51 = load i64, ptr %local_1, align 8
+  store i64 %load_store_tmp51, ptr %local_49, align 8
+  store i64 0, ptr %local_50, align 8
+  %eq_src_052 = load i64, ptr %local_49, align 8
+  %eq_src_153 = load i64, ptr %local_50, align 8
+  %eq_dst54 = icmp eq i64 %eq_src_052, %eq_src_153
+  store i1 %eq_dst54, ptr %local_51, align 1
+  %load_store_tmp55 = load i1, ptr %local_51, align 1
+  store i1 %load_store_tmp55, ptr %local_6, align 1
+  br label %bb_17
+
+bb_15:                                            ; preds = %bb_9
+  store i1 false, ptr %local_52, align 1
+  %load_store_tmp56 = load i1, ptr %local_52, align 1
+  store i1 %load_store_tmp56, ptr %local_6, align 1
+  br label %bb_17
+
+bb_17:                                            ; preds = %bb_15, %bb_16
+  %load_store_tmp57 = load i1, ptr %local_6, align 1
+  store i1 %load_store_tmp57, ptr %local_53, align 1
+  %cnd58 = load i1, ptr %local_53, align 1
+  br i1 %cnd58, label %bb_19, label %bb_18
+
+bb_19:                                            ; preds = %bb_17
+  store i1 true, ptr %local_54, align 1
+  %load_store_tmp59 = load i1, ptr %local_54, align 1
+  store i1 %load_store_tmp59, ptr %local_7, align 1
+  br label %bb_20
+
+bb_18:                                            ; preds = %bb_17
+  %load_store_tmp60 = load i64, ptr %local_1, align 8
+  store i64 %load_store_tmp60, ptr %local_55, align 8
+  %load_store_tmp61 = load ptr, ptr %local_9, align 8
+  store ptr %load_store_tmp61, ptr %local_56, align 8
+  %tmp62 = load ptr, ptr %local_56, align 8
+  %fld_ref63 = getelementptr inbounds %struct.random__RandomInner, ptr %tmp62, i32 0, i32 2
+  store ptr %fld_ref63, ptr %local_57__randomness_round, align 8
+  %load_deref_store_tmp164 = load ptr, ptr %local_57__randomness_round, align 8
+  %load_deref_store_tmp265 = load i64, ptr %load_deref_store_tmp164, align 8
+  store i64 %load_deref_store_tmp265, ptr %local_58, align 8
+  store i64 1, ptr %local_59, align 8
+  %add_src_0 = load i64, ptr %local_58, align 8
+  %add_src_1 = load i64, ptr %local_59, align 8
+  %add_dst = add i64 %add_src_0, %add_src_1
+  %ovfcond = icmp ult i64 %add_dst, %add_src_0
+  br i1 %ovfcond, label %then_bb, label %join_bb
+
+then_bb:                                          ; preds = %bb_18
+  call void @move_rt_abort(i64 4017)
+  unreachable
+
+join_bb:                                          ; preds = %bb_18
+  store i64 %add_dst, ptr %local_60, align 8
+  %eq_src_066 = load i64, ptr %local_55, align 8
+  %eq_src_167 = load i64, ptr %local_60, align 8
+  %eq_dst68 = icmp eq i64 %eq_src_066, %eq_src_167
+  store i1 %eq_dst68, ptr %local_61, align 1
+  %load_store_tmp69 = load i1, ptr %local_61, align 1
+  store i1 %load_store_tmp69, ptr %local_7, align 1
+  br label %bb_20
+
+bb_20:                                            ; preds = %join_bb, %bb_19
+  %load_store_tmp70 = load i1, ptr %local_7, align 1
+  store i1 %load_store_tmp70, ptr %local_62, align 1
+  %cnd71 = load i1, ptr %local_62, align 1
+  br i1 %cnd71, label %bb_22, label %bb_21
+
+bb_22:                                            ; preds = %bb_20
+  br label %bb_14
+
+bb_21:                                            ; preds = %bb_20
+  %load_store_tmp72 = load ptr, ptr %local_9, align 8
+  store ptr %load_store_tmp72, ptr %local_63, align 8
+  %load_store_tmp73 = load ptr, ptr %local_3, align 8
+  store ptr %load_store_tmp73, ptr %local_64, align 8
+  store i64 2, ptr %local_65, align 8
+  %call_arg_074 = load i64, ptr %local_65, align 8
+  call void @move_rt_abort(i64 %call_arg_074)
+  unreachable
+
+bb_14:                                            ; preds = %bb_22, %bb_13
+  %load_store_tmp75 = load ptr, ptr %local_3, align 8
+  store ptr %load_store_tmp75, ptr %local_66, align 8
+  %call_arg_076 = load ptr, ptr %local_66, align 8
+  %retval77 = call i64 @"0000000000000002_tx_context_epoch_D93PCrdoigPcah"(ptr %call_arg_076)
+  store i64 %retval77, ptr %local_67, align 8
+  %load_store_tmp78 = load ptr, ptr %local_9, align 8
+  store ptr %load_store_tmp78, ptr %local_68, align 8
+  %tmp79 = load ptr, ptr %local_68, align 8
+  %fld_ref80 = getelementptr inbounds %struct.random__RandomInner, ptr %tmp79, i32 0, i32 1
+  store ptr %fld_ref80, ptr %local_69__epoch, align 8
+  %load_store_ref_src = load i64, ptr %local_67, align 8
+  %load_store_ref_dst_ptr = load ptr, ptr %local_69__epoch, align 8
+  store i64 %load_store_ref_src, ptr %load_store_ref_dst_ptr, align 8
+  %load_store_tmp81 = load i64, ptr %local_1, align 8
+  store i64 %load_store_tmp81, ptr %local_70, align 8
+  %load_store_tmp82 = load ptr, ptr %local_9, align 8
+  store ptr %load_store_tmp82, ptr %local_71, align 8
+  %tmp83 = load ptr, ptr %local_71, align 8
+  %fld_ref84 = getelementptr inbounds %struct.random__RandomInner, ptr %tmp83, i32 0, i32 2
+  store ptr %fld_ref84, ptr %local_72__randomness_round, align 8
+  %load_store_ref_src85 = load i64, ptr %local_70, align 8
+  %load_store_ref_dst_ptr86 = load ptr, ptr %local_72__randomness_round, align 8
+  store i64 %load_store_ref_src85, ptr %load_store_ref_dst_ptr86, align 8
+  %load_store_tmp87 = load { ptr, i64, i64 }, ptr %local_2, align 8
+  store { ptr, i64, i64 } %load_store_tmp87, ptr %local_73, align 8
+  %load_store_tmp88 = load ptr, ptr %local_9, align 8
+  store ptr %load_store_tmp88, ptr %local_74, align 8
+  %tmp89 = load ptr, ptr %local_74, align 8
+  %fld_ref90 = getelementptr inbounds %struct.random__RandomInner, ptr %tmp89, i32 0, i32 3
+  store ptr %fld_ref90, ptr %local_75__random_bytes, align 8
+  %load_store_ref_src91 = load { ptr, i64, i64 }, ptr %local_73, align 8
+  %load_store_ref_dst_ptr92 = load ptr, ptr %local_75__random_bytes, align 8
+  store { ptr, i64, i64 } %load_store_ref_src91, ptr %load_store_ref_dst_ptr92, align 8
+  ret void
+}
+
+define private i1 @"0000000000000001_vector_is_empty_BrzErKu8hVV1SC"(ptr nonnull readonly %0) {
+entry:
+  %local_0 = alloca ptr, align 8
+  %local_1 = alloca ptr, align 8
+  %local_2 = alloca i64, align 8
+  %local_3 = alloca i64, align 8
+  %local_4 = alloca i1, align 1
+  store ptr %0, ptr %local_0, align 8
+  %load_store_tmp = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp, ptr %local_1, align 8
+  %loaded_alloca = load ptr, ptr %local_1, align 8
+  %retval = call i64 @move_native_vector_length(ptr @__move_rttydesc_u8, ptr %loaded_alloca)
+  store i64 %retval, ptr %local_2, align 8
+  store i64 0, ptr %local_3, align 8
+  %eq_src_0 = load i64, ptr %local_2, align 8
+  %eq_src_1 = load i64, ptr %local_3, align 8
+  %eq_dst = icmp eq i64 %eq_src_0, %eq_src_1
+  store i1 %eq_dst, ptr %local_4, align 1
+  %retval1 = load i1, ptr %local_4, align 1
+  ret i1 %retval1
+}
+
+declare i64 @move_native_vector_length(ptr, ptr)
+
+define void @"0000000000000002_random_update_randomne_6XcwSYsk4caFPP"(ptr noalias nonnull %0, i64 %1, { ptr, i64, i64 } %2, ptr nonnull readonly %3) {
+entry:
+  %local_0 = alloca ptr, align 8
+  %local_1 = alloca i64, align 8
+  %local_2 = alloca { ptr, i64, i64 }, align 8
+  %local_3 = alloca ptr, align 8
+  %local_4 = alloca ptr, align 8
+  %local_5 = alloca i64, align 8
+  %local_6 = alloca { ptr, i64, i64 }, align 8
+  %local_7 = alloca ptr, align 8
+  store ptr %0, ptr %local_0, align 8
+  store i64 %1, ptr %local_1, align 8
+  store { ptr, i64, i64 } %2, ptr %local_2, align 8
+  store ptr %3, ptr %local_3, align 8
+  %load_store_tmp = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp, ptr %local_4, align 8
+  %load_store_tmp1 = load i64, ptr %local_1, align 8
+  store i64 %load_store_tmp1, ptr %local_5, align 8
+  %load_store_tmp2 = load { ptr, i64, i64 }, ptr %local_2, align 8
+  store { ptr, i64, i64 } %load_store_tmp2, ptr %local_6, align 8
+  %load_store_tmp3 = load ptr, ptr %local_3, align 8
+  store ptr %load_store_tmp3, ptr %local_7, align 8
+  %call_arg_0 = load ptr, ptr %local_4, align 8
+  %call_arg_1 = load i64, ptr %local_5, align 8
+  %call_arg_2 = load { ptr, i64, i64 }, ptr %local_6, align 8
+  %call_arg_3 = load ptr, ptr %local_7, align 8
+  call void @"0000000000000002_random_update_randomne_5fQ1bEWWX11hkJ"(ptr %call_arg_0, i64 %call_arg_1, { ptr, i64, i64 } %call_arg_2, ptr %call_arg_3)
+  ret void
+}
+
+declare void @move_rt_vec_destroy(ptr nonnull readonly dereferenceable(32), ptr)
+
+; Function Attrs: cold noreturn
+declare void @move_rt_abort(i64) #0
+
+declare { ptr, i64, i64 } @move_rt_vec_empty(ptr nonnull readonly dereferenceable(32))
+
+declare void @move_rt_vec_copy(ptr nonnull readonly dereferenceable(32), ptr nonnull dereferenceable(24), ptr nonnull readonly dereferenceable(24))
+
+attributes #0 = { cold noreturn }

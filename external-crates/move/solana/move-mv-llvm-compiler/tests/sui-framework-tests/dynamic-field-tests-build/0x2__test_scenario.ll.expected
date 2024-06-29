@@ -1,0 +1,553 @@
+; ModuleID = '0x2__test_scenario'
+source_filename = "../../../../../../crates/sui-framework/packages/sui-framework/sources/test/test_scenario.move"
+target datalayout = "e-m:e-p:64:64-i64:64-n32:64-S128"
+target triple = "sbf-solana-solana"
+
+%__move_rt_type = type { { ptr, i64 }, i64, ptr }
+%struct.test_scenario__Scenario = type { i64, %struct.tx_context__TxContext }
+%struct.tx_context__TxContext = type { [32 x i8], { ptr, i64, i64 }, i64, i64, i64 }
+%struct.test_scenario__TransactionEffects = type { { ptr, i64, i64 }, { ptr, i64, i64 }, { ptr, i64, i64 }, %struct.vec_map__VecMap_object__ID.address_, %struct.vec_map__VecMap_object__ID.object__ID_, { ptr, i64, i64 }, { ptr, i64, i64 }, i64 }
+%struct.vec_map__VecMap_object__ID.address_ = type { { ptr, i64, i64 } }
+%struct.vec_map__VecMap_object__ID.object__ID_ = type { { ptr, i64, i64 } }
+%struct.option__Option_object__ID_ = type { { ptr, i64, i64 } }
+%struct.object__UID = type { %struct.object__ID }
+%struct.object__ID = type { [32 x i8] }
+
+@__move_rttydesc_signer = private unnamed_addr constant %__move_rt_type { { ptr, i64 } { ptr @__move_rttydesc_signer_name, i64 6 }, i64 9, ptr @__move_rttydesc_NOTHING_info }
+@__move_rttydesc_signer_name = private unnamed_addr constant [6 x i8] c"signer"
+@__move_rttydesc_NOTHING_info = private unnamed_addr constant i8 -1
+
+declare i32 @memcmp(ptr, ptr, i64)
+
+define void @"0000000000000002_test_scenario_unit_test_poiso_C4ih1MfrfcnJFv"() {
+entry:
+  %local_0 = alloca i64, align 8
+  %local_1 = alloca { ptr, i64, i64 }, align 8
+  store i64 0, ptr %local_0, align 8
+  %loaded_alloca = load i64, ptr %local_0, align 8
+  %retval = call { ptr, i64, i64 } @move_native_unit_test_create_signers_for_testing(i64 %loaded_alloca)
+  store { ptr, i64, i64 } %retval, ptr %local_1, align 8
+  call void @move_rt_vec_destroy(ptr @__move_rttydesc_signer, ptr %local_1)
+  ret void
+}
+
+declare { ptr, i64, i64 } @move_native_unit_test_create_signers_for_testing(i64)
+
+define ptr @"0000000000000002_test_scenario_ctx_4nTVYB1oBh8VCL"(ptr noalias nonnull %0) {
+entry:
+  %local_0 = alloca ptr, align 8
+  %local_1 = alloca ptr, align 8
+  %local_2__ctx = alloca ptr, align 8
+  store ptr %0, ptr %local_0, align 8
+  %load_store_tmp = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp, ptr %local_1, align 8
+  %tmp = load ptr, ptr %local_1, align 8
+  %fld_ref = getelementptr inbounds %struct.test_scenario__Scenario, ptr %tmp, i32 0, i32 1
+  store ptr %fld_ref, ptr %local_2__ctx, align 8
+  %retval = load ptr, ptr %local_2__ctx, align 8
+  ret ptr %retval
+}
+
+define [32 x i8] @"0000000000000002_test_scenario_sender_CZnDLJ9D5p86Ao"(ptr nonnull readonly %0) {
+entry:
+  %local_0 = alloca ptr, align 8
+  %local_1 = alloca ptr, align 8
+  %local_2__ctx = alloca ptr, align 8
+  %local_3 = alloca [32 x i8], align 1
+  store ptr %0, ptr %local_0, align 8
+  %load_store_tmp = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp, ptr %local_1, align 8
+  %tmp = load ptr, ptr %local_1, align 8
+  %fld_ref = getelementptr inbounds %struct.test_scenario__Scenario, ptr %tmp, i32 0, i32 1
+  store ptr %fld_ref, ptr %local_2__ctx, align 8
+  %call_arg_0 = load ptr, ptr %local_2__ctx, align 8
+  %retval = call [32 x i8] @"0000000000000002_tx_context_sender_9nYw9GTwZ2W8pp"(ptr %call_arg_0)
+  store [32 x i8] %retval, ptr %local_3, align 1
+  %retval1 = load [32 x i8], ptr %local_3, align 1
+  ret [32 x i8] %retval1
+}
+
+declare [32 x i8] @"0000000000000002_tx_context_sender_9nYw9GTwZ2W8pp"(ptr nonnull readonly)
+
+define %struct.test_scenario__Scenario @"0000000000000002_test_scenario_begin_3XVGA5cFGdebeE"([32 x i8] %0) {
+entry:
+  %local_0 = alloca [32 x i8], align 1
+  %local_1__txn_number = alloca i64, align 8
+  %local_2 = alloca [32 x i8], align 1
+  %local_3 = alloca i64, align 8
+  %local_4 = alloca i64, align 8
+  %local_5 = alloca i64, align 8
+  %local_6 = alloca i64, align 8
+  %local_7__ctx = alloca %struct.tx_context__TxContext, align 8
+  %local_8 = alloca %struct.test_scenario__Scenario, align 8
+  store [32 x i8] %0, ptr %local_0, align 1
+  store i64 0, ptr %local_1__txn_number, align 8
+  store i64 0, ptr %local_3, align 8
+  store i64 0, ptr %local_4, align 8
+  store i64 0, ptr %local_5, align 8
+  store i64 0, ptr %local_6, align 8
+  %call_arg_0 = load [32 x i8], ptr %local_0, align 1
+  %call_arg_1 = load i64, ptr %local_3, align 8
+  %call_arg_2 = load i64, ptr %local_4, align 8
+  %call_arg_3 = load i64, ptr %local_5, align 8
+  %call_arg_4 = load i64, ptr %local_6, align 8
+  %retval = call %struct.tx_context__TxContext @"0000000000000002_tx_context_new_from_hint_9eKZScShnwdGsh"([32 x i8] %call_arg_0, i64 %call_arg_1, i64 %call_arg_2, i64 %call_arg_3, i64 %call_arg_4)
+  store %struct.tx_context__TxContext %retval, ptr %local_7__ctx, align 8
+  %fv.0 = load i64, ptr %local_1__txn_number, align 8
+  %fv.1 = load %struct.tx_context__TxContext, ptr %local_7__ctx, align 8
+  %insert_0 = insertvalue %struct.test_scenario__Scenario undef, i64 %fv.0, 0
+  %insert_1 = insertvalue %struct.test_scenario__Scenario %insert_0, %struct.tx_context__TxContext %fv.1, 1
+  store %struct.test_scenario__Scenario %insert_1, ptr %local_8, align 8
+  %retval1 = load %struct.test_scenario__Scenario, ptr %local_8, align 8
+  ret %struct.test_scenario__Scenario %retval1
+}
+
+declare %struct.tx_context__TxContext @"0000000000000002_tx_context_new_from_hint_9eKZScShnwdGsh"([32 x i8], i64, i64, i64, i64)
+
+define { ptr, i64, i64 } @"0000000000000002_test_scenario_created_2HbMbYkjwPW5iF"(ptr nonnull readonly %0) {
+entry:
+  %local_0 = alloca ptr, align 8
+  %local_1 = alloca ptr, align 8
+  %local_2__created = alloca ptr, align 8
+  %local_3 = alloca { ptr, i64, i64 }, align 8
+  store ptr %0, ptr %local_0, align 8
+  %load_store_tmp = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp, ptr %local_1, align 8
+  %tmp = load ptr, ptr %local_1, align 8
+  %fld_ref = getelementptr inbounds %struct.test_scenario__TransactionEffects, ptr %tmp, i32 0, i32 0
+  store ptr %fld_ref, ptr %local_2__created, align 8
+  %load_deref_store_tmp1 = load ptr, ptr %local_2__created, align 8
+  %load_deref_store_tmp2 = load { ptr, i64, i64 }, ptr %load_deref_store_tmp1, align 8
+  store { ptr, i64, i64 } %load_deref_store_tmp2, ptr %local_3, align 8
+  %retval = load { ptr, i64, i64 }, ptr %local_3, align 8
+  ret { ptr, i64, i64 } %retval
+}
+
+define { ptr, i64, i64 } @"0000000000000002_test_scenario_deleted_3TBWZx8yQ38kNP"(ptr nonnull readonly %0) {
+entry:
+  %local_0 = alloca ptr, align 8
+  %local_1 = alloca ptr, align 8
+  %local_2__deleted = alloca ptr, align 8
+  %local_3 = alloca { ptr, i64, i64 }, align 8
+  store ptr %0, ptr %local_0, align 8
+  %load_store_tmp = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp, ptr %local_1, align 8
+  %tmp = load ptr, ptr %local_1, align 8
+  %fld_ref = getelementptr inbounds %struct.test_scenario__TransactionEffects, ptr %tmp, i32 0, i32 2
+  store ptr %fld_ref, ptr %local_2__deleted, align 8
+  %load_deref_store_tmp1 = load ptr, ptr %local_2__deleted, align 8
+  %load_deref_store_tmp2 = load { ptr, i64, i64 }, ptr %load_deref_store_tmp1, align 8
+  store { ptr, i64, i64 } %load_deref_store_tmp2, ptr %local_3, align 8
+  %retval = load { ptr, i64, i64 }, ptr %local_3, align 8
+  ret { ptr, i64, i64 } %retval
+}
+
+define %struct.test_scenario__TransactionEffects @"0000000000000002_test_scenario_end_CUyxbnQs4X4MtS"(%struct.test_scenario__Scenario %0) {
+entry:
+  %local_0 = alloca %struct.test_scenario__Scenario, align 8
+  %local_1 = alloca %struct.test_scenario__Scenario, align 8
+  %local_2__txn_number = alloca i64, align 8
+  %local_3__ctx = alloca %struct.tx_context__TxContext, align 8
+  %local_4 = alloca %struct.test_scenario__TransactionEffects, align 8
+  store %struct.test_scenario__Scenario %0, ptr %local_0, align 8
+  %srcval = load %struct.test_scenario__Scenario, ptr %local_0, align 8
+  %ext_0 = extractvalue %struct.test_scenario__Scenario %srcval, 0
+  %ext_1 = extractvalue %struct.test_scenario__Scenario %srcval, 1
+  store i64 %ext_0, ptr %local_2__txn_number, align 8
+  store %struct.tx_context__TxContext %ext_1, ptr %local_3__ctx, align 8
+  %retval = call %struct.test_scenario__TransactionEffects @move_native_test_scenario_end_transaction()
+  store %struct.test_scenario__TransactionEffects %retval, ptr %local_4, align 8
+  %retval1 = load %struct.test_scenario__TransactionEffects, ptr %local_4, align 8
+  ret %struct.test_scenario__TransactionEffects %retval1
+}
+
+declare %struct.test_scenario__TransactionEffects @move_native_test_scenario_end_transaction()
+
+define { ptr, i64, i64 } @"0000000000000002_test_scenario_frozen_GFnKhRzK3wbqYT"(ptr nonnull readonly %0) {
+entry:
+  %local_0 = alloca ptr, align 8
+  %local_1 = alloca ptr, align 8
+  %local_2__frozen = alloca ptr, align 8
+  %local_3 = alloca { ptr, i64, i64 }, align 8
+  store ptr %0, ptr %local_0, align 8
+  %load_store_tmp = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp, ptr %local_1, align 8
+  %tmp = load ptr, ptr %local_1, align 8
+  %fld_ref = getelementptr inbounds %struct.test_scenario__TransactionEffects, ptr %tmp, i32 0, i32 6
+  store ptr %fld_ref, ptr %local_2__frozen, align 8
+  %load_deref_store_tmp1 = load ptr, ptr %local_2__frozen, align 8
+  %load_deref_store_tmp2 = load { ptr, i64, i64 }, ptr %load_deref_store_tmp1, align 8
+  store { ptr, i64, i64 } %load_deref_store_tmp2, ptr %local_3, align 8
+  %retval = load { ptr, i64, i64 }, ptr %local_3, align 8
+  ret { ptr, i64, i64 } %retval
+}
+
+declare { ptr, i64, i64 } @move_native_test_scenario_ids_for_address(ptr, [32 x i8])
+
+define %struct.test_scenario__TransactionEffects @"0000000000000002_test_scenario_later_epoch_GVBitxyhX22LqY"(ptr noalias nonnull %0, i64 %1, [32 x i8] %2) {
+entry:
+  %local_0 = alloca ptr, align 8
+  %local_1 = alloca i64, align 8
+  %local_2 = alloca [32 x i8], align 1
+  %local_3 = alloca ptr, align 8
+  %local_4__ctx = alloca ptr, align 8
+  %local_5 = alloca i64, align 8
+  %local_6 = alloca ptr, align 8
+  %local_7 = alloca [32 x i8], align 1
+  %local_8 = alloca %struct.test_scenario__TransactionEffects, align 8
+  store ptr %0, ptr %local_0, align 8
+  store i64 %1, ptr %local_1, align 8
+  store [32 x i8] %2, ptr %local_2, align 1
+  %load_store_tmp = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp, ptr %local_3, align 8
+  %tmp = load ptr, ptr %local_3, align 8
+  %fld_ref = getelementptr inbounds %struct.test_scenario__Scenario, ptr %tmp, i32 0, i32 1
+  store ptr %fld_ref, ptr %local_4__ctx, align 8
+  %load_store_tmp1 = load i64, ptr %local_1, align 8
+  store i64 %load_store_tmp1, ptr %local_5, align 8
+  %call_arg_0 = load ptr, ptr %local_4__ctx, align 8
+  %call_arg_1 = load i64, ptr %local_5, align 8
+  call void @"0000000000000002_tx_context_increment_epoch_7LomAMLeFJKXpb"(ptr %call_arg_0, i64 %call_arg_1)
+  %load_store_tmp2 = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp2, ptr %local_6, align 8
+  %call_arg_03 = load ptr, ptr %local_6, align 8
+  %call_arg_14 = load [32 x i8], ptr %local_2, align 1
+  %retval = call %struct.test_scenario__TransactionEffects @"0000000000000002_test_scenario_next_epoch_3d2j1qxY5pXbEe"(ptr %call_arg_03, [32 x i8] %call_arg_14)
+  store %struct.test_scenario__TransactionEffects %retval, ptr %local_8, align 8
+  %retval5 = load %struct.test_scenario__TransactionEffects, ptr %local_8, align 8
+  ret %struct.test_scenario__TransactionEffects %retval5
+}
+
+declare void @"0000000000000002_tx_context_increment_epoch_7LomAMLeFJKXpb"(ptr noalias nonnull, i64)
+
+define %struct.test_scenario__TransactionEffects @"0000000000000002_test_scenario_next_epoch_3d2j1qxY5pXbEe"(ptr noalias nonnull %0, [32 x i8] %1) {
+entry:
+  %local_0 = alloca ptr, align 8
+  %local_1 = alloca [32 x i8], align 1
+  %local_2 = alloca ptr, align 8
+  %local_3__ctx = alloca ptr, align 8
+  %local_4 = alloca ptr, align 8
+  %local_5 = alloca [32 x i8], align 1
+  %local_6 = alloca %struct.test_scenario__TransactionEffects, align 8
+  store ptr %0, ptr %local_0, align 8
+  store [32 x i8] %1, ptr %local_1, align 1
+  %load_store_tmp = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp, ptr %local_2, align 8
+  %tmp = load ptr, ptr %local_2, align 8
+  %fld_ref = getelementptr inbounds %struct.test_scenario__Scenario, ptr %tmp, i32 0, i32 1
+  store ptr %fld_ref, ptr %local_3__ctx, align 8
+  %call_arg_0 = load ptr, ptr %local_3__ctx, align 8
+  call void @"0000000000000002_tx_context_increment_epoch_DJtfJsfpgZF9xB"(ptr %call_arg_0)
+  %load_store_tmp1 = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp1, ptr %local_4, align 8
+  %call_arg_02 = load ptr, ptr %local_4, align 8
+  %call_arg_1 = load [32 x i8], ptr %local_1, align 1
+  %retval = call %struct.test_scenario__TransactionEffects @"0000000000000002_test_scenario_next_tx_FSty8kTFcR1wkJ"(ptr %call_arg_02, [32 x i8] %call_arg_1)
+  store %struct.test_scenario__TransactionEffects %retval, ptr %local_6, align 8
+  %retval3 = load %struct.test_scenario__TransactionEffects, ptr %local_6, align 8
+  ret %struct.test_scenario__TransactionEffects %retval3
+}
+
+declare void @"0000000000000002_tx_context_increment_epoch_DJtfJsfpgZF9xB"(ptr noalias nonnull)
+
+define %struct.test_scenario__TransactionEffects @"0000000000000002_test_scenario_next_tx_FSty8kTFcR1wkJ"(ptr noalias nonnull %0, [32 x i8] %1) {
+entry:
+  %local_0 = alloca ptr, align 8
+  %local_1 = alloca [32 x i8], align 1
+  %local_2 = alloca i64, align 8
+  %local_3 = alloca i64, align 8
+  %local_4 = alloca ptr, align 8
+  %local_5__txn_number = alloca ptr, align 8
+  %local_6 = alloca i64, align 8
+  %local_7 = alloca i64, align 8
+  %local_8 = alloca i64, align 8
+  %local_9 = alloca ptr, align 8
+  %local_10__txn_number = alloca ptr, align 8
+  %local_11 = alloca ptr, align 8
+  %local_12__ctx = alloca ptr, align 8
+  %local_13 = alloca i64, align 8
+  %local_14 = alloca ptr, align 8
+  %local_15__ctx = alloca ptr, align 8
+  %local_16 = alloca i64, align 8
+  %local_17 = alloca [32 x i8], align 1
+  %local_18 = alloca ptr, align 8
+  %local_19__txn_number = alloca ptr, align 8
+  %local_20 = alloca i64, align 8
+  %local_21 = alloca i64, align 8
+  %local_22 = alloca i64, align 8
+  %local_23 = alloca i64, align 8
+  %local_24 = alloca %struct.tx_context__TxContext, align 8
+  %local_25 = alloca ptr, align 8
+  %local_26__ctx = alloca ptr, align 8
+  %local_27 = alloca %struct.test_scenario__TransactionEffects, align 8
+  store ptr %0, ptr %local_0, align 8
+  store [32 x i8] %1, ptr %local_1, align 1
+  %load_store_tmp = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp, ptr %local_4, align 8
+  %tmp = load ptr, ptr %local_4, align 8
+  %fld_ref = getelementptr inbounds %struct.test_scenario__Scenario, ptr %tmp, i32 0, i32 0
+  store ptr %fld_ref, ptr %local_5__txn_number, align 8
+  %load_deref_store_tmp1 = load ptr, ptr %local_5__txn_number, align 8
+  %load_deref_store_tmp2 = load i64, ptr %load_deref_store_tmp1, align 8
+  store i64 %load_deref_store_tmp2, ptr %local_6, align 8
+  store i64 1, ptr %local_7, align 8
+  %add_src_0 = load i64, ptr %local_6, align 8
+  %add_src_1 = load i64, ptr %local_7, align 8
+  %add_dst = add i64 %add_src_0, %add_src_1
+  %ovfcond = icmp ult i64 %add_dst, %add_src_0
+  br i1 %ovfcond, label %then_bb, label %join_bb
+
+then_bb:                                          ; preds = %entry
+  call void @move_rt_abort(i64 4017)
+  unreachable
+
+join_bb:                                          ; preds = %entry
+  store i64 %add_dst, ptr %local_8, align 8
+  %load_store_tmp1 = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp1, ptr %local_9, align 8
+  %tmp2 = load ptr, ptr %local_9, align 8
+  %fld_ref3 = getelementptr inbounds %struct.test_scenario__Scenario, ptr %tmp2, i32 0, i32 0
+  store ptr %fld_ref3, ptr %local_10__txn_number, align 8
+  %load_store_ref_src = load i64, ptr %local_8, align 8
+  %load_store_ref_dst_ptr = load ptr, ptr %local_10__txn_number, align 8
+  store i64 %load_store_ref_src, ptr %load_store_ref_dst_ptr, align 8
+  %load_store_tmp4 = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp4, ptr %local_11, align 8
+  %tmp5 = load ptr, ptr %local_11, align 8
+  %fld_ref6 = getelementptr inbounds %struct.test_scenario__Scenario, ptr %tmp5, i32 0, i32 1
+  store ptr %fld_ref6, ptr %local_12__ctx, align 8
+  %call_arg_0 = load ptr, ptr %local_12__ctx, align 8
+  %retval = call i64 @"0000000000000002_tx_context_epoch_D93PCrdoigPcah"(ptr %call_arg_0)
+  store i64 %retval, ptr %local_13, align 8
+  %load_store_tmp7 = load i64, ptr %local_13, align 8
+  store i64 %load_store_tmp7, ptr %local_2, align 8
+  %load_store_tmp8 = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp8, ptr %local_14, align 8
+  %tmp9 = load ptr, ptr %local_14, align 8
+  %fld_ref10 = getelementptr inbounds %struct.test_scenario__Scenario, ptr %tmp9, i32 0, i32 1
+  store ptr %fld_ref10, ptr %local_15__ctx, align 8
+  %call_arg_011 = load ptr, ptr %local_15__ctx, align 8
+  %retval12 = call i64 @"0000000000000002_tx_context_epoch_timestamp_9QTSawMv3u6zpR"(ptr %call_arg_011)
+  store i64 %retval12, ptr %local_16, align 8
+  %load_store_tmp13 = load i64, ptr %local_16, align 8
+  store i64 %load_store_tmp13, ptr %local_3, align 8
+  %load_store_tmp14 = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp14, ptr %local_18, align 8
+  %tmp15 = load ptr, ptr %local_18, align 8
+  %fld_ref16 = getelementptr inbounds %struct.test_scenario__Scenario, ptr %tmp15, i32 0, i32 0
+  store ptr %fld_ref16, ptr %local_19__txn_number, align 8
+  %load_deref_store_tmp117 = load ptr, ptr %local_19__txn_number, align 8
+  %load_deref_store_tmp218 = load i64, ptr %load_deref_store_tmp117, align 8
+  store i64 %load_deref_store_tmp218, ptr %local_20, align 8
+  %load_store_tmp19 = load i64, ptr %local_2, align 8
+  store i64 %load_store_tmp19, ptr %local_21, align 8
+  %load_store_tmp20 = load i64, ptr %local_3, align 8
+  store i64 %load_store_tmp20, ptr %local_22, align 8
+  store i64 0, ptr %local_23, align 8
+  %call_arg_021 = load [32 x i8], ptr %local_1, align 1
+  %call_arg_1 = load i64, ptr %local_20, align 8
+  %call_arg_2 = load i64, ptr %local_21, align 8
+  %call_arg_3 = load i64, ptr %local_22, align 8
+  %call_arg_4 = load i64, ptr %local_23, align 8
+  %retval22 = call %struct.tx_context__TxContext @"0000000000000002_tx_context_new_from_hint_9eKZScShnwdGsh"([32 x i8] %call_arg_021, i64 %call_arg_1, i64 %call_arg_2, i64 %call_arg_3, i64 %call_arg_4)
+  store %struct.tx_context__TxContext %retval22, ptr %local_24, align 8
+  %load_store_tmp23 = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp23, ptr %local_25, align 8
+  %tmp24 = load ptr, ptr %local_25, align 8
+  %fld_ref25 = getelementptr inbounds %struct.test_scenario__Scenario, ptr %tmp24, i32 0, i32 1
+  store ptr %fld_ref25, ptr %local_26__ctx, align 8
+  %load_store_ref_src26 = load %struct.tx_context__TxContext, ptr %local_24, align 8
+  %load_store_ref_dst_ptr27 = load ptr, ptr %local_26__ctx, align 8
+  store %struct.tx_context__TxContext %load_store_ref_src26, ptr %load_store_ref_dst_ptr27, align 8
+  %retval28 = call %struct.test_scenario__TransactionEffects @move_native_test_scenario_end_transaction()
+  store %struct.test_scenario__TransactionEffects %retval28, ptr %local_27, align 8
+  %retval29 = load %struct.test_scenario__TransactionEffects, ptr %local_27, align 8
+  ret %struct.test_scenario__TransactionEffects %retval29
+}
+
+declare i64 @"0000000000000002_tx_context_epoch_D93PCrdoigPcah"(ptr nonnull readonly)
+
+declare i64 @"0000000000000002_tx_context_epoch_timestamp_9QTSawMv3u6zpR"(ptr nonnull readonly)
+
+declare %struct.option__Option_object__ID_ @move_native_test_scenario_most_recent_id_for_address(ptr, [32 x i8])
+
+declare %struct.option__Option_object__ID_ @move_native_test_scenario_most_recent_id_shared(ptr)
+
+declare %struct.option__Option_object__ID_ @move_native_test_scenario_most_recent_immutable_id(ptr)
+
+define %struct.object__UID @"0000000000000002_test_scenario_new_object_HZkzkAEY2xmPrt"(ptr noalias nonnull %0) {
+entry:
+  %local_0 = alloca ptr, align 8
+  %local_1 = alloca ptr, align 8
+  %local_2__ctx = alloca ptr, align 8
+  %local_3 = alloca %struct.object__UID, align 8
+  store ptr %0, ptr %local_0, align 8
+  %load_store_tmp = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp, ptr %local_1, align 8
+  %tmp = load ptr, ptr %local_1, align 8
+  %fld_ref = getelementptr inbounds %struct.test_scenario__Scenario, ptr %tmp, i32 0, i32 1
+  store ptr %fld_ref, ptr %local_2__ctx, align 8
+  %call_arg_0 = load ptr, ptr %local_2__ctx, align 8
+  %retval = call %struct.object__UID @"0000000000000002_object_new_7YpMdzkAYZzs1W"(ptr %call_arg_0)
+  store %struct.object__UID %retval, ptr %local_3, align 1
+  %retval1 = load %struct.object__UID, ptr %local_3, align 1
+  ret %struct.object__UID %retval1
+}
+
+declare %struct.object__UID @"0000000000000002_object_new_7YpMdzkAYZzs1W"(ptr noalias nonnull)
+
+define i64 @"0000000000000002_test_scenario_num_concluded_t_2pM77Nhj2X3rdf"(ptr nonnull readonly %0) {
+entry:
+  %local_0 = alloca ptr, align 8
+  %local_1 = alloca ptr, align 8
+  %local_2__txn_number = alloca ptr, align 8
+  %local_3 = alloca i64, align 8
+  store ptr %0, ptr %local_0, align 8
+  %load_store_tmp = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp, ptr %local_1, align 8
+  %tmp = load ptr, ptr %local_1, align 8
+  %fld_ref = getelementptr inbounds %struct.test_scenario__Scenario, ptr %tmp, i32 0, i32 0
+  store ptr %fld_ref, ptr %local_2__txn_number, align 8
+  %load_deref_store_tmp1 = load ptr, ptr %local_2__txn_number, align 8
+  %load_deref_store_tmp2 = load i64, ptr %load_deref_store_tmp1, align 8
+  store i64 %load_deref_store_tmp2, ptr %local_3, align 8
+  %retval = load i64, ptr %local_3, align 8
+  ret i64 %retval
+}
+
+define i64 @"0000000000000002_test_scenario_num_user_events_BEuU6mUEZmEddb"(ptr nonnull readonly %0) {
+entry:
+  %local_0 = alloca ptr, align 8
+  %local_1 = alloca ptr, align 8
+  %local_2__num_user_events = alloca ptr, align 8
+  %local_3 = alloca i64, align 8
+  store ptr %0, ptr %local_0, align 8
+  %load_store_tmp = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp, ptr %local_1, align 8
+  %tmp = load ptr, ptr %local_1, align 8
+  %fld_ref = getelementptr inbounds %struct.test_scenario__TransactionEffects, ptr %tmp, i32 0, i32 7
+  store ptr %fld_ref, ptr %local_2__num_user_events, align 8
+  %load_deref_store_tmp1 = load ptr, ptr %local_2__num_user_events, align 8
+  %load_deref_store_tmp2 = load i64, ptr %load_deref_store_tmp1, align 8
+  store i64 %load_deref_store_tmp2, ptr %local_3, align 8
+  %retval = load i64, ptr %local_3, align 8
+  ret i64 %retval
+}
+
+define { ptr, i64, i64 } @"0000000000000002_test_scenario_shared_CADP5G4EV91Aed"(ptr nonnull readonly %0) {
+entry:
+  %local_0 = alloca ptr, align 8
+  %local_1 = alloca ptr, align 8
+  %local_2__shared = alloca ptr, align 8
+  %local_3 = alloca { ptr, i64, i64 }, align 8
+  store ptr %0, ptr %local_0, align 8
+  %load_store_tmp = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp, ptr %local_1, align 8
+  %tmp = load ptr, ptr %local_1, align 8
+  %fld_ref = getelementptr inbounds %struct.test_scenario__TransactionEffects, ptr %tmp, i32 0, i32 5
+  store ptr %fld_ref, ptr %local_2__shared, align 8
+  %load_deref_store_tmp1 = load ptr, ptr %local_2__shared, align 8
+  %load_deref_store_tmp2 = load { ptr, i64, i64 }, ptr %load_deref_store_tmp1, align 8
+  store { ptr, i64, i64 } %load_deref_store_tmp2, ptr %local_3, align 8
+  %retval = load { ptr, i64, i64 }, ptr %local_3, align 8
+  ret { ptr, i64, i64 } %retval
+}
+
+declare void @move_native_test_scenario_take_from_address_by_id(ptr, ptr, [32 x i8], %struct.object__ID, ptr)
+
+declare void @move_native_test_scenario_take_immutable_by_id(ptr, ptr, %struct.object__ID, ptr)
+
+declare void @move_native_test_scenario_take_shared_by_id(ptr, ptr, %struct.object__ID, ptr)
+
+define %struct.vec_map__VecMap_object__ID.address_ @"0000000000000002_test_scenario_transferred_to__eYFvh8ksZjNq2P"(ptr nonnull readonly %0) {
+entry:
+  %local_0 = alloca ptr, align 8
+  %local_1 = alloca ptr, align 8
+  %local_2__transferred_to_account = alloca ptr, align 8
+  %local_3 = alloca %struct.vec_map__VecMap_object__ID.address_, align 8
+  store ptr %0, ptr %local_0, align 8
+  %load_store_tmp = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp, ptr %local_1, align 8
+  %tmp = load ptr, ptr %local_1, align 8
+  %fld_ref = getelementptr inbounds %struct.test_scenario__TransactionEffects, ptr %tmp, i32 0, i32 3
+  store ptr %fld_ref, ptr %local_2__transferred_to_account, align 8
+  %load_deref_store_tmp1 = load ptr, ptr %local_2__transferred_to_account, align 8
+  %load_deref_store_tmp2 = load %struct.vec_map__VecMap_object__ID.address_, ptr %load_deref_store_tmp1, align 8
+  store %struct.vec_map__VecMap_object__ID.address_ %load_deref_store_tmp2, ptr %local_3, align 8
+  %retval = load %struct.vec_map__VecMap_object__ID.address_, ptr %local_3, align 8
+  ret %struct.vec_map__VecMap_object__ID.address_ %retval
+}
+
+define %struct.vec_map__VecMap_object__ID.object__ID_ @"0000000000000002_test_scenario_transferred_to__2Kiw3iYM5LgaxU"(ptr nonnull readonly %0) {
+entry:
+  %local_0 = alloca ptr, align 8
+  %local_1 = alloca ptr, align 8
+  %local_2__transferred_to_object = alloca ptr, align 8
+  %local_3 = alloca %struct.vec_map__VecMap_object__ID.object__ID_, align 8
+  store ptr %0, ptr %local_0, align 8
+  %load_store_tmp = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp, ptr %local_1, align 8
+  %tmp = load ptr, ptr %local_1, align 8
+  %fld_ref = getelementptr inbounds %struct.test_scenario__TransactionEffects, ptr %tmp, i32 0, i32 4
+  store ptr %fld_ref, ptr %local_2__transferred_to_object, align 8
+  %load_deref_store_tmp1 = load ptr, ptr %local_2__transferred_to_object, align 8
+  %load_deref_store_tmp2 = load %struct.vec_map__VecMap_object__ID.object__ID_, ptr %load_deref_store_tmp1, align 8
+  store %struct.vec_map__VecMap_object__ID.object__ID_ %load_deref_store_tmp2, ptr %local_3, align 8
+  %retval = load %struct.vec_map__VecMap_object__ID.object__ID_, ptr %local_3, align 8
+  ret %struct.vec_map__VecMap_object__ID.object__ID_ %retval
+}
+
+declare i1 @move_native_test_scenario_was_taken_from_address([32 x i8], %struct.object__ID)
+
+define i1 @"0000000000000002_test_scenario_was_taken_from__8BgH3kyt2YWBqx"(ptr nonnull readonly %0, %struct.object__ID %1) {
+entry:
+  %local_0 = alloca ptr, align 8
+  %local_1 = alloca %struct.object__ID, align 8
+  %local_2 = alloca ptr, align 8
+  %local_3 = alloca [32 x i8], align 1
+  %local_4 = alloca %struct.object__ID, align 8
+  %local_5 = alloca i1, align 1
+  store ptr %0, ptr %local_0, align 8
+  store %struct.object__ID %1, ptr %local_1, align 1
+  %load_store_tmp = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp, ptr %local_2, align 8
+  %call_arg_0 = load ptr, ptr %local_2, align 8
+  %retval = call [32 x i8] @"0000000000000002_test_scenario_sender_CZnDLJ9D5p86Ao"(ptr %call_arg_0)
+  store [32 x i8] %retval, ptr %local_3, align 1
+  %loaded_alloca = load [32 x i8], ptr %local_3, align 1
+  %loaded_alloca1 = load %struct.object__ID, ptr %local_1, align 1
+  %retval2 = call i1 @move_native_test_scenario_was_taken_from_address([32 x i8] %loaded_alloca, %struct.object__ID %loaded_alloca1)
+  store i1 %retval2, ptr %local_5, align 1
+  %retval3 = load i1, ptr %local_5, align 1
+  ret i1 %retval3
+}
+
+declare i1 @move_native_test_scenario_was_taken_immutable(%struct.object__ID)
+
+declare i1 @move_native_test_scenario_was_taken_shared(%struct.object__ID)
+
+define { ptr, i64, i64 } @"0000000000000002_test_scenario_written_CwdBAkT7qNafBh"(ptr nonnull readonly %0) {
+entry:
+  %local_0 = alloca ptr, align 8
+  %local_1 = alloca ptr, align 8
+  %local_2__written = alloca ptr, align 8
+  %local_3 = alloca { ptr, i64, i64 }, align 8
+  store ptr %0, ptr %local_0, align 8
+  %load_store_tmp = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp, ptr %local_1, align 8
+  %tmp = load ptr, ptr %local_1, align 8
+  %fld_ref = getelementptr inbounds %struct.test_scenario__TransactionEffects, ptr %tmp, i32 0, i32 1
+  store ptr %fld_ref, ptr %local_2__written, align 8
+  %load_deref_store_tmp1 = load ptr, ptr %local_2__written, align 8
+  %load_deref_store_tmp2 = load { ptr, i64, i64 }, ptr %load_deref_store_tmp1, align 8
+  store { ptr, i64, i64 } %load_deref_store_tmp2, ptr %local_3, align 8
+  %retval = load { ptr, i64, i64 }, ptr %local_3, align 8
+  ret { ptr, i64, i64 } %retval
+}
+
+declare void @move_rt_vec_destroy(ptr nonnull readonly dereferenceable(32), ptr)
+
+; Function Attrs: cold noreturn
+declare void @move_rt_abort(i64) #0
+
+attributes #0 = { cold noreturn }

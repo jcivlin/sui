@@ -89,3 +89,7 @@ harness = false
 [[test]]
 name = "failure-tests"
 harness = false
+
+[[test]]
+name = "sui-framework-tests"
+harness = false

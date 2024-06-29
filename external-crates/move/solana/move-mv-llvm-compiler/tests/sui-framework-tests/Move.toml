@@ -1,0 +1,10 @@
+[package]
+name = "Dynamic-field-tests"
+version = "0.0.1"
+# published-at = "0x2"
+
+[dependencies]
+Sui = { local = "../../../../../../crates/sui-framework/packages/sui-framework", address = "0x2", package = "Sui" }
+
+[addresses]
+sui = "0x2"
