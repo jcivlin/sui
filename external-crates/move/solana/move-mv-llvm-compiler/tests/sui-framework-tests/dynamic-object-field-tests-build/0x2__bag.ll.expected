@@ -1,0 +1,156 @@
+; ModuleID = '0x2__bag'
+source_filename = "../../../../../../crates/sui-framework/packages/sui-framework/sources/bag.move"
+target datalayout = "e-m:e-p:64:64-i64:64-n32:64-S128"
+target triple = "sbf-solana-solana"
+
+%__move_rt_type = type { { ptr, i64 }, i64, ptr }
+%struct.bag__Bag = type { %struct.object__UID, i64 }
+%struct.object__UID = type { %struct.object__ID }
+%struct.object__ID = type { [32 x i8] }
+
+@__move_rttydesc_signer = private unnamed_addr constant %__move_rt_type { { ptr, i64 } { ptr @__move_rttydesc_signer_name, i64 6 }, i64 9, ptr @__move_rttydesc_NOTHING_info }
+@__move_rttydesc_signer_name = private unnamed_addr constant [6 x i8] c"signer"
+@__move_rttydesc_NOTHING_info = private unnamed_addr constant i8 -1
+
+declare i32 @memcmp(ptr, ptr, i64)
+
+define void @"0000000000000002_bag_unit_test_poiso_BBf1uenSeYGQzy"() {
+entry:
+  %local_0 = alloca i64, align 8
+  %local_1 = alloca { ptr, i64, i64 }, align 8
+  store i64 0, ptr %local_0, align 8
+  %loaded_alloca = load i64, ptr %local_0, align 8
+  %retval = call { ptr, i64, i64 } @move_native_unit_test_create_signers_for_testing(i64 %loaded_alloca)
+  store { ptr, i64, i64 } %retval, ptr %local_1, align 8
+  call void @move_rt_vec_destroy(ptr @__move_rttydesc_signer, ptr %local_1)
+  ret void
+}
+
+declare { ptr, i64, i64 } @move_native_unit_test_create_signers_for_testing(i64)
+
+define i64 @"0000000000000002_bag_length_CPfBHK6NwatHw3"(ptr nonnull readonly %0) {
+entry:
+  %local_0 = alloca ptr, align 8
+  %local_1 = alloca ptr, align 8
+  %local_2__size = alloca ptr, align 8
+  %local_3 = alloca i64, align 8
+  store ptr %0, ptr %local_0, align 8
+  %load_store_tmp = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp, ptr %local_1, align 8
+  %tmp = load ptr, ptr %local_1, align 8
+  %fld_ref = getelementptr inbounds %struct.bag__Bag, ptr %tmp, i32 0, i32 1
+  store ptr %fld_ref, ptr %local_2__size, align 8
+  %load_deref_store_tmp1 = load ptr, ptr %local_2__size, align 8
+  %load_deref_store_tmp2 = load i64, ptr %load_deref_store_tmp1, align 8
+  store i64 %load_deref_store_tmp2, ptr %local_3, align 8
+  %retval = load i64, ptr %local_3, align 8
+  ret i64 %retval
+}
+
+define void @"0000000000000002_bag_destroy_empty_573SW1byci8mv7"(%struct.bag__Bag %0) {
+entry:
+  %local_0 = alloca %struct.bag__Bag, align 8
+  %local_1 = alloca %struct.object__UID, align 8
+  %local_2 = alloca i64, align 8
+  %local_3 = alloca %struct.bag__Bag, align 8
+  %local_4__id = alloca %struct.object__UID, align 8
+  %local_5__size = alloca i64, align 8
+  %local_6 = alloca i64, align 8
+  %local_7 = alloca i64, align 8
+  %local_8 = alloca i1, align 1
+  %local_9 = alloca i64, align 8
+  %local_10 = alloca %struct.object__UID, align 8
+  store %struct.bag__Bag %0, ptr %local_0, align 8
+  %srcval = load %struct.bag__Bag, ptr %local_0, align 8
+  %ext_0 = extractvalue %struct.bag__Bag %srcval, 0
+  %ext_1 = extractvalue %struct.bag__Bag %srcval, 1
+  store %struct.object__UID %ext_0, ptr %local_4__id, align 1
+  store i64 %ext_1, ptr %local_5__size, align 8
+  %load_store_tmp = load i64, ptr %local_5__size, align 8
+  store i64 %load_store_tmp, ptr %local_2, align 8
+  %load_store_tmp1 = load %struct.object__UID, ptr %local_4__id, align 1
+  store %struct.object__UID %load_store_tmp1, ptr %local_1, align 1
+  %load_store_tmp2 = load i64, ptr %local_2, align 8
+  store i64 %load_store_tmp2, ptr %local_6, align 8
+  store i64 0, ptr %local_7, align 8
+  %eq_src_0 = load i64, ptr %local_6, align 8
+  %eq_src_1 = load i64, ptr %local_7, align 8
+  %eq_dst = icmp eq i64 %eq_src_0, %eq_src_1
+  store i1 %eq_dst, ptr %local_8, align 1
+  %cnd = load i1, ptr %local_8, align 1
+  br i1 %cnd, label %bb_1, label %bb_0
+
+bb_1:                                             ; preds = %entry
+  br label %bb_2
+
+bb_0:                                             ; preds = %entry
+  store i64 0, ptr %local_9, align 8
+  %call_arg_0 = load i64, ptr %local_9, align 8
+  call void @move_rt_abort(i64 %call_arg_0)
+  unreachable
+
+bb_2:                                             ; preds = %bb_1
+  %call_arg_03 = load %struct.object__UID, ptr %local_1, align 1
+  call void @"0000000000000002_object_delete_FRdqjKo1rYipTy"(%struct.object__UID %call_arg_03)
+  ret void
+}
+
+declare void @"0000000000000002_object_delete_FRdqjKo1rYipTy"(%struct.object__UID)
+
+define i1 @"0000000000000002_bag_is_empty_8AUPQLGZt4PrVh"(ptr nonnull readonly %0) {
+entry:
+  %local_0 = alloca ptr, align 8
+  %local_1 = alloca ptr, align 8
+  %local_2__size = alloca ptr, align 8
+  %local_3 = alloca i64, align 8
+  %local_4 = alloca i64, align 8
+  %local_5 = alloca i1, align 1
+  store ptr %0, ptr %local_0, align 8
+  %load_store_tmp = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp, ptr %local_1, align 8
+  %tmp = load ptr, ptr %local_1, align 8
+  %fld_ref = getelementptr inbounds %struct.bag__Bag, ptr %tmp, i32 0, i32 1
+  store ptr %fld_ref, ptr %local_2__size, align 8
+  %load_deref_store_tmp1 = load ptr, ptr %local_2__size, align 8
+  %load_deref_store_tmp2 = load i64, ptr %load_deref_store_tmp1, align 8
+  store i64 %load_deref_store_tmp2, ptr %local_3, align 8
+  store i64 0, ptr %local_4, align 8
+  %eq_src_0 = load i64, ptr %local_3, align 8
+  %eq_src_1 = load i64, ptr %local_4, align 8
+  %eq_dst = icmp eq i64 %eq_src_0, %eq_src_1
+  store i1 %eq_dst, ptr %local_5, align 1
+  %retval = load i1, ptr %local_5, align 1
+  ret i1 %retval
+}
+
+define %struct.bag__Bag @"0000000000000002_bag_new_4KyFevWsKbBGC5"(ptr noalias nonnull %0) {
+entry:
+  %local_0 = alloca ptr, align 8
+  %local_1 = alloca ptr, align 8
+  %local_2__id = alloca %struct.object__UID, align 8
+  %local_3__size = alloca i64, align 8
+  %local_4 = alloca %struct.bag__Bag, align 8
+  store ptr %0, ptr %local_0, align 8
+  %load_store_tmp = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp, ptr %local_1, align 8
+  %call_arg_0 = load ptr, ptr %local_1, align 8
+  %retval = call %struct.object__UID @"0000000000000002_object_new_7YpMdzkAYZzs1W"(ptr %call_arg_0)
+  store %struct.object__UID %retval, ptr %local_2__id, align 1
+  store i64 0, ptr %local_3__size, align 8
+  %fv.0 = load %struct.object__UID, ptr %local_2__id, align 1
+  %fv.1 = load i64, ptr %local_3__size, align 8
+  %insert_0 = insertvalue %struct.bag__Bag undef, %struct.object__UID %fv.0, 0
+  %insert_1 = insertvalue %struct.bag__Bag %insert_0, i64 %fv.1, 1
+  store %struct.bag__Bag %insert_1, ptr %local_4, align 8
+  %retval1 = load %struct.bag__Bag, ptr %local_4, align 8
+  ret %struct.bag__Bag %retval1
+}
+
+declare %struct.object__UID @"0000000000000002_object_new_7YpMdzkAYZzs1W"(ptr noalias nonnull)
+
+declare void @move_rt_vec_destroy(ptr nonnull readonly dereferenceable(32), ptr)
+
+; Function Attrs: cold noreturn
+declare void @move_rt_abort(i64) #0
+
+attributes #0 = { cold noreturn }

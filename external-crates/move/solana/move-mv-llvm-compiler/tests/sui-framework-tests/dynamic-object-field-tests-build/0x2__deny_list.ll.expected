@@ -1,0 +1,2728 @@
+; ModuleID = '0x2__deny_list'
+source_filename = "../../../../../../crates/sui-framework/packages/sui-framework/sources/deny_list.move"
+target datalayout = "e-m:e-p:64:64-i64:64-n32:64-S128"
+target triple = "sbf-solana-solana"
+
+%__move_rt_type = type { { ptr, i64 }, i64, ptr }
+%struct.deny_list__DenyList = type { %struct.object__UID, %struct.bag__Bag }
+%struct.object__UID = type { %struct.object__ID }
+%struct.object__ID = type { [32 x i8] }
+%struct.bag__Bag = type { %struct.object__UID, i64 }
+%struct.dynamic_field__Field_u64.deny_list__PerTypeList_ = type { %struct.object__UID, i64, %struct.deny_list__PerTypeList }
+%struct.deny_list__PerTypeList = type { %struct.object__UID, %struct.table__Table_address.u64_, %struct.table__Table_vector_u8_.vec_set__VecSet_address__ }
+%struct.table__Table_address.u64_ = type { %struct.object__UID, i64 }
+%struct.table__Table_vector_u8_.vec_set__VecSet_address__ = type { %struct.object__UID, i64 }
+%struct.dynamic_field__Field_address.u64_ = type { %struct.object__UID, [32 x i8], i64 }
+%struct.dynamic_field__Field_vector_u8_.vec_set__VecSet_address__ = type { %struct.object__UID, { ptr, i64, i64 }, %struct.vec_set__VecSet_address_ }
+%struct.vec_set__VecSet_address_ = type { { ptr, i64, i64 } }
+%struct.option__Option_u64_ = type { { ptr, i64, i64 } }
+
+@__move_rttydesc_signer = private unnamed_addr constant %__move_rt_type { { ptr, i64 } { ptr @__move_rttydesc_signer_name, i64 6 }, i64 9, ptr @__move_rttydesc_NOTHING_info }
+@__move_rttydesc_signer_name = private unnamed_addr constant [6 x i8] c"signer"
+@__move_rttydesc_NOTHING_info = private unnamed_addr constant i8 -1
+@__move_rttydesc_u64 = private unnamed_addr constant %__move_rt_type { { ptr, i64 } { ptr @__move_rttydesc_u64_name, i64 3 }, i64 5, ptr @__move_rttydesc_NOTHING_info }
+@__move_rttydesc_u64_name = private unnamed_addr constant [3 x i8] c"u64"
+@"__move_rttydesc_dynamic_field__Field_u64, deny_list__PerTypeList_" = private unnamed_addr constant %__move_rt_type { { ptr, i64 } { ptr @"__move_rttydesc_dynamic_field__Field_u64, deny_list__PerTypeList__name", i64 180 }, i64 11, ptr @"__move_rttydesc_dynamic_field__Field_u64, deny_list__PerTypeList__info" }
+@"__move_rttydesc_dynamic_field__Field_u64, deny_list__PerTypeList__name" = private unnamed_addr constant [180 x i8] c"0000000000000000000000000000000000000000000000000000000000000002::dynamic_field::Field<u64,0000000000000000000000000000000000000000000000000000000000000002::deny_list::PerTypeList>"
+@__move_rttydesc_object__UID_name = private unnamed_addr constant [77 x i8] c"0000000000000000000000000000000000000000000000000000000000000002::object::UID"
+@__move_rttydesc_object__ID_name = private unnamed_addr constant [76 x i8] c"0000000000000000000000000000000000000000000000000000000000000002::object::ID"
+@__move_rttydesc_address_name = private unnamed_addr constant [7 x i8] c"address"
+@0 = private unnamed_addr constant [5 x i8] c"bytes"
+@s_fld_array = private unnamed_addr constant [1 x { %__move_rt_type, i64, { ptr, i64 } }] [{ %__move_rt_type, i64, { ptr, i64 } } { %__move_rt_type { { ptr, i64 } { ptr @__move_rttydesc_address_name, i64 7 }, i64 8, ptr @__move_rttydesc_NOTHING_info }, i64 0, { ptr, i64 } { ptr @0, i64 5 } }]
+@__move_rttydesc_object__ID_info = private unnamed_addr constant { ptr, i64, i64, i64 } { ptr @s_fld_array, i64 1, i64 32, i64 1 }
+@1 = private unnamed_addr constant [2 x i8] c"id"
+@s_fld_array.1 = private unnamed_addr constant [1 x { %__move_rt_type, i64, { ptr, i64 } }] [{ %__move_rt_type, i64, { ptr, i64 } } { %__move_rt_type { { ptr, i64 } { ptr @__move_rttydesc_object__ID_name, i64 76 }, i64 11, ptr @__move_rttydesc_object__ID_info }, i64 0, { ptr, i64 } { ptr @1, i64 2 } }]
+@__move_rttydesc_object__UID_info = private unnamed_addr constant { ptr, i64, i64, i64 } { ptr @s_fld_array.1, i64 1, i64 32, i64 1 }
+@2 = private unnamed_addr constant [2 x i8] c"id"
+@3 = private unnamed_addr constant [4 x i8] c"name"
+@__move_rttydesc_deny_list__PerTypeList_name = private unnamed_addr constant [88 x i8] c"0000000000000000000000000000000000000000000000000000000000000002::deny_list::PerTypeList"
+@4 = private unnamed_addr constant [2 x i8] c"id"
+@"__move_rttydesc_table__Table_address, u64__name" = private unnamed_addr constant [91 x i8] c"0000000000000000000000000000000000000000000000000000000000000002::table::Table<address,u64>"
+@5 = private unnamed_addr constant [2 x i8] c"id"
+@6 = private unnamed_addr constant [4 x i8] c"size"
+@s_fld_array.2 = private unnamed_addr constant [2 x { %__move_rt_type, i64, { ptr, i64 } }] [{ %__move_rt_type, i64, { ptr, i64 } } { %__move_rt_type { { ptr, i64 } { ptr @__move_rttydesc_object__UID_name, i64 77 }, i64 11, ptr @__move_rttydesc_object__UID_info }, i64 0, { ptr, i64 } { ptr @5, i64 2 } }, { %__move_rt_type, i64, { ptr, i64 } } { %__move_rt_type { { ptr, i64 } { ptr @__move_rttydesc_u64_name, i64 3 }, i64 5, ptr @__move_rttydesc_NOTHING_info }, i64 32, { ptr, i64 } { ptr @6, i64 4 } }]
+@"__move_rttydesc_table__Table_address, u64__info" = private unnamed_addr constant { ptr, i64, i64, i64 } { ptr @s_fld_array.2, i64 2, i64 40, i64 8 }
+@7 = private unnamed_addr constant [12 x i8] c"denied_count"
+@"__move_rttydesc_table__Table_vector_u8_, vec_set__VecSet_address___name" = private unnamed_addr constant [181 x i8] c"0000000000000000000000000000000000000000000000000000000000000002::table::Table<vector<u8>,0000000000000000000000000000000000000000000000000000000000000002::vec_set::VecSet<address>>"
+@8 = private unnamed_addr constant [2 x i8] c"id"
+@9 = private unnamed_addr constant [4 x i8] c"size"
+@s_fld_array.3 = private unnamed_addr constant [2 x { %__move_rt_type, i64, { ptr, i64 } }] [{ %__move_rt_type, i64, { ptr, i64 } } { %__move_rt_type { { ptr, i64 } { ptr @__move_rttydesc_object__UID_name, i64 77 }, i64 11, ptr @__move_rttydesc_object__UID_info }, i64 0, { ptr, i64 } { ptr @8, i64 2 } }, { %__move_rt_type, i64, { ptr, i64 } } { %__move_rt_type { { ptr, i64 } { ptr @__move_rttydesc_u64_name, i64 3 }, i64 5, ptr @__move_rttydesc_NOTHING_info }, i64 32, { ptr, i64 } { ptr @9, i64 4 } }]
+@"__move_rttydesc_table__Table_vector_u8_, vec_set__VecSet_address___info" = private unnamed_addr constant { ptr, i64, i64, i64 } { ptr @s_fld_array.3, i64 2, i64 40, i64 8 }
+@10 = private unnamed_addr constant [16 x i8] c"denied_addresses"
+@s_fld_array.4 = private unnamed_addr constant [3 x { %__move_rt_type, i64, { ptr, i64 } }] [{ %__move_rt_type, i64, { ptr, i64 } } { %__move_rt_type { { ptr, i64 } { ptr @__move_rttydesc_object__UID_name, i64 77 }, i64 11, ptr @__move_rttydesc_object__UID_info }, i64 0, { ptr, i64 } { ptr @4, i64 2 } }, { %__move_rt_type, i64, { ptr, i64 } } { %__move_rt_type { { ptr, i64 } { ptr @"__move_rttydesc_table__Table_address, u64__name", i64 91 }, i64 11, ptr @"__move_rttydesc_table__Table_address, u64__info" }, i64 32, { ptr, i64 } { ptr @7, i64 12 } }, { %__move_rt_type, i64, { ptr, i64 } } { %__move_rt_type { { ptr, i64 } { ptr @"__move_rttydesc_table__Table_vector_u8_, vec_set__VecSet_address___name", i64 181 }, i64 11, ptr @"__move_rttydesc_table__Table_vector_u8_, vec_set__VecSet_address___info" }, i64 72, { ptr, i64 } { ptr @10, i64 16 } }]
+@__move_rttydesc_deny_list__PerTypeList_info = private unnamed_addr constant { ptr, i64, i64, i64 } { ptr @s_fld_array.4, i64 3, i64 112, i64 8 }
+@11 = private unnamed_addr constant [5 x i8] c"value"
+@s_fld_array.5 = private unnamed_addr constant [3 x { %__move_rt_type, i64, { ptr, i64 } }] [{ %__move_rt_type, i64, { ptr, i64 } } { %__move_rt_type { { ptr, i64 } { ptr @__move_rttydesc_object__UID_name, i64 77 }, i64 11, ptr @__move_rttydesc_object__UID_info }, i64 0, { ptr, i64 } { ptr @2, i64 2 } }, { %__move_rt_type, i64, { ptr, i64 } } { %__move_rt_type { { ptr, i64 } { ptr @__move_rttydesc_u64_name, i64 3 }, i64 5, ptr @__move_rttydesc_NOTHING_info }, i64 32, { ptr, i64 } { ptr @3, i64 4 } }, { %__move_rt_type, i64, { ptr, i64 } } { %__move_rt_type { { ptr, i64 } { ptr @__move_rttydesc_deny_list__PerTypeList_name, i64 88 }, i64 11, ptr @__move_rttydesc_deny_list__PerTypeList_info }, i64 40, { ptr, i64 } { ptr @11, i64 5 } }]
+@"__move_rttydesc_dynamic_field__Field_u64, deny_list__PerTypeList__info" = private unnamed_addr constant { ptr, i64, i64, i64 } { ptr @s_fld_array.5, i64 3, i64 152, i64 8 }
+@__move_rttydesc_u8 = private unnamed_addr constant %__move_rt_type { { ptr, i64 } { ptr @__move_rttydesc_u8_name, i64 2 }, i64 2, ptr @__move_rttydesc_NOTHING_info }
+@__move_rttydesc_u8_name = private unnamed_addr constant [2 x i8] c"u8"
+@__move_rttydesc_address = private unnamed_addr constant %__move_rt_type { { ptr, i64 } { ptr @__move_rttydesc_address_name, i64 7 }, i64 8, ptr @__move_rttydesc_NOTHING_info }
+@"__move_rttydesc_dynamic_field__Field_address, u64_" = private unnamed_addr constant %__move_rt_type { { ptr, i64 } { ptr @"__move_rttydesc_dynamic_field__Field_address, u64__name", i64 99 }, i64 11, ptr @"__move_rttydesc_dynamic_field__Field_address, u64__info" }
+@"__move_rttydesc_dynamic_field__Field_address, u64__name" = private unnamed_addr constant [99 x i8] c"0000000000000000000000000000000000000000000000000000000000000002::dynamic_field::Field<address,u64>"
+@12 = private unnamed_addr constant [2 x i8] c"id"
+@13 = private unnamed_addr constant [4 x i8] c"name"
+@14 = private unnamed_addr constant [5 x i8] c"value"
+@s_fld_array.6 = private unnamed_addr constant [3 x { %__move_rt_type, i64, { ptr, i64 } }] [{ %__move_rt_type, i64, { ptr, i64 } } { %__move_rt_type { { ptr, i64 } { ptr @__move_rttydesc_object__UID_name, i64 77 }, i64 11, ptr @__move_rttydesc_object__UID_info }, i64 0, { ptr, i64 } { ptr @12, i64 2 } }, { %__move_rt_type, i64, { ptr, i64 } } { %__move_rt_type { { ptr, i64 } { ptr @__move_rttydesc_address_name, i64 7 }, i64 8, ptr @__move_rttydesc_NOTHING_info }, i64 32, { ptr, i64 } { ptr @13, i64 4 } }, { %__move_rt_type, i64, { ptr, i64 } } { %__move_rt_type { { ptr, i64 } { ptr @__move_rttydesc_u64_name, i64 3 }, i64 5, ptr @__move_rttydesc_NOTHING_info }, i64 64, { ptr, i64 } { ptr @14, i64 5 } }]
+@"__move_rttydesc_dynamic_field__Field_address, u64__info" = private unnamed_addr constant { ptr, i64, i64, i64 } { ptr @s_fld_array.6, i64 3, i64 72, i64 8 }
+@__move_rttydesc_vector_u8_ = private unnamed_addr constant %__move_rt_type { { ptr, i64 } { ptr @__move_rttydesc_vector_u8__name, i64 10 }, i64 10, ptr @__move_rttydesc_vector_u8__info }
+@__move_rttydesc_vector_u8__name = private unnamed_addr constant [10 x i8] c"vector<u8>"
+@__move_rttydesc_vector_u8__info = private unnamed_addr constant { ptr } { ptr @__move_rttydesc_u8 }
+@"__move_rttydesc_dynamic_field__Field_vector_u8_, vec_set__VecSet_address__" = private unnamed_addr constant %__move_rt_type { { ptr, i64 } { ptr @"__move_rttydesc_dynamic_field__Field_vector_u8_, vec_set__VecSet_address___name", i64 189 }, i64 11, ptr @"__move_rttydesc_dynamic_field__Field_vector_u8_, vec_set__VecSet_address___info" }
+@"__move_rttydesc_dynamic_field__Field_vector_u8_, vec_set__VecSet_address___name" = private unnamed_addr constant [189 x i8] c"0000000000000000000000000000000000000000000000000000000000000002::dynamic_field::Field<vector<u8>,0000000000000000000000000000000000000000000000000000000000000002::vec_set::VecSet<address>>"
+@15 = private unnamed_addr constant [2 x i8] c"id"
+@16 = private unnamed_addr constant [4 x i8] c"name"
+@__move_rttydesc_vec_set__VecSet_address__name = private unnamed_addr constant [90 x i8] c"0000000000000000000000000000000000000000000000000000000000000002::vec_set::VecSet<address>"
+@__move_rttydesc_vector_address__name = private unnamed_addr constant [15 x i8] c"vector<address>"
+@__move_rttydesc_vector_address__info = private unnamed_addr constant { ptr } { ptr @__move_rttydesc_address }
+@17 = private unnamed_addr constant [8 x i8] c"contents"
+@s_fld_array.7 = private unnamed_addr constant [1 x { %__move_rt_type, i64, { ptr, i64 } }] [{ %__move_rt_type, i64, { ptr, i64 } } { %__move_rt_type { { ptr, i64 } { ptr @__move_rttydesc_vector_address__name, i64 15 }, i64 10, ptr @__move_rttydesc_vector_address__info }, i64 0, { ptr, i64 } { ptr @17, i64 8 } }]
+@__move_rttydesc_vec_set__VecSet_address__info = private unnamed_addr constant { ptr, i64, i64, i64 } { ptr @s_fld_array.7, i64 1, i64 24, i64 8 }
+@18 = private unnamed_addr constant [5 x i8] c"value"
+@s_fld_array.8 = private unnamed_addr constant [3 x { %__move_rt_type, i64, { ptr, i64 } }] [{ %__move_rt_type, i64, { ptr, i64 } } { %__move_rt_type { { ptr, i64 } { ptr @__move_rttydesc_object__UID_name, i64 77 }, i64 11, ptr @__move_rttydesc_object__UID_info }, i64 0, { ptr, i64 } { ptr @15, i64 2 } }, { %__move_rt_type, i64, { ptr, i64 } } { %__move_rt_type { { ptr, i64 } { ptr @__move_rttydesc_vector_u8__name, i64 10 }, i64 10, ptr @__move_rttydesc_vector_u8__info }, i64 32, { ptr, i64 } { ptr @16, i64 4 } }, { %__move_rt_type, i64, { ptr, i64 } } { %__move_rt_type { { ptr, i64 } { ptr @__move_rttydesc_vec_set__VecSet_address__name, i64 90 }, i64 11, ptr @__move_rttydesc_vec_set__VecSet_address__info }, i64 56, { ptr, i64 } { ptr @18, i64 5 } }]
+@"__move_rttydesc_dynamic_field__Field_vector_u8_, vec_set__VecSet_address___info" = private unnamed_addr constant { ptr, i64, i64, i64 } { ptr @s_fld_array.8, i64 3, i64 80, i64 8 }
+@acct.addr = internal constant [32 x i8] zeroinitializer
+@__move_rttydesc_deny_list__DenyList = private unnamed_addr constant %__move_rt_type { { ptr, i64 } { ptr @__move_rttydesc_deny_list__DenyList_name, i64 85 }, i64 11, ptr @__move_rttydesc_deny_list__DenyList_info }
+@__move_rttydesc_deny_list__DenyList_name = private unnamed_addr constant [85 x i8] c"0000000000000000000000000000000000000000000000000000000000000002::deny_list::DenyList"
+@19 = private unnamed_addr constant [2 x i8] c"id"
+@__move_rttydesc_bag__Bag_name = private unnamed_addr constant [74 x i8] c"0000000000000000000000000000000000000000000000000000000000000002::bag::Bag"
+@20 = private unnamed_addr constant [2 x i8] c"id"
+@21 = private unnamed_addr constant [4 x i8] c"size"
+@s_fld_array.9 = private unnamed_addr constant [2 x { %__move_rt_type, i64, { ptr, i64 } }] [{ %__move_rt_type, i64, { ptr, i64 } } { %__move_rt_type { { ptr, i64 } { ptr @__move_rttydesc_object__UID_name, i64 77 }, i64 11, ptr @__move_rttydesc_object__UID_info }, i64 0, { ptr, i64 } { ptr @20, i64 2 } }, { %__move_rt_type, i64, { ptr, i64 } } { %__move_rt_type { { ptr, i64 } { ptr @__move_rttydesc_u64_name, i64 3 }, i64 5, ptr @__move_rttydesc_NOTHING_info }, i64 32, { ptr, i64 } { ptr @21, i64 4 } }]
+@__move_rttydesc_bag__Bag_info = private unnamed_addr constant { ptr, i64, i64, i64 } { ptr @s_fld_array.9, i64 2, i64 40, i64 8 }
+@22 = private unnamed_addr constant [5 x i8] c"lists"
+@s_fld_array.10 = private unnamed_addr constant [2 x { %__move_rt_type, i64, { ptr, i64 } }] [{ %__move_rt_type, i64, { ptr, i64 } } { %__move_rt_type { { ptr, i64 } { ptr @__move_rttydesc_object__UID_name, i64 77 }, i64 11, ptr @__move_rttydesc_object__UID_info }, i64 0, { ptr, i64 } { ptr @19, i64 2 } }, { %__move_rt_type, i64, { ptr, i64 } } { %__move_rt_type { { ptr, i64 } { ptr @__move_rttydesc_bag__Bag_name, i64 74 }, i64 11, ptr @__move_rttydesc_bag__Bag_info }, i64 32, { ptr, i64 } { ptr @22, i64 5 } }]
+@__move_rttydesc_deny_list__DenyList_info = private unnamed_addr constant { ptr, i64, i64, i64 } { ptr @s_fld_array.10, i64 2, i64 72, i64 8 }
+
+declare i32 @memcmp(ptr, ptr, i64)
+
+define void @"0000000000000002_deny_list_unit_test_poiso_9n945vCZmDg5wJ"() {
+entry:
+  %local_0 = alloca i64, align 8
+  %local_1 = alloca { ptr, i64, i64 }, align 8
+  store i64 0, ptr %local_0, align 8
+  %loaded_alloca = load i64, ptr %local_0, align 8
+  %retval = call { ptr, i64, i64 } @move_native_unit_test_create_signers_for_testing(i64 %loaded_alloca)
+  store { ptr, i64, i64 } %retval, ptr %local_1, align 8
+  call void @move_rt_vec_destroy(ptr @__move_rttydesc_signer, ptr %local_1)
+  ret void
+}
+
+declare { ptr, i64, i64 } @move_native_unit_test_create_signers_for_testing(i64)
+
+define i1 @"0000000000000002_deny_list_contains_6ymuJSofcX7ocJ"(ptr nonnull readonly %0, i64 %1, { ptr, i64, i64 } %2, [32 x i8] %3) {
+entry:
+  %local_0 = alloca ptr, align 8
+  %local_1 = alloca i64, align 8
+  %local_2 = alloca { ptr, i64, i64 }, align 8
+  %local_3 = alloca [32 x i8], align 1
+  %local_4 = alloca ptr, align 8
+  %local_5__lists = alloca ptr, align 8
+  %local_6 = alloca i64, align 8
+  %local_7 = alloca ptr, align 8
+  %local_8 = alloca { ptr, i64, i64 }, align 8
+  %local_9 = alloca [32 x i8], align 1
+  %local_10 = alloca i1, align 1
+  store ptr %0, ptr %local_0, align 8
+  store i64 %1, ptr %local_1, align 8
+  store { ptr, i64, i64 } %2, ptr %local_2, align 8
+  store [32 x i8] %3, ptr %local_3, align 1
+  %load_store_tmp = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp, ptr %local_4, align 8
+  %tmp = load ptr, ptr %local_4, align 8
+  %fld_ref = getelementptr inbounds %struct.deny_list__DenyList, ptr %tmp, i32 0, i32 1
+  store ptr %fld_ref, ptr %local_5__lists, align 8
+  %load_store_tmp1 = load i64, ptr %local_1, align 8
+  store i64 %load_store_tmp1, ptr %local_6, align 8
+  %call_arg_0 = load ptr, ptr %local_5__lists, align 8
+  %call_arg_1 = load i64, ptr %local_6, align 8
+  %retval = call ptr @"0000000000000002_bag_borrow_7fs6LwTCjAsxVY"(ptr %call_arg_0, i64 %call_arg_1)
+  store ptr %retval, ptr %local_7, align 8
+  %load_store_tmp2 = load { ptr, i64, i64 }, ptr %local_2, align 8
+  store { ptr, i64, i64 } %load_store_tmp2, ptr %local_8, align 8
+  %call_arg_03 = load ptr, ptr %local_7, align 8
+  %call_arg_14 = load { ptr, i64, i64 }, ptr %local_8, align 8
+  %call_arg_2 = load [32 x i8], ptr %local_3, align 1
+  %retval5 = call i1 @"0000000000000002_deny_list_per_type_list_c_ESNMJWLAKS1vwP"(ptr %call_arg_03, { ptr, i64, i64 } %call_arg_14, [32 x i8] %call_arg_2)
+  store i1 %retval5, ptr %local_10, align 1
+  %retval6 = load i1, ptr %local_10, align 1
+  ret i1 %retval6
+}
+
+define private ptr @"0000000000000002_bag_borrow_7fs6LwTCjAsxVY"(ptr nonnull readonly %0, i64 %1) {
+entry:
+  %local_0 = alloca ptr, align 8
+  %local_1 = alloca i64, align 8
+  %local_2 = alloca ptr, align 8
+  %local_3__id = alloca ptr, align 8
+  %local_4 = alloca i64, align 8
+  %local_5 = alloca ptr, align 8
+  store ptr %0, ptr %local_0, align 8
+  store i64 %1, ptr %local_1, align 8
+  %load_store_tmp = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp, ptr %local_2, align 8
+  %tmp = load ptr, ptr %local_2, align 8
+  %fld_ref = getelementptr inbounds %struct.bag__Bag, ptr %tmp, i32 0, i32 0
+  store ptr %fld_ref, ptr %local_3__id, align 8
+  %load_store_tmp1 = load i64, ptr %local_1, align 8
+  store i64 %load_store_tmp1, ptr %local_4, align 8
+  %call_arg_0 = load ptr, ptr %local_3__id, align 8
+  %call_arg_1 = load i64, ptr %local_4, align 8
+  %retval = call ptr @"0000000000000002_dynamic_field_borrow_CAoUtXpFupeYi5"(ptr %call_arg_0, i64 %call_arg_1)
+  store ptr %retval, ptr %local_5, align 8
+  %retval2 = load ptr, ptr %local_5, align 8
+  ret ptr %retval2
+}
+
+define private ptr @"0000000000000002_dynamic_field_borrow_CAoUtXpFupeYi5"(ptr nonnull readonly %0, i64 %1) {
+entry:
+  %local_0 = alloca ptr, align 8
+  %local_1 = alloca i64, align 8
+  %local_2 = alloca [32 x i8], align 1
+  %local_3 = alloca ptr, align 8
+  %local_4 = alloca [32 x i8], align 1
+  %local_5 = alloca i64, align 8
+  %local_6 = alloca [32 x i8], align 1
+  %local_7 = alloca ptr, align 8
+  %local_8 = alloca [32 x i8], align 1
+  %local_9 = alloca ptr, align 8
+  %local_10__value = alloca ptr, align 8
+  store ptr %0, ptr %local_0, align 8
+  store i64 %1, ptr %local_1, align 8
+  %load_store_tmp = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp, ptr %local_3, align 8
+  %call_arg_0 = load ptr, ptr %local_3, align 8
+  %retval = call [32 x i8] @"0000000000000002_object_uid_to_address_DdQo7Y9Arw6ggD"(ptr %call_arg_0)
+  store [32 x i8] %retval, ptr %local_4, align 1
+  %load_store_tmp1 = load i64, ptr %local_1, align 8
+  store i64 %load_store_tmp1, ptr %local_5, align 8
+  %loaded_alloca = load [32 x i8], ptr %local_4, align 1
+  %retval2 = call [32 x i8] @move_native_dynamic_field_hash_type_and_key(ptr @__move_rttydesc_u64, [32 x i8] %loaded_alloca, ptr %local_5)
+  store [32 x i8] %retval2, ptr %local_6, align 1
+  %load_store_tmp3 = load [32 x i8], ptr %local_6, align 1
+  store [32 x i8] %load_store_tmp3, ptr %local_2, align 1
+  %load_store_tmp4 = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp4, ptr %local_7, align 8
+  %loaded_alloca5 = load ptr, ptr %local_7, align 8
+  %loaded_alloca6 = load [32 x i8], ptr %local_2, align 1
+  %retval7 = call ptr @move_native_dynamic_field_borrow_child_object(ptr @"__move_rttydesc_dynamic_field__Field_u64, deny_list__PerTypeList_", ptr %loaded_alloca5, [32 x i8] %loaded_alloca6)
+  store ptr %retval7, ptr %local_9, align 8
+  %tmp = load ptr, ptr %local_9, align 8
+  %fld_ref = getelementptr inbounds %struct.dynamic_field__Field_u64.deny_list__PerTypeList_, ptr %tmp, i32 0, i32 2
+  store ptr %fld_ref, ptr %local_10__value, align 8
+  %retval8 = load ptr, ptr %local_10__value, align 8
+  ret ptr %retval8
+}
+
+declare [32 x i8] @"0000000000000002_object_uid_to_address_DdQo7Y9Arw6ggD"(ptr nonnull readonly)
+
+declare [32 x i8] @move_native_dynamic_field_hash_type_and_key(ptr, [32 x i8], ptr)
+
+declare ptr @move_native_dynamic_field_borrow_child_object(ptr, ptr, [32 x i8])
+
+define private i1 @"0000000000000002_deny_list_per_type_list_c_ESNMJWLAKS1vwP"(ptr nonnull readonly %0, { ptr, i64, i64 } %1, [32 x i8] %2) {
+entry:
+  %local_0 = alloca ptr, align 8
+  %local_1 = alloca { ptr, i64, i64 }, align 8
+  %local_2 = alloca [32 x i8], align 1
+  %local_3 = alloca ptr, align 8
+  %local_4__denied_count = alloca ptr, align 8
+  %local_5 = alloca [32 x i8], align 1
+  %local_6 = alloca i1, align 1
+  %local_7 = alloca i1, align 1
+  %local_8 = alloca ptr, align 8
+  %local_9 = alloca i1, align 1
+  %local_10 = alloca ptr, align 8
+  %local_11__denied_count = alloca ptr, align 8
+  %local_12 = alloca [32 x i8], align 1
+  %local_13 = alloca ptr, align 8
+  %local_14 = alloca i64, align 8
+  %local_15 = alloca i64, align 8
+  %local_16 = alloca i1, align 1
+  %local_17 = alloca ptr, align 8
+  %local_18 = alloca i1, align 1
+  %local_19 = alloca ptr, align 8
+  %local_20__denied_addresses = alloca ptr, align 8
+  %local_21 = alloca { ptr, i64, i64 }, align 8
+  %local_22 = alloca i1, align 1
+  %local_23 = alloca i1, align 1
+  %local_24 = alloca ptr, align 8
+  %local_25 = alloca i1, align 1
+  %local_26 = alloca ptr, align 8
+  %local_27__denied_addresses = alloca ptr, align 8
+  %local_28 = alloca { ptr, i64, i64 }, align 8
+  %local_29 = alloca ptr, align 8
+  %local_30 = alloca ptr, align 8
+  %local_31 = alloca i1, align 1
+  store ptr %0, ptr %local_0, align 8
+  store { ptr, i64, i64 } %1, ptr %local_1, align 8
+  store [32 x i8] %2, ptr %local_2, align 1
+  %load_store_tmp = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp, ptr %local_3, align 8
+  %tmp = load ptr, ptr %local_3, align 8
+  %fld_ref = getelementptr inbounds %struct.deny_list__PerTypeList, ptr %tmp, i32 0, i32 1
+  store ptr %fld_ref, ptr %local_4__denied_count, align 8
+  %load_store_tmp1 = load [32 x i8], ptr %local_2, align 1
+  store [32 x i8] %load_store_tmp1, ptr %local_5, align 1
+  %call_arg_0 = load ptr, ptr %local_4__denied_count, align 8
+  %call_arg_1 = load [32 x i8], ptr %local_5, align 1
+  %retval = call i1 @"0000000000000002_table_contains_14p9rspetaijkM"(ptr %call_arg_0, [32 x i8] %call_arg_1)
+  store i1 %retval, ptr %local_6, align 1
+  %not_src = load i1, ptr %local_6, align 1
+  %not_dst = xor i1 %not_src, true
+  store i1 %not_dst, ptr %local_7, align 1
+  %cnd = load i1, ptr %local_7, align 1
+  br i1 %cnd, label %bb_1, label %bb_0
+
+bb_1:                                             ; preds = %entry
+  %load_store_tmp2 = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp2, ptr %local_8, align 8
+  store i1 false, ptr %local_9, align 1
+  %retval3 = load i1, ptr %local_9, align 1
+  ret i1 %retval3
+
+bb_0:                                             ; preds = %entry
+  %load_store_tmp4 = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp4, ptr %local_10, align 8
+  %tmp5 = load ptr, ptr %local_10, align 8
+  %fld_ref6 = getelementptr inbounds %struct.deny_list__PerTypeList, ptr %tmp5, i32 0, i32 1
+  store ptr %fld_ref6, ptr %local_11__denied_count, align 8
+  %load_store_tmp7 = load [32 x i8], ptr %local_2, align 1
+  store [32 x i8] %load_store_tmp7, ptr %local_12, align 1
+  %call_arg_08 = load ptr, ptr %local_11__denied_count, align 8
+  %call_arg_19 = load [32 x i8], ptr %local_12, align 1
+  %retval10 = call ptr @"0000000000000002_table_borrow_HaxVSz1DZrqeMk"(ptr %call_arg_08, [32 x i8] %call_arg_19)
+  store ptr %retval10, ptr %local_13, align 8
+  %load_deref_store_tmp1 = load ptr, ptr %local_13, align 8
+  %load_deref_store_tmp2 = load i64, ptr %load_deref_store_tmp1, align 8
+  store i64 %load_deref_store_tmp2, ptr %local_14, align 8
+  store i64 0, ptr %local_15, align 8
+  %eq_src_0 = load i64, ptr %local_14, align 8
+  %eq_src_1 = load i64, ptr %local_15, align 8
+  %eq_dst = icmp eq i64 %eq_src_0, %eq_src_1
+  store i1 %eq_dst, ptr %local_16, align 1
+  %cnd11 = load i1, ptr %local_16, align 1
+  br i1 %cnd11, label %bb_3, label %bb_2
+
+bb_3:                                             ; preds = %bb_0
+  %load_store_tmp12 = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp12, ptr %local_17, align 8
+  store i1 false, ptr %local_18, align 1
+  %retval13 = load i1, ptr %local_18, align 1
+  ret i1 %retval13
+
+bb_2:                                             ; preds = %bb_0
+  %load_store_tmp14 = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp14, ptr %local_19, align 8
+  %tmp15 = load ptr, ptr %local_19, align 8
+  %fld_ref16 = getelementptr inbounds %struct.deny_list__PerTypeList, ptr %tmp15, i32 0, i32 2
+  store ptr %fld_ref16, ptr %local_20__denied_addresses, align 8
+  call void @move_rt_vec_copy(ptr @__move_rttydesc_u8, ptr %local_21, ptr %local_1)
+  %call_arg_017 = load ptr, ptr %local_20__denied_addresses, align 8
+  %call_arg_118 = load { ptr, i64, i64 }, ptr %local_21, align 8
+  %retval19 = call i1 @"0000000000000002_table_contains_4Gv4QQhpCFwh59"(ptr %call_arg_017, { ptr, i64, i64 } %call_arg_118)
+  store i1 %retval19, ptr %local_22, align 1
+  %not_src20 = load i1, ptr %local_22, align 1
+  %not_dst21 = xor i1 %not_src20, true
+  store i1 %not_dst21, ptr %local_23, align 1
+  %cnd22 = load i1, ptr %local_23, align 1
+  br i1 %cnd22, label %bb_5, label %bb_4
+
+bb_5:                                             ; preds = %bb_2
+  %load_store_tmp23 = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp23, ptr %local_24, align 8
+  store i1 false, ptr %local_25, align 1
+  %retval24 = load i1, ptr %local_25, align 1
+  ret i1 %retval24
+
+bb_4:                                             ; preds = %bb_2
+  %load_store_tmp25 = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp25, ptr %local_26, align 8
+  %tmp26 = load ptr, ptr %local_26, align 8
+  %fld_ref27 = getelementptr inbounds %struct.deny_list__PerTypeList, ptr %tmp26, i32 0, i32 2
+  store ptr %fld_ref27, ptr %local_27__denied_addresses, align 8
+  %load_store_tmp28 = load { ptr, i64, i64 }, ptr %local_1, align 8
+  store { ptr, i64, i64 } %load_store_tmp28, ptr %local_28, align 8
+  %call_arg_029 = load ptr, ptr %local_27__denied_addresses, align 8
+  %call_arg_130 = load { ptr, i64, i64 }, ptr %local_28, align 8
+  %retval31 = call ptr @"0000000000000002_table_borrow_4oPMBWGVct9LRR"(ptr %call_arg_029, { ptr, i64, i64 } %call_arg_130)
+  store ptr %retval31, ptr %local_29, align 8
+  store ptr %local_2, ptr %local_30, align 8
+  %call_arg_032 = load ptr, ptr %local_29, align 8
+  %call_arg_133 = load ptr, ptr %local_30, align 8
+  %retval34 = call i1 @"0000000000000002_vec_set_contains_ApRSMRpyfxApiW"(ptr %call_arg_032, ptr %call_arg_133)
+  store i1 %retval34, ptr %local_31, align 1
+  %retval35 = load i1, ptr %local_31, align 1
+  ret i1 %retval35
+}
+
+define private i1 @"0000000000000002_table_contains_14p9rspetaijkM"(ptr nonnull readonly %0, [32 x i8] %1) {
+entry:
+  %local_0 = alloca ptr, align 8
+  %local_1 = alloca [32 x i8], align 1
+  %local_2 = alloca ptr, align 8
+  %local_3__id = alloca ptr, align 8
+  %local_4 = alloca [32 x i8], align 1
+  %local_5 = alloca i1, align 1
+  store ptr %0, ptr %local_0, align 8
+  store [32 x i8] %1, ptr %local_1, align 1
+  %load_store_tmp = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp, ptr %local_2, align 8
+  %tmp = load ptr, ptr %local_2, align 8
+  %fld_ref = getelementptr inbounds %struct.table__Table_address.u64_, ptr %tmp, i32 0, i32 0
+  store ptr %fld_ref, ptr %local_3__id, align 8
+  %call_arg_0 = load ptr, ptr %local_3__id, align 8
+  %call_arg_1 = load [32 x i8], ptr %local_1, align 1
+  %retval = call i1 @"0000000000000002_dynamic_field_exists_with_typ_9bXY542QA4Yt3d"(ptr %call_arg_0, [32 x i8] %call_arg_1)
+  store i1 %retval, ptr %local_5, align 1
+  %retval1 = load i1, ptr %local_5, align 1
+  ret i1 %retval1
+}
+
+define private i1 @"0000000000000002_dynamic_field_exists_with_typ_9bXY542QA4Yt3d"(ptr nonnull readonly %0, [32 x i8] %1) {
+entry:
+  %local_0 = alloca ptr, align 8
+  %local_1 = alloca [32 x i8], align 1
+  %local_2 = alloca [32 x i8], align 1
+  %local_3 = alloca [32 x i8], align 1
+  %local_4 = alloca ptr, align 8
+  %local_5 = alloca [32 x i8], align 1
+  %local_6 = alloca [32 x i8], align 1
+  %local_7 = alloca [32 x i8], align 1
+  %local_8 = alloca [32 x i8], align 1
+  %local_9 = alloca [32 x i8], align 1
+  %local_10 = alloca [32 x i8], align 1
+  %local_11 = alloca i1, align 1
+  store ptr %0, ptr %local_0, align 8
+  store [32 x i8] %1, ptr %local_1, align 1
+  %load_store_tmp = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp, ptr %local_4, align 8
+  %call_arg_0 = load ptr, ptr %local_4, align 8
+  %retval = call [32 x i8] @"0000000000000002_object_uid_to_address_DdQo7Y9Arw6ggD"(ptr %call_arg_0)
+  store [32 x i8] %retval, ptr %local_5, align 1
+  %load_store_tmp1 = load [32 x i8], ptr %local_5, align 1
+  store [32 x i8] %load_store_tmp1, ptr %local_3, align 1
+  %load_store_tmp2 = load [32 x i8], ptr %local_3, align 1
+  store [32 x i8] %load_store_tmp2, ptr %local_6, align 1
+  %loaded_alloca = load [32 x i8], ptr %local_6, align 1
+  %retval3 = call [32 x i8] @move_native_dynamic_field_hash_type_and_key(ptr @__move_rttydesc_address, [32 x i8] %loaded_alloca, ptr %local_1)
+  store [32 x i8] %retval3, ptr %local_8, align 1
+  %load_store_tmp4 = load [32 x i8], ptr %local_8, align 1
+  store [32 x i8] %load_store_tmp4, ptr %local_2, align 1
+  %loaded_alloca5 = load [32 x i8], ptr %local_3, align 1
+  %loaded_alloca6 = load [32 x i8], ptr %local_2, align 1
+  %retval7 = call i1 @move_native_dynamic_field_has_child_object_with_ty(ptr @"__move_rttydesc_dynamic_field__Field_address, u64_", [32 x i8] %loaded_alloca5, [32 x i8] %loaded_alloca6)
+  store i1 %retval7, ptr %local_11, align 1
+  %retval8 = load i1, ptr %local_11, align 1
+  ret i1 %retval8
+}
+
+declare i1 @move_native_dynamic_field_has_child_object_with_ty(ptr, [32 x i8], [32 x i8])
+
+define private ptr @"0000000000000002_table_borrow_HaxVSz1DZrqeMk"(ptr nonnull readonly %0, [32 x i8] %1) {
+entry:
+  %local_0 = alloca ptr, align 8
+  %local_1 = alloca [32 x i8], align 1
+  %local_2 = alloca ptr, align 8
+  %local_3__id = alloca ptr, align 8
+  %local_4 = alloca [32 x i8], align 1
+  %local_5 = alloca ptr, align 8
+  store ptr %0, ptr %local_0, align 8
+  store [32 x i8] %1, ptr %local_1, align 1
+  %load_store_tmp = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp, ptr %local_2, align 8
+  %tmp = load ptr, ptr %local_2, align 8
+  %fld_ref = getelementptr inbounds %struct.table__Table_address.u64_, ptr %tmp, i32 0, i32 0
+  store ptr %fld_ref, ptr %local_3__id, align 8
+  %call_arg_0 = load ptr, ptr %local_3__id, align 8
+  %call_arg_1 = load [32 x i8], ptr %local_1, align 1
+  %retval = call ptr @"0000000000000002_dynamic_field_borrow_Gm1VwPGToK6NbC"(ptr %call_arg_0, [32 x i8] %call_arg_1)
+  store ptr %retval, ptr %local_5, align 8
+  %retval1 = load ptr, ptr %local_5, align 8
+  ret ptr %retval1
+}
+
+define private ptr @"0000000000000002_dynamic_field_borrow_Gm1VwPGToK6NbC"(ptr nonnull readonly %0, [32 x i8] %1) {
+entry:
+  %local_0 = alloca ptr, align 8
+  %local_1 = alloca [32 x i8], align 1
+  %local_2 = alloca [32 x i8], align 1
+  %local_3 = alloca ptr, align 8
+  %local_4 = alloca [32 x i8], align 1
+  %local_5 = alloca [32 x i8], align 1
+  %local_6 = alloca [32 x i8], align 1
+  %local_7 = alloca ptr, align 8
+  %local_8 = alloca [32 x i8], align 1
+  %local_9 = alloca ptr, align 8
+  %local_10__value = alloca ptr, align 8
+  store ptr %0, ptr %local_0, align 8
+  store [32 x i8] %1, ptr %local_1, align 1
+  %load_store_tmp = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp, ptr %local_3, align 8
+  %call_arg_0 = load ptr, ptr %local_3, align 8
+  %retval = call [32 x i8] @"0000000000000002_object_uid_to_address_DdQo7Y9Arw6ggD"(ptr %call_arg_0)
+  store [32 x i8] %retval, ptr %local_4, align 1
+  %loaded_alloca = load [32 x i8], ptr %local_4, align 1
+  %retval1 = call [32 x i8] @move_native_dynamic_field_hash_type_and_key(ptr @__move_rttydesc_address, [32 x i8] %loaded_alloca, ptr %local_1)
+  store [32 x i8] %retval1, ptr %local_6, align 1
+  %load_store_tmp2 = load [32 x i8], ptr %local_6, align 1
+  store [32 x i8] %load_store_tmp2, ptr %local_2, align 1
+  %load_store_tmp3 = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp3, ptr %local_7, align 8
+  %loaded_alloca4 = load ptr, ptr %local_7, align 8
+  %loaded_alloca5 = load [32 x i8], ptr %local_2, align 1
+  %retval6 = call ptr @move_native_dynamic_field_borrow_child_object(ptr @"__move_rttydesc_dynamic_field__Field_address, u64_", ptr %loaded_alloca4, [32 x i8] %loaded_alloca5)
+  store ptr %retval6, ptr %local_9, align 8
+  %tmp = load ptr, ptr %local_9, align 8
+  %fld_ref = getelementptr inbounds %struct.dynamic_field__Field_address.u64_, ptr %tmp, i32 0, i32 2
+  store ptr %fld_ref, ptr %local_10__value, align 8
+  %retval7 = load ptr, ptr %local_10__value, align 8
+  ret ptr %retval7
+}
+
+define private i1 @"0000000000000002_table_contains_4Gv4QQhpCFwh59"(ptr nonnull readonly %0, { ptr, i64, i64 } %1) {
+entry:
+  %local_0 = alloca ptr, align 8
+  %local_1 = alloca { ptr, i64, i64 }, align 8
+  %local_2 = alloca ptr, align 8
+  %local_3__id = alloca ptr, align 8
+  %local_4 = alloca { ptr, i64, i64 }, align 8
+  %local_5 = alloca i1, align 1
+  store ptr %0, ptr %local_0, align 8
+  store { ptr, i64, i64 } %1, ptr %local_1, align 8
+  %load_store_tmp = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp, ptr %local_2, align 8
+  %tmp = load ptr, ptr %local_2, align 8
+  %fld_ref = getelementptr inbounds %struct.table__Table_vector_u8_.vec_set__VecSet_address__, ptr %tmp, i32 0, i32 0
+  store ptr %fld_ref, ptr %local_3__id, align 8
+  %load_store_tmp1 = load { ptr, i64, i64 }, ptr %local_1, align 8
+  store { ptr, i64, i64 } %load_store_tmp1, ptr %local_4, align 8
+  %call_arg_0 = load ptr, ptr %local_3__id, align 8
+  %call_arg_1 = load { ptr, i64, i64 }, ptr %local_4, align 8
+  %retval = call i1 @"0000000000000002_dynamic_field_exists_with_typ_AhsF32sEyogkVR"(ptr %call_arg_0, { ptr, i64, i64 } %call_arg_1)
+  store i1 %retval, ptr %local_5, align 1
+  %retval2 = load i1, ptr %local_5, align 1
+  ret i1 %retval2
+}
+
+define private i1 @"0000000000000002_dynamic_field_exists_with_typ_AhsF32sEyogkVR"(ptr nonnull readonly %0, { ptr, i64, i64 } %1) {
+entry:
+  %local_0 = alloca ptr, align 8
+  %local_1 = alloca { ptr, i64, i64 }, align 8
+  %local_2 = alloca [32 x i8], align 1
+  %local_3 = alloca [32 x i8], align 1
+  %local_4 = alloca ptr, align 8
+  %local_5 = alloca [32 x i8], align 1
+  %local_6 = alloca [32 x i8], align 1
+  %local_7 = alloca { ptr, i64, i64 }, align 8
+  %local_8 = alloca [32 x i8], align 1
+  %local_9 = alloca [32 x i8], align 1
+  %local_10 = alloca [32 x i8], align 1
+  %local_11 = alloca i1, align 1
+  store ptr %0, ptr %local_0, align 8
+  store { ptr, i64, i64 } %1, ptr %local_1, align 8
+  %load_store_tmp = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp, ptr %local_4, align 8
+  %call_arg_0 = load ptr, ptr %local_4, align 8
+  %retval = call [32 x i8] @"0000000000000002_object_uid_to_address_DdQo7Y9Arw6ggD"(ptr %call_arg_0)
+  store [32 x i8] %retval, ptr %local_5, align 1
+  %load_store_tmp1 = load [32 x i8], ptr %local_5, align 1
+  store [32 x i8] %load_store_tmp1, ptr %local_3, align 1
+  %load_store_tmp2 = load [32 x i8], ptr %local_3, align 1
+  store [32 x i8] %load_store_tmp2, ptr %local_6, align 1
+  %load_store_tmp3 = load { ptr, i64, i64 }, ptr %local_1, align 8
+  store { ptr, i64, i64 } %load_store_tmp3, ptr %local_7, align 8
+  %loaded_alloca = load [32 x i8], ptr %local_6, align 1
+  %retval4 = call [32 x i8] @move_native_dynamic_field_hash_type_and_key(ptr @__move_rttydesc_vector_u8_, [32 x i8] %loaded_alloca, ptr %local_7)
+  store [32 x i8] %retval4, ptr %local_8, align 1
+  %load_store_tmp5 = load [32 x i8], ptr %local_8, align 1
+  store [32 x i8] %load_store_tmp5, ptr %local_2, align 1
+  %loaded_alloca6 = load [32 x i8], ptr %local_3, align 1
+  %loaded_alloca7 = load [32 x i8], ptr %local_2, align 1
+  %retval8 = call i1 @move_native_dynamic_field_has_child_object_with_ty(ptr @"__move_rttydesc_dynamic_field__Field_vector_u8_, vec_set__VecSet_address__", [32 x i8] %loaded_alloca6, [32 x i8] %loaded_alloca7)
+  store i1 %retval8, ptr %local_11, align 1
+  %retval9 = load i1, ptr %local_11, align 1
+  ret i1 %retval9
+}
+
+define private ptr @"0000000000000002_table_borrow_4oPMBWGVct9LRR"(ptr nonnull readonly %0, { ptr, i64, i64 } %1) {
+entry:
+  %local_0 = alloca ptr, align 8
+  %local_1 = alloca { ptr, i64, i64 }, align 8
+  %local_2 = alloca ptr, align 8
+  %local_3__id = alloca ptr, align 8
+  %local_4 = alloca { ptr, i64, i64 }, align 8
+  %local_5 = alloca ptr, align 8
+  store ptr %0, ptr %local_0, align 8
+  store { ptr, i64, i64 } %1, ptr %local_1, align 8
+  %load_store_tmp = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp, ptr %local_2, align 8
+  %tmp = load ptr, ptr %local_2, align 8
+  %fld_ref = getelementptr inbounds %struct.table__Table_vector_u8_.vec_set__VecSet_address__, ptr %tmp, i32 0, i32 0
+  store ptr %fld_ref, ptr %local_3__id, align 8
+  %load_store_tmp1 = load { ptr, i64, i64 }, ptr %local_1, align 8
+  store { ptr, i64, i64 } %load_store_tmp1, ptr %local_4, align 8
+  %call_arg_0 = load ptr, ptr %local_3__id, align 8
+  %call_arg_1 = load { ptr, i64, i64 }, ptr %local_4, align 8
+  %retval = call ptr @"0000000000000002_dynamic_field_borrow_6EABPsJSWHhDLG"(ptr %call_arg_0, { ptr, i64, i64 } %call_arg_1)
+  store ptr %retval, ptr %local_5, align 8
+  %retval2 = load ptr, ptr %local_5, align 8
+  ret ptr %retval2
+}
+
+define private ptr @"0000000000000002_dynamic_field_borrow_6EABPsJSWHhDLG"(ptr nonnull readonly %0, { ptr, i64, i64 } %1) {
+entry:
+  %local_0 = alloca ptr, align 8
+  %local_1 = alloca { ptr, i64, i64 }, align 8
+  %local_2 = alloca [32 x i8], align 1
+  %local_3 = alloca ptr, align 8
+  %local_4 = alloca [32 x i8], align 1
+  %local_5 = alloca { ptr, i64, i64 }, align 8
+  %local_6 = alloca [32 x i8], align 1
+  %local_7 = alloca ptr, align 8
+  %local_8 = alloca [32 x i8], align 1
+  %local_9 = alloca ptr, align 8
+  %local_10__value = alloca ptr, align 8
+  store ptr %0, ptr %local_0, align 8
+  store { ptr, i64, i64 } %1, ptr %local_1, align 8
+  %load_store_tmp = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp, ptr %local_3, align 8
+  %call_arg_0 = load ptr, ptr %local_3, align 8
+  %retval = call [32 x i8] @"0000000000000002_object_uid_to_address_DdQo7Y9Arw6ggD"(ptr %call_arg_0)
+  store [32 x i8] %retval, ptr %local_4, align 1
+  %load_store_tmp1 = load { ptr, i64, i64 }, ptr %local_1, align 8
+  store { ptr, i64, i64 } %load_store_tmp1, ptr %local_5, align 8
+  %loaded_alloca = load [32 x i8], ptr %local_4, align 1
+  %retval2 = call [32 x i8] @move_native_dynamic_field_hash_type_and_key(ptr @__move_rttydesc_vector_u8_, [32 x i8] %loaded_alloca, ptr %local_5)
+  store [32 x i8] %retval2, ptr %local_6, align 1
+  %load_store_tmp3 = load [32 x i8], ptr %local_6, align 1
+  store [32 x i8] %load_store_tmp3, ptr %local_2, align 1
+  %load_store_tmp4 = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp4, ptr %local_7, align 8
+  %loaded_alloca5 = load ptr, ptr %local_7, align 8
+  %loaded_alloca6 = load [32 x i8], ptr %local_2, align 1
+  %retval7 = call ptr @move_native_dynamic_field_borrow_child_object(ptr @"__move_rttydesc_dynamic_field__Field_vector_u8_, vec_set__VecSet_address__", ptr %loaded_alloca5, [32 x i8] %loaded_alloca6)
+  store ptr %retval7, ptr %local_9, align 8
+  %tmp = load ptr, ptr %local_9, align 8
+  %fld_ref = getelementptr inbounds %struct.dynamic_field__Field_vector_u8_.vec_set__VecSet_address__, ptr %tmp, i32 0, i32 2
+  store ptr %fld_ref, ptr %local_10__value, align 8
+  %retval8 = load ptr, ptr %local_10__value, align 8
+  ret ptr %retval8
+}
+
+define private i1 @"0000000000000002_vec_set_contains_ApRSMRpyfxApiW"(ptr nonnull readonly %0, ptr nonnull readonly %1) {
+entry:
+  %local_0 = alloca ptr, align 8
+  %local_1 = alloca ptr, align 8
+  %local_2 = alloca %struct.option__Option_u64_, align 8
+  %local_3 = alloca ptr, align 8
+  %local_4 = alloca ptr, align 8
+  %local_5 = alloca %struct.option__Option_u64_, align 8
+  %local_6 = alloca ptr, align 8
+  %local_7 = alloca i1, align 1
+  store ptr %0, ptr %local_0, align 8
+  store ptr %1, ptr %local_1, align 8
+  %load_store_tmp = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp, ptr %local_3, align 8
+  %load_store_tmp1 = load ptr, ptr %local_1, align 8
+  store ptr %load_store_tmp1, ptr %local_4, align 8
+  %call_arg_0 = load ptr, ptr %local_3, align 8
+  %call_arg_1 = load ptr, ptr %local_4, align 8
+  %retval = call %struct.option__Option_u64_ @"0000000000000002_vec_set_get_idx_opt_DSnCgYtpxV6dEj"(ptr %call_arg_0, ptr %call_arg_1)
+  store %struct.option__Option_u64_ %retval, ptr %local_5, align 8
+  %load_store_tmp2 = load %struct.option__Option_u64_, ptr %local_5, align 8
+  store %struct.option__Option_u64_ %load_store_tmp2, ptr %local_2, align 8
+  store ptr %local_2, ptr %local_6, align 8
+  %call_arg_03 = load ptr, ptr %local_6, align 8
+  %retval4 = call i1 @"0000000000000001_option_is_some_G6Pocm5xTCEyXt"(ptr %call_arg_03)
+  store i1 %retval4, ptr %local_7, align 1
+  %retval5 = load i1, ptr %local_7, align 1
+  ret i1 %retval5
+}
+
+define private %struct.option__Option_u64_ @"0000000000000002_vec_set_get_idx_opt_DSnCgYtpxV6dEj"(ptr nonnull readonly %0, ptr nonnull readonly %1) {
+entry:
+  %local_0 = alloca ptr, align 8
+  %local_1 = alloca ptr, align 8
+  %local_2 = alloca i64, align 8
+  %local_3 = alloca i64, align 8
+  %local_4 = alloca i64, align 8
+  %local_5 = alloca ptr, align 8
+  %local_6 = alloca i64, align 8
+  %local_7 = alloca i64, align 8
+  %local_8 = alloca i64, align 8
+  %local_9 = alloca i1, align 1
+  %local_10 = alloca ptr, align 8
+  %local_11__contents = alloca ptr, align 8
+  %local_12 = alloca i64, align 8
+  %local_13 = alloca ptr, align 8
+  %local_14 = alloca ptr, align 8
+  %local_15 = alloca i1, align 1
+  %local_16 = alloca ptr, align 8
+  %local_17 = alloca ptr, align 8
+  %local_18 = alloca i64, align 8
+  %local_19 = alloca %struct.option__Option_u64_, align 8
+  %local_20 = alloca i64, align 8
+  %local_21 = alloca i64, align 8
+  %local_22 = alloca i64, align 8
+  %local_23 = alloca ptr, align 8
+  %local_24 = alloca ptr, align 8
+  %local_25 = alloca %struct.option__Option_u64_, align 8
+  store ptr %0, ptr %local_0, align 8
+  store ptr %1, ptr %local_1, align 8
+  store i64 0, ptr %local_4, align 8
+  %load_store_tmp = load i64, ptr %local_4, align 8
+  store i64 %load_store_tmp, ptr %local_2, align 8
+  %load_store_tmp1 = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp1, ptr %local_5, align 8
+  %call_arg_0 = load ptr, ptr %local_5, align 8
+  %retval = call i64 @"0000000000000002_vec_set_size_6av5qwyjTwwJbT"(ptr %call_arg_0)
+  store i64 %retval, ptr %local_6, align 8
+  %load_store_tmp2 = load i64, ptr %local_6, align 8
+  store i64 %load_store_tmp2, ptr %local_3, align 8
+  br label %bb_5
+
+bb_5:                                             ; preds = %join_bb, %entry
+  %load_store_tmp3 = load i64, ptr %local_2, align 8
+  store i64 %load_store_tmp3, ptr %local_7, align 8
+  %load_store_tmp4 = load i64, ptr %local_3, align 8
+  store i64 %load_store_tmp4, ptr %local_8, align 8
+  %lt_src_0 = load i64, ptr %local_7, align 8
+  %lt_src_1 = load i64, ptr %local_8, align 8
+  %lt_dst = icmp ult i64 %lt_src_0, %lt_src_1
+  store i1 %lt_dst, ptr %local_9, align 1
+  %cnd = load i1, ptr %local_9, align 1
+  br i1 %cnd, label %bb_1, label %bb_0
+
+bb_1:                                             ; preds = %bb_5
+  br label %bb_2
+
+bb_2:                                             ; preds = %bb_1
+  %load_store_tmp5 = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp5, ptr %local_10, align 8
+  %tmp = load ptr, ptr %local_10, align 8
+  %fld_ref = getelementptr inbounds %struct.vec_set__VecSet_address_, ptr %tmp, i32 0, i32 0
+  store ptr %fld_ref, ptr %local_11__contents, align 8
+  %load_store_tmp6 = load i64, ptr %local_2, align 8
+  store i64 %load_store_tmp6, ptr %local_12, align 8
+  %loaded_alloca = load ptr, ptr %local_11__contents, align 8
+  %loaded_alloca7 = load i64, ptr %local_12, align 8
+  %retval8 = call ptr @move_native_vector_borrow(ptr @__move_rttydesc_address, ptr %loaded_alloca, i64 %loaded_alloca7)
+  store ptr %retval8, ptr %local_13, align 8
+  %load_store_tmp9 = load ptr, ptr %local_1, align 8
+  store ptr %load_store_tmp9, ptr %local_14, align 8
+  %eq_indsrc_0 = load ptr, ptr %local_13, align 8
+  %eq_indsrc_1 = load ptr, ptr %local_14, align 8
+  %2 = call i32 @memcmp(ptr %eq_indsrc_0, ptr %eq_indsrc_1, i64 32)
+  %eq_dst = icmp eq i32 %2, 0
+  store i1 %eq_dst, ptr %local_15, align 1
+  %cnd10 = load i1, ptr %local_15, align 1
+  br i1 %cnd10, label %bb_4, label %bb_3
+
+bb_4:                                             ; preds = %bb_2
+  %load_store_tmp11 = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp11, ptr %local_16, align 8
+  %load_store_tmp12 = load ptr, ptr %local_1, align 8
+  store ptr %load_store_tmp12, ptr %local_17, align 8
+  %load_store_tmp13 = load i64, ptr %local_2, align 8
+  store i64 %load_store_tmp13, ptr %local_18, align 8
+  %call_arg_014 = load i64, ptr %local_18, align 8
+  %retval15 = call %struct.option__Option_u64_ @"0000000000000001_option_some_4zz2TymghHW1fs"(i64 %call_arg_014)
+  store %struct.option__Option_u64_ %retval15, ptr %local_19, align 8
+  %retval16 = load %struct.option__Option_u64_, ptr %local_19, align 8
+  ret %struct.option__Option_u64_ %retval16
+
+bb_3:                                             ; preds = %bb_2
+  %load_store_tmp17 = load i64, ptr %local_2, align 8
+  store i64 %load_store_tmp17, ptr %local_20, align 8
+  store i64 1, ptr %local_21, align 8
+  %add_src_0 = load i64, ptr %local_20, align 8
+  %add_src_1 = load i64, ptr %local_21, align 8
+  %add_dst = add i64 %add_src_0, %add_src_1
+  %ovfcond = icmp ult i64 %add_dst, %add_src_0
+  br i1 %ovfcond, label %then_bb, label %join_bb
+
+then_bb:                                          ; preds = %bb_3
+  call void @move_rt_abort(i64 4017)
+  unreachable
+
+join_bb:                                          ; preds = %bb_3
+  store i64 %add_dst, ptr %local_22, align 8
+  %load_store_tmp18 = load i64, ptr %local_22, align 8
+  store i64 %load_store_tmp18, ptr %local_2, align 8
+  br label %bb_5
+
+bb_0:                                             ; preds = %bb_5
+  %load_store_tmp19 = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp19, ptr %local_23, align 8
+  %load_store_tmp20 = load ptr, ptr %local_1, align 8
+  store ptr %load_store_tmp20, ptr %local_24, align 8
+  %retval21 = call %struct.option__Option_u64_ @"0000000000000001_option_none_5gpVRKyNEVsuL3"()
+  store %struct.option__Option_u64_ %retval21, ptr %local_25, align 8
+  %retval22 = load %struct.option__Option_u64_, ptr %local_25, align 8
+  ret %struct.option__Option_u64_ %retval22
+}
+
+define private i64 @"0000000000000002_vec_set_size_6av5qwyjTwwJbT"(ptr nonnull readonly %0) {
+entry:
+  %local_0 = alloca ptr, align 8
+  %local_1 = alloca ptr, align 8
+  %local_2__contents = alloca ptr, align 8
+  %local_3 = alloca i64, align 8
+  store ptr %0, ptr %local_0, align 8
+  %load_store_tmp = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp, ptr %local_1, align 8
+  %tmp = load ptr, ptr %local_1, align 8
+  %fld_ref = getelementptr inbounds %struct.vec_set__VecSet_address_, ptr %tmp, i32 0, i32 0
+  store ptr %fld_ref, ptr %local_2__contents, align 8
+  %loaded_alloca = load ptr, ptr %local_2__contents, align 8
+  %retval = call i64 @move_native_vector_length(ptr @__move_rttydesc_address, ptr %loaded_alloca)
+  store i64 %retval, ptr %local_3, align 8
+  %retval1 = load i64, ptr %local_3, align 8
+  ret i64 %retval1
+}
+
+declare i64 @move_native_vector_length(ptr, ptr)
+
+declare ptr @move_native_vector_borrow(ptr, ptr, i64)
+
+define private %struct.option__Option_u64_ @"0000000000000001_option_some_4zz2TymghHW1fs"(i64 %0) {
+entry:
+  %local_0 = alloca i64, align 8
+  %local_1 = alloca i64, align 8
+  %local_2__vec = alloca { ptr, i64, i64 }, align 8
+  %local_3 = alloca %struct.option__Option_u64_, align 8
+  store i64 %0, ptr %local_0, align 8
+  %load_store_tmp = load i64, ptr %local_0, align 8
+  store i64 %load_store_tmp, ptr %local_1, align 8
+  %call_arg_0 = load i64, ptr %local_1, align 8
+  %retval = call { ptr, i64, i64 } @"0000000000000001_vector_singleton_8XKRmxA9XBmXWD"(i64 %call_arg_0)
+  store { ptr, i64, i64 } %retval, ptr %local_2__vec, align 8
+  %fv.0 = load { ptr, i64, i64 }, ptr %local_2__vec, align 8
+  %insert_0 = insertvalue %struct.option__Option_u64_ undef, { ptr, i64, i64 } %fv.0, 0
+  store %struct.option__Option_u64_ %insert_0, ptr %local_3, align 8
+  %retval1 = load %struct.option__Option_u64_, ptr %local_3, align 8
+  ret %struct.option__Option_u64_ %retval1
+}
+
+define private { ptr, i64, i64 } @"0000000000000001_vector_singleton_8XKRmxA9XBmXWD"(i64 %0) {
+entry:
+  %local_0 = alloca i64, align 8
+  %local_1 = alloca { ptr, i64, i64 }, align 8
+  %local_2 = alloca { ptr, i64, i64 }, align 8
+  %local_3 = alloca ptr, align 8
+  %local_4 = alloca i64, align 8
+  %local_5 = alloca { ptr, i64, i64 }, align 8
+  store i64 %0, ptr %local_0, align 8
+  %retval = call { ptr, i64, i64 } @move_native_vector_empty(ptr @__move_rttydesc_u64)
+  store { ptr, i64, i64 } %retval, ptr %local_2, align 8
+  %load_store_tmp = load { ptr, i64, i64 }, ptr %local_2, align 8
+  store { ptr, i64, i64 } %load_store_tmp, ptr %local_1, align 8
+  store ptr %local_1, ptr %local_3, align 8
+  %load_store_tmp1 = load i64, ptr %local_0, align 8
+  store i64 %load_store_tmp1, ptr %local_4, align 8
+  %loaded_alloca = load ptr, ptr %local_3, align 8
+  call void @move_native_vector_push_back(ptr @__move_rttydesc_u64, ptr %loaded_alloca, ptr %local_4)
+  %load_store_tmp2 = load { ptr, i64, i64 }, ptr %local_1, align 8
+  store { ptr, i64, i64 } %load_store_tmp2, ptr %local_5, align 8
+  %retval3 = load { ptr, i64, i64 }, ptr %local_5, align 8
+  ret { ptr, i64, i64 } %retval3
+}
+
+declare { ptr, i64, i64 } @move_native_vector_empty(ptr)
+
+declare void @move_native_vector_push_back(ptr, ptr, ptr)
+
+define private %struct.option__Option_u64_ @"0000000000000001_option_none_5gpVRKyNEVsuL3"() {
+entry:
+  %local_0__vec = alloca { ptr, i64, i64 }, align 8
+  %local_1 = alloca %struct.option__Option_u64_, align 8
+  %retval = call { ptr, i64, i64 } @move_native_vector_empty(ptr @__move_rttydesc_u64)
+  store { ptr, i64, i64 } %retval, ptr %local_0__vec, align 8
+  %fv.0 = load { ptr, i64, i64 }, ptr %local_0__vec, align 8
+  %insert_0 = insertvalue %struct.option__Option_u64_ undef, { ptr, i64, i64 } %fv.0, 0
+  store %struct.option__Option_u64_ %insert_0, ptr %local_1, align 8
+  %retval1 = load %struct.option__Option_u64_, ptr %local_1, align 8
+  ret %struct.option__Option_u64_ %retval1
+}
+
+define private i1 @"0000000000000001_option_is_some_G6Pocm5xTCEyXt"(ptr nonnull readonly %0) {
+entry:
+  %local_0 = alloca ptr, align 8
+  %local_1 = alloca ptr, align 8
+  %local_2__vec = alloca ptr, align 8
+  %local_3 = alloca i1, align 1
+  %local_4 = alloca i1, align 1
+  store ptr %0, ptr %local_0, align 8
+  %load_store_tmp = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp, ptr %local_1, align 8
+  %tmp = load ptr, ptr %local_1, align 8
+  %fld_ref = getelementptr inbounds %struct.option__Option_u64_, ptr %tmp, i32 0, i32 0
+  store ptr %fld_ref, ptr %local_2__vec, align 8
+  %call_arg_0 = load ptr, ptr %local_2__vec, align 8
+  %retval = call i1 @"0000000000000001_vector_is_empty_5ty6fxofcoN47Y"(ptr %call_arg_0)
+  store i1 %retval, ptr %local_3, align 1
+  %not_src = load i1, ptr %local_3, align 1
+  %not_dst = xor i1 %not_src, true
+  store i1 %not_dst, ptr %local_4, align 1
+  %retval1 = load i1, ptr %local_4, align 1
+  ret i1 %retval1
+}
+
+define private i1 @"0000000000000001_vector_is_empty_5ty6fxofcoN47Y"(ptr nonnull readonly %0) {
+entry:
+  %local_0 = alloca ptr, align 8
+  %local_1 = alloca ptr, align 8
+  %local_2 = alloca i64, align 8
+  %local_3 = alloca i64, align 8
+  %local_4 = alloca i1, align 1
+  store ptr %0, ptr %local_0, align 8
+  %load_store_tmp = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp, ptr %local_1, align 8
+  %loaded_alloca = load ptr, ptr %local_1, align 8
+  %retval = call i64 @move_native_vector_length(ptr @__move_rttydesc_u64, ptr %loaded_alloca)
+  store i64 %retval, ptr %local_2, align 8
+  store i64 0, ptr %local_3, align 8
+  %eq_src_0 = load i64, ptr %local_2, align 8
+  %eq_src_1 = load i64, ptr %local_3, align 8
+  %eq_dst = icmp eq i64 %eq_src_0, %eq_src_1
+  store i1 %eq_dst, ptr %local_4, align 1
+  %retval1 = load i1, ptr %local_4, align 1
+  ret i1 %retval1
+}
+
+define void @"0000000000000002_deny_list_remove_Dc8tqfq8HtqXM8"(ptr noalias nonnull %0, i64 %1, { ptr, i64, i64 } %2, [32 x i8] %3) {
+entry:
+  %local_0 = alloca ptr, align 8
+  %local_1 = alloca i64, align 8
+  %local_2 = alloca { ptr, i64, i64 }, align 8
+  %local_3 = alloca [32 x i8], align 1
+  %local_4 = alloca ptr, align 8
+  %local_5__lists = alloca ptr, align 8
+  %local_6 = alloca i64, align 8
+  %local_7 = alloca ptr, align 8
+  %local_8 = alloca { ptr, i64, i64 }, align 8
+  %local_9 = alloca [32 x i8], align 1
+  store ptr %0, ptr %local_0, align 8
+  store i64 %1, ptr %local_1, align 8
+  store { ptr, i64, i64 } %2, ptr %local_2, align 8
+  store [32 x i8] %3, ptr %local_3, align 1
+  %load_store_tmp = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp, ptr %local_4, align 8
+  %tmp = load ptr, ptr %local_4, align 8
+  %fld_ref = getelementptr inbounds %struct.deny_list__DenyList, ptr %tmp, i32 0, i32 1
+  store ptr %fld_ref, ptr %local_5__lists, align 8
+  %load_store_tmp1 = load i64, ptr %local_1, align 8
+  store i64 %load_store_tmp1, ptr %local_6, align 8
+  %call_arg_0 = load ptr, ptr %local_5__lists, align 8
+  %call_arg_1 = load i64, ptr %local_6, align 8
+  %retval = call ptr @"0000000000000002_bag_borrow_mut_Bh3vRXZ76AoCB4"(ptr %call_arg_0, i64 %call_arg_1)
+  store ptr %retval, ptr %local_7, align 8
+  %load_store_tmp2 = load { ptr, i64, i64 }, ptr %local_2, align 8
+  store { ptr, i64, i64 } %load_store_tmp2, ptr %local_8, align 8
+  %call_arg_03 = load ptr, ptr %local_7, align 8
+  %call_arg_14 = load { ptr, i64, i64 }, ptr %local_8, align 8
+  %call_arg_2 = load [32 x i8], ptr %local_3, align 1
+  call void @"0000000000000002_deny_list_per_type_list_r_5tLDAtS4BipEZG"(ptr %call_arg_03, { ptr, i64, i64 } %call_arg_14, [32 x i8] %call_arg_2)
+  ret void
+}
+
+define private ptr @"0000000000000002_bag_borrow_mut_Bh3vRXZ76AoCB4"(ptr noalias nonnull %0, i64 %1) {
+entry:
+  %local_0 = alloca ptr, align 8
+  %local_1 = alloca i64, align 8
+  %local_2 = alloca ptr, align 8
+  %local_3__id = alloca ptr, align 8
+  %local_4 = alloca i64, align 8
+  %local_5 = alloca ptr, align 8
+  store ptr %0, ptr %local_0, align 8
+  store i64 %1, ptr %local_1, align 8
+  %load_store_tmp = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp, ptr %local_2, align 8
+  %tmp = load ptr, ptr %local_2, align 8
+  %fld_ref = getelementptr inbounds %struct.bag__Bag, ptr %tmp, i32 0, i32 0
+  store ptr %fld_ref, ptr %local_3__id, align 8
+  %load_store_tmp1 = load i64, ptr %local_1, align 8
+  store i64 %load_store_tmp1, ptr %local_4, align 8
+  %call_arg_0 = load ptr, ptr %local_3__id, align 8
+  %call_arg_1 = load i64, ptr %local_4, align 8
+  %retval = call ptr @"0000000000000002_dynamic_field_borrow_mut_5Y8syvZQj3Gu2f"(ptr %call_arg_0, i64 %call_arg_1)
+  store ptr %retval, ptr %local_5, align 8
+  %retval2 = load ptr, ptr %local_5, align 8
+  ret ptr %retval2
+}
+
+define private ptr @"0000000000000002_dynamic_field_borrow_mut_5Y8syvZQj3Gu2f"(ptr noalias nonnull %0, i64 %1) {
+entry:
+  %local_0 = alloca ptr, align 8
+  %local_1 = alloca i64, align 8
+  %local_2 = alloca [32 x i8], align 1
+  %local_3 = alloca ptr, align 8
+  %local_4 = alloca ptr, align 8
+  %local_5 = alloca [32 x i8], align 1
+  %local_6 = alloca i64, align 8
+  %local_7 = alloca [32 x i8], align 1
+  %local_8 = alloca ptr, align 8
+  %local_9 = alloca [32 x i8], align 1
+  %local_10 = alloca ptr, align 8
+  %local_11__value = alloca ptr, align 8
+  store ptr %0, ptr %local_0, align 8
+  store i64 %1, ptr %local_1, align 8
+  %load_store_tmp = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp, ptr %local_3, align 8
+  %load_store_tmp1 = load ptr, ptr %local_3, align 8
+  store ptr %load_store_tmp1, ptr %local_4, align 8
+  %call_arg_0 = load ptr, ptr %local_4, align 8
+  %retval = call [32 x i8] @"0000000000000002_object_uid_to_address_DdQo7Y9Arw6ggD"(ptr %call_arg_0)
+  store [32 x i8] %retval, ptr %local_5, align 1
+  %load_store_tmp2 = load i64, ptr %local_1, align 8
+  store i64 %load_store_tmp2, ptr %local_6, align 8
+  %loaded_alloca = load [32 x i8], ptr %local_5, align 1
+  %retval3 = call [32 x i8] @move_native_dynamic_field_hash_type_and_key(ptr @__move_rttydesc_u64, [32 x i8] %loaded_alloca, ptr %local_6)
+  store [32 x i8] %retval3, ptr %local_7, align 1
+  %load_store_tmp4 = load [32 x i8], ptr %local_7, align 1
+  store [32 x i8] %load_store_tmp4, ptr %local_2, align 1
+  %load_store_tmp5 = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp5, ptr %local_8, align 8
+  %loaded_alloca6 = load ptr, ptr %local_8, align 8
+  %loaded_alloca7 = load [32 x i8], ptr %local_2, align 1
+  %retval8 = call ptr @move_native_dynamic_field_borrow_child_object_mut(ptr @"__move_rttydesc_dynamic_field__Field_u64, deny_list__PerTypeList_", ptr %loaded_alloca6, [32 x i8] %loaded_alloca7)
+  store ptr %retval8, ptr %local_10, align 8
+  %tmp = load ptr, ptr %local_10, align 8
+  %fld_ref = getelementptr inbounds %struct.dynamic_field__Field_u64.deny_list__PerTypeList_, ptr %tmp, i32 0, i32 2
+  store ptr %fld_ref, ptr %local_11__value, align 8
+  %retval9 = load ptr, ptr %local_11__value, align 8
+  ret ptr %retval9
+}
+
+declare ptr @move_native_dynamic_field_borrow_child_object_mut(ptr, ptr, [32 x i8])
+
+define private void @"0000000000000002_deny_list_per_type_list_r_5tLDAtS4BipEZG"(ptr noalias nonnull %0, { ptr, i64, i64 } %1, [32 x i8] %2) {
+entry:
+  %local_0 = alloca ptr, align 8
+  %local_1 = alloca { ptr, i64, i64 }, align 8
+  %local_2 = alloca [32 x i8], align 1
+  %local_3 = alloca ptr, align 8
+  %local_4 = alloca ptr, align 8
+  %local_5 = alloca ptr, align 8
+  %local_6 = alloca ptr, align 8
+  %local_7__denied_addresses = alloca ptr, align 8
+  %local_8 = alloca { ptr, i64, i64 }, align 8
+  %local_9 = alloca ptr, align 8
+  %local_10 = alloca ptr, align 8
+  %local_11 = alloca ptr, align 8
+  %local_12 = alloca ptr, align 8
+  %local_13 = alloca ptr, align 8
+  %local_14 = alloca i1, align 1
+  %local_15 = alloca ptr, align 8
+  %local_16 = alloca ptr, align 8
+  %local_17 = alloca i64, align 8
+  %local_18 = alloca ptr, align 8
+  %local_19 = alloca ptr, align 8
+  %local_20 = alloca ptr, align 8
+  %local_21__denied_count = alloca ptr, align 8
+  %local_22 = alloca [32 x i8], align 1
+  %local_23 = alloca ptr, align 8
+  %local_24 = alloca ptr, align 8
+  %local_25 = alloca i64, align 8
+  %local_26 = alloca i64, align 8
+  %local_27 = alloca i64, align 8
+  %local_28 = alloca ptr, align 8
+  %local_29 = alloca ptr, align 8
+  %local_30 = alloca i64, align 8
+  %local_31 = alloca i64, align 8
+  %local_32 = alloca i1, align 1
+  %local_33 = alloca ptr, align 8
+  %local_34__denied_count = alloca ptr, align 8
+  %local_35 = alloca [32 x i8], align 1
+  %local_36 = alloca i64, align 8
+  %local_37 = alloca ptr, align 8
+  store ptr %0, ptr %local_0, align 8
+  store { ptr, i64, i64 } %1, ptr %local_1, align 8
+  store [32 x i8] %2, ptr %local_2, align 1
+  %load_store_tmp = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp, ptr %local_6, align 8
+  %tmp = load ptr, ptr %local_6, align 8
+  %fld_ref = getelementptr inbounds %struct.deny_list__PerTypeList, ptr %tmp, i32 0, i32 2
+  store ptr %fld_ref, ptr %local_7__denied_addresses, align 8
+  %load_store_tmp1 = load { ptr, i64, i64 }, ptr %local_1, align 8
+  store { ptr, i64, i64 } %load_store_tmp1, ptr %local_8, align 8
+  %call_arg_0 = load ptr, ptr %local_7__denied_addresses, align 8
+  %call_arg_1 = load { ptr, i64, i64 }, ptr %local_8, align 8
+  %retval = call ptr @"0000000000000002_table_borrow_mut_BstuEfzgctfCXC"(ptr %call_arg_0, { ptr, i64, i64 } %call_arg_1)
+  store ptr %retval, ptr %local_9, align 8
+  %load_store_tmp2 = load ptr, ptr %local_9, align 8
+  store ptr %load_store_tmp2, ptr %local_4, align 8
+  %load_store_tmp3 = load ptr, ptr %local_4, align 8
+  store ptr %load_store_tmp3, ptr %local_10, align 8
+  store ptr %local_2, ptr %local_11, align 8
+  %load_store_tmp4 = load ptr, ptr %local_11, align 8
+  store ptr %load_store_tmp4, ptr %local_3, align 8
+  %load_store_tmp5 = load ptr, ptr %local_10, align 8
+  store ptr %load_store_tmp5, ptr %local_12, align 8
+  %load_store_tmp6 = load ptr, ptr %local_3, align 8
+  store ptr %load_store_tmp6, ptr %local_13, align 8
+  %call_arg_07 = load ptr, ptr %local_12, align 8
+  %call_arg_18 = load ptr, ptr %local_13, align 8
+  %retval9 = call i1 @"0000000000000002_vec_set_contains_ApRSMRpyfxApiW"(ptr %call_arg_07, ptr %call_arg_18)
+  store i1 %retval9, ptr %local_14, align 1
+  %cnd = load i1, ptr %local_14, align 1
+  br i1 %cnd, label %bb_1, label %bb_0
+
+bb_1:                                             ; preds = %entry
+  br label %bb_2
+
+bb_0:                                             ; preds = %entry
+  %load_store_tmp10 = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp10, ptr %local_15, align 8
+  %load_store_tmp11 = load ptr, ptr %local_4, align 8
+  store ptr %load_store_tmp11, ptr %local_16, align 8
+  store i64 1, ptr %local_17, align 8
+  %call_arg_012 = load i64, ptr %local_17, align 8
+  call void @move_rt_abort(i64 %call_arg_012)
+  unreachable
+
+bb_2:                                             ; preds = %bb_1
+  %load_store_tmp13 = load ptr, ptr %local_4, align 8
+  store ptr %load_store_tmp13, ptr %local_18, align 8
+  store ptr %local_2, ptr %local_19, align 8
+  %call_arg_014 = load ptr, ptr %local_18, align 8
+  %call_arg_115 = load ptr, ptr %local_19, align 8
+  call void @"0000000000000002_vec_set_remove_FqbTD55CZ5Sjxf"(ptr %call_arg_014, ptr %call_arg_115)
+  %load_store_tmp16 = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp16, ptr %local_20, align 8
+  %tmp17 = load ptr, ptr %local_20, align 8
+  %fld_ref18 = getelementptr inbounds %struct.deny_list__PerTypeList, ptr %tmp17, i32 0, i32 1
+  store ptr %fld_ref18, ptr %local_21__denied_count, align 8
+  %load_store_tmp19 = load [32 x i8], ptr %local_2, align 1
+  store [32 x i8] %load_store_tmp19, ptr %local_22, align 1
+  %call_arg_020 = load ptr, ptr %local_21__denied_count, align 8
+  %call_arg_121 = load [32 x i8], ptr %local_22, align 1
+  %retval22 = call ptr @"0000000000000002_table_borrow_mut_ftm6vdjVXcasy3"(ptr %call_arg_020, [32 x i8] %call_arg_121)
+  store ptr %retval22, ptr %local_23, align 8
+  %load_store_tmp23 = load ptr, ptr %local_23, align 8
+  store ptr %load_store_tmp23, ptr %local_5, align 8
+  %load_store_tmp24 = load ptr, ptr %local_5, align 8
+  store ptr %load_store_tmp24, ptr %local_24, align 8
+  %load_deref_store_tmp1 = load ptr, ptr %local_24, align 8
+  %load_deref_store_tmp2 = load i64, ptr %load_deref_store_tmp1, align 8
+  store i64 %load_deref_store_tmp2, ptr %local_25, align 8
+  store i64 1, ptr %local_26, align 8
+  %sub_src_0 = load i64, ptr %local_25, align 8
+  %sub_src_1 = load i64, ptr %local_26, align 8
+  %sub_dst = sub i64 %sub_src_0, %sub_src_1
+  %ovfcond = icmp ugt i64 %sub_dst, %sub_src_0
+  br i1 %ovfcond, label %then_bb, label %join_bb
+
+then_bb:                                          ; preds = %bb_2
+  call void @move_rt_abort(i64 4017)
+  unreachable
+
+join_bb:                                          ; preds = %bb_2
+  store i64 %sub_dst, ptr %local_27, align 8
+  %load_store_tmp25 = load ptr, ptr %local_5, align 8
+  store ptr %load_store_tmp25, ptr %local_28, align 8
+  %load_store_ref_src = load i64, ptr %local_27, align 8
+  %load_store_ref_dst_ptr = load ptr, ptr %local_28, align 8
+  store i64 %load_store_ref_src, ptr %load_store_ref_dst_ptr, align 8
+  %load_store_tmp26 = load ptr, ptr %local_5, align 8
+  store ptr %load_store_tmp26, ptr %local_29, align 8
+  %load_deref_store_tmp127 = load ptr, ptr %local_29, align 8
+  %load_deref_store_tmp228 = load i64, ptr %load_deref_store_tmp127, align 8
+  store i64 %load_deref_store_tmp228, ptr %local_30, align 8
+  store i64 0, ptr %local_31, align 8
+  %eq_src_0 = load i64, ptr %local_30, align 8
+  %eq_src_1 = load i64, ptr %local_31, align 8
+  %eq_dst = icmp eq i64 %eq_src_0, %eq_src_1
+  store i1 %eq_dst, ptr %local_32, align 1
+  %cnd29 = load i1, ptr %local_32, align 1
+  br i1 %cnd29, label %bb_4, label %bb_3
+
+bb_4:                                             ; preds = %join_bb
+  %load_store_tmp30 = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp30, ptr %local_33, align 8
+  %tmp31 = load ptr, ptr %local_33, align 8
+  %fld_ref32 = getelementptr inbounds %struct.deny_list__PerTypeList, ptr %tmp31, i32 0, i32 1
+  store ptr %fld_ref32, ptr %local_34__denied_count, align 8
+  %call_arg_033 = load ptr, ptr %local_34__denied_count, align 8
+  %call_arg_134 = load [32 x i8], ptr %local_2, align 1
+  %retval35 = call i64 @"0000000000000002_table_remove_7j4jjMJLFQMfd3"(ptr %call_arg_033, [32 x i8] %call_arg_134)
+  store i64 %retval35, ptr %local_36, align 8
+  br label %bb_5
+
+bb_3:                                             ; preds = %join_bb
+  %load_store_tmp36 = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp36, ptr %local_37, align 8
+  br label %bb_5
+
+bb_5:                                             ; preds = %bb_3, %bb_4
+  ret void
+}
+
+define private ptr @"0000000000000002_table_borrow_mut_BstuEfzgctfCXC"(ptr noalias nonnull %0, { ptr, i64, i64 } %1) {
+entry:
+  %local_0 = alloca ptr, align 8
+  %local_1 = alloca { ptr, i64, i64 }, align 8
+  %local_2 = alloca ptr, align 8
+  %local_3__id = alloca ptr, align 8
+  %local_4 = alloca { ptr, i64, i64 }, align 8
+  %local_5 = alloca ptr, align 8
+  store ptr %0, ptr %local_0, align 8
+  store { ptr, i64, i64 } %1, ptr %local_1, align 8
+  %load_store_tmp = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp, ptr %local_2, align 8
+  %tmp = load ptr, ptr %local_2, align 8
+  %fld_ref = getelementptr inbounds %struct.table__Table_vector_u8_.vec_set__VecSet_address__, ptr %tmp, i32 0, i32 0
+  store ptr %fld_ref, ptr %local_3__id, align 8
+  %load_store_tmp1 = load { ptr, i64, i64 }, ptr %local_1, align 8
+  store { ptr, i64, i64 } %load_store_tmp1, ptr %local_4, align 8
+  %call_arg_0 = load ptr, ptr %local_3__id, align 8
+  %call_arg_1 = load { ptr, i64, i64 }, ptr %local_4, align 8
+  %retval = call ptr @"0000000000000002_dynamic_field_borrow_mut_7JMh4QrPfqcB1H"(ptr %call_arg_0, { ptr, i64, i64 } %call_arg_1)
+  store ptr %retval, ptr %local_5, align 8
+  %retval2 = load ptr, ptr %local_5, align 8
+  ret ptr %retval2
+}
+
+define private ptr @"0000000000000002_dynamic_field_borrow_mut_7JMh4QrPfqcB1H"(ptr noalias nonnull %0, { ptr, i64, i64 } %1) {
+entry:
+  %local_0 = alloca ptr, align 8
+  %local_1 = alloca { ptr, i64, i64 }, align 8
+  %local_2 = alloca [32 x i8], align 1
+  %local_3 = alloca ptr, align 8
+  %local_4 = alloca ptr, align 8
+  %local_5 = alloca [32 x i8], align 1
+  %local_6 = alloca { ptr, i64, i64 }, align 8
+  %local_7 = alloca [32 x i8], align 1
+  %local_8 = alloca ptr, align 8
+  %local_9 = alloca [32 x i8], align 1
+  %local_10 = alloca ptr, align 8
+  %local_11__value = alloca ptr, align 8
+  store ptr %0, ptr %local_0, align 8
+  store { ptr, i64, i64 } %1, ptr %local_1, align 8
+  %load_store_tmp = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp, ptr %local_3, align 8
+  %load_store_tmp1 = load ptr, ptr %local_3, align 8
+  store ptr %load_store_tmp1, ptr %local_4, align 8
+  %call_arg_0 = load ptr, ptr %local_4, align 8
+  %retval = call [32 x i8] @"0000000000000002_object_uid_to_address_DdQo7Y9Arw6ggD"(ptr %call_arg_0)
+  store [32 x i8] %retval, ptr %local_5, align 1
+  %load_store_tmp2 = load { ptr, i64, i64 }, ptr %local_1, align 8
+  store { ptr, i64, i64 } %load_store_tmp2, ptr %local_6, align 8
+  %loaded_alloca = load [32 x i8], ptr %local_5, align 1
+  %retval3 = call [32 x i8] @move_native_dynamic_field_hash_type_and_key(ptr @__move_rttydesc_vector_u8_, [32 x i8] %loaded_alloca, ptr %local_6)
+  store [32 x i8] %retval3, ptr %local_7, align 1
+  %load_store_tmp4 = load [32 x i8], ptr %local_7, align 1
+  store [32 x i8] %load_store_tmp4, ptr %local_2, align 1
+  %load_store_tmp5 = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp5, ptr %local_8, align 8
+  %loaded_alloca6 = load ptr, ptr %local_8, align 8
+  %loaded_alloca7 = load [32 x i8], ptr %local_2, align 1
+  %retval8 = call ptr @move_native_dynamic_field_borrow_child_object_mut(ptr @"__move_rttydesc_dynamic_field__Field_vector_u8_, vec_set__VecSet_address__", ptr %loaded_alloca6, [32 x i8] %loaded_alloca7)
+  store ptr %retval8, ptr %local_10, align 8
+  %tmp = load ptr, ptr %local_10, align 8
+  %fld_ref = getelementptr inbounds %struct.dynamic_field__Field_vector_u8_.vec_set__VecSet_address__, ptr %tmp, i32 0, i32 2
+  store ptr %fld_ref, ptr %local_11__value, align 8
+  %retval9 = load ptr, ptr %local_11__value, align 8
+  ret ptr %retval9
+}
+
+define private void @"0000000000000002_vec_set_remove_FqbTD55CZ5Sjxf"(ptr noalias nonnull %0, ptr nonnull readonly %1) {
+entry:
+  %local_0 = alloca ptr, align 8
+  %local_1 = alloca ptr, align 8
+  %local_2 = alloca ptr, align 8
+  %local_3 = alloca i64, align 8
+  %local_4 = alloca ptr, align 8
+  %local_5 = alloca ptr, align 8
+  %local_6 = alloca ptr, align 8
+  %local_7 = alloca ptr, align 8
+  %local_8 = alloca i64, align 8
+  %local_9 = alloca ptr, align 8
+  %local_10__contents = alloca ptr, align 8
+  %local_11 = alloca i64, align 8
+  %local_12 = alloca [32 x i8], align 1
+  store ptr %0, ptr %local_0, align 8
+  store ptr %1, ptr %local_1, align 8
+  %load_store_tmp = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp, ptr %local_4, align 8
+  %load_store_tmp1 = load ptr, ptr %local_1, align 8
+  store ptr %load_store_tmp1, ptr %local_5, align 8
+  %load_store_tmp2 = load ptr, ptr %local_5, align 8
+  store ptr %load_store_tmp2, ptr %local_2, align 8
+  %load_store_tmp3 = load ptr, ptr %local_4, align 8
+  store ptr %load_store_tmp3, ptr %local_6, align 8
+  %load_store_tmp4 = load ptr, ptr %local_2, align 8
+  store ptr %load_store_tmp4, ptr %local_7, align 8
+  %call_arg_0 = load ptr, ptr %local_6, align 8
+  %call_arg_1 = load ptr, ptr %local_7, align 8
+  %retval = call i64 @"0000000000000002_vec_set_get_idx_GcLEgF4Hx8chBC"(ptr %call_arg_0, ptr %call_arg_1)
+  store i64 %retval, ptr %local_8, align 8
+  %load_store_tmp5 = load i64, ptr %local_8, align 8
+  store i64 %load_store_tmp5, ptr %local_3, align 8
+  %load_store_tmp6 = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp6, ptr %local_9, align 8
+  %tmp = load ptr, ptr %local_9, align 8
+  %fld_ref = getelementptr inbounds %struct.vec_set__VecSet_address_, ptr %tmp, i32 0, i32 0
+  store ptr %fld_ref, ptr %local_10__contents, align 8
+  %load_store_tmp7 = load i64, ptr %local_3, align 8
+  store i64 %load_store_tmp7, ptr %local_11, align 8
+  %call_arg_08 = load ptr, ptr %local_10__contents, align 8
+  %call_arg_19 = load i64, ptr %local_11, align 8
+  %retval10 = call [32 x i8] @"0000000000000001_vector_remove_GfDUknvCmy5FBa"(ptr %call_arg_08, i64 %call_arg_19)
+  store [32 x i8] %retval10, ptr %local_12, align 1
+  ret void
+}
+
+define private i64 @"0000000000000002_vec_set_get_idx_GcLEgF4Hx8chBC"(ptr nonnull readonly %0, ptr nonnull readonly %1) {
+entry:
+  %local_0 = alloca ptr, align 8
+  %local_1 = alloca ptr, align 8
+  %local_2 = alloca %struct.option__Option_u64_, align 8
+  %local_3 = alloca ptr, align 8
+  %local_4 = alloca ptr, align 8
+  %local_5 = alloca %struct.option__Option_u64_, align 8
+  %local_6 = alloca ptr, align 8
+  %local_7 = alloca i1, align 1
+  %local_8 = alloca i64, align 8
+  %local_9 = alloca %struct.option__Option_u64_, align 8
+  %local_10 = alloca i64, align 8
+  store ptr %0, ptr %local_0, align 8
+  store ptr %1, ptr %local_1, align 8
+  %load_store_tmp = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp, ptr %local_3, align 8
+  %load_store_tmp1 = load ptr, ptr %local_1, align 8
+  store ptr %load_store_tmp1, ptr %local_4, align 8
+  %call_arg_0 = load ptr, ptr %local_3, align 8
+  %call_arg_1 = load ptr, ptr %local_4, align 8
+  %retval = call %struct.option__Option_u64_ @"0000000000000002_vec_set_get_idx_opt_DSnCgYtpxV6dEj"(ptr %call_arg_0, ptr %call_arg_1)
+  store %struct.option__Option_u64_ %retval, ptr %local_5, align 8
+  %load_store_tmp2 = load %struct.option__Option_u64_, ptr %local_5, align 8
+  store %struct.option__Option_u64_ %load_store_tmp2, ptr %local_2, align 8
+  store ptr %local_2, ptr %local_6, align 8
+  %call_arg_03 = load ptr, ptr %local_6, align 8
+  %retval4 = call i1 @"0000000000000001_option_is_some_G6Pocm5xTCEyXt"(ptr %call_arg_03)
+  store i1 %retval4, ptr %local_7, align 1
+  %cnd = load i1, ptr %local_7, align 1
+  br i1 %cnd, label %bb_1, label %bb_0
+
+bb_1:                                             ; preds = %entry
+  br label %bb_2
+
+bb_0:                                             ; preds = %entry
+  store i64 1, ptr %local_8, align 8
+  %call_arg_05 = load i64, ptr %local_8, align 8
+  call void @move_rt_abort(i64 %call_arg_05)
+  unreachable
+
+bb_2:                                             ; preds = %bb_1
+  %call_arg_06 = load %struct.option__Option_u64_, ptr %local_2, align 8
+  %retval7 = call i64 @"0000000000000001_option_destroy_some_9PXqkfTxVGgq5Z"(%struct.option__Option_u64_ %call_arg_06)
+  store i64 %retval7, ptr %local_10, align 8
+  %retval8 = load i64, ptr %local_10, align 8
+  ret i64 %retval8
+}
+
+define private i64 @"0000000000000001_option_destroy_some_9PXqkfTxVGgq5Z"(%struct.option__Option_u64_ %0) {
+entry:
+  %local_0 = alloca %struct.option__Option_u64_, align 8
+  %local_1 = alloca i64, align 8
+  %local_2 = alloca { ptr, i64, i64 }, align 8
+  %local_3 = alloca ptr, align 8
+  %local_4 = alloca i1, align 1
+  %local_5 = alloca i64, align 8
+  %local_6 = alloca %struct.option__Option_u64_, align 8
+  %local_7__vec = alloca { ptr, i64, i64 }, align 8
+  %local_8 = alloca ptr, align 8
+  %local_9 = alloca i64, align 8
+  %local_10 = alloca { ptr, i64, i64 }, align 8
+  %local_11 = alloca i64, align 8
+  store %struct.option__Option_u64_ %0, ptr %local_0, align 8
+  store ptr %local_0, ptr %local_3, align 8
+  %call_arg_0 = load ptr, ptr %local_3, align 8
+  %retval = call i1 @"0000000000000001_option_is_some_G6Pocm5xTCEyXt"(ptr %call_arg_0)
+  store i1 %retval, ptr %local_4, align 1
+  %cnd = load i1, ptr %local_4, align 1
+  br i1 %cnd, label %bb_1, label %bb_0
+
+bb_1:                                             ; preds = %entry
+  br label %bb_2
+
+bb_0:                                             ; preds = %entry
+  store i64 262145, ptr %local_5, align 8
+  %call_arg_01 = load i64, ptr %local_5, align 8
+  call void @move_rt_abort(i64 %call_arg_01)
+  unreachable
+
+bb_2:                                             ; preds = %bb_1
+  %srcval = load %struct.option__Option_u64_, ptr %local_0, align 8
+  %ext_0 = extractvalue %struct.option__Option_u64_ %srcval, 0
+  store { ptr, i64, i64 } %ext_0, ptr %local_7__vec, align 8
+  %load_store_tmp = load { ptr, i64, i64 }, ptr %local_7__vec, align 8
+  store { ptr, i64, i64 } %load_store_tmp, ptr %local_2, align 8
+  store ptr %local_2, ptr %local_8, align 8
+  %loaded_alloca = load ptr, ptr %local_8, align 8
+  call void @move_native_vector_pop_back(ptr @__move_rttydesc_u64, ptr %loaded_alloca, ptr %local_9)
+  %load_store_tmp2 = load i64, ptr %local_9, align 8
+  store i64 %load_store_tmp2, ptr %local_1, align 8
+  %load_store_tmp3 = load { ptr, i64, i64 }, ptr %local_2, align 8
+  store { ptr, i64, i64 } %load_store_tmp3, ptr %local_10, align 8
+  call void @move_native_vector_destroy_empty(ptr @__move_rttydesc_u64, ptr %local_10)
+  %load_store_tmp4 = load i64, ptr %local_1, align 8
+  store i64 %load_store_tmp4, ptr %local_11, align 8
+  %retval5 = load i64, ptr %local_11, align 8
+  ret i64 %retval5
+}
+
+declare void @move_native_vector_pop_back(ptr, ptr, ptr)
+
+declare void @move_native_vector_destroy_empty(ptr, ptr)
+
+define private [32 x i8] @"0000000000000001_vector_remove_GfDUknvCmy5FBa"(ptr noalias nonnull %0, i64 %1) {
+entry:
+  %local_0 = alloca ptr, align 8
+  %local_1 = alloca i64, align 8
+  %local_2 = alloca i64, align 8
+  %local_3 = alloca ptr, align 8
+  %local_4 = alloca i64, align 8
+  %local_5 = alloca ptr, align 8
+  %local_6 = alloca ptr, align 8
+  %local_7 = alloca i64, align 8
+  %local_8 = alloca i64, align 8
+  %local_9 = alloca i64, align 8
+  %local_10 = alloca i1, align 1
+  %local_11 = alloca ptr, align 8
+  %local_12 = alloca i64, align 8
+  %local_13 = alloca i64, align 8
+  %local_14 = alloca i64, align 8
+  %local_15 = alloca i64, align 8
+  %local_16 = alloca i64, align 8
+  %local_17 = alloca i64, align 8
+  %local_18 = alloca i1, align 1
+  %local_19 = alloca ptr, align 8
+  %local_20 = alloca i64, align 8
+  %local_21 = alloca i64, align 8
+  %local_22 = alloca i64, align 8
+  %local_23 = alloca i64, align 8
+  %local_24 = alloca ptr, align 8
+  %local_25 = alloca i64, align 8
+  %local_26 = alloca i64, align 8
+  %local_27 = alloca ptr, align 8
+  %local_28 = alloca [32 x i8], align 1
+  store ptr %0, ptr %local_0, align 8
+  store i64 %1, ptr %local_1, align 8
+  %load_store_tmp = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp, ptr %local_5, align 8
+  %load_store_tmp1 = load ptr, ptr %local_5, align 8
+  store ptr %load_store_tmp1, ptr %local_6, align 8
+  %loaded_alloca = load ptr, ptr %local_6, align 8
+  %retval = call i64 @move_native_vector_length(ptr @__move_rttydesc_address, ptr %loaded_alloca)
+  store i64 %retval, ptr %local_7, align 8
+  %load_store_tmp2 = load i64, ptr %local_7, align 8
+  store i64 %load_store_tmp2, ptr %local_4, align 8
+  %load_store_tmp3 = load i64, ptr %local_1, align 8
+  store i64 %load_store_tmp3, ptr %local_8, align 8
+  %load_store_tmp4 = load i64, ptr %local_4, align 8
+  store i64 %load_store_tmp4, ptr %local_9, align 8
+  %ge_src_0 = load i64, ptr %local_8, align 8
+  %ge_src_1 = load i64, ptr %local_9, align 8
+  %ge_dst = icmp uge i64 %ge_src_0, %ge_src_1
+  store i1 %ge_dst, ptr %local_10, align 1
+  %cnd = load i1, ptr %local_10, align 1
+  br i1 %cnd, label %bb_1, label %bb_0
+
+bb_1:                                             ; preds = %entry
+  %load_store_tmp5 = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp5, ptr %local_11, align 8
+  store i64 131072, ptr %local_12, align 8
+  %call_arg_0 = load i64, ptr %local_12, align 8
+  call void @move_rt_abort(i64 %call_arg_0)
+  unreachable
+
+bb_0:                                             ; preds = %entry
+  %load_store_tmp6 = load i64, ptr %local_4, align 8
+  store i64 %load_store_tmp6, ptr %local_13, align 8
+  store i64 1, ptr %local_14, align 8
+  %sub_src_0 = load i64, ptr %local_13, align 8
+  %sub_src_1 = load i64, ptr %local_14, align 8
+  %sub_dst = sub i64 %sub_src_0, %sub_src_1
+  %ovfcond = icmp ugt i64 %sub_dst, %sub_src_0
+  br i1 %ovfcond, label %then_bb, label %join_bb
+
+then_bb:                                          ; preds = %bb_0
+  call void @move_rt_abort(i64 4017)
+  unreachable
+
+join_bb:                                          ; preds = %bb_0
+  store i64 %sub_dst, ptr %local_15, align 8
+  %load_store_tmp7 = load i64, ptr %local_15, align 8
+  store i64 %load_store_tmp7, ptr %local_4, align 8
+  br label %bb_5
+
+bb_5:                                             ; preds = %join_bb18, %join_bb
+  %load_store_tmp8 = load i64, ptr %local_1, align 8
+  store i64 %load_store_tmp8, ptr %local_16, align 8
+  %load_store_tmp9 = load i64, ptr %local_4, align 8
+  store i64 %load_store_tmp9, ptr %local_17, align 8
+  %lt_src_0 = load i64, ptr %local_16, align 8
+  %lt_src_1 = load i64, ptr %local_17, align 8
+  %lt_dst = icmp ult i64 %lt_src_0, %lt_src_1
+  store i1 %lt_dst, ptr %local_18, align 1
+  %cnd10 = load i1, ptr %local_18, align 1
+  br i1 %cnd10, label %bb_3, label %bb_2
+
+bb_3:                                             ; preds = %bb_5
+  br label %bb_4
+
+bb_4:                                             ; preds = %bb_3
+  %load_store_tmp11 = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp11, ptr %local_19, align 8
+  %load_store_tmp12 = load ptr, ptr %local_19, align 8
+  store ptr %load_store_tmp12, ptr %local_3, align 8
+  %load_store_tmp13 = load i64, ptr %local_1, align 8
+  store i64 %load_store_tmp13, ptr %local_20, align 8
+  %load_store_tmp14 = load i64, ptr %local_20, align 8
+  store i64 %load_store_tmp14, ptr %local_2, align 8
+  %load_store_tmp15 = load i64, ptr %local_1, align 8
+  store i64 %load_store_tmp15, ptr %local_21, align 8
+  store i64 1, ptr %local_22, align 8
+  %add_src_0 = load i64, ptr %local_21, align 8
+  %add_src_1 = load i64, ptr %local_22, align 8
+  %add_dst = add i64 %add_src_0, %add_src_1
+  %ovfcond16 = icmp ult i64 %add_dst, %add_src_0
+  br i1 %ovfcond16, label %then_bb17, label %join_bb18
+
+then_bb17:                                        ; preds = %bb_4
+  call void @move_rt_abort(i64 4017)
+  unreachable
+
+join_bb18:                                        ; preds = %bb_4
+  store i64 %add_dst, ptr %local_23, align 8
+  %load_store_tmp19 = load i64, ptr %local_23, align 8
+  store i64 %load_store_tmp19, ptr %local_1, align 8
+  %load_store_tmp20 = load ptr, ptr %local_3, align 8
+  store ptr %load_store_tmp20, ptr %local_24, align 8
+  %load_store_tmp21 = load i64, ptr %local_2, align 8
+  store i64 %load_store_tmp21, ptr %local_25, align 8
+  %load_store_tmp22 = load i64, ptr %local_1, align 8
+  store i64 %load_store_tmp22, ptr %local_26, align 8
+  %loaded_alloca23 = load ptr, ptr %local_24, align 8
+  %loaded_alloca24 = load i64, ptr %local_25, align 8
+  %loaded_alloca25 = load i64, ptr %local_26, align 8
+  call void @move_native_vector_swap(ptr @__move_rttydesc_address, ptr %loaded_alloca23, i64 %loaded_alloca24, i64 %loaded_alloca25)
+  br label %bb_5
+
+bb_2:                                             ; preds = %bb_5
+  %load_store_tmp26 = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp26, ptr %local_27, align 8
+  %loaded_alloca27 = load ptr, ptr %local_27, align 8
+  call void @move_native_vector_pop_back(ptr @__move_rttydesc_address, ptr %loaded_alloca27, ptr %local_28)
+  %retval28 = load [32 x i8], ptr %local_28, align 1
+  ret [32 x i8] %retval28
+}
+
+declare void @move_native_vector_swap(ptr, ptr, i64, i64)
+
+define private ptr @"0000000000000002_table_borrow_mut_ftm6vdjVXcasy3"(ptr noalias nonnull %0, [32 x i8] %1) {
+entry:
+  %local_0 = alloca ptr, align 8
+  %local_1 = alloca [32 x i8], align 1
+  %local_2 = alloca ptr, align 8
+  %local_3__id = alloca ptr, align 8
+  %local_4 = alloca [32 x i8], align 1
+  %local_5 = alloca ptr, align 8
+  store ptr %0, ptr %local_0, align 8
+  store [32 x i8] %1, ptr %local_1, align 1
+  %load_store_tmp = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp, ptr %local_2, align 8
+  %tmp = load ptr, ptr %local_2, align 8
+  %fld_ref = getelementptr inbounds %struct.table__Table_address.u64_, ptr %tmp, i32 0, i32 0
+  store ptr %fld_ref, ptr %local_3__id, align 8
+  %call_arg_0 = load ptr, ptr %local_3__id, align 8
+  %call_arg_1 = load [32 x i8], ptr %local_1, align 1
+  %retval = call ptr @"0000000000000002_dynamic_field_borrow_mut_GuVeWqzqKmDiEC"(ptr %call_arg_0, [32 x i8] %call_arg_1)
+  store ptr %retval, ptr %local_5, align 8
+  %retval1 = load ptr, ptr %local_5, align 8
+  ret ptr %retval1
+}
+
+define private ptr @"0000000000000002_dynamic_field_borrow_mut_GuVeWqzqKmDiEC"(ptr noalias nonnull %0, [32 x i8] %1) {
+entry:
+  %local_0 = alloca ptr, align 8
+  %local_1 = alloca [32 x i8], align 1
+  %local_2 = alloca [32 x i8], align 1
+  %local_3 = alloca ptr, align 8
+  %local_4 = alloca ptr, align 8
+  %local_5 = alloca [32 x i8], align 1
+  %local_6 = alloca [32 x i8], align 1
+  %local_7 = alloca [32 x i8], align 1
+  %local_8 = alloca ptr, align 8
+  %local_9 = alloca [32 x i8], align 1
+  %local_10 = alloca ptr, align 8
+  %local_11__value = alloca ptr, align 8
+  store ptr %0, ptr %local_0, align 8
+  store [32 x i8] %1, ptr %local_1, align 1
+  %load_store_tmp = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp, ptr %local_3, align 8
+  %load_store_tmp1 = load ptr, ptr %local_3, align 8
+  store ptr %load_store_tmp1, ptr %local_4, align 8
+  %call_arg_0 = load ptr, ptr %local_4, align 8
+  %retval = call [32 x i8] @"0000000000000002_object_uid_to_address_DdQo7Y9Arw6ggD"(ptr %call_arg_0)
+  store [32 x i8] %retval, ptr %local_5, align 1
+  %loaded_alloca = load [32 x i8], ptr %local_5, align 1
+  %retval2 = call [32 x i8] @move_native_dynamic_field_hash_type_and_key(ptr @__move_rttydesc_address, [32 x i8] %loaded_alloca, ptr %local_1)
+  store [32 x i8] %retval2, ptr %local_7, align 1
+  %load_store_tmp3 = load [32 x i8], ptr %local_7, align 1
+  store [32 x i8] %load_store_tmp3, ptr %local_2, align 1
+  %load_store_tmp4 = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp4, ptr %local_8, align 8
+  %loaded_alloca5 = load ptr, ptr %local_8, align 8
+  %loaded_alloca6 = load [32 x i8], ptr %local_2, align 1
+  %retval7 = call ptr @move_native_dynamic_field_borrow_child_object_mut(ptr @"__move_rttydesc_dynamic_field__Field_address, u64_", ptr %loaded_alloca5, [32 x i8] %loaded_alloca6)
+  store ptr %retval7, ptr %local_10, align 8
+  %tmp = load ptr, ptr %local_10, align 8
+  %fld_ref = getelementptr inbounds %struct.dynamic_field__Field_address.u64_, ptr %tmp, i32 0, i32 2
+  store ptr %fld_ref, ptr %local_11__value, align 8
+  %retval8 = load ptr, ptr %local_11__value, align 8
+  ret ptr %retval8
+}
+
+define private i64 @"0000000000000002_table_remove_7j4jjMJLFQMfd3"(ptr noalias nonnull %0, [32 x i8] %1) {
+entry:
+  %local_0 = alloca ptr, align 8
+  %local_1 = alloca [32 x i8], align 1
+  %local_2 = alloca i64, align 8
+  %local_3 = alloca ptr, align 8
+  %local_4__id = alloca ptr, align 8
+  %local_5 = alloca [32 x i8], align 1
+  %local_6 = alloca i64, align 8
+  %local_7 = alloca ptr, align 8
+  %local_8__size = alloca ptr, align 8
+  %local_9 = alloca i64, align 8
+  %local_10 = alloca i64, align 8
+  %local_11 = alloca i64, align 8
+  %local_12 = alloca ptr, align 8
+  %local_13__size = alloca ptr, align 8
+  %local_14 = alloca i64, align 8
+  store ptr %0, ptr %local_0, align 8
+  store [32 x i8] %1, ptr %local_1, align 1
+  %load_store_tmp = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp, ptr %local_3, align 8
+  %tmp = load ptr, ptr %local_3, align 8
+  %fld_ref = getelementptr inbounds %struct.table__Table_address.u64_, ptr %tmp, i32 0, i32 0
+  store ptr %fld_ref, ptr %local_4__id, align 8
+  %call_arg_0 = load ptr, ptr %local_4__id, align 8
+  %call_arg_1 = load [32 x i8], ptr %local_1, align 1
+  %retval = call i64 @"0000000000000002_dynamic_field_remove_5uMSeYHgFFHHmk"(ptr %call_arg_0, [32 x i8] %call_arg_1)
+  store i64 %retval, ptr %local_6, align 8
+  %load_store_tmp1 = load i64, ptr %local_6, align 8
+  store i64 %load_store_tmp1, ptr %local_2, align 8
+  %load_store_tmp2 = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp2, ptr %local_7, align 8
+  %tmp3 = load ptr, ptr %local_7, align 8
+  %fld_ref4 = getelementptr inbounds %struct.table__Table_address.u64_, ptr %tmp3, i32 0, i32 1
+  store ptr %fld_ref4, ptr %local_8__size, align 8
+  %load_deref_store_tmp1 = load ptr, ptr %local_8__size, align 8
+  %load_deref_store_tmp2 = load i64, ptr %load_deref_store_tmp1, align 8
+  store i64 %load_deref_store_tmp2, ptr %local_9, align 8
+  store i64 1, ptr %local_10, align 8
+  %sub_src_0 = load i64, ptr %local_9, align 8
+  %sub_src_1 = load i64, ptr %local_10, align 8
+  %sub_dst = sub i64 %sub_src_0, %sub_src_1
+  %ovfcond = icmp ugt i64 %sub_dst, %sub_src_0
+  br i1 %ovfcond, label %then_bb, label %join_bb
+
+then_bb:                                          ; preds = %entry
+  call void @move_rt_abort(i64 4017)
+  unreachable
+
+join_bb:                                          ; preds = %entry
+  store i64 %sub_dst, ptr %local_11, align 8
+  %load_store_tmp5 = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp5, ptr %local_12, align 8
+  %tmp6 = load ptr, ptr %local_12, align 8
+  %fld_ref7 = getelementptr inbounds %struct.table__Table_address.u64_, ptr %tmp6, i32 0, i32 1
+  store ptr %fld_ref7, ptr %local_13__size, align 8
+  %load_store_ref_src = load i64, ptr %local_11, align 8
+  %load_store_ref_dst_ptr = load ptr, ptr %local_13__size, align 8
+  store i64 %load_store_ref_src, ptr %load_store_ref_dst_ptr, align 8
+  %load_store_tmp8 = load i64, ptr %local_2, align 8
+  store i64 %load_store_tmp8, ptr %local_14, align 8
+  %retval9 = load i64, ptr %local_14, align 8
+  ret i64 %retval9
+}
+
+define private i64 @"0000000000000002_dynamic_field_remove_5uMSeYHgFFHHmk"(ptr noalias nonnull %0, [32 x i8] %1) {
+entry:
+  %local_0 = alloca ptr, align 8
+  %local_1 = alloca [32 x i8], align 1
+  %local_2 = alloca [32 x i8], align 1
+  %local_3 = alloca [32 x i8], align 1
+  %local_4 = alloca i64, align 8
+  %local_5 = alloca ptr, align 8
+  %local_6 = alloca ptr, align 8
+  %local_7 = alloca [32 x i8], align 1
+  %local_8 = alloca [32 x i8], align 1
+  %local_9 = alloca [32 x i8], align 1
+  %local_10 = alloca [32 x i8], align 1
+  %local_11 = alloca [32 x i8], align 1
+  %local_12 = alloca [32 x i8], align 1
+  %local_13 = alloca %struct.dynamic_field__Field_address.u64_, align 8
+  %local_14__id = alloca %struct.object__UID, align 8
+  %local_15__name = alloca [32 x i8], align 1
+  %local_16__value = alloca i64, align 8
+  %local_17 = alloca i64, align 8
+  store ptr %0, ptr %local_0, align 8
+  store [32 x i8] %1, ptr %local_1, align 1
+  %load_store_tmp = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp, ptr %local_5, align 8
+  %load_store_tmp1 = load ptr, ptr %local_5, align 8
+  store ptr %load_store_tmp1, ptr %local_6, align 8
+  %call_arg_0 = load ptr, ptr %local_6, align 8
+  %retval = call [32 x i8] @"0000000000000002_object_uid_to_address_DdQo7Y9Arw6ggD"(ptr %call_arg_0)
+  store [32 x i8] %retval, ptr %local_7, align 1
+  %load_store_tmp2 = load [32 x i8], ptr %local_7, align 1
+  store [32 x i8] %load_store_tmp2, ptr %local_3, align 1
+  %load_store_tmp3 = load [32 x i8], ptr %local_3, align 1
+  store [32 x i8] %load_store_tmp3, ptr %local_8, align 1
+  %loaded_alloca = load [32 x i8], ptr %local_8, align 1
+  %retval4 = call [32 x i8] @move_native_dynamic_field_hash_type_and_key(ptr @__move_rttydesc_address, [32 x i8] %loaded_alloca, ptr %local_1)
+  store [32 x i8] %retval4, ptr %local_10, align 1
+  %load_store_tmp5 = load [32 x i8], ptr %local_10, align 1
+  store [32 x i8] %load_store_tmp5, ptr %local_2, align 1
+  %loaded_alloca6 = load [32 x i8], ptr %local_3, align 1
+  %loaded_alloca7 = load [32 x i8], ptr %local_2, align 1
+  call void @move_native_dynamic_field_remove_child_object(ptr @"__move_rttydesc_dynamic_field__Field_address, u64_", [32 x i8] %loaded_alloca6, [32 x i8] %loaded_alloca7, ptr %local_13)
+  %srcval = load %struct.dynamic_field__Field_address.u64_, ptr %local_13, align 8
+  %ext_0 = extractvalue %struct.dynamic_field__Field_address.u64_ %srcval, 0
+  %ext_1 = extractvalue %struct.dynamic_field__Field_address.u64_ %srcval, 1
+  %ext_2 = extractvalue %struct.dynamic_field__Field_address.u64_ %srcval, 2
+  store %struct.object__UID %ext_0, ptr %local_14__id, align 1
+  store [32 x i8] %ext_1, ptr %local_15__name, align 1
+  store i64 %ext_2, ptr %local_16__value, align 8
+  %load_store_tmp8 = load i64, ptr %local_16__value, align 8
+  store i64 %load_store_tmp8, ptr %local_4, align 8
+  %call_arg_09 = load %struct.object__UID, ptr %local_14__id, align 1
+  call void @"0000000000000002_object_delete_FRdqjKo1rYipTy"(%struct.object__UID %call_arg_09)
+  %load_store_tmp10 = load i64, ptr %local_4, align 8
+  store i64 %load_store_tmp10, ptr %local_17, align 8
+  %retval11 = load i64, ptr %local_17, align 8
+  ret i64 %retval11
+}
+
+declare void @move_native_dynamic_field_remove_child_object(ptr, [32 x i8], [32 x i8], ptr)
+
+declare void @"0000000000000002_object_delete_FRdqjKo1rYipTy"(%struct.object__UID)
+
+define void @"0000000000000002_deny_list_add_A1pbZHYQYkakhN"(ptr noalias nonnull %0, i64 %1, { ptr, i64, i64 } %2, [32 x i8] %3) {
+entry:
+  %local_0 = alloca ptr, align 8
+  %local_1 = alloca i64, align 8
+  %local_2 = alloca { ptr, i64, i64 }, align 8
+  %local_3 = alloca [32 x i8], align 1
+  %local_4 = alloca ptr, align 8
+  %local_5__lists = alloca ptr, align 8
+  %local_6 = alloca i64, align 8
+  %local_7 = alloca ptr, align 8
+  %local_8 = alloca { ptr, i64, i64 }, align 8
+  %local_9 = alloca [32 x i8], align 1
+  store ptr %0, ptr %local_0, align 8
+  store i64 %1, ptr %local_1, align 8
+  store { ptr, i64, i64 } %2, ptr %local_2, align 8
+  store [32 x i8] %3, ptr %local_3, align 1
+  %load_store_tmp = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp, ptr %local_4, align 8
+  %tmp = load ptr, ptr %local_4, align 8
+  %fld_ref = getelementptr inbounds %struct.deny_list__DenyList, ptr %tmp, i32 0, i32 1
+  store ptr %fld_ref, ptr %local_5__lists, align 8
+  %load_store_tmp1 = load i64, ptr %local_1, align 8
+  store i64 %load_store_tmp1, ptr %local_6, align 8
+  %call_arg_0 = load ptr, ptr %local_5__lists, align 8
+  %call_arg_1 = load i64, ptr %local_6, align 8
+  %retval = call ptr @"0000000000000002_bag_borrow_mut_Bh3vRXZ76AoCB4"(ptr %call_arg_0, i64 %call_arg_1)
+  store ptr %retval, ptr %local_7, align 8
+  %load_store_tmp2 = load { ptr, i64, i64 }, ptr %local_2, align 8
+  store { ptr, i64, i64 } %load_store_tmp2, ptr %local_8, align 8
+  %call_arg_03 = load ptr, ptr %local_7, align 8
+  %call_arg_14 = load { ptr, i64, i64 }, ptr %local_8, align 8
+  %call_arg_2 = load [32 x i8], ptr %local_3, align 1
+  call void @"0000000000000002_deny_list_per_type_list_a_ECH7m7BP66stFj"(ptr %call_arg_03, { ptr, i64, i64 } %call_arg_14, [32 x i8] %call_arg_2)
+  ret void
+}
+
+define private void @"0000000000000002_deny_list_per_type_list_a_ECH7m7BP66stFj"(ptr noalias nonnull %0, { ptr, i64, i64 } %1, [32 x i8] %2) {
+entry:
+  %local_0 = alloca ptr, align 8
+  %local_1 = alloca { ptr, i64, i64 }, align 8
+  %local_2 = alloca [32 x i8], align 1
+  %local_3 = alloca ptr, align 8
+  %local_4 = alloca ptr, align 8
+  %local_5 = alloca ptr, align 8
+  %local_6 = alloca ptr, align 8
+  %local_7__denied_addresses = alloca ptr, align 8
+  %local_8 = alloca { ptr, i64, i64 }, align 8
+  %local_9 = alloca i1, align 1
+  %local_10 = alloca i1, align 1
+  %local_11 = alloca ptr, align 8
+  %local_12__denied_addresses = alloca ptr, align 8
+  %local_13 = alloca { ptr, i64, i64 }, align 8
+  %local_14 = alloca %struct.vec_set__VecSet_address_, align 8
+  %local_15 = alloca ptr, align 8
+  %local_16__denied_addresses = alloca ptr, align 8
+  %local_17 = alloca { ptr, i64, i64 }, align 8
+  %local_18 = alloca ptr, align 8
+  %local_19 = alloca ptr, align 8
+  %local_20 = alloca ptr, align 8
+  %local_21 = alloca ptr, align 8
+  %local_22 = alloca ptr, align 8
+  %local_23 = alloca i1, align 1
+  %local_24 = alloca ptr, align 8
+  %local_25 = alloca ptr, align 8
+  %local_26 = alloca ptr, align 8
+  %local_27 = alloca [32 x i8], align 1
+  %local_28 = alloca ptr, align 8
+  %local_29__denied_count = alloca ptr, align 8
+  %local_30 = alloca [32 x i8], align 1
+  %local_31 = alloca i1, align 1
+  %local_32 = alloca i1, align 1
+  %local_33 = alloca ptr, align 8
+  %local_34__denied_count = alloca ptr, align 8
+  %local_35 = alloca [32 x i8], align 1
+  %local_36 = alloca i64, align 8
+  %local_37 = alloca ptr, align 8
+  %local_38__denied_count = alloca ptr, align 8
+  %local_39 = alloca [32 x i8], align 1
+  %local_40 = alloca ptr, align 8
+  %local_41 = alloca ptr, align 8
+  %local_42 = alloca i64, align 8
+  %local_43 = alloca i64, align 8
+  %local_44 = alloca i64, align 8
+  %local_45 = alloca ptr, align 8
+  store ptr %0, ptr %local_0, align 8
+  store { ptr, i64, i64 } %1, ptr %local_1, align 8
+  store [32 x i8] %2, ptr %local_2, align 1
+  %load_store_tmp = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp, ptr %local_6, align 8
+  %tmp = load ptr, ptr %local_6, align 8
+  %fld_ref = getelementptr inbounds %struct.deny_list__PerTypeList, ptr %tmp, i32 0, i32 2
+  store ptr %fld_ref, ptr %local_7__denied_addresses, align 8
+  call void @move_rt_vec_copy(ptr @__move_rttydesc_u8, ptr %local_8, ptr %local_1)
+  %call_arg_0 = load ptr, ptr %local_7__denied_addresses, align 8
+  %call_arg_1 = load { ptr, i64, i64 }, ptr %local_8, align 8
+  %retval = call i1 @"0000000000000002_table_contains_4Gv4QQhpCFwh59"(ptr %call_arg_0, { ptr, i64, i64 } %call_arg_1)
+  store i1 %retval, ptr %local_9, align 1
+  %not_src = load i1, ptr %local_9, align 1
+  %not_dst = xor i1 %not_src, true
+  store i1 %not_dst, ptr %local_10, align 1
+  %cnd = load i1, ptr %local_10, align 1
+  br i1 %cnd, label %bb_1, label %bb_0
+
+bb_1:                                             ; preds = %entry
+  %load_store_tmp1 = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp1, ptr %local_11, align 8
+  %tmp2 = load ptr, ptr %local_11, align 8
+  %fld_ref3 = getelementptr inbounds %struct.deny_list__PerTypeList, ptr %tmp2, i32 0, i32 2
+  store ptr %fld_ref3, ptr %local_12__denied_addresses, align 8
+  call void @move_rt_vec_copy(ptr @__move_rttydesc_u8, ptr %local_13, ptr %local_1)
+  %retval4 = call %struct.vec_set__VecSet_address_ @"0000000000000002_vec_set_empty_E7mjw914vpgDbi"()
+  store %struct.vec_set__VecSet_address_ %retval4, ptr %local_14, align 8
+  %call_arg_05 = load ptr, ptr %local_12__denied_addresses, align 8
+  %call_arg_16 = load { ptr, i64, i64 }, ptr %local_13, align 8
+  %call_arg_2 = load %struct.vec_set__VecSet_address_, ptr %local_14, align 8
+  call void @"0000000000000002_table_add_2dMH2XqdP3U4WM"(ptr %call_arg_05, { ptr, i64, i64 } %call_arg_16, %struct.vec_set__VecSet_address_ %call_arg_2)
+  br label %bb_0
+
+bb_0:                                             ; preds = %bb_1, %entry
+  %load_store_tmp7 = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp7, ptr %local_15, align 8
+  %tmp8 = load ptr, ptr %local_15, align 8
+  %fld_ref9 = getelementptr inbounds %struct.deny_list__PerTypeList, ptr %tmp8, i32 0, i32 2
+  store ptr %fld_ref9, ptr %local_16__denied_addresses, align 8
+  %load_store_tmp10 = load { ptr, i64, i64 }, ptr %local_1, align 8
+  store { ptr, i64, i64 } %load_store_tmp10, ptr %local_17, align 8
+  %call_arg_011 = load ptr, ptr %local_16__denied_addresses, align 8
+  %call_arg_112 = load { ptr, i64, i64 }, ptr %local_17, align 8
+  %retval13 = call ptr @"0000000000000002_table_borrow_mut_BstuEfzgctfCXC"(ptr %call_arg_011, { ptr, i64, i64 } %call_arg_112)
+  store ptr %retval13, ptr %local_18, align 8
+  %load_store_tmp14 = load ptr, ptr %local_18, align 8
+  store ptr %load_store_tmp14, ptr %local_4, align 8
+  %load_store_tmp15 = load ptr, ptr %local_4, align 8
+  store ptr %load_store_tmp15, ptr %local_19, align 8
+  store ptr %local_2, ptr %local_20, align 8
+  %load_store_tmp16 = load ptr, ptr %local_20, align 8
+  store ptr %load_store_tmp16, ptr %local_3, align 8
+  %load_store_tmp17 = load ptr, ptr %local_19, align 8
+  store ptr %load_store_tmp17, ptr %local_21, align 8
+  %load_store_tmp18 = load ptr, ptr %local_3, align 8
+  store ptr %load_store_tmp18, ptr %local_22, align 8
+  %call_arg_019 = load ptr, ptr %local_21, align 8
+  %call_arg_120 = load ptr, ptr %local_22, align 8
+  %retval21 = call i1 @"0000000000000002_vec_set_contains_ApRSMRpyfxApiW"(ptr %call_arg_019, ptr %call_arg_120)
+  store i1 %retval21, ptr %local_23, align 1
+  %cnd22 = load i1, ptr %local_23, align 1
+  br i1 %cnd22, label %bb_3, label %bb_2
+
+bb_3:                                             ; preds = %bb_0
+  %load_store_tmp23 = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp23, ptr %local_24, align 8
+  %load_store_tmp24 = load ptr, ptr %local_4, align 8
+  store ptr %load_store_tmp24, ptr %local_25, align 8
+  ret void
+
+bb_2:                                             ; preds = %bb_0
+  %load_store_tmp25 = load ptr, ptr %local_4, align 8
+  store ptr %load_store_tmp25, ptr %local_26, align 8
+  %load_store_tmp26 = load [32 x i8], ptr %local_2, align 1
+  store [32 x i8] %load_store_tmp26, ptr %local_27, align 1
+  %call_arg_027 = load ptr, ptr %local_26, align 8
+  %call_arg_128 = load [32 x i8], ptr %local_27, align 1
+  call void @"0000000000000002_vec_set_insert_36apjfEaxzYMbU"(ptr %call_arg_027, [32 x i8] %call_arg_128)
+  %load_store_tmp29 = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp29, ptr %local_28, align 8
+  %tmp30 = load ptr, ptr %local_28, align 8
+  %fld_ref31 = getelementptr inbounds %struct.deny_list__PerTypeList, ptr %tmp30, i32 0, i32 1
+  store ptr %fld_ref31, ptr %local_29__denied_count, align 8
+  %load_store_tmp32 = load [32 x i8], ptr %local_2, align 1
+  store [32 x i8] %load_store_tmp32, ptr %local_30, align 1
+  %call_arg_033 = load ptr, ptr %local_29__denied_count, align 8
+  %call_arg_134 = load [32 x i8], ptr %local_30, align 1
+  %retval35 = call i1 @"0000000000000002_table_contains_14p9rspetaijkM"(ptr %call_arg_033, [32 x i8] %call_arg_134)
+  store i1 %retval35, ptr %local_31, align 1
+  %not_src36 = load i1, ptr %local_31, align 1
+  %not_dst37 = xor i1 %not_src36, true
+  store i1 %not_dst37, ptr %local_32, align 1
+  %cnd38 = load i1, ptr %local_32, align 1
+  br i1 %cnd38, label %bb_5, label %bb_4
+
+bb_5:                                             ; preds = %bb_2
+  %load_store_tmp39 = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp39, ptr %local_33, align 8
+  %tmp40 = load ptr, ptr %local_33, align 8
+  %fld_ref41 = getelementptr inbounds %struct.deny_list__PerTypeList, ptr %tmp40, i32 0, i32 1
+  store ptr %fld_ref41, ptr %local_34__denied_count, align 8
+  %load_store_tmp42 = load [32 x i8], ptr %local_2, align 1
+  store [32 x i8] %load_store_tmp42, ptr %local_35, align 1
+  store i64 0, ptr %local_36, align 8
+  %call_arg_043 = load ptr, ptr %local_34__denied_count, align 8
+  %call_arg_144 = load [32 x i8], ptr %local_35, align 1
+  %call_arg_245 = load i64, ptr %local_36, align 8
+  call void @"0000000000000002_table_add_9U6K9gGmdR5NSd"(ptr %call_arg_043, [32 x i8] %call_arg_144, i64 %call_arg_245)
+  br label %bb_4
+
+bb_4:                                             ; preds = %bb_5, %bb_2
+  %load_store_tmp46 = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp46, ptr %local_37, align 8
+  %tmp47 = load ptr, ptr %local_37, align 8
+  %fld_ref48 = getelementptr inbounds %struct.deny_list__PerTypeList, ptr %tmp47, i32 0, i32 1
+  store ptr %fld_ref48, ptr %local_38__denied_count, align 8
+  %call_arg_049 = load ptr, ptr %local_38__denied_count, align 8
+  %call_arg_150 = load [32 x i8], ptr %local_2, align 1
+  %retval51 = call ptr @"0000000000000002_table_borrow_mut_ftm6vdjVXcasy3"(ptr %call_arg_049, [32 x i8] %call_arg_150)
+  store ptr %retval51, ptr %local_40, align 8
+  %load_store_tmp52 = load ptr, ptr %local_40, align 8
+  store ptr %load_store_tmp52, ptr %local_5, align 8
+  %load_store_tmp53 = load ptr, ptr %local_5, align 8
+  store ptr %load_store_tmp53, ptr %local_41, align 8
+  %load_deref_store_tmp1 = load ptr, ptr %local_41, align 8
+  %load_deref_store_tmp2 = load i64, ptr %load_deref_store_tmp1, align 8
+  store i64 %load_deref_store_tmp2, ptr %local_42, align 8
+  store i64 1, ptr %local_43, align 8
+  %add_src_0 = load i64, ptr %local_42, align 8
+  %add_src_1 = load i64, ptr %local_43, align 8
+  %add_dst = add i64 %add_src_0, %add_src_1
+  %ovfcond = icmp ult i64 %add_dst, %add_src_0
+  br i1 %ovfcond, label %then_bb, label %join_bb
+
+then_bb:                                          ; preds = %bb_4
+  call void @move_rt_abort(i64 4017)
+  unreachable
+
+join_bb:                                          ; preds = %bb_4
+  store i64 %add_dst, ptr %local_44, align 8
+  %load_store_tmp54 = load ptr, ptr %local_5, align 8
+  store ptr %load_store_tmp54, ptr %local_45, align 8
+  %load_store_ref_src = load i64, ptr %local_44, align 8
+  %load_store_ref_dst_ptr = load ptr, ptr %local_45, align 8
+  store i64 %load_store_ref_src, ptr %load_store_ref_dst_ptr, align 8
+  ret void
+}
+
+define private %struct.vec_set__VecSet_address_ @"0000000000000002_vec_set_empty_E7mjw914vpgDbi"() {
+entry:
+  %local_0__contents = alloca { ptr, i64, i64 }, align 8
+  %local_1 = alloca %struct.vec_set__VecSet_address_, align 8
+  %retval = call { ptr, i64, i64 } @move_native_vector_empty(ptr @__move_rttydesc_address)
+  store { ptr, i64, i64 } %retval, ptr %local_0__contents, align 8
+  %fv.0 = load { ptr, i64, i64 }, ptr %local_0__contents, align 8
+  %insert_0 = insertvalue %struct.vec_set__VecSet_address_ undef, { ptr, i64, i64 } %fv.0, 0
+  store %struct.vec_set__VecSet_address_ %insert_0, ptr %local_1, align 8
+  %retval1 = load %struct.vec_set__VecSet_address_, ptr %local_1, align 8
+  ret %struct.vec_set__VecSet_address_ %retval1
+}
+
+define private void @"0000000000000002_table_add_2dMH2XqdP3U4WM"(ptr noalias nonnull %0, { ptr, i64, i64 } %1, %struct.vec_set__VecSet_address_ %2) {
+entry:
+  %local_0 = alloca ptr, align 8
+  %local_1 = alloca { ptr, i64, i64 }, align 8
+  %local_2 = alloca %struct.vec_set__VecSet_address_, align 8
+  %local_3 = alloca ptr, align 8
+  %local_4__id = alloca ptr, align 8
+  %local_5 = alloca { ptr, i64, i64 }, align 8
+  %local_6 = alloca %struct.vec_set__VecSet_address_, align 8
+  %local_7 = alloca ptr, align 8
+  %local_8__size = alloca ptr, align 8
+  %local_9 = alloca i64, align 8
+  %local_10 = alloca i64, align 8
+  %local_11 = alloca i64, align 8
+  %local_12 = alloca ptr, align 8
+  %local_13__size = alloca ptr, align 8
+  store ptr %0, ptr %local_0, align 8
+  store { ptr, i64, i64 } %1, ptr %local_1, align 8
+  store %struct.vec_set__VecSet_address_ %2, ptr %local_2, align 8
+  %load_store_tmp = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp, ptr %local_3, align 8
+  %tmp = load ptr, ptr %local_3, align 8
+  %fld_ref = getelementptr inbounds %struct.table__Table_vector_u8_.vec_set__VecSet_address__, ptr %tmp, i32 0, i32 0
+  store ptr %fld_ref, ptr %local_4__id, align 8
+  %load_store_tmp1 = load { ptr, i64, i64 }, ptr %local_1, align 8
+  store { ptr, i64, i64 } %load_store_tmp1, ptr %local_5, align 8
+  %call_arg_0 = load ptr, ptr %local_4__id, align 8
+  %call_arg_1 = load { ptr, i64, i64 }, ptr %local_5, align 8
+  %call_arg_2 = load %struct.vec_set__VecSet_address_, ptr %local_2, align 8
+  call void @"0000000000000002_dynamic_field_add_FLuSVjViSWVxNs"(ptr %call_arg_0, { ptr, i64, i64 } %call_arg_1, %struct.vec_set__VecSet_address_ %call_arg_2)
+  %load_store_tmp2 = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp2, ptr %local_7, align 8
+  %tmp3 = load ptr, ptr %local_7, align 8
+  %fld_ref4 = getelementptr inbounds %struct.table__Table_vector_u8_.vec_set__VecSet_address__, ptr %tmp3, i32 0, i32 1
+  store ptr %fld_ref4, ptr %local_8__size, align 8
+  %load_deref_store_tmp1 = load ptr, ptr %local_8__size, align 8
+  %load_deref_store_tmp2 = load i64, ptr %load_deref_store_tmp1, align 8
+  store i64 %load_deref_store_tmp2, ptr %local_9, align 8
+  store i64 1, ptr %local_10, align 8
+  %add_src_0 = load i64, ptr %local_9, align 8
+  %add_src_1 = load i64, ptr %local_10, align 8
+  %add_dst = add i64 %add_src_0, %add_src_1
+  %ovfcond = icmp ult i64 %add_dst, %add_src_0
+  br i1 %ovfcond, label %then_bb, label %join_bb
+
+then_bb:                                          ; preds = %entry
+  call void @move_rt_abort(i64 4017)
+  unreachable
+
+join_bb:                                          ; preds = %entry
+  store i64 %add_dst, ptr %local_11, align 8
+  %load_store_tmp5 = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp5, ptr %local_12, align 8
+  %tmp6 = load ptr, ptr %local_12, align 8
+  %fld_ref7 = getelementptr inbounds %struct.table__Table_vector_u8_.vec_set__VecSet_address__, ptr %tmp6, i32 0, i32 1
+  store ptr %fld_ref7, ptr %local_13__size, align 8
+  %load_store_ref_src = load i64, ptr %local_11, align 8
+  %load_store_ref_dst_ptr = load ptr, ptr %local_13__size, align 8
+  store i64 %load_store_ref_src, ptr %load_store_ref_dst_ptr, align 8
+  ret void
+}
+
+define private void @"0000000000000002_dynamic_field_add_FLuSVjViSWVxNs"(ptr noalias nonnull %0, { ptr, i64, i64 } %1, %struct.vec_set__VecSet_address_ %2) {
+entry:
+  %local_0 = alloca ptr, align 8
+  %local_1 = alloca { ptr, i64, i64 }, align 8
+  %local_2 = alloca %struct.vec_set__VecSet_address_, align 8
+  %local_3 = alloca %struct.dynamic_field__Field_vector_u8_.vec_set__VecSet_address__, align 8
+  %local_4 = alloca [32 x i8], align 1
+  %local_5 = alloca [32 x i8], align 1
+  %local_6 = alloca ptr, align 8
+  %local_7 = alloca ptr, align 8
+  %local_8 = alloca [32 x i8], align 1
+  %local_9 = alloca [32 x i8], align 1
+  %local_10 = alloca { ptr, i64, i64 }, align 8
+  %local_11 = alloca [32 x i8], align 1
+  %local_12 = alloca [32 x i8], align 1
+  %local_13 = alloca [32 x i8], align 1
+  %local_14 = alloca i1, align 1
+  %local_15 = alloca i1, align 1
+  %local_16 = alloca i64, align 8
+  %local_17 = alloca [32 x i8], align 1
+  %local_18__id = alloca %struct.object__UID, align 8
+  %local_19__name = alloca { ptr, i64, i64 }, align 8
+  %local_20__value = alloca %struct.vec_set__VecSet_address_, align 8
+  %local_21 = alloca %struct.dynamic_field__Field_vector_u8_.vec_set__VecSet_address__, align 8
+  %local_22 = alloca [32 x i8], align 1
+  %local_23 = alloca %struct.dynamic_field__Field_vector_u8_.vec_set__VecSet_address__, align 8
+  store ptr %0, ptr %local_0, align 8
+  store { ptr, i64, i64 } %1, ptr %local_1, align 8
+  store %struct.vec_set__VecSet_address_ %2, ptr %local_2, align 8
+  %load_store_tmp = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp, ptr %local_6, align 8
+  %load_store_tmp1 = load ptr, ptr %local_6, align 8
+  store ptr %load_store_tmp1, ptr %local_7, align 8
+  %call_arg_0 = load ptr, ptr %local_7, align 8
+  %retval = call [32 x i8] @"0000000000000002_object_uid_to_address_DdQo7Y9Arw6ggD"(ptr %call_arg_0)
+  store [32 x i8] %retval, ptr %local_8, align 1
+  %load_store_tmp2 = load [32 x i8], ptr %local_8, align 1
+  store [32 x i8] %load_store_tmp2, ptr %local_5, align 1
+  %load_store_tmp3 = load [32 x i8], ptr %local_5, align 1
+  store [32 x i8] %load_store_tmp3, ptr %local_9, align 1
+  call void @move_rt_vec_copy(ptr @__move_rttydesc_u8, ptr %local_10, ptr %local_1)
+  %loaded_alloca = load [32 x i8], ptr %local_9, align 1
+  %retval4 = call [32 x i8] @move_native_dynamic_field_hash_type_and_key(ptr @__move_rttydesc_vector_u8_, [32 x i8] %loaded_alloca, ptr %local_10)
+  store [32 x i8] %retval4, ptr %local_11, align 1
+  %load_store_tmp5 = load [32 x i8], ptr %local_11, align 1
+  store [32 x i8] %load_store_tmp5, ptr %local_4, align 1
+  %load_store_tmp6 = load [32 x i8], ptr %local_5, align 1
+  store [32 x i8] %load_store_tmp6, ptr %local_12, align 1
+  %load_store_tmp7 = load [32 x i8], ptr %local_4, align 1
+  store [32 x i8] %load_store_tmp7, ptr %local_13, align 1
+  %loaded_alloca8 = load [32 x i8], ptr %local_12, align 1
+  %loaded_alloca9 = load [32 x i8], ptr %local_13, align 1
+  %retval10 = call i1 @move_native_dynamic_field_has_child_object([32 x i8] %loaded_alloca8, [32 x i8] %loaded_alloca9)
+  store i1 %retval10, ptr %local_14, align 1
+  %not_src = load i1, ptr %local_14, align 1
+  %not_dst = xor i1 %not_src, true
+  store i1 %not_dst, ptr %local_15, align 1
+  %cnd = load i1, ptr %local_15, align 1
+  br i1 %cnd, label %bb_1, label %bb_0
+
+bb_1:                                             ; preds = %entry
+  br label %bb_2
+
+bb_0:                                             ; preds = %entry
+  store i64 0, ptr %local_16, align 8
+  %call_arg_011 = load i64, ptr %local_16, align 8
+  call void @move_rt_abort(i64 %call_arg_011)
+  unreachable
+
+bb_2:                                             ; preds = %bb_1
+  %call_arg_012 = load [32 x i8], ptr %local_4, align 1
+  %retval13 = call %struct.object__UID @"0000000000000002_object_new_uid_from_ha_3qCxFQoQFKfVJZ"([32 x i8] %call_arg_012)
+  store %struct.object__UID %retval13, ptr %local_18__id, align 1
+  %load_store_tmp14 = load { ptr, i64, i64 }, ptr %local_1, align 8
+  store { ptr, i64, i64 } %load_store_tmp14, ptr %local_19__name, align 8
+  %fv.0 = load %struct.object__UID, ptr %local_18__id, align 1
+  %fv.1 = load { ptr, i64, i64 }, ptr %local_19__name, align 8
+  %fv.2 = load %struct.vec_set__VecSet_address_, ptr %local_2, align 8
+  %insert_0 = insertvalue %struct.dynamic_field__Field_vector_u8_.vec_set__VecSet_address__ undef, %struct.object__UID %fv.0, 0
+  %insert_1 = insertvalue %struct.dynamic_field__Field_vector_u8_.vec_set__VecSet_address__ %insert_0, { ptr, i64, i64 } %fv.1, 1
+  %insert_2 = insertvalue %struct.dynamic_field__Field_vector_u8_.vec_set__VecSet_address__ %insert_1, %struct.vec_set__VecSet_address_ %fv.2, 2
+  store %struct.dynamic_field__Field_vector_u8_.vec_set__VecSet_address__ %insert_2, ptr %local_21, align 8
+  %load_store_tmp15 = load %struct.dynamic_field__Field_vector_u8_.vec_set__VecSet_address__, ptr %local_21, align 8
+  store %struct.dynamic_field__Field_vector_u8_.vec_set__VecSet_address__ %load_store_tmp15, ptr %local_3, align 8
+  %loaded_alloca16 = load [32 x i8], ptr %local_5, align 1
+  call void @move_native_dynamic_field_add_child_object(ptr @"__move_rttydesc_dynamic_field__Field_vector_u8_, vec_set__VecSet_address__", [32 x i8] %loaded_alloca16, ptr %local_3)
+  ret void
+}
+
+declare i1 @move_native_dynamic_field_has_child_object([32 x i8], [32 x i8])
+
+declare %struct.object__UID @"0000000000000002_object_new_uid_from_ha_3qCxFQoQFKfVJZ"([32 x i8])
+
+declare void @move_native_dynamic_field_add_child_object(ptr, [32 x i8], ptr)
+
+define private void @"0000000000000002_vec_set_insert_36apjfEaxzYMbU"(ptr noalias nonnull %0, [32 x i8] %1) {
+entry:
+  %local_0 = alloca ptr, align 8
+  %local_1 = alloca [32 x i8], align 1
+  %local_2 = alloca ptr, align 8
+  %local_3 = alloca ptr, align 8
+  %local_4 = alloca ptr, align 8
+  %local_5 = alloca ptr, align 8
+  %local_6 = alloca ptr, align 8
+  %local_7 = alloca i1, align 1
+  %local_8 = alloca i1, align 1
+  %local_9 = alloca ptr, align 8
+  %local_10 = alloca i64, align 8
+  %local_11 = alloca ptr, align 8
+  %local_12__contents = alloca ptr, align 8
+  %local_13 = alloca [32 x i8], align 1
+  store ptr %0, ptr %local_0, align 8
+  store [32 x i8] %1, ptr %local_1, align 1
+  %load_store_tmp = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp, ptr %local_3, align 8
+  store ptr %local_1, ptr %local_4, align 8
+  %load_store_tmp1 = load ptr, ptr %local_4, align 8
+  store ptr %load_store_tmp1, ptr %local_2, align 8
+  %load_store_tmp2 = load ptr, ptr %local_3, align 8
+  store ptr %load_store_tmp2, ptr %local_5, align 8
+  %load_store_tmp3 = load ptr, ptr %local_2, align 8
+  store ptr %load_store_tmp3, ptr %local_6, align 8
+  %call_arg_0 = load ptr, ptr %local_5, align 8
+  %call_arg_1 = load ptr, ptr %local_6, align 8
+  %retval = call i1 @"0000000000000002_vec_set_contains_ApRSMRpyfxApiW"(ptr %call_arg_0, ptr %call_arg_1)
+  store i1 %retval, ptr %local_7, align 1
+  %not_src = load i1, ptr %local_7, align 1
+  %not_dst = xor i1 %not_src, true
+  store i1 %not_dst, ptr %local_8, align 1
+  %cnd = load i1, ptr %local_8, align 1
+  br i1 %cnd, label %bb_1, label %bb_0
+
+bb_1:                                             ; preds = %entry
+  br label %bb_2
+
+bb_0:                                             ; preds = %entry
+  %load_store_tmp4 = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp4, ptr %local_9, align 8
+  store i64 0, ptr %local_10, align 8
+  %call_arg_05 = load i64, ptr %local_10, align 8
+  call void @move_rt_abort(i64 %call_arg_05)
+  unreachable
+
+bb_2:                                             ; preds = %bb_1
+  %load_store_tmp6 = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp6, ptr %local_11, align 8
+  %tmp = load ptr, ptr %local_11, align 8
+  %fld_ref = getelementptr inbounds %struct.vec_set__VecSet_address_, ptr %tmp, i32 0, i32 0
+  store ptr %fld_ref, ptr %local_12__contents, align 8
+  %loaded_alloca = load ptr, ptr %local_12__contents, align 8
+  call void @move_native_vector_push_back(ptr @__move_rttydesc_address, ptr %loaded_alloca, ptr %local_1)
+  ret void
+}
+
+define private void @"0000000000000002_table_add_9U6K9gGmdR5NSd"(ptr noalias nonnull %0, [32 x i8] %1, i64 %2) {
+entry:
+  %local_0 = alloca ptr, align 8
+  %local_1 = alloca [32 x i8], align 1
+  %local_2 = alloca i64, align 8
+  %local_3 = alloca ptr, align 8
+  %local_4__id = alloca ptr, align 8
+  %local_5 = alloca [32 x i8], align 1
+  %local_6 = alloca i64, align 8
+  %local_7 = alloca ptr, align 8
+  %local_8__size = alloca ptr, align 8
+  %local_9 = alloca i64, align 8
+  %local_10 = alloca i64, align 8
+  %local_11 = alloca i64, align 8
+  %local_12 = alloca ptr, align 8
+  %local_13__size = alloca ptr, align 8
+  store ptr %0, ptr %local_0, align 8
+  store [32 x i8] %1, ptr %local_1, align 1
+  store i64 %2, ptr %local_2, align 8
+  %load_store_tmp = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp, ptr %local_3, align 8
+  %tmp = load ptr, ptr %local_3, align 8
+  %fld_ref = getelementptr inbounds %struct.table__Table_address.u64_, ptr %tmp, i32 0, i32 0
+  store ptr %fld_ref, ptr %local_4__id, align 8
+  %load_store_tmp1 = load i64, ptr %local_2, align 8
+  store i64 %load_store_tmp1, ptr %local_6, align 8
+  %call_arg_0 = load ptr, ptr %local_4__id, align 8
+  %call_arg_1 = load [32 x i8], ptr %local_1, align 1
+  %call_arg_2 = load i64, ptr %local_6, align 8
+  call void @"0000000000000002_dynamic_field_add_9i4qTRa8624azF"(ptr %call_arg_0, [32 x i8] %call_arg_1, i64 %call_arg_2)
+  %load_store_tmp2 = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp2, ptr %local_7, align 8
+  %tmp3 = load ptr, ptr %local_7, align 8
+  %fld_ref4 = getelementptr inbounds %struct.table__Table_address.u64_, ptr %tmp3, i32 0, i32 1
+  store ptr %fld_ref4, ptr %local_8__size, align 8
+  %load_deref_store_tmp1 = load ptr, ptr %local_8__size, align 8
+  %load_deref_store_tmp2 = load i64, ptr %load_deref_store_tmp1, align 8
+  store i64 %load_deref_store_tmp2, ptr %local_9, align 8
+  store i64 1, ptr %local_10, align 8
+  %add_src_0 = load i64, ptr %local_9, align 8
+  %add_src_1 = load i64, ptr %local_10, align 8
+  %add_dst = add i64 %add_src_0, %add_src_1
+  %ovfcond = icmp ult i64 %add_dst, %add_src_0
+  br i1 %ovfcond, label %then_bb, label %join_bb
+
+then_bb:                                          ; preds = %entry
+  call void @move_rt_abort(i64 4017)
+  unreachable
+
+join_bb:                                          ; preds = %entry
+  store i64 %add_dst, ptr %local_11, align 8
+  %load_store_tmp5 = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp5, ptr %local_12, align 8
+  %tmp6 = load ptr, ptr %local_12, align 8
+  %fld_ref7 = getelementptr inbounds %struct.table__Table_address.u64_, ptr %tmp6, i32 0, i32 1
+  store ptr %fld_ref7, ptr %local_13__size, align 8
+  %load_store_ref_src = load i64, ptr %local_11, align 8
+  %load_store_ref_dst_ptr = load ptr, ptr %local_13__size, align 8
+  store i64 %load_store_ref_src, ptr %load_store_ref_dst_ptr, align 8
+  ret void
+}
+
+define private void @"0000000000000002_dynamic_field_add_9i4qTRa8624azF"(ptr noalias nonnull %0, [32 x i8] %1, i64 %2) {
+entry:
+  %local_0 = alloca ptr, align 8
+  %local_1 = alloca [32 x i8], align 1
+  %local_2 = alloca i64, align 8
+  %local_3 = alloca %struct.dynamic_field__Field_address.u64_, align 8
+  %local_4 = alloca [32 x i8], align 1
+  %local_5 = alloca [32 x i8], align 1
+  %local_6 = alloca ptr, align 8
+  %local_7 = alloca ptr, align 8
+  %local_8 = alloca [32 x i8], align 1
+  %local_9 = alloca [32 x i8], align 1
+  %local_10 = alloca [32 x i8], align 1
+  %local_11 = alloca [32 x i8], align 1
+  %local_12 = alloca [32 x i8], align 1
+  %local_13 = alloca [32 x i8], align 1
+  %local_14 = alloca i1, align 1
+  %local_15 = alloca i1, align 1
+  %local_16 = alloca i64, align 8
+  %local_17 = alloca [32 x i8], align 1
+  %local_18__id = alloca %struct.object__UID, align 8
+  %local_19__name = alloca [32 x i8], align 1
+  %local_20__value = alloca i64, align 8
+  %local_21 = alloca %struct.dynamic_field__Field_address.u64_, align 8
+  %local_22 = alloca [32 x i8], align 1
+  %local_23 = alloca %struct.dynamic_field__Field_address.u64_, align 8
+  store ptr %0, ptr %local_0, align 8
+  store [32 x i8] %1, ptr %local_1, align 1
+  store i64 %2, ptr %local_2, align 8
+  %load_store_tmp = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp, ptr %local_6, align 8
+  %load_store_tmp1 = load ptr, ptr %local_6, align 8
+  store ptr %load_store_tmp1, ptr %local_7, align 8
+  %call_arg_0 = load ptr, ptr %local_7, align 8
+  %retval = call [32 x i8] @"0000000000000002_object_uid_to_address_DdQo7Y9Arw6ggD"(ptr %call_arg_0)
+  store [32 x i8] %retval, ptr %local_8, align 1
+  %load_store_tmp2 = load [32 x i8], ptr %local_8, align 1
+  store [32 x i8] %load_store_tmp2, ptr %local_5, align 1
+  %load_store_tmp3 = load [32 x i8], ptr %local_5, align 1
+  store [32 x i8] %load_store_tmp3, ptr %local_9, align 1
+  %load_store_tmp4 = load [32 x i8], ptr %local_1, align 1
+  store [32 x i8] %load_store_tmp4, ptr %local_10, align 1
+  %loaded_alloca = load [32 x i8], ptr %local_9, align 1
+  %retval5 = call [32 x i8] @move_native_dynamic_field_hash_type_and_key(ptr @__move_rttydesc_address, [32 x i8] %loaded_alloca, ptr %local_10)
+  store [32 x i8] %retval5, ptr %local_11, align 1
+  %load_store_tmp6 = load [32 x i8], ptr %local_11, align 1
+  store [32 x i8] %load_store_tmp6, ptr %local_4, align 1
+  %load_store_tmp7 = load [32 x i8], ptr %local_5, align 1
+  store [32 x i8] %load_store_tmp7, ptr %local_12, align 1
+  %load_store_tmp8 = load [32 x i8], ptr %local_4, align 1
+  store [32 x i8] %load_store_tmp8, ptr %local_13, align 1
+  %loaded_alloca9 = load [32 x i8], ptr %local_12, align 1
+  %loaded_alloca10 = load [32 x i8], ptr %local_13, align 1
+  %retval11 = call i1 @move_native_dynamic_field_has_child_object([32 x i8] %loaded_alloca9, [32 x i8] %loaded_alloca10)
+  store i1 %retval11, ptr %local_14, align 1
+  %not_src = load i1, ptr %local_14, align 1
+  %not_dst = xor i1 %not_src, true
+  store i1 %not_dst, ptr %local_15, align 1
+  %cnd = load i1, ptr %local_15, align 1
+  br i1 %cnd, label %bb_1, label %bb_0
+
+bb_1:                                             ; preds = %entry
+  br label %bb_2
+
+bb_0:                                             ; preds = %entry
+  store i64 0, ptr %local_16, align 8
+  %call_arg_012 = load i64, ptr %local_16, align 8
+  call void @move_rt_abort(i64 %call_arg_012)
+  unreachable
+
+bb_2:                                             ; preds = %bb_1
+  %call_arg_013 = load [32 x i8], ptr %local_4, align 1
+  %retval14 = call %struct.object__UID @"0000000000000002_object_new_uid_from_ha_3qCxFQoQFKfVJZ"([32 x i8] %call_arg_013)
+  store %struct.object__UID %retval14, ptr %local_18__id, align 1
+  %load_store_tmp15 = load i64, ptr %local_2, align 8
+  store i64 %load_store_tmp15, ptr %local_20__value, align 8
+  %fv.0 = load %struct.object__UID, ptr %local_18__id, align 1
+  %fv.1 = load [32 x i8], ptr %local_1, align 1
+  %fv.2 = load i64, ptr %local_20__value, align 8
+  %insert_0 = insertvalue %struct.dynamic_field__Field_address.u64_ undef, %struct.object__UID %fv.0, 0
+  %insert_1 = insertvalue %struct.dynamic_field__Field_address.u64_ %insert_0, [32 x i8] %fv.1, 1
+  %insert_2 = insertvalue %struct.dynamic_field__Field_address.u64_ %insert_1, i64 %fv.2, 2
+  store %struct.dynamic_field__Field_address.u64_ %insert_2, ptr %local_21, align 8
+  %load_store_tmp16 = load %struct.dynamic_field__Field_address.u64_, ptr %local_21, align 8
+  store %struct.dynamic_field__Field_address.u64_ %load_store_tmp16, ptr %local_3, align 8
+  %loaded_alloca17 = load [32 x i8], ptr %local_5, align 1
+  call void @move_native_dynamic_field_add_child_object(ptr @"__move_rttydesc_dynamic_field__Field_address, u64_", [32 x i8] %loaded_alloca17, ptr %local_3)
+  ret void
+}
+
+define private void @"0000000000000002_deny_list_create_H5MKvDFKQUq1Gm"(ptr noalias nonnull %0) {
+entry:
+  %local_0 = alloca ptr, align 8
+  %local_1 = alloca %struct.bag__Bag, align 8
+  %local_2 = alloca ptr, align 8
+  %local_3 = alloca ptr, align 8
+  %local_4 = alloca [32 x i8], align 1
+  %local_5 = alloca [32 x i8], align 1
+  %local_6 = alloca i1, align 1
+  %local_7 = alloca ptr, align 8
+  %local_8 = alloca i64, align 8
+  %local_9 = alloca ptr, align 8
+  %local_10 = alloca %struct.bag__Bag, align 8
+  %local_11 = alloca ptr, align 8
+  %local_12 = alloca i64, align 8
+  %local_13 = alloca ptr, align 8
+  %local_14 = alloca %struct.deny_list__PerTypeList, align 8
+  %local_15__id = alloca %struct.object__UID, align 8
+  %local_16__lists = alloca %struct.bag__Bag, align 8
+  %local_17 = alloca %struct.deny_list__DenyList, align 8
+  store ptr %0, ptr %local_0, align 8
+  %load_store_tmp = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp, ptr %local_2, align 8
+  %load_store_tmp1 = load ptr, ptr %local_2, align 8
+  store ptr %load_store_tmp1, ptr %local_3, align 8
+  %call_arg_0 = load ptr, ptr %local_3, align 8
+  %retval = call [32 x i8] @"0000000000000002_tx_context_sender_9nYw9GTwZ2W8pp"(ptr %call_arg_0)
+  store [32 x i8] %retval, ptr %local_4, align 1
+  %1 = load [32 x i8], ptr @acct.addr, align 1
+  store [32 x i8] %1, ptr %local_5, align 1
+  %2 = call i32 @memcmp(ptr %local_4, ptr %local_5, i64 32)
+  %eq_dst = icmp eq i32 %2, 0
+  store i1 %eq_dst, ptr %local_6, align 1
+  %cnd = load i1, ptr %local_6, align 1
+  br i1 %cnd, label %bb_1, label %bb_0
+
+bb_1:                                             ; preds = %entry
+  br label %bb_2
+
+bb_0:                                             ; preds = %entry
+  %load_store_tmp2 = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp2, ptr %local_7, align 8
+  store i64 0, ptr %local_8, align 8
+  %call_arg_03 = load i64, ptr %local_8, align 8
+  call void @move_rt_abort(i64 %call_arg_03)
+  unreachable
+
+bb_2:                                             ; preds = %bb_1
+  %load_store_tmp4 = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp4, ptr %local_9, align 8
+  %call_arg_05 = load ptr, ptr %local_9, align 8
+  %retval6 = call %struct.bag__Bag @"0000000000000002_bag_new_4KyFevWsKbBGC5"(ptr %call_arg_05)
+  store %struct.bag__Bag %retval6, ptr %local_10, align 8
+  %load_store_tmp7 = load %struct.bag__Bag, ptr %local_10, align 8
+  store %struct.bag__Bag %load_store_tmp7, ptr %local_1, align 8
+  store ptr %local_1, ptr %local_11, align 8
+  store i64 0, ptr %local_12, align 8
+  %load_store_tmp8 = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp8, ptr %local_13, align 8
+  %call_arg_09 = load ptr, ptr %local_13, align 8
+  %retval10 = call %struct.deny_list__PerTypeList @"0000000000000002_deny_list_per_type_list_FxCQigNwQmD8bc"(ptr %call_arg_09)
+  store %struct.deny_list__PerTypeList %retval10, ptr %local_14, align 8
+  %call_arg_011 = load ptr, ptr %local_11, align 8
+  %call_arg_1 = load i64, ptr %local_12, align 8
+  %call_arg_2 = load %struct.deny_list__PerTypeList, ptr %local_14, align 8
+  call void @"0000000000000002_bag_add_CyXetfDrTrYbuv"(ptr %call_arg_011, i64 %call_arg_1, %struct.deny_list__PerTypeList %call_arg_2)
+  %retval12 = call %struct.object__UID @"0000000000000002_object_sui_deny_list_o_B6BNRVv3wP9xqN"()
+  store %struct.object__UID %retval12, ptr %local_15__id, align 1
+  %fv.0 = load %struct.object__UID, ptr %local_15__id, align 1
+  %fv.1 = load %struct.bag__Bag, ptr %local_1, align 8
+  %insert_0 = insertvalue %struct.deny_list__DenyList undef, %struct.object__UID %fv.0, 0
+  %insert_1 = insertvalue %struct.deny_list__DenyList %insert_0, %struct.bag__Bag %fv.1, 1
+  store %struct.deny_list__DenyList %insert_1, ptr %local_17, align 8
+  %call_arg_013 = load %struct.deny_list__DenyList, ptr %local_17, align 8
+  call void @"0000000000000002_transfer_share_object_EpL4XfFfC4zyLv"(%struct.deny_list__DenyList %call_arg_013)
+  ret void
+}
+
+declare [32 x i8] @"0000000000000002_tx_context_sender_9nYw9GTwZ2W8pp"(ptr nonnull readonly)
+
+declare %struct.bag__Bag @"0000000000000002_bag_new_4KyFevWsKbBGC5"(ptr noalias nonnull)
+
+define private %struct.deny_list__PerTypeList @"0000000000000002_deny_list_per_type_list_FxCQigNwQmD8bc"(ptr noalias nonnull %0) {
+entry:
+  %local_0 = alloca ptr, align 8
+  %local_1 = alloca ptr, align 8
+  %local_2__id = alloca %struct.object__UID, align 8
+  %local_3 = alloca ptr, align 8
+  %local_4__denied_count = alloca %struct.table__Table_address.u64_, align 8
+  %local_5 = alloca ptr, align 8
+  %local_6__denied_addresses = alloca %struct.table__Table_vector_u8_.vec_set__VecSet_address__, align 8
+  %local_7 = alloca %struct.deny_list__PerTypeList, align 8
+  store ptr %0, ptr %local_0, align 8
+  %load_store_tmp = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp, ptr %local_1, align 8
+  %call_arg_0 = load ptr, ptr %local_1, align 8
+  %retval = call %struct.object__UID @"0000000000000002_object_new_7YpMdzkAYZzs1W"(ptr %call_arg_0)
+  store %struct.object__UID %retval, ptr %local_2__id, align 1
+  %load_store_tmp1 = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp1, ptr %local_3, align 8
+  %call_arg_02 = load ptr, ptr %local_3, align 8
+  %retval3 = call %struct.table__Table_address.u64_ @"0000000000000002_table_new_ER4f3kyoJGthnU"(ptr %call_arg_02)
+  store %struct.table__Table_address.u64_ %retval3, ptr %local_4__denied_count, align 8
+  %load_store_tmp4 = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp4, ptr %local_5, align 8
+  %call_arg_05 = load ptr, ptr %local_5, align 8
+  %retval6 = call %struct.table__Table_vector_u8_.vec_set__VecSet_address__ @"0000000000000002_table_new_ExRSNyzuEyCPRT"(ptr %call_arg_05)
+  store %struct.table__Table_vector_u8_.vec_set__VecSet_address__ %retval6, ptr %local_6__denied_addresses, align 8
+  %fv.0 = load %struct.object__UID, ptr %local_2__id, align 1
+  %fv.1 = load %struct.table__Table_address.u64_, ptr %local_4__denied_count, align 8
+  %fv.2 = load %struct.table__Table_vector_u8_.vec_set__VecSet_address__, ptr %local_6__denied_addresses, align 8
+  %insert_0 = insertvalue %struct.deny_list__PerTypeList undef, %struct.object__UID %fv.0, 0
+  %insert_1 = insertvalue %struct.deny_list__PerTypeList %insert_0, %struct.table__Table_address.u64_ %fv.1, 1
+  %insert_2 = insertvalue %struct.deny_list__PerTypeList %insert_1, %struct.table__Table_vector_u8_.vec_set__VecSet_address__ %fv.2, 2
+  store %struct.deny_list__PerTypeList %insert_2, ptr %local_7, align 8
+  %retval7 = load %struct.deny_list__PerTypeList, ptr %local_7, align 8
+  ret %struct.deny_list__PerTypeList %retval7
+}
+
+declare %struct.object__UID @"0000000000000002_object_new_7YpMdzkAYZzs1W"(ptr noalias nonnull)
+
+define private %struct.table__Table_address.u64_ @"0000000000000002_table_new_ER4f3kyoJGthnU"(ptr noalias nonnull %0) {
+entry:
+  %local_0 = alloca ptr, align 8
+  %local_1 = alloca ptr, align 8
+  %local_2__id = alloca %struct.object__UID, align 8
+  %local_3__size = alloca i64, align 8
+  %local_4 = alloca %struct.table__Table_address.u64_, align 8
+  store ptr %0, ptr %local_0, align 8
+  %load_store_tmp = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp, ptr %local_1, align 8
+  %call_arg_0 = load ptr, ptr %local_1, align 8
+  %retval = call %struct.object__UID @"0000000000000002_object_new_7YpMdzkAYZzs1W"(ptr %call_arg_0)
+  store %struct.object__UID %retval, ptr %local_2__id, align 1
+  store i64 0, ptr %local_3__size, align 8
+  %fv.0 = load %struct.object__UID, ptr %local_2__id, align 1
+  %fv.1 = load i64, ptr %local_3__size, align 8
+  %insert_0 = insertvalue %struct.table__Table_address.u64_ undef, %struct.object__UID %fv.0, 0
+  %insert_1 = insertvalue %struct.table__Table_address.u64_ %insert_0, i64 %fv.1, 1
+  store %struct.table__Table_address.u64_ %insert_1, ptr %local_4, align 8
+  %retval1 = load %struct.table__Table_address.u64_, ptr %local_4, align 8
+  ret %struct.table__Table_address.u64_ %retval1
+}
+
+define private %struct.table__Table_vector_u8_.vec_set__VecSet_address__ @"0000000000000002_table_new_ExRSNyzuEyCPRT"(ptr noalias nonnull %0) {
+entry:
+  %local_0 = alloca ptr, align 8
+  %local_1 = alloca ptr, align 8
+  %local_2__id = alloca %struct.object__UID, align 8
+  %local_3__size = alloca i64, align 8
+  %local_4 = alloca %struct.table__Table_vector_u8_.vec_set__VecSet_address__, align 8
+  store ptr %0, ptr %local_0, align 8
+  %load_store_tmp = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp, ptr %local_1, align 8
+  %call_arg_0 = load ptr, ptr %local_1, align 8
+  %retval = call %struct.object__UID @"0000000000000002_object_new_7YpMdzkAYZzs1W"(ptr %call_arg_0)
+  store %struct.object__UID %retval, ptr %local_2__id, align 1
+  store i64 0, ptr %local_3__size, align 8
+  %fv.0 = load %struct.object__UID, ptr %local_2__id, align 1
+  %fv.1 = load i64, ptr %local_3__size, align 8
+  %insert_0 = insertvalue %struct.table__Table_vector_u8_.vec_set__VecSet_address__ undef, %struct.object__UID %fv.0, 0
+  %insert_1 = insertvalue %struct.table__Table_vector_u8_.vec_set__VecSet_address__ %insert_0, i64 %fv.1, 1
+  store %struct.table__Table_vector_u8_.vec_set__VecSet_address__ %insert_1, ptr %local_4, align 8
+  %retval1 = load %struct.table__Table_vector_u8_.vec_set__VecSet_address__, ptr %local_4, align 8
+  ret %struct.table__Table_vector_u8_.vec_set__VecSet_address__ %retval1
+}
+
+define private void @"0000000000000002_bag_add_CyXetfDrTrYbuv"(ptr noalias nonnull %0, i64 %1, %struct.deny_list__PerTypeList %2) {
+entry:
+  %local_0 = alloca ptr, align 8
+  %local_1 = alloca i64, align 8
+  %local_2 = alloca %struct.deny_list__PerTypeList, align 8
+  %local_3 = alloca ptr, align 8
+  %local_4__id = alloca ptr, align 8
+  %local_5 = alloca i64, align 8
+  %local_6 = alloca %struct.deny_list__PerTypeList, align 8
+  %local_7 = alloca ptr, align 8
+  %local_8__size = alloca ptr, align 8
+  %local_9 = alloca i64, align 8
+  %local_10 = alloca i64, align 8
+  %local_11 = alloca i64, align 8
+  %local_12 = alloca ptr, align 8
+  %local_13__size = alloca ptr, align 8
+  store ptr %0, ptr %local_0, align 8
+  store i64 %1, ptr %local_1, align 8
+  store %struct.deny_list__PerTypeList %2, ptr %local_2, align 8
+  %load_store_tmp = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp, ptr %local_3, align 8
+  %tmp = load ptr, ptr %local_3, align 8
+  %fld_ref = getelementptr inbounds %struct.bag__Bag, ptr %tmp, i32 0, i32 0
+  store ptr %fld_ref, ptr %local_4__id, align 8
+  %load_store_tmp1 = load i64, ptr %local_1, align 8
+  store i64 %load_store_tmp1, ptr %local_5, align 8
+  %call_arg_0 = load ptr, ptr %local_4__id, align 8
+  %call_arg_1 = load i64, ptr %local_5, align 8
+  %call_arg_2 = load %struct.deny_list__PerTypeList, ptr %local_2, align 8
+  call void @"0000000000000002_dynamic_field_add_Cd18yoDxQT4yiE"(ptr %call_arg_0, i64 %call_arg_1, %struct.deny_list__PerTypeList %call_arg_2)
+  %load_store_tmp2 = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp2, ptr %local_7, align 8
+  %tmp3 = load ptr, ptr %local_7, align 8
+  %fld_ref4 = getelementptr inbounds %struct.bag__Bag, ptr %tmp3, i32 0, i32 1
+  store ptr %fld_ref4, ptr %local_8__size, align 8
+  %load_deref_store_tmp1 = load ptr, ptr %local_8__size, align 8
+  %load_deref_store_tmp2 = load i64, ptr %load_deref_store_tmp1, align 8
+  store i64 %load_deref_store_tmp2, ptr %local_9, align 8
+  store i64 1, ptr %local_10, align 8
+  %add_src_0 = load i64, ptr %local_9, align 8
+  %add_src_1 = load i64, ptr %local_10, align 8
+  %add_dst = add i64 %add_src_0, %add_src_1
+  %ovfcond = icmp ult i64 %add_dst, %add_src_0
+  br i1 %ovfcond, label %then_bb, label %join_bb
+
+then_bb:                                          ; preds = %entry
+  call void @move_rt_abort(i64 4017)
+  unreachable
+
+join_bb:                                          ; preds = %entry
+  store i64 %add_dst, ptr %local_11, align 8
+  %load_store_tmp5 = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp5, ptr %local_12, align 8
+  %tmp6 = load ptr, ptr %local_12, align 8
+  %fld_ref7 = getelementptr inbounds %struct.bag__Bag, ptr %tmp6, i32 0, i32 1
+  store ptr %fld_ref7, ptr %local_13__size, align 8
+  %load_store_ref_src = load i64, ptr %local_11, align 8
+  %load_store_ref_dst_ptr = load ptr, ptr %local_13__size, align 8
+  store i64 %load_store_ref_src, ptr %load_store_ref_dst_ptr, align 8
+  ret void
+}
+
+define private void @"0000000000000002_dynamic_field_add_Cd18yoDxQT4yiE"(ptr noalias nonnull %0, i64 %1, %struct.deny_list__PerTypeList %2) {
+entry:
+  %local_0 = alloca ptr, align 8
+  %local_1 = alloca i64, align 8
+  %local_2 = alloca %struct.deny_list__PerTypeList, align 8
+  %local_3 = alloca %struct.dynamic_field__Field_u64.deny_list__PerTypeList_, align 8
+  %local_4 = alloca [32 x i8], align 1
+  %local_5 = alloca [32 x i8], align 1
+  %local_6 = alloca ptr, align 8
+  %local_7 = alloca ptr, align 8
+  %local_8 = alloca [32 x i8], align 1
+  %local_9 = alloca [32 x i8], align 1
+  %local_10 = alloca i64, align 8
+  %local_11 = alloca [32 x i8], align 1
+  %local_12 = alloca [32 x i8], align 1
+  %local_13 = alloca [32 x i8], align 1
+  %local_14 = alloca i1, align 1
+  %local_15 = alloca i1, align 1
+  %local_16 = alloca i64, align 8
+  %local_17 = alloca [32 x i8], align 1
+  %local_18__id = alloca %struct.object__UID, align 8
+  %local_19__name = alloca i64, align 8
+  %local_20__value = alloca %struct.deny_list__PerTypeList, align 8
+  %local_21 = alloca %struct.dynamic_field__Field_u64.deny_list__PerTypeList_, align 8
+  %local_22 = alloca [32 x i8], align 1
+  %local_23 = alloca %struct.dynamic_field__Field_u64.deny_list__PerTypeList_, align 8
+  store ptr %0, ptr %local_0, align 8
+  store i64 %1, ptr %local_1, align 8
+  store %struct.deny_list__PerTypeList %2, ptr %local_2, align 8
+  %load_store_tmp = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp, ptr %local_6, align 8
+  %load_store_tmp1 = load ptr, ptr %local_6, align 8
+  store ptr %load_store_tmp1, ptr %local_7, align 8
+  %call_arg_0 = load ptr, ptr %local_7, align 8
+  %retval = call [32 x i8] @"0000000000000002_object_uid_to_address_DdQo7Y9Arw6ggD"(ptr %call_arg_0)
+  store [32 x i8] %retval, ptr %local_8, align 1
+  %load_store_tmp2 = load [32 x i8], ptr %local_8, align 1
+  store [32 x i8] %load_store_tmp2, ptr %local_5, align 1
+  %load_store_tmp3 = load [32 x i8], ptr %local_5, align 1
+  store [32 x i8] %load_store_tmp3, ptr %local_9, align 1
+  %load_store_tmp4 = load i64, ptr %local_1, align 8
+  store i64 %load_store_tmp4, ptr %local_10, align 8
+  %loaded_alloca = load [32 x i8], ptr %local_9, align 1
+  %retval5 = call [32 x i8] @move_native_dynamic_field_hash_type_and_key(ptr @__move_rttydesc_u64, [32 x i8] %loaded_alloca, ptr %local_10)
+  store [32 x i8] %retval5, ptr %local_11, align 1
+  %load_store_tmp6 = load [32 x i8], ptr %local_11, align 1
+  store [32 x i8] %load_store_tmp6, ptr %local_4, align 1
+  %load_store_tmp7 = load [32 x i8], ptr %local_5, align 1
+  store [32 x i8] %load_store_tmp7, ptr %local_12, align 1
+  %load_store_tmp8 = load [32 x i8], ptr %local_4, align 1
+  store [32 x i8] %load_store_tmp8, ptr %local_13, align 1
+  %loaded_alloca9 = load [32 x i8], ptr %local_12, align 1
+  %loaded_alloca10 = load [32 x i8], ptr %local_13, align 1
+  %retval11 = call i1 @move_native_dynamic_field_has_child_object([32 x i8] %loaded_alloca9, [32 x i8] %loaded_alloca10)
+  store i1 %retval11, ptr %local_14, align 1
+  %not_src = load i1, ptr %local_14, align 1
+  %not_dst = xor i1 %not_src, true
+  store i1 %not_dst, ptr %local_15, align 1
+  %cnd = load i1, ptr %local_15, align 1
+  br i1 %cnd, label %bb_1, label %bb_0
+
+bb_1:                                             ; preds = %entry
+  br label %bb_2
+
+bb_0:                                             ; preds = %entry
+  store i64 0, ptr %local_16, align 8
+  %call_arg_012 = load i64, ptr %local_16, align 8
+  call void @move_rt_abort(i64 %call_arg_012)
+  unreachable
+
+bb_2:                                             ; preds = %bb_1
+  %call_arg_013 = load [32 x i8], ptr %local_4, align 1
+  %retval14 = call %struct.object__UID @"0000000000000002_object_new_uid_from_ha_3qCxFQoQFKfVJZ"([32 x i8] %call_arg_013)
+  store %struct.object__UID %retval14, ptr %local_18__id, align 1
+  %load_store_tmp15 = load i64, ptr %local_1, align 8
+  store i64 %load_store_tmp15, ptr %local_19__name, align 8
+  %fv.0 = load %struct.object__UID, ptr %local_18__id, align 1
+  %fv.1 = load i64, ptr %local_19__name, align 8
+  %fv.2 = load %struct.deny_list__PerTypeList, ptr %local_2, align 8
+  %insert_0 = insertvalue %struct.dynamic_field__Field_u64.deny_list__PerTypeList_ undef, %struct.object__UID %fv.0, 0
+  %insert_1 = insertvalue %struct.dynamic_field__Field_u64.deny_list__PerTypeList_ %insert_0, i64 %fv.1, 1
+  %insert_2 = insertvalue %struct.dynamic_field__Field_u64.deny_list__PerTypeList_ %insert_1, %struct.deny_list__PerTypeList %fv.2, 2
+  store %struct.dynamic_field__Field_u64.deny_list__PerTypeList_ %insert_2, ptr %local_21, align 8
+  %load_store_tmp16 = load %struct.dynamic_field__Field_u64.deny_list__PerTypeList_, ptr %local_21, align 8
+  store %struct.dynamic_field__Field_u64.deny_list__PerTypeList_ %load_store_tmp16, ptr %local_3, align 8
+  %loaded_alloca17 = load [32 x i8], ptr %local_5, align 1
+  call void @move_native_dynamic_field_add_child_object(ptr @"__move_rttydesc_dynamic_field__Field_u64, deny_list__PerTypeList_", [32 x i8] %loaded_alloca17, ptr %local_3)
+  ret void
+}
+
+declare %struct.object__UID @"0000000000000002_object_sui_deny_list_o_B6BNRVv3wP9xqN"()
+
+define private void @"0000000000000002_transfer_share_object_EpL4XfFfC4zyLv"(%struct.deny_list__DenyList %0) {
+entry:
+  %local_0 = alloca %struct.deny_list__DenyList, align 8
+  %local_1 = alloca %struct.deny_list__DenyList, align 8
+  store %struct.deny_list__DenyList %0, ptr %local_0, align 8
+  call void @move_native_transfer_share_object_impl(ptr @__move_rttydesc_deny_list__DenyList, ptr %local_0)
+  ret void
+}
+
+declare void @move_native_transfer_share_object_impl(ptr, ptr)
+
+define void @"0000000000000002_deny_list_create_for_test_GEzcbBx6htCBqo"(ptr noalias nonnull %0) {
+entry:
+  %local_0 = alloca ptr, align 8
+  %local_1 = alloca ptr, align 8
+  store ptr %0, ptr %local_0, align 8
+  %load_store_tmp = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp, ptr %local_1, align 8
+  %call_arg_0 = load ptr, ptr %local_1, align 8
+  call void @"0000000000000002_deny_list_create_H5MKvDFKQUq1Gm"(ptr %call_arg_0)
+  ret void
+}
+
+define %struct.deny_list__DenyList @"0000000000000002_deny_list_new_for_testing_76XvvriUQu9E1a"(ptr noalias nonnull %0) {
+entry:
+  %local_0 = alloca ptr, align 8
+  %local_1 = alloca %struct.bag__Bag, align 8
+  %local_2 = alloca ptr, align 8
+  %local_3 = alloca %struct.bag__Bag, align 8
+  %local_4 = alloca ptr, align 8
+  %local_5 = alloca i64, align 8
+  %local_6 = alloca ptr, align 8
+  %local_7 = alloca %struct.deny_list__PerTypeList, align 8
+  %local_8 = alloca ptr, align 8
+  %local_9__id = alloca %struct.object__UID, align 8
+  %local_10__lists = alloca %struct.bag__Bag, align 8
+  %local_11 = alloca %struct.deny_list__DenyList, align 8
+  store ptr %0, ptr %local_0, align 8
+  %load_store_tmp = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp, ptr %local_2, align 8
+  %call_arg_0 = load ptr, ptr %local_2, align 8
+  %retval = call %struct.bag__Bag @"0000000000000002_bag_new_4KyFevWsKbBGC5"(ptr %call_arg_0)
+  store %struct.bag__Bag %retval, ptr %local_3, align 8
+  %load_store_tmp1 = load %struct.bag__Bag, ptr %local_3, align 8
+  store %struct.bag__Bag %load_store_tmp1, ptr %local_1, align 8
+  store ptr %local_1, ptr %local_4, align 8
+  store i64 0, ptr %local_5, align 8
+  %load_store_tmp2 = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp2, ptr %local_6, align 8
+  %call_arg_03 = load ptr, ptr %local_6, align 8
+  %retval4 = call %struct.deny_list__PerTypeList @"0000000000000002_deny_list_per_type_list_FxCQigNwQmD8bc"(ptr %call_arg_03)
+  store %struct.deny_list__PerTypeList %retval4, ptr %local_7, align 8
+  %call_arg_05 = load ptr, ptr %local_4, align 8
+  %call_arg_1 = load i64, ptr %local_5, align 8
+  %call_arg_2 = load %struct.deny_list__PerTypeList, ptr %local_7, align 8
+  call void @"0000000000000002_bag_add_CyXetfDrTrYbuv"(ptr %call_arg_05, i64 %call_arg_1, %struct.deny_list__PerTypeList %call_arg_2)
+  %load_store_tmp6 = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp6, ptr %local_8, align 8
+  %call_arg_07 = load ptr, ptr %local_8, align 8
+  %retval8 = call %struct.object__UID @"0000000000000002_object_new_7YpMdzkAYZzs1W"(ptr %call_arg_07)
+  store %struct.object__UID %retval8, ptr %local_9__id, align 1
+  %fv.0 = load %struct.object__UID, ptr %local_9__id, align 1
+  %fv.1 = load %struct.bag__Bag, ptr %local_1, align 8
+  %insert_0 = insertvalue %struct.deny_list__DenyList undef, %struct.object__UID %fv.0, 0
+  %insert_1 = insertvalue %struct.deny_list__DenyList %insert_0, %struct.bag__Bag %fv.1, 1
+  store %struct.deny_list__DenyList %insert_1, ptr %local_11, align 8
+  %retval9 = load %struct.deny_list__DenyList, ptr %local_11, align 8
+  ret %struct.deny_list__DenyList %retval9
+}
+
+declare void @move_rt_vec_destroy(ptr nonnull readonly dereferenceable(32), ptr)
+
+declare void @move_rt_vec_copy(ptr nonnull readonly dereferenceable(32), ptr nonnull dereferenceable(24), ptr nonnull readonly dereferenceable(24))
+
+; Function Attrs: cold noreturn
+declare void @move_rt_abort(i64) #0
+
+attributes #0 = { cold noreturn }

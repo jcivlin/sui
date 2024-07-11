@@ -1,0 +1,593 @@
+; ModuleID = '0x2__tx_context'
+source_filename = "../../../../../../crates/sui-framework/packages/sui-framework/sources/tx_context.move"
+target datalayout = "e-m:e-p:64:64-i64:64-n32:64-S128"
+target triple = "sbf-solana-solana"
+
+%__move_rt_type = type { { ptr, i64 }, i64, ptr }
+%struct.tx_context__TxContext = type { [32 x i8], { ptr, i64, i64 }, i64, i64, i64 }
+
+@__move_rttydesc_signer = private unnamed_addr constant %__move_rt_type { { ptr, i64 } { ptr @__move_rttydesc_signer_name, i64 6 }, i64 9, ptr @__move_rttydesc_NOTHING_info }
+@__move_rttydesc_signer_name = private unnamed_addr constant [6 x i8] c"signer"
+@__move_rttydesc_NOTHING_info = private unnamed_addr constant i8 -1
+@acct.addr = internal constant [32 x i8] zeroinitializer
+@vec_literal = internal constant [32 x i8] c":\98]\A7O\E2%\B2\04\\\17-k\D3\90\BD\85_\08n>\9DR[F\BF\E2E\11C\152"
+@vdesc = internal constant { ptr, i64, i64 } { ptr @vec_literal, i64 32, i64 32 }
+@__move_rttydesc_u8 = private unnamed_addr constant %__move_rt_type { { ptr, i64 } { ptr @__move_rttydesc_u8_name, i64 2 }, i64 2, ptr @__move_rttydesc_NOTHING_info }
+@__move_rttydesc_u8_name = private unnamed_addr constant [2 x i8] c"u8"
+@__move_rttydesc_u64 = private unnamed_addr constant %__move_rt_type { { ptr, i64 } { ptr @__move_rttydesc_u64_name, i64 3 }, i64 5, ptr @__move_rttydesc_NOTHING_info }
+@__move_rttydesc_u64_name = private unnamed_addr constant [3 x i8] c"u64"
+
+declare i32 @memcmp(ptr, ptr, i64)
+
+define void @"0000000000000002_tx_context_unit_test_poiso_DmGNb89xqPayWf"() {
+entry:
+  %local_0 = alloca i64, align 8
+  %local_1 = alloca { ptr, i64, i64 }, align 8
+  store i64 0, ptr %local_0, align 8
+  %loaded_alloca = load i64, ptr %local_0, align 8
+  %retval = call { ptr, i64, i64 } @move_native_unit_test_create_signers_for_testing(i64 %loaded_alloca)
+  store { ptr, i64, i64 } %retval, ptr %local_1, align 8
+  call void @move_rt_vec_destroy(ptr @__move_rttydesc_signer, ptr %local_1)
+  ret void
+}
+
+declare { ptr, i64, i64 } @move_native_unit_test_create_signers_for_testing(i64)
+
+declare [32 x i8] @move_native_tx_context_derive_id(ptr, i64)
+
+define private i64 @"0000000000000002_tx_context_ids_created_EQGUdoMWmFGJpu"(ptr nonnull readonly %0) {
+entry:
+  %local_0 = alloca ptr, align 8
+  %local_1 = alloca ptr, align 8
+  %local_2__ids_created = alloca ptr, align 8
+  %local_3 = alloca i64, align 8
+  store ptr %0, ptr %local_0, align 8
+  %load_store_tmp = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp, ptr %local_1, align 8
+  %tmp = load ptr, ptr %local_1, align 8
+  %fld_ref = getelementptr inbounds %struct.tx_context__TxContext, ptr %tmp, i32 0, i32 4
+  store ptr %fld_ref, ptr %local_2__ids_created, align 8
+  %load_deref_store_tmp1 = load ptr, ptr %local_2__ids_created, align 8
+  %load_deref_store_tmp2 = load i64, ptr %load_deref_store_tmp1, align 8
+  store i64 %load_deref_store_tmp2, ptr %local_3, align 8
+  %retval = load i64, ptr %local_3, align 8
+  ret i64 %retval
+}
+
+define ptr @"0000000000000002_tx_context_digest_Fq1LEmXxb2fLRK"(ptr nonnull readonly %0) {
+entry:
+  %local_0 = alloca ptr, align 8
+  %local_1 = alloca ptr, align 8
+  %local_2__tx_hash = alloca ptr, align 8
+  store ptr %0, ptr %local_0, align 8
+  %load_store_tmp = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp, ptr %local_1, align 8
+  %tmp = load ptr, ptr %local_1, align 8
+  %fld_ref = getelementptr inbounds %struct.tx_context__TxContext, ptr %tmp, i32 0, i32 1
+  store ptr %fld_ref, ptr %local_2__tx_hash, align 8
+  %retval = load ptr, ptr %local_2__tx_hash, align 8
+  ret ptr %retval
+}
+
+define %struct.tx_context__TxContext @"0000000000000002_tx_context_dummy_823XBaaT73VQZf"() {
+entry:
+  %newv = alloca { ptr, i64, i64 }, align 8
+  %local_0 = alloca [32 x i8], align 1
+  %local_1 = alloca { ptr, i64, i64 }, align 8
+  %local_2 = alloca i64, align 8
+  %local_3 = alloca i64, align 8
+  %local_4 = alloca i64, align 8
+  %local_5 = alloca %struct.tx_context__TxContext, align 8
+  %0 = load [32 x i8], ptr @acct.addr, align 1
+  store [32 x i8] %0, ptr %local_0, align 1
+  %1 = call { ptr, i64, i64 } @move_rt_vec_empty(ptr @__move_rttydesc_u8)
+  store { ptr, i64, i64 } %1, ptr %newv, align 8
+  call void @move_rt_vec_copy(ptr @__move_rttydesc_u8, ptr %newv, ptr @vdesc)
+  %reload = load { ptr, i64, i64 }, ptr %newv, align 8
+  store { ptr, i64, i64 } %reload, ptr %local_1, align 8
+  store i64 0, ptr %local_2, align 8
+  store i64 0, ptr %local_3, align 8
+  store i64 0, ptr %local_4, align 8
+  %call_arg_0 = load [32 x i8], ptr %local_0, align 1
+  %call_arg_1 = load { ptr, i64, i64 }, ptr %local_1, align 8
+  %call_arg_2 = load i64, ptr %local_2, align 8
+  %call_arg_3 = load i64, ptr %local_3, align 8
+  %call_arg_4 = load i64, ptr %local_4, align 8
+  %retval = call %struct.tx_context__TxContext @"0000000000000002_tx_context_new_883eSEnpkQKbr9"([32 x i8] %call_arg_0, { ptr, i64, i64 } %call_arg_1, i64 %call_arg_2, i64 %call_arg_3, i64 %call_arg_4)
+  store %struct.tx_context__TxContext %retval, ptr %local_5, align 8
+  %retval1 = load %struct.tx_context__TxContext, ptr %local_5, align 8
+  ret %struct.tx_context__TxContext %retval1
+}
+
+define %struct.tx_context__TxContext @"0000000000000002_tx_context_new_883eSEnpkQKbr9"([32 x i8] %0, { ptr, i64, i64 } %1, i64 %2, i64 %3, i64 %4) {
+entry:
+  %local_0 = alloca [32 x i8], align 1
+  %local_1 = alloca { ptr, i64, i64 }, align 8
+  %local_2 = alloca i64, align 8
+  %local_3 = alloca i64, align 8
+  %local_4 = alloca i64, align 8
+  %local_5 = alloca ptr, align 8
+  %local_6 = alloca i64, align 8
+  %local_7 = alloca i64, align 8
+  %local_8 = alloca i1, align 1
+  %local_9 = alloca i64, align 8
+  %local_10__sender = alloca [32 x i8], align 1
+  %local_11__tx_hash = alloca { ptr, i64, i64 }, align 8
+  %local_12__epoch = alloca i64, align 8
+  %local_13__epoch_timestamp_ms = alloca i64, align 8
+  %local_14__ids_created = alloca i64, align 8
+  %local_15 = alloca %struct.tx_context__TxContext, align 8
+  store [32 x i8] %0, ptr %local_0, align 1
+  store { ptr, i64, i64 } %1, ptr %local_1, align 8
+  store i64 %2, ptr %local_2, align 8
+  store i64 %3, ptr %local_3, align 8
+  store i64 %4, ptr %local_4, align 8
+  store ptr %local_1, ptr %local_5, align 8
+  %loaded_alloca = load ptr, ptr %local_5, align 8
+  %retval = call i64 @move_native_vector_length(ptr @__move_rttydesc_u8, ptr %loaded_alloca)
+  store i64 %retval, ptr %local_6, align 8
+  store i64 32, ptr %local_7, align 8
+  %eq_src_0 = load i64, ptr %local_6, align 8
+  %eq_src_1 = load i64, ptr %local_7, align 8
+  %eq_dst = icmp eq i64 %eq_src_0, %eq_src_1
+  store i1 %eq_dst, ptr %local_8, align 1
+  %cnd = load i1, ptr %local_8, align 1
+  br i1 %cnd, label %bb_1, label %bb_0
+
+bb_1:                                             ; preds = %entry
+  br label %bb_2
+
+bb_0:                                             ; preds = %entry
+  store i64 0, ptr %local_9, align 8
+  %call_arg_0 = load i64, ptr %local_9, align 8
+  call void @move_rt_abort(i64 %call_arg_0)
+  unreachable
+
+bb_2:                                             ; preds = %bb_1
+  %load_store_tmp = load { ptr, i64, i64 }, ptr %local_1, align 8
+  store { ptr, i64, i64 } %load_store_tmp, ptr %local_11__tx_hash, align 8
+  %load_store_tmp1 = load i64, ptr %local_2, align 8
+  store i64 %load_store_tmp1, ptr %local_12__epoch, align 8
+  %load_store_tmp2 = load i64, ptr %local_3, align 8
+  store i64 %load_store_tmp2, ptr %local_13__epoch_timestamp_ms, align 8
+  %load_store_tmp3 = load i64, ptr %local_4, align 8
+  store i64 %load_store_tmp3, ptr %local_14__ids_created, align 8
+  %fv.0 = load [32 x i8], ptr %local_0, align 1
+  %fv.1 = load { ptr, i64, i64 }, ptr %local_11__tx_hash, align 8
+  %fv.2 = load i64, ptr %local_12__epoch, align 8
+  %fv.3 = load i64, ptr %local_13__epoch_timestamp_ms, align 8
+  %fv.4 = load i64, ptr %local_14__ids_created, align 8
+  %insert_0 = insertvalue %struct.tx_context__TxContext undef, [32 x i8] %fv.0, 0
+  %insert_1 = insertvalue %struct.tx_context__TxContext %insert_0, { ptr, i64, i64 } %fv.1, 1
+  %insert_2 = insertvalue %struct.tx_context__TxContext %insert_1, i64 %fv.2, 2
+  %insert_3 = insertvalue %struct.tx_context__TxContext %insert_2, i64 %fv.3, 3
+  %insert_4 = insertvalue %struct.tx_context__TxContext %insert_3, i64 %fv.4, 4
+  store %struct.tx_context__TxContext %insert_4, ptr %local_15, align 8
+  %retval4 = load %struct.tx_context__TxContext, ptr %local_15, align 8
+  ret %struct.tx_context__TxContext %retval4
+}
+
+declare i64 @move_native_vector_length(ptr, ptr)
+
+define private { ptr, i64, i64 } @"0000000000000002_tx_context_dummy_tx_hash_w_57ghCbjhG5KtQf"(i64 %0) {
+entry:
+  %local_0 = alloca i64, align 8
+  %local_1 = alloca { ptr, i64, i64 }, align 8
+  %local_2 = alloca ptr, align 8
+  %local_3 = alloca { ptr, i64, i64 }, align 8
+  %local_4 = alloca ptr, align 8
+  %local_5 = alloca i64, align 8
+  %local_6 = alloca i64, align 8
+  %local_7 = alloca i1, align 1
+  %local_8 = alloca ptr, align 8
+  %local_9 = alloca i8, align 1
+  %local_10 = alloca { ptr, i64, i64 }, align 8
+  store i64 %0, ptr %local_0, align 8
+  store ptr %local_0, ptr %local_2, align 8
+  %loaded_alloca = load ptr, ptr %local_2, align 8
+  %retval = call { ptr, i64, i64 } @move_native_bcs_to_bytes(ptr @__move_rttydesc_u64, ptr %loaded_alloca)
+  store { ptr, i64, i64 } %retval, ptr %local_3, align 8
+  %load_store_tmp = load { ptr, i64, i64 }, ptr %local_3, align 8
+  store { ptr, i64, i64 } %load_store_tmp, ptr %local_1, align 8
+  br label %bb_3
+
+bb_3:                                             ; preds = %bb_2, %entry
+  store ptr %local_1, ptr %local_4, align 8
+  %loaded_alloca1 = load ptr, ptr %local_4, align 8
+  %retval2 = call i64 @move_native_vector_length(ptr @__move_rttydesc_u8, ptr %loaded_alloca1)
+  store i64 %retval2, ptr %local_5, align 8
+  store i64 32, ptr %local_6, align 8
+  %lt_src_0 = load i64, ptr %local_5, align 8
+  %lt_src_1 = load i64, ptr %local_6, align 8
+  %lt_dst = icmp ult i64 %lt_src_0, %lt_src_1
+  store i1 %lt_dst, ptr %local_7, align 1
+  %cnd = load i1, ptr %local_7, align 1
+  br i1 %cnd, label %bb_1, label %bb_0
+
+bb_1:                                             ; preds = %bb_3
+  br label %bb_2
+
+bb_2:                                             ; preds = %bb_1
+  store ptr %local_1, ptr %local_8, align 8
+  store i8 0, ptr %local_9, align 1
+  %loaded_alloca3 = load ptr, ptr %local_8, align 8
+  call void @move_native_vector_push_back(ptr @__move_rttydesc_u8, ptr %loaded_alloca3, ptr %local_9)
+  br label %bb_3
+
+bb_0:                                             ; preds = %bb_3
+  %load_store_tmp4 = load { ptr, i64, i64 }, ptr %local_1, align 8
+  store { ptr, i64, i64 } %load_store_tmp4, ptr %local_10, align 8
+  %retval5 = load { ptr, i64, i64 }, ptr %local_10, align 8
+  ret { ptr, i64, i64 } %retval5
+}
+
+declare { ptr, i64, i64 } @move_native_bcs_to_bytes(ptr, ptr)
+
+declare void @move_native_vector_push_back(ptr, ptr, ptr)
+
+define i64 @"0000000000000002_tx_context_epoch_D93PCrdoigPcah"(ptr nonnull readonly %0) {
+entry:
+  %local_0 = alloca ptr, align 8
+  %local_1 = alloca ptr, align 8
+  %local_2__epoch = alloca ptr, align 8
+  %local_3 = alloca i64, align 8
+  store ptr %0, ptr %local_0, align 8
+  %load_store_tmp = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp, ptr %local_1, align 8
+  %tmp = load ptr, ptr %local_1, align 8
+  %fld_ref = getelementptr inbounds %struct.tx_context__TxContext, ptr %tmp, i32 0, i32 2
+  store ptr %fld_ref, ptr %local_2__epoch, align 8
+  %load_deref_store_tmp1 = load ptr, ptr %local_2__epoch, align 8
+  %load_deref_store_tmp2 = load i64, ptr %load_deref_store_tmp1, align 8
+  store i64 %load_deref_store_tmp2, ptr %local_3, align 8
+  %retval = load i64, ptr %local_3, align 8
+  ret i64 %retval
+}
+
+define i64 @"0000000000000002_tx_context_epoch_timestamp_9QTSawMv3u6zpR"(ptr nonnull readonly %0) {
+entry:
+  %local_0 = alloca ptr, align 8
+  %local_1 = alloca ptr, align 8
+  %local_2__epoch_timestamp_ms = alloca ptr, align 8
+  %local_3 = alloca i64, align 8
+  store ptr %0, ptr %local_0, align 8
+  %load_store_tmp = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp, ptr %local_1, align 8
+  %tmp = load ptr, ptr %local_1, align 8
+  %fld_ref = getelementptr inbounds %struct.tx_context__TxContext, ptr %tmp, i32 0, i32 3
+  store ptr %fld_ref, ptr %local_2__epoch_timestamp_ms, align 8
+  %load_deref_store_tmp1 = load ptr, ptr %local_2__epoch_timestamp_ms, align 8
+  %load_deref_store_tmp2 = load i64, ptr %load_deref_store_tmp1, align 8
+  store i64 %load_deref_store_tmp2, ptr %local_3, align 8
+  %retval = load i64, ptr %local_3, align 8
+  ret i64 %retval
+}
+
+define [32 x i8] @"0000000000000002_tx_context_fresh_object_ad_CuVbwfzuRgXUZg"(ptr noalias nonnull %0) {
+entry:
+  %local_0 = alloca ptr, align 8
+  %local_1 = alloca [32 x i8], align 1
+  %local_2 = alloca i64, align 8
+  %local_3 = alloca ptr, align 8
+  %local_4__ids_created = alloca ptr, align 8
+  %local_5 = alloca i64, align 8
+  %local_6 = alloca ptr, align 8
+  %local_7__tx_hash = alloca ptr, align 8
+  %local_8 = alloca { ptr, i64, i64 }, align 8
+  %local_9 = alloca i64, align 8
+  %local_10 = alloca [32 x i8], align 1
+  %local_11 = alloca i64, align 8
+  %local_12 = alloca i64, align 8
+  %local_13 = alloca i64, align 8
+  %local_14 = alloca ptr, align 8
+  %local_15__ids_created = alloca ptr, align 8
+  %local_16 = alloca [32 x i8], align 1
+  store ptr %0, ptr %local_0, align 8
+  %load_store_tmp = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp, ptr %local_3, align 8
+  %tmp = load ptr, ptr %local_3, align 8
+  %fld_ref = getelementptr inbounds %struct.tx_context__TxContext, ptr %tmp, i32 0, i32 4
+  store ptr %fld_ref, ptr %local_4__ids_created, align 8
+  %load_deref_store_tmp1 = load ptr, ptr %local_4__ids_created, align 8
+  %load_deref_store_tmp2 = load i64, ptr %load_deref_store_tmp1, align 8
+  store i64 %load_deref_store_tmp2, ptr %local_5, align 8
+  %load_store_tmp1 = load i64, ptr %local_5, align 8
+  store i64 %load_store_tmp1, ptr %local_2, align 8
+  %load_store_tmp2 = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp2, ptr %local_6, align 8
+  %tmp3 = load ptr, ptr %local_6, align 8
+  %fld_ref4 = getelementptr inbounds %struct.tx_context__TxContext, ptr %tmp3, i32 0, i32 1
+  store ptr %fld_ref4, ptr %local_7__tx_hash, align 8
+  %load_deref_store_tmp15 = load ptr, ptr %local_7__tx_hash, align 8
+  %load_deref_store_tmp26 = load { ptr, i64, i64 }, ptr %load_deref_store_tmp15, align 8
+  store { ptr, i64, i64 } %load_deref_store_tmp26, ptr %local_8, align 8
+  %load_store_tmp7 = load i64, ptr %local_2, align 8
+  store i64 %load_store_tmp7, ptr %local_9, align 8
+  %loaded_alloca = load i64, ptr %local_9, align 8
+  %retval = call [32 x i8] @move_native_tx_context_derive_id(ptr %local_8, i64 %loaded_alloca)
+  store [32 x i8] %retval, ptr %local_10, align 1
+  %load_store_tmp8 = load [32 x i8], ptr %local_10, align 1
+  store [32 x i8] %load_store_tmp8, ptr %local_1, align 1
+  %load_store_tmp9 = load i64, ptr %local_2, align 8
+  store i64 %load_store_tmp9, ptr %local_11, align 8
+  store i64 1, ptr %local_12, align 8
+  %add_src_0 = load i64, ptr %local_11, align 8
+  %add_src_1 = load i64, ptr %local_12, align 8
+  %add_dst = add i64 %add_src_0, %add_src_1
+  %ovfcond = icmp ult i64 %add_dst, %add_src_0
+  br i1 %ovfcond, label %then_bb, label %join_bb
+
+then_bb:                                          ; preds = %entry
+  call void @move_rt_abort(i64 4017)
+  unreachable
+
+join_bb:                                          ; preds = %entry
+  store i64 %add_dst, ptr %local_13, align 8
+  %load_store_tmp10 = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp10, ptr %local_14, align 8
+  %tmp11 = load ptr, ptr %local_14, align 8
+  %fld_ref12 = getelementptr inbounds %struct.tx_context__TxContext, ptr %tmp11, i32 0, i32 4
+  store ptr %fld_ref12, ptr %local_15__ids_created, align 8
+  %load_store_ref_src = load i64, ptr %local_13, align 8
+  %load_store_ref_dst_ptr = load ptr, ptr %local_15__ids_created, align 8
+  store i64 %load_store_ref_src, ptr %load_store_ref_dst_ptr, align 8
+  %retval13 = load [32 x i8], ptr %local_1, align 1
+  ret [32 x i8] %retval13
+}
+
+define i64 @"0000000000000002_tx_context_get_ids_created_2T6AAPT532mFqU"(ptr nonnull readonly %0) {
+entry:
+  %local_0 = alloca ptr, align 8
+  %local_1 = alloca ptr, align 8
+  %local_2 = alloca i64, align 8
+  store ptr %0, ptr %local_0, align 8
+  %load_store_tmp = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp, ptr %local_1, align 8
+  %call_arg_0 = load ptr, ptr %local_1, align 8
+  %retval = call i64 @"0000000000000002_tx_context_ids_created_EQGUdoMWmFGJpu"(ptr %call_arg_0)
+  store i64 %retval, ptr %local_2, align 8
+  %retval1 = load i64, ptr %local_2, align 8
+  ret i64 %retval1
+}
+
+define void @"0000000000000002_tx_context_increment_epoch_DJtfJsfpgZF9xB"(ptr noalias nonnull %0) {
+entry:
+  %local_0 = alloca ptr, align 8
+  %local_1 = alloca ptr, align 8
+  %local_2__epoch = alloca ptr, align 8
+  %local_3 = alloca i64, align 8
+  %local_4 = alloca i64, align 8
+  %local_5 = alloca i64, align 8
+  %local_6 = alloca ptr, align 8
+  %local_7__epoch = alloca ptr, align 8
+  store ptr %0, ptr %local_0, align 8
+  %load_store_tmp = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp, ptr %local_1, align 8
+  %tmp = load ptr, ptr %local_1, align 8
+  %fld_ref = getelementptr inbounds %struct.tx_context__TxContext, ptr %tmp, i32 0, i32 2
+  store ptr %fld_ref, ptr %local_2__epoch, align 8
+  %load_deref_store_tmp1 = load ptr, ptr %local_2__epoch, align 8
+  %load_deref_store_tmp2 = load i64, ptr %load_deref_store_tmp1, align 8
+  store i64 %load_deref_store_tmp2, ptr %local_3, align 8
+  store i64 1, ptr %local_4, align 8
+  %add_src_0 = load i64, ptr %local_3, align 8
+  %add_src_1 = load i64, ptr %local_4, align 8
+  %add_dst = add i64 %add_src_0, %add_src_1
+  %ovfcond = icmp ult i64 %add_dst, %add_src_0
+  br i1 %ovfcond, label %then_bb, label %join_bb
+
+then_bb:                                          ; preds = %entry
+  call void @move_rt_abort(i64 4017)
+  unreachable
+
+join_bb:                                          ; preds = %entry
+  store i64 %add_dst, ptr %local_5, align 8
+  %load_store_tmp1 = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp1, ptr %local_6, align 8
+  %tmp2 = load ptr, ptr %local_6, align 8
+  %fld_ref3 = getelementptr inbounds %struct.tx_context__TxContext, ptr %tmp2, i32 0, i32 2
+  store ptr %fld_ref3, ptr %local_7__epoch, align 8
+  %load_store_ref_src = load i64, ptr %local_5, align 8
+  %load_store_ref_dst_ptr = load ptr, ptr %local_7__epoch, align 8
+  store i64 %load_store_ref_src, ptr %load_store_ref_dst_ptr, align 8
+  ret void
+}
+
+define void @"0000000000000002_tx_context_increment_epoch_7LomAMLeFJKXpb"(ptr noalias nonnull %0, i64 %1) {
+entry:
+  %local_0 = alloca ptr, align 8
+  %local_1 = alloca i64, align 8
+  %local_2 = alloca ptr, align 8
+  %local_3__epoch_timestamp_ms = alloca ptr, align 8
+  %local_4 = alloca i64, align 8
+  %local_5 = alloca i64, align 8
+  %local_6 = alloca i64, align 8
+  %local_7 = alloca ptr, align 8
+  %local_8__epoch_timestamp_ms = alloca ptr, align 8
+  store ptr %0, ptr %local_0, align 8
+  store i64 %1, ptr %local_1, align 8
+  %load_store_tmp = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp, ptr %local_2, align 8
+  %tmp = load ptr, ptr %local_2, align 8
+  %fld_ref = getelementptr inbounds %struct.tx_context__TxContext, ptr %tmp, i32 0, i32 3
+  store ptr %fld_ref, ptr %local_3__epoch_timestamp_ms, align 8
+  %load_deref_store_tmp1 = load ptr, ptr %local_3__epoch_timestamp_ms, align 8
+  %load_deref_store_tmp2 = load i64, ptr %load_deref_store_tmp1, align 8
+  store i64 %load_deref_store_tmp2, ptr %local_4, align 8
+  %load_store_tmp1 = load i64, ptr %local_1, align 8
+  store i64 %load_store_tmp1, ptr %local_5, align 8
+  %add_src_0 = load i64, ptr %local_4, align 8
+  %add_src_1 = load i64, ptr %local_5, align 8
+  %add_dst = add i64 %add_src_0, %add_src_1
+  %ovfcond = icmp ult i64 %add_dst, %add_src_0
+  br i1 %ovfcond, label %then_bb, label %join_bb
+
+then_bb:                                          ; preds = %entry
+  call void @move_rt_abort(i64 4017)
+  unreachable
+
+join_bb:                                          ; preds = %entry
+  store i64 %add_dst, ptr %local_6, align 8
+  %load_store_tmp2 = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp2, ptr %local_7, align 8
+  %tmp3 = load ptr, ptr %local_7, align 8
+  %fld_ref4 = getelementptr inbounds %struct.tx_context__TxContext, ptr %tmp3, i32 0, i32 3
+  store ptr %fld_ref4, ptr %local_8__epoch_timestamp_ms, align 8
+  %load_store_ref_src = load i64, ptr %local_6, align 8
+  %load_store_ref_dst_ptr = load ptr, ptr %local_8__epoch_timestamp_ms, align 8
+  store i64 %load_store_ref_src, ptr %load_store_ref_dst_ptr, align 8
+  ret void
+}
+
+define [32 x i8] @"0000000000000002_tx_context_last_created_ob_F5FJ3HqHcxT4Gb"(ptr nonnull readonly %0) {
+entry:
+  %local_0 = alloca ptr, align 8
+  %local_1 = alloca i64, align 8
+  %local_2 = alloca ptr, align 8
+  %local_3__ids_created = alloca ptr, align 8
+  %local_4 = alloca i64, align 8
+  %local_5 = alloca i64, align 8
+  %local_6 = alloca i64, align 8
+  %local_7 = alloca i1, align 1
+  %local_8 = alloca ptr, align 8
+  %local_9 = alloca i64, align 8
+  %local_10 = alloca ptr, align 8
+  %local_11__tx_hash = alloca ptr, align 8
+  %local_12 = alloca { ptr, i64, i64 }, align 8
+  %local_13 = alloca i64, align 8
+  %local_14 = alloca i64, align 8
+  %local_15 = alloca i64, align 8
+  %local_16 = alloca [32 x i8], align 1
+  store ptr %0, ptr %local_0, align 8
+  %load_store_tmp = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp, ptr %local_2, align 8
+  %tmp = load ptr, ptr %local_2, align 8
+  %fld_ref = getelementptr inbounds %struct.tx_context__TxContext, ptr %tmp, i32 0, i32 4
+  store ptr %fld_ref, ptr %local_3__ids_created, align 8
+  %load_deref_store_tmp1 = load ptr, ptr %local_3__ids_created, align 8
+  %load_deref_store_tmp2 = load i64, ptr %load_deref_store_tmp1, align 8
+  store i64 %load_deref_store_tmp2, ptr %local_4, align 8
+  %load_store_tmp1 = load i64, ptr %local_4, align 8
+  store i64 %load_store_tmp1, ptr %local_1, align 8
+  %load_store_tmp2 = load i64, ptr %local_1, align 8
+  store i64 %load_store_tmp2, ptr %local_5, align 8
+  store i64 0, ptr %local_6, align 8
+  %gt_src_0 = load i64, ptr %local_5, align 8
+  %gt_src_1 = load i64, ptr %local_6, align 8
+  %gt_dst = icmp ugt i64 %gt_src_0, %gt_src_1
+  store i1 %gt_dst, ptr %local_7, align 1
+  %cnd = load i1, ptr %local_7, align 1
+  br i1 %cnd, label %bb_1, label %bb_0
+
+bb_1:                                             ; preds = %entry
+  br label %bb_2
+
+bb_0:                                             ; preds = %entry
+  %load_store_tmp3 = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp3, ptr %local_8, align 8
+  store i64 1, ptr %local_9, align 8
+  %call_arg_0 = load i64, ptr %local_9, align 8
+  call void @move_rt_abort(i64 %call_arg_0)
+  unreachable
+
+bb_2:                                             ; preds = %bb_1
+  %load_store_tmp4 = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp4, ptr %local_10, align 8
+  %tmp5 = load ptr, ptr %local_10, align 8
+  %fld_ref6 = getelementptr inbounds %struct.tx_context__TxContext, ptr %tmp5, i32 0, i32 1
+  store ptr %fld_ref6, ptr %local_11__tx_hash, align 8
+  %load_deref_store_tmp17 = load ptr, ptr %local_11__tx_hash, align 8
+  %load_deref_store_tmp28 = load { ptr, i64, i64 }, ptr %load_deref_store_tmp17, align 8
+  store { ptr, i64, i64 } %load_deref_store_tmp28, ptr %local_12, align 8
+  %load_store_tmp9 = load i64, ptr %local_1, align 8
+  store i64 %load_store_tmp9, ptr %local_13, align 8
+  store i64 1, ptr %local_14, align 8
+  %sub_src_0 = load i64, ptr %local_13, align 8
+  %sub_src_1 = load i64, ptr %local_14, align 8
+  %sub_dst = sub i64 %sub_src_0, %sub_src_1
+  %ovfcond = icmp ugt i64 %sub_dst, %sub_src_0
+  br i1 %ovfcond, label %then_bb, label %join_bb
+
+then_bb:                                          ; preds = %bb_2
+  call void @move_rt_abort(i64 4017)
+  unreachable
+
+join_bb:                                          ; preds = %bb_2
+  store i64 %sub_dst, ptr %local_15, align 8
+  %loaded_alloca = load i64, ptr %local_15, align 8
+  %retval = call [32 x i8] @move_native_tx_context_derive_id(ptr %local_12, i64 %loaded_alloca)
+  store [32 x i8] %retval, ptr %local_16, align 1
+  %retval10 = load [32 x i8], ptr %local_16, align 1
+  ret [32 x i8] %retval10
+}
+
+define [32 x i8] @"0000000000000002_tx_context_sender_9nYw9GTwZ2W8pp"(ptr nonnull readonly %0) {
+entry:
+  %local_0 = alloca ptr, align 8
+  %local_1 = alloca ptr, align 8
+  %local_2__sender = alloca ptr, align 8
+  %local_3 = alloca [32 x i8], align 1
+  store ptr %0, ptr %local_0, align 8
+  %load_store_tmp = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp, ptr %local_1, align 8
+  %tmp = load ptr, ptr %local_1, align 8
+  %fld_ref = getelementptr inbounds %struct.tx_context__TxContext, ptr %tmp, i32 0, i32 0
+  store ptr %fld_ref, ptr %local_2__sender, align 8
+  %load_deref_store_tmp1 = load ptr, ptr %local_2__sender, align 8
+  %load_deref_store_tmp2 = load [32 x i8], ptr %load_deref_store_tmp1, align 1
+  store [32 x i8] %load_deref_store_tmp2, ptr %local_3, align 1
+  %retval = load [32 x i8], ptr %local_3, align 1
+  ret [32 x i8] %retval
+}
+
+define %struct.tx_context__TxContext @"0000000000000002_tx_context_new_from_hint_9eKZScShnwdGsh"([32 x i8] %0, i64 %1, i64 %2, i64 %3, i64 %4) {
+entry:
+  %local_0 = alloca [32 x i8], align 1
+  %local_1 = alloca i64, align 8
+  %local_2 = alloca i64, align 8
+  %local_3 = alloca i64, align 8
+  %local_4 = alloca i64, align 8
+  %local_5 = alloca [32 x i8], align 1
+  %local_6 = alloca i64, align 8
+  %local_7 = alloca { ptr, i64, i64 }, align 8
+  %local_8 = alloca i64, align 8
+  %local_9 = alloca i64, align 8
+  %local_10 = alloca i64, align 8
+  %local_11 = alloca %struct.tx_context__TxContext, align 8
+  store [32 x i8] %0, ptr %local_0, align 1
+  store i64 %1, ptr %local_1, align 8
+  store i64 %2, ptr %local_2, align 8
+  store i64 %3, ptr %local_3, align 8
+  store i64 %4, ptr %local_4, align 8
+  %load_store_tmp = load i64, ptr %local_1, align 8
+  store i64 %load_store_tmp, ptr %local_6, align 8
+  %call_arg_0 = load i64, ptr %local_6, align 8
+  %retval = call { ptr, i64, i64 } @"0000000000000002_tx_context_dummy_tx_hash_w_57ghCbjhG5KtQf"(i64 %call_arg_0)
+  store { ptr, i64, i64 } %retval, ptr %local_7, align 8
+  %load_store_tmp1 = load i64, ptr %local_2, align 8
+  store i64 %load_store_tmp1, ptr %local_8, align 8
+  %load_store_tmp2 = load i64, ptr %local_3, align 8
+  store i64 %load_store_tmp2, ptr %local_9, align 8
+  %load_store_tmp3 = load i64, ptr %local_4, align 8
+  store i64 %load_store_tmp3, ptr %local_10, align 8
+  %call_arg_04 = load [32 x i8], ptr %local_0, align 1
+  %call_arg_1 = load { ptr, i64, i64 }, ptr %local_7, align 8
+  %call_arg_2 = load i64, ptr %local_8, align 8
+  %call_arg_3 = load i64, ptr %local_9, align 8
+  %call_arg_4 = load i64, ptr %local_10, align 8
+  %retval5 = call %struct.tx_context__TxContext @"0000000000000002_tx_context_new_883eSEnpkQKbr9"([32 x i8] %call_arg_04, { ptr, i64, i64 } %call_arg_1, i64 %call_arg_2, i64 %call_arg_3, i64 %call_arg_4)
+  store %struct.tx_context__TxContext %retval5, ptr %local_11, align 8
+  %retval6 = load %struct.tx_context__TxContext, ptr %local_11, align 8
+  ret %struct.tx_context__TxContext %retval6
+}
+
+declare void @move_rt_vec_destroy(ptr nonnull readonly dereferenceable(32), ptr)
+
+declare { ptr, i64, i64 } @move_rt_vec_empty(ptr nonnull readonly dereferenceable(32))
+
+declare void @move_rt_vec_copy(ptr nonnull readonly dereferenceable(32), ptr nonnull dereferenceable(24), ptr nonnull readonly dereferenceable(24))
+
+; Function Attrs: cold noreturn
+declare void @move_rt_abort(i64) #0
+
+attributes #0 = { cold noreturn }
