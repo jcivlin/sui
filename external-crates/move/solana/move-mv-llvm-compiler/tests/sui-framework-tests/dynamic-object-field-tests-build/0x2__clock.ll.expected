@@ -1,0 +1,349 @@
+; ModuleID = '0x2__clock'
+source_filename = "../../../../../../crates/sui-framework/packages/sui-framework/sources/clock.move"
+target datalayout = "e-m:e-p:64:64-i64:64-n32:64-S128"
+target triple = "sbf-solana-solana"
+
+%__move_rt_type = type { { ptr, i64 }, i64, ptr }
+%struct.object__UID = type { %struct.object__ID }
+%struct.object__ID = type { [32 x i8] }
+%struct.clock__Clock = type { %struct.object__UID, i64 }
+
+@__move_rttydesc_signer = private unnamed_addr constant %__move_rt_type { { ptr, i64 } { ptr @__move_rttydesc_signer_name, i64 6 }, i64 9, ptr @__move_rttydesc_NOTHING_info }
+@__move_rttydesc_signer_name = private unnamed_addr constant [6 x i8] c"signer"
+@__move_rttydesc_NOTHING_info = private unnamed_addr constant i8 -1
+@acct.addr = internal constant [32 x i8] zeroinitializer
+@__move_rttydesc_clock__Clock = private unnamed_addr constant %__move_rt_type { { ptr, i64 } { ptr @__move_rttydesc_clock__Clock_name, i64 78 }, i64 11, ptr @__move_rttydesc_clock__Clock_info }
+@__move_rttydesc_clock__Clock_name = private unnamed_addr constant [78 x i8] c"0000000000000000000000000000000000000000000000000000000000000002::clock::Clock"
+@__move_rttydesc_object__UID_name = private unnamed_addr constant [77 x i8] c"0000000000000000000000000000000000000000000000000000000000000002::object::UID"
+@__move_rttydesc_object__ID_name = private unnamed_addr constant [76 x i8] c"0000000000000000000000000000000000000000000000000000000000000002::object::ID"
+@__move_rttydesc_address_name = private unnamed_addr constant [7 x i8] c"address"
+@0 = private unnamed_addr constant [5 x i8] c"bytes"
+@s_fld_array = private unnamed_addr constant [1 x { %__move_rt_type, i64, { ptr, i64 } }] [{ %__move_rt_type, i64, { ptr, i64 } } { %__move_rt_type { { ptr, i64 } { ptr @__move_rttydesc_address_name, i64 7 }, i64 8, ptr @__move_rttydesc_NOTHING_info }, i64 0, { ptr, i64 } { ptr @0, i64 5 } }]
+@__move_rttydesc_object__ID_info = private unnamed_addr constant { ptr, i64, i64, i64 } { ptr @s_fld_array, i64 1, i64 32, i64 1 }
+@1 = private unnamed_addr constant [2 x i8] c"id"
+@s_fld_array.1 = private unnamed_addr constant [1 x { %__move_rt_type, i64, { ptr, i64 } }] [{ %__move_rt_type, i64, { ptr, i64 } } { %__move_rt_type { { ptr, i64 } { ptr @__move_rttydesc_object__ID_name, i64 76 }, i64 11, ptr @__move_rttydesc_object__ID_info }, i64 0, { ptr, i64 } { ptr @1, i64 2 } }]
+@__move_rttydesc_object__UID_info = private unnamed_addr constant { ptr, i64, i64, i64 } { ptr @s_fld_array.1, i64 1, i64 32, i64 1 }
+@2 = private unnamed_addr constant [2 x i8] c"id"
+@__move_rttydesc_u64_name = private unnamed_addr constant [3 x i8] c"u64"
+@3 = private unnamed_addr constant [12 x i8] c"timestamp_ms"
+@s_fld_array.2 = private unnamed_addr constant [2 x { %__move_rt_type, i64, { ptr, i64 } }] [{ %__move_rt_type, i64, { ptr, i64 } } { %__move_rt_type { { ptr, i64 } { ptr @__move_rttydesc_object__UID_name, i64 77 }, i64 11, ptr @__move_rttydesc_object__UID_info }, i64 0, { ptr, i64 } { ptr @2, i64 2 } }, { %__move_rt_type, i64, { ptr, i64 } } { %__move_rt_type { { ptr, i64 } { ptr @__move_rttydesc_u64_name, i64 3 }, i64 5, ptr @__move_rttydesc_NOTHING_info }, i64 32, { ptr, i64 } { ptr @3, i64 12 } }]
+@__move_rttydesc_clock__Clock_info = private unnamed_addr constant { ptr, i64, i64, i64 } { ptr @s_fld_array.2, i64 2, i64 40, i64 8 }
+@acct.addr.3 = internal constant [32 x i8] zeroinitializer
+
+declare i32 @memcmp(ptr, ptr, i64)
+
+define void @"0000000000000002_clock_unit_test_poiso_8d1xjso22HBmeE"() {
+entry:
+  %local_0 = alloca i64, align 8
+  %local_1 = alloca { ptr, i64, i64 }, align 8
+  store i64 0, ptr %local_0, align 8
+  %loaded_alloca = load i64, ptr %local_0, align 8
+  %retval = call { ptr, i64, i64 } @move_native_unit_test_create_signers_for_testing(i64 %loaded_alloca)
+  store { ptr, i64, i64 } %retval, ptr %local_1, align 8
+  call void @move_rt_vec_destroy(ptr @__move_rttydesc_signer, ptr %local_1)
+  ret void
+}
+
+declare { ptr, i64, i64 } @move_native_unit_test_create_signers_for_testing(i64)
+
+define private void @"0000000000000002_clock_create_8wX1yoUWiQ8wx2"(ptr nonnull readonly %0) {
+entry:
+  %local_0 = alloca ptr, align 8
+  %local_1 = alloca ptr, align 8
+  %local_2 = alloca [32 x i8], align 1
+  %local_3 = alloca [32 x i8], align 1
+  %local_4 = alloca i1, align 1
+  %local_5 = alloca i64, align 8
+  %local_6__id = alloca %struct.object__UID, align 8
+  %local_7__timestamp_ms = alloca i64, align 8
+  %local_8 = alloca %struct.clock__Clock, align 8
+  store ptr %0, ptr %local_0, align 8
+  %load_store_tmp = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp, ptr %local_1, align 8
+  %call_arg_0 = load ptr, ptr %local_1, align 8
+  %retval = call [32 x i8] @"0000000000000002_tx_context_sender_9nYw9GTwZ2W8pp"(ptr %call_arg_0)
+  store [32 x i8] %retval, ptr %local_2, align 1
+  %1 = load [32 x i8], ptr @acct.addr, align 1
+  store [32 x i8] %1, ptr %local_3, align 1
+  %2 = call i32 @memcmp(ptr %local_2, ptr %local_3, i64 32)
+  %eq_dst = icmp eq i32 %2, 0
+  store i1 %eq_dst, ptr %local_4, align 1
+  %cnd = load i1, ptr %local_4, align 1
+  br i1 %cnd, label %bb_1, label %bb_0
+
+bb_1:                                             ; preds = %entry
+  br label %bb_2
+
+bb_0:                                             ; preds = %entry
+  store i64 0, ptr %local_5, align 8
+  %call_arg_01 = load i64, ptr %local_5, align 8
+  call void @move_rt_abort(i64 %call_arg_01)
+  unreachable
+
+bb_2:                                             ; preds = %bb_1
+  %retval2 = call %struct.object__UID @"0000000000000002_object_clock_CYm9uWutPZMceP"()
+  store %struct.object__UID %retval2, ptr %local_6__id, align 1
+  store i64 0, ptr %local_7__timestamp_ms, align 8
+  %fv.0 = load %struct.object__UID, ptr %local_6__id, align 1
+  %fv.1 = load i64, ptr %local_7__timestamp_ms, align 8
+  %insert_0 = insertvalue %struct.clock__Clock undef, %struct.object__UID %fv.0, 0
+  %insert_1 = insertvalue %struct.clock__Clock %insert_0, i64 %fv.1, 1
+  store %struct.clock__Clock %insert_1, ptr %local_8, align 8
+  %call_arg_03 = load %struct.clock__Clock, ptr %local_8, align 8
+  call void @"0000000000000002_transfer_share_object_AtdGbiX7ZapKV3"(%struct.clock__Clock %call_arg_03)
+  ret void
+}
+
+declare [32 x i8] @"0000000000000002_tx_context_sender_9nYw9GTwZ2W8pp"(ptr nonnull readonly)
+
+declare %struct.object__UID @"0000000000000002_object_clock_CYm9uWutPZMceP"()
+
+define private void @"0000000000000002_transfer_share_object_AtdGbiX7ZapKV3"(%struct.clock__Clock %0) {
+entry:
+  %local_0 = alloca %struct.clock__Clock, align 8
+  %local_1 = alloca %struct.clock__Clock, align 8
+  store %struct.clock__Clock %0, ptr %local_0, align 8
+  call void @move_native_transfer_share_object_impl(ptr @__move_rttydesc_clock__Clock, ptr %local_0)
+  ret void
+}
+
+declare void @move_native_transfer_share_object_impl(ptr, ptr)
+
+define %struct.clock__Clock @"0000000000000002_clock_create_for_test_5SgjdKVriUtTyn"(ptr noalias nonnull %0) {
+entry:
+  %local_0 = alloca ptr, align 8
+  %local_1 = alloca ptr, align 8
+  %local_2__id = alloca %struct.object__UID, align 8
+  %local_3__timestamp_ms = alloca i64, align 8
+  %local_4 = alloca %struct.clock__Clock, align 8
+  store ptr %0, ptr %local_0, align 8
+  %load_store_tmp = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp, ptr %local_1, align 8
+  %call_arg_0 = load ptr, ptr %local_1, align 8
+  %retval = call %struct.object__UID @"0000000000000002_object_new_7YpMdzkAYZzs1W"(ptr %call_arg_0)
+  store %struct.object__UID %retval, ptr %local_2__id, align 1
+  store i64 0, ptr %local_3__timestamp_ms, align 8
+  %fv.0 = load %struct.object__UID, ptr %local_2__id, align 1
+  %fv.1 = load i64, ptr %local_3__timestamp_ms, align 8
+  %insert_0 = insertvalue %struct.clock__Clock undef, %struct.object__UID %fv.0, 0
+  %insert_1 = insertvalue %struct.clock__Clock %insert_0, i64 %fv.1, 1
+  store %struct.clock__Clock %insert_1, ptr %local_4, align 8
+  %retval1 = load %struct.clock__Clock, ptr %local_4, align 8
+  ret %struct.clock__Clock %retval1
+}
+
+declare %struct.object__UID @"0000000000000002_object_new_7YpMdzkAYZzs1W"(ptr noalias nonnull)
+
+define void @"0000000000000002_clock_destroy_for_tes_G5FvuJqVMJeNmP"(%struct.clock__Clock %0) {
+entry:
+  %local_0 = alloca %struct.clock__Clock, align 8
+  %local_1 = alloca %struct.clock__Clock, align 8
+  %local_2__id = alloca %struct.object__UID, align 8
+  %local_3__timestamp_ms = alloca i64, align 8
+  store %struct.clock__Clock %0, ptr %local_0, align 8
+  %srcval = load %struct.clock__Clock, ptr %local_0, align 8
+  %ext_0 = extractvalue %struct.clock__Clock %srcval, 0
+  %ext_1 = extractvalue %struct.clock__Clock %srcval, 1
+  store %struct.object__UID %ext_0, ptr %local_2__id, align 1
+  store i64 %ext_1, ptr %local_3__timestamp_ms, align 8
+  %call_arg_0 = load %struct.object__UID, ptr %local_2__id, align 1
+  call void @"0000000000000002_object_delete_FRdqjKo1rYipTy"(%struct.object__UID %call_arg_0)
+  ret void
+}
+
+declare void @"0000000000000002_object_delete_FRdqjKo1rYipTy"(%struct.object__UID)
+
+define private void @"0000000000000002_clock_consensus_commi_ExSCTsZnaKrENs"(ptr noalias nonnull %0, i64 %1, ptr nonnull readonly %2) {
+entry:
+  %local_0 = alloca ptr, align 8
+  %local_1 = alloca i64, align 8
+  %local_2 = alloca ptr, align 8
+  %local_3 = alloca ptr, align 8
+  %local_4 = alloca [32 x i8], align 1
+  %local_5 = alloca [32 x i8], align 1
+  %local_6 = alloca i1, align 1
+  %local_7 = alloca ptr, align 8
+  %local_8 = alloca i64, align 8
+  %local_9 = alloca i64, align 8
+  %local_10 = alloca ptr, align 8
+  %local_11__timestamp_ms = alloca ptr, align 8
+  store ptr %0, ptr %local_0, align 8
+  store i64 %1, ptr %local_1, align 8
+  store ptr %2, ptr %local_2, align 8
+  %load_store_tmp = load ptr, ptr %local_2, align 8
+  store ptr %load_store_tmp, ptr %local_3, align 8
+  %call_arg_0 = load ptr, ptr %local_3, align 8
+  %retval = call [32 x i8] @"0000000000000002_tx_context_sender_9nYw9GTwZ2W8pp"(ptr %call_arg_0)
+  store [32 x i8] %retval, ptr %local_4, align 1
+  %3 = load [32 x i8], ptr @acct.addr.3, align 1
+  store [32 x i8] %3, ptr %local_5, align 1
+  %4 = call i32 @memcmp(ptr %local_4, ptr %local_5, i64 32)
+  %eq_dst = icmp eq i32 %4, 0
+  store i1 %eq_dst, ptr %local_6, align 1
+  %cnd = load i1, ptr %local_6, align 1
+  br i1 %cnd, label %bb_1, label %bb_0
+
+bb_1:                                             ; preds = %entry
+  br label %bb_2
+
+bb_0:                                             ; preds = %entry
+  %load_store_tmp1 = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp1, ptr %local_7, align 8
+  store i64 0, ptr %local_8, align 8
+  %call_arg_02 = load i64, ptr %local_8, align 8
+  call void @move_rt_abort(i64 %call_arg_02)
+  unreachable
+
+bb_2:                                             ; preds = %bb_1
+  %load_store_tmp3 = load i64, ptr %local_1, align 8
+  store i64 %load_store_tmp3, ptr %local_9, align 8
+  %load_store_tmp4 = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp4, ptr %local_10, align 8
+  %tmp = load ptr, ptr %local_10, align 8
+  %fld_ref = getelementptr inbounds %struct.clock__Clock, ptr %tmp, i32 0, i32 1
+  store ptr %fld_ref, ptr %local_11__timestamp_ms, align 8
+  %load_store_ref_src = load i64, ptr %local_9, align 8
+  %load_store_ref_dst_ptr = load ptr, ptr %local_11__timestamp_ms, align 8
+  store i64 %load_store_ref_src, ptr %load_store_ref_dst_ptr, align 8
+  ret void
+}
+
+define i64 @"0000000000000002_clock_timestamp_ms_BB5cGQ8sUyLiRi"(ptr nonnull readonly %0) {
+entry:
+  %local_0 = alloca ptr, align 8
+  %local_1 = alloca ptr, align 8
+  %local_2__timestamp_ms = alloca ptr, align 8
+  %local_3 = alloca i64, align 8
+  store ptr %0, ptr %local_0, align 8
+  %load_store_tmp = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp, ptr %local_1, align 8
+  %tmp = load ptr, ptr %local_1, align 8
+  %fld_ref = getelementptr inbounds %struct.clock__Clock, ptr %tmp, i32 0, i32 1
+  store ptr %fld_ref, ptr %local_2__timestamp_ms, align 8
+  %load_deref_store_tmp1 = load ptr, ptr %local_2__timestamp_ms, align 8
+  %load_deref_store_tmp2 = load i64, ptr %load_deref_store_tmp1, align 8
+  store i64 %load_deref_store_tmp2, ptr %local_3, align 8
+  %retval = load i64, ptr %local_3, align 8
+  ret i64 %retval
+}
+
+define void @"0000000000000002_clock_increment_for_t_AaGCips17nWUuY"(ptr noalias nonnull %0, i64 %1) {
+entry:
+  %local_0 = alloca ptr, align 8
+  %local_1 = alloca i64, align 8
+  %local_2 = alloca ptr, align 8
+  %local_3__timestamp_ms = alloca ptr, align 8
+  %local_4 = alloca i64, align 8
+  %local_5 = alloca i64, align 8
+  %local_6 = alloca i64, align 8
+  %local_7 = alloca ptr, align 8
+  %local_8__timestamp_ms = alloca ptr, align 8
+  store ptr %0, ptr %local_0, align 8
+  store i64 %1, ptr %local_1, align 8
+  %load_store_tmp = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp, ptr %local_2, align 8
+  %tmp = load ptr, ptr %local_2, align 8
+  %fld_ref = getelementptr inbounds %struct.clock__Clock, ptr %tmp, i32 0, i32 1
+  store ptr %fld_ref, ptr %local_3__timestamp_ms, align 8
+  %load_deref_store_tmp1 = load ptr, ptr %local_3__timestamp_ms, align 8
+  %load_deref_store_tmp2 = load i64, ptr %load_deref_store_tmp1, align 8
+  store i64 %load_deref_store_tmp2, ptr %local_4, align 8
+  %load_store_tmp1 = load i64, ptr %local_1, align 8
+  store i64 %load_store_tmp1, ptr %local_5, align 8
+  %add_src_0 = load i64, ptr %local_4, align 8
+  %add_src_1 = load i64, ptr %local_5, align 8
+  %add_dst = add i64 %add_src_0, %add_src_1
+  %ovfcond = icmp ult i64 %add_dst, %add_src_0
+  br i1 %ovfcond, label %then_bb, label %join_bb
+
+then_bb:                                          ; preds = %entry
+  call void @move_rt_abort(i64 4017)
+  unreachable
+
+join_bb:                                          ; preds = %entry
+  store i64 %add_dst, ptr %local_6, align 8
+  %load_store_tmp2 = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp2, ptr %local_7, align 8
+  %tmp3 = load ptr, ptr %local_7, align 8
+  %fld_ref4 = getelementptr inbounds %struct.clock__Clock, ptr %tmp3, i32 0, i32 1
+  store ptr %fld_ref4, ptr %local_8__timestamp_ms, align 8
+  %load_store_ref_src = load i64, ptr %local_6, align 8
+  %load_store_ref_dst_ptr = load ptr, ptr %local_8__timestamp_ms, align 8
+  store i64 %load_store_ref_src, ptr %load_store_ref_dst_ptr, align 8
+  ret void
+}
+
+define void @"0000000000000002_clock_set_for_testing_BvJFaf7qpBCWqy"(ptr noalias nonnull %0, i64 %1) {
+entry:
+  %local_0 = alloca ptr, align 8
+  %local_1 = alloca i64, align 8
+  %local_2 = alloca i64, align 8
+  %local_3 = alloca ptr, align 8
+  %local_4__timestamp_ms = alloca ptr, align 8
+  %local_5 = alloca i64, align 8
+  %local_6 = alloca i1, align 1
+  %local_7 = alloca ptr, align 8
+  %local_8 = alloca i64, align 8
+  %local_9 = alloca i64, align 8
+  %local_10 = alloca ptr, align 8
+  %local_11__timestamp_ms = alloca ptr, align 8
+  store ptr %0, ptr %local_0, align 8
+  store i64 %1, ptr %local_1, align 8
+  %load_store_tmp = load i64, ptr %local_1, align 8
+  store i64 %load_store_tmp, ptr %local_2, align 8
+  %load_store_tmp1 = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp1, ptr %local_3, align 8
+  %tmp = load ptr, ptr %local_3, align 8
+  %fld_ref = getelementptr inbounds %struct.clock__Clock, ptr %tmp, i32 0, i32 1
+  store ptr %fld_ref, ptr %local_4__timestamp_ms, align 8
+  %load_deref_store_tmp1 = load ptr, ptr %local_4__timestamp_ms, align 8
+  %load_deref_store_tmp2 = load i64, ptr %load_deref_store_tmp1, align 8
+  store i64 %load_deref_store_tmp2, ptr %local_5, align 8
+  %ge_src_0 = load i64, ptr %local_2, align 8
+  %ge_src_1 = load i64, ptr %local_5, align 8
+  %ge_dst = icmp uge i64 %ge_src_0, %ge_src_1
+  store i1 %ge_dst, ptr %local_6, align 1
+  %cnd = load i1, ptr %local_6, align 1
+  br i1 %cnd, label %bb_1, label %bb_0
+
+bb_1:                                             ; preds = %entry
+  br label %bb_2
+
+bb_0:                                             ; preds = %entry
+  %load_store_tmp2 = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp2, ptr %local_7, align 8
+  store i64 0, ptr %local_8, align 8
+  %call_arg_0 = load i64, ptr %local_8, align 8
+  call void @move_rt_abort(i64 %call_arg_0)
+  unreachable
+
+bb_2:                                             ; preds = %bb_1
+  %load_store_tmp3 = load i64, ptr %local_1, align 8
+  store i64 %load_store_tmp3, ptr %local_9, align 8
+  %load_store_tmp4 = load ptr, ptr %local_0, align 8
+  store ptr %load_store_tmp4, ptr %local_10, align 8
+  %tmp5 = load ptr, ptr %local_10, align 8
+  %fld_ref6 = getelementptr inbounds %struct.clock__Clock, ptr %tmp5, i32 0, i32 1
+  store ptr %fld_ref6, ptr %local_11__timestamp_ms, align 8
+  %load_store_ref_src = load i64, ptr %local_9, align 8
+  %load_store_ref_dst_ptr = load ptr, ptr %local_11__timestamp_ms, align 8
+  store i64 %load_store_ref_src, ptr %load_store_ref_dst_ptr, align 8
+  ret void
+}
+
+define void @"0000000000000002_clock_share_for_testi_8y9DDNeJLghKRp"(%struct.clock__Clock %0) {
+entry:
+  %local_0 = alloca %struct.clock__Clock, align 8
+  %local_1 = alloca %struct.clock__Clock, align 8
+  store %struct.clock__Clock %0, ptr %local_0, align 8
+  %call_arg_0 = load %struct.clock__Clock, ptr %local_0, align 8
+  call void @"0000000000000002_transfer_share_object_AtdGbiX7ZapKV3"(%struct.clock__Clock %call_arg_0)
+  ret void
+}
+
+declare void @move_rt_vec_destroy(ptr nonnull readonly dereferenceable(32), ptr)
+
+; Function Attrs: cold noreturn
+declare void @move_rt_abort(i64) #0
+
+attributes #0 = { cold noreturn }
